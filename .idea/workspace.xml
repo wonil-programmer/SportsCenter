@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="ca9a1687-7357-49dc-8023-c66cb0f536e6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/api/user/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/api/user/UserDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gui/Login.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gui/Login.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gui/MainRegist.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gui/MainRegist.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gui/NewRegist.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gui/NewRegist.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/flatlaf_2_6.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/flatlaf_intellij_themes_2_6.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SportsCenterApp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SportsCenterApp.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SportsCenterApp/MainRegister.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SportsCenterApp/api/App.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/Login.form" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/Login.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/MainRegist.form" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/MainRegist.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/NewRegist.form" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/NewRegist.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,12 +48,18 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW": "false",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/허원일/Documents/SportsCenterApp",
-    "project.structure.last.edited": "Modules",
+    "last_opened_file_path": "C:/Users/JMLEE/Downloads/flatlaf-intellij-themes-2.6.jar",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2"
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   },
   "keyToStringList": {
     "DatabaseDriversLRU": [
@@ -65,15 +73,9 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
+    <configuration name="gui" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="gui.login" />
       <module name="SportsCenterApp" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="SportsCenterApp" />
-      <option name="filePath" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -95,6 +97,7 @@
       <workItem from="1668561568198" duration="25000" />
       <workItem from="1668561615866" duration="2000" />
       <workItem from="1668561636390" duration="189000" />
+      <workItem from="1668563391229" duration="2160000" />
     </task>
     <servers />
   </component>
