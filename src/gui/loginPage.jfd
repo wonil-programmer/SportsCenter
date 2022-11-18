@@ -1,0 +1,800 @@
+JFDML JFormDesigner: "8.0.0.0.194" Java: "17.0.4.1" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) {
+			"autoSize": false
+		} ) {
+			name: "this"
+			"title": "LOGIN"
+			"resizable": false
+			"defaultCloseOperation": 3
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "ID"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 20
+				"height": 17
+				"x": 15
+				"y": 15
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label2"
+				"text": "PW"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 18
+				"height": 20
+				"x": 10
+				"y": 45
+			} )
+			add( new FormComponent( "javax.swing.JPasswordField" ) {
+				name: "PWtext"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 195
+				"height": 23
+				"x": 35
+				"y": 45
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "IDtext"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 195
+				"height": 23
+				"x": 35
+				"y": 15
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "LoginButton"
+				"text": "LOGIN"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Login", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 150
+				"height": 55
+				"x": 240
+				"y": 15
+			} )
+			add( new FormComponent( "javax.swing.JCheckBox" ) {
+				name: "RememberCheck"
+				"text": "Remember me"
+				"selected": true
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 110
+				"height": 21
+				"x": 10
+				"y": 75
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "RegButton"
+				"text": "REGISTER"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Reg", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 150
+				"height": 23
+				"x": 240
+				"y": 75
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 5, 10 )
+			"size": new java.awt.Dimension( 400, 135 )
+		} )
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) {
+			"autoSize": false
+		} ) {
+			name: "this2"
+			"title": "REGISTER"
+			"resizable": false
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label3"
+				"text": "userID"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 30
+				"y": 15
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label4"
+				"text": "userPW"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 25
+				"y": 50
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "textField1"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 85
+				"y": 10
+				"width": 175
+				"height": 25
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label5"
+				"text": "gender"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 25
+				"y": 115
+				"width": 50
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "radioButton1"
+				"text": "남"
+				"$buttonGroup": new FormReference( "buttonGroup1" )
+				"selected": true
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 85
+				"y": 115
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "radioButton2"
+				"text": "여"
+				"$buttonGroup": new FormReference( "buttonGroup1" )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 125
+				"y": 115
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label6"
+				"text": "PW Again"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 60
+				"height": 17
+				"x": 15
+				"y": 85
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label7"
+				"text": "state"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 30
+				"y": 145
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "comboBox1"
+				"model": new javax.swing.DefaultComboBoxModel {
+					selectedItem: "재학생"
+					addElement( "재학생" )
+					addElement( "일반인" )
+					addElement( "교직원" )
+				}
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 85
+				"y": 145
+				"width": 75
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label8"
+				"text": "locker usage"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 10
+				"y": 175
+				"width": 70
+			} )
+			add( new FormComponent( "javax.swing.JCheckBox" ) {
+				name: "checkBox1"
+				"text": "사용함"
+				"selected": true
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 85
+				"y": 175
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button1"
+				"text": "Create Account"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button1", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 15
+				"y": 205
+				"width": 260
+				"height": 30
+			} )
+			add( new FormComponent( "javax.swing.JPasswordField" ) {
+				name: "passwordField1"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 85
+				"y": 45
+				"width": 175
+			} )
+			add( new FormComponent( "javax.swing.JPasswordField" ) {
+				name: "passwordField2"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 85
+				"y": 80
+				"width": 175
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"size": new java.awt.Dimension( 290, 275 )
+			"location": new java.awt.Point( 420, 0 )
+		} )
+		add( new FormNonVisual( "javax.swing.ButtonGroup" ) {
+			name: "buttonGroup1"
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 790, 455 )
+		} )
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) {
+			"autoSize": false
+		} ) {
+			name: "MainForm"
+			"title": "OPEN SW"
+			"defaultCloseOperation": 3
+			"resizable": false
+			add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
+				name: "tabbedPane1"
+				"tabPlacement": 2
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+					name: "panel5"
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label13"
+						"text": "현재 이용자수 : "
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 86
+						"height": 17
+						"x": 20
+						"y": 10
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label14"
+						"text": "32명"
+						"font": new java.awt.Font( "맑은 고딕", 1, 12 )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 26
+						"height": 17
+						"x": 110
+						"y": 10
+					} )
+					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+						name: "scrollPane1"
+						add( new FormComponent( "javax.swing.JTable" ) {
+							name: "table1"
+							"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector {
+								add( new java.util.Vector {
+									add( "   9 : 00 ~ 10 : 00" )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( "  10 : 00 ~ 11 : 00" )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( "  11 : 00 ~ 12 : 00" )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( "  12 : 00 ~ 13 : 00" )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( "  13 : 00 ~ 14 : 00" )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( "  14 : 00 ~ 15 : 00" )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( "  15 : 00 ~ 16 : 00" )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( "  16 : 00 ~ 17 : 00" )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( "  17 : 00 ~ 18 : 00" )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( "  18 : 00 ~ 19 : 00" )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( "  19 : 00 ~ 20 : 00" )
+									add( null )
+								} )
+							}, new java.util.Vector {
+								add( "시간" )
+								add( "평균 인원" )
+							}, new java.util.Vector {
+								add( null )
+								add( null )
+							}, new java.util.Vector {
+								add( false )
+								add( false )
+							}, new java.util.Vector {
+								add( new com.jformdesigner.model.SwingTableColumn( null, 0, 0, 0, false ) )
+								add( new com.jformdesigner.model.SwingTableColumn( null, 0, 0, 0, false ) )
+							} )
+							"showVerticalLines": true
+							"showHorizontalLines": true
+							"focusable": false
+						} )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 235
+						"height": 197
+						"x": 20
+						"y": 75
+					} )
+					add( new FormComponent( "javax.swing.JComboBox" ) {
+						name: "comboBox2"
+						"model": new javax.swing.DefaultComboBoxModel {
+							selectedItem: "지난주"
+							addElement( "지난주" )
+							addElement( "2주 전" )
+						}
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 72
+						"height": 23
+						"x": 20
+						"y": 40
+					} )
+					add( new FormComponent( "javax.swing.JComboBox" ) {
+						name: "comboBox3"
+						"model": new javax.swing.DefaultComboBoxModel {
+							selectedItem: "월"
+							addElement( "월" )
+							addElement( "화" )
+							addElement( "수" )
+							addElement( "목" )
+							addElement( "금" )
+							addElement( "토" )
+							addElement( "일" )
+						}
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 72
+						"height": 23
+						"x": 100
+						"y": 40
+					} )
+					add( new FormComponent( "javax.swing.JProgressBar" ) {
+						name: "progressBar1"
+						"orientation": 1
+						"value": 40
+						"background": &Color0 new java.awt.Color( 242, 242, 242, 255 )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 10
+						"height": 135
+						"x": 285
+						"y": 115
+					} )
+					add( new FormComponent( "javax.swing.JProgressBar" ) {
+						name: "progressBar2"
+						"orientation": 1
+						"value": 60
+						"background": #Color0
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 10
+						"height": 135
+						"x": 310
+						"y": 115
+					} )
+					add( new FormComponent( "javax.swing.JProgressBar" ) {
+						name: "progressBar3"
+						"orientation": 1
+						"value": 55
+						"background": #Color0
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 10
+						"height": 135
+						"x": 335
+						"y": 115
+					} )
+					add( new FormComponent( "javax.swing.JProgressBar" ) {
+						name: "progressBar4"
+						"orientation": 1
+						"value": 75
+						"background": #Color0
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 10
+						"height": 135
+						"x": 360
+						"y": 115
+					} )
+					add( new FormComponent( "javax.swing.JProgressBar" ) {
+						name: "progressBar5"
+						"orientation": 1
+						"value": 60
+						"background": #Color0
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 10
+						"height": 135
+						"x": 385
+						"y": 115
+					} )
+					add( new FormComponent( "javax.swing.JProgressBar" ) {
+						name: "progressBar6"
+						"orientation": 1
+						"value": 80
+						"background": #Color0
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 10
+						"height": 135
+						"x": 410
+						"y": 115
+					} )
+					add( new FormComponent( "javax.swing.JProgressBar" ) {
+						name: "progressBar7"
+						"orientation": 1
+						"value": 100
+						"background": #Color0
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 10
+						"height": 135
+						"x": 435
+						"y": 115
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label21"
+						"text": "월    화    수   목   금   토   일 "
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 168
+						"height": 17
+						"x": 280
+						"y": 255
+					} )
+				}, new FormLayoutConstraints( null ) {
+					"title": "회원 수 확인"
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+					name: "panel2"
+				}, new FormLayoutConstraints( null ) {
+					"title": "회원권 구매"
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+					name: "panel4"
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "button2"
+						"text": "1."
+						"background": &Color1 new java.awt.Color( 102, 153, 255, 255 )
+						"focusable": false
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 20
+						"y": 25
+						"width": 75
+						"height": 35
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "button3"
+						"text": "2."
+						"background": #Color1
+						"focusable": false
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 75
+						"height": 35
+						"x": 110
+						"y": 25
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "button4"
+						"text": "3."
+						"background": new java.awt.Color( 204, 204, 204, 255 )
+						"focusable": false
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 75
+						"height": 35
+						"x": 200
+						"y": 25
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "button5"
+						"text": "4."
+						"background": #Color1
+						"focusable": false
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 75
+						"height": 35
+						"x": 285
+						"y": 25
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "button6"
+						"text": "5."
+						"background": #Color1
+						"focusable": false
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 75
+						"height": 35
+						"x": 370
+						"y": 25
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "button7"
+						"text": "6."
+						"background": &Color2 new java.awt.Color( 204, 204, 204, 255 )
+						"focusable": false
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 75
+						"height": 35
+						"x": 20
+						"y": 75
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "button8"
+						"text": "7."
+						"background": #Color2
+						"focusable": false
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 75
+						"height": 35
+						"x": 110
+						"y": 75
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "button9"
+						"text": "11."
+						"background": #Color2
+						"focusable": false
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 75
+						"height": 35
+						"x": 20
+						"y": 125
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "button10"
+						"text": "12."
+						"background": #Color2
+						"focusable": false
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 75
+						"height": 35
+						"x": 110
+						"y": 125
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "button11"
+						"text": "13."
+						"background": #Color1
+						"focusable": false
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 75
+						"height": 35
+						"x": 200
+						"y": 125
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "button12"
+						"text": "14."
+						"background": #Color1
+						"focusable": false
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 75
+						"height": 35
+						"x": 285
+						"y": 125
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "button13"
+						"text": "15."
+						"background": new java.awt.Color( 255, 153, 153, 255 )
+						"focusable": false
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 75
+						"height": 35
+						"x": 370
+						"y": 125
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "button14"
+						"text": "16."
+						"background": #Color1
+						"focusable": false
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 75
+						"height": 35
+						"x": 20
+						"y": 175
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "button15"
+						"text": "17."
+						"background": #Color1
+						"focusable": false
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 75
+						"height": 35
+						"x": 110
+						"y": 175
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "button16"
+						"text": "8."
+						"background": #Color2
+						"focusable": false
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 75
+						"height": 35
+						"x": 200
+						"y": 75
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "button17"
+						"text": "9."
+						"background": #Color1
+						"focusable": false
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 75
+						"height": 35
+						"x": 285
+						"y": 75
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "button18"
+						"text": "10."
+						"background": #Color2
+						"focusable": false
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 75
+						"height": 35
+						"x": 370
+						"y": 75
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "button19"
+						"text": "18."
+						"background": #Color2
+						"focusable": false
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 75
+						"height": 35
+						"x": 200
+						"y": 175
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "button20"
+						"text": "19."
+						"background": #Color2
+						"focusable": false
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 75
+						"height": 35
+						"x": 285
+						"y": 175
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "button21"
+						"text": "20."
+						"background": #Color2
+						"focusable": false
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 75
+						"height": 35
+						"x": 370
+						"y": 175
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label15"
+						"text": "   "
+						"background": new java.awt.Color( 102, 153, 255, 255 )
+						"opaque": true
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 225
+						"y": 240
+						"width": 15
+						"height": 15
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label16"
+						"text": "사용 가능"
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 250
+						"y": 240
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label17"
+						"text": "   "
+						"background": new java.awt.Color( 204, 204, 204, 255 )
+						"opaque": true
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 15
+						"height": 15
+						"x": 310
+						"y": 240
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label18"
+						"text": "이용중"
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 52
+						"height": 17
+						"x": 335
+						"y": 240
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label19"
+						"text": "   "
+						"background": new java.awt.Color( 255, 153, 153, 255 )
+						"opaque": true
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 15
+						"height": 15
+						"x": 385
+						"y": 240
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label20"
+						"text": "고장"
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 52
+						"height": 17
+						"x": 410
+						"y": 240
+					} )
+				}, new FormLayoutConstraints( null ) {
+					"title": "개인락커"
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+					name: "panel6"
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label9"
+						"text": "이름 : "
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 34
+						"height": 17
+						"x": 20
+						"y": 25
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label11"
+						"text": "회원권 : "
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 46
+						"height": 17
+						"x": 20
+						"y": 55
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label12"
+						"text": "남은 기간 : "
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 62
+						"height": 17
+						"x": 20
+						"y": 115
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label22"
+						"text": "개인 락커 번호 : "
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 90
+						"height": 17
+						"x": 20
+						"y": 145
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label23"
+						"text": "PT 트레이너 : "
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 76
+						"height": 17
+						"x": 20
+						"y": 175
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label24"
+						"text": "PT 남은 횟수 : "
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 80
+						"height": 17
+						"x": 20
+						"y": 205
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label25"
+						"text": "회원권 가격 : "
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 20
+						"y": 85
+					} )
+				}, new FormLayoutConstraints( null ) {
+					"title": "회원정보"
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 0
+				"y": 0
+				"width": 560
+				"height": 285
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"size": new java.awt.Dimension( 565, 315 )
+			"location": new java.awt.Point( 15, 280 )
+		} )
+	}
+}
