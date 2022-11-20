@@ -4,12 +4,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Arrays;
 
 public class UserDAO {
 
-    private Connection conn; // Connection 객체 생성
-    private PreparedStatement pstmt; // prepareStatement 객체 생성    
-    private ResultSet rs;
+    private static Connection conn; // Connection 객체 생성
+    private static PreparedStatement pstmt; // prepareStatement 객체 생성
+    private static ResultSet rs;
 
     // 생성자
     public UserDAO() {
@@ -69,10 +70,8 @@ public class UserDAO {
         return -1; // 데이터베이스 오류
     }
 
-    boolean lockerPayment(String _u, int _n, int _p) {
+    public static boolean lockerPayment(String _u, int _n, int _p) {
         boolean flag = false;
-
-        _u = "test";    // 수정
 
         String UserID = _u;
         int lockerPeriod = _p;
@@ -94,5 +93,47 @@ public class UserDAO {
         }
 
         return flag;
+    }
+
+    public static int[] lockerColor() {
+        boolean flag = false;
+
+        int num;
+        int[] locker_state = new int[20];
+
+        try {
+
+            for (num=0; num<20; num++) {
+                String SQL = "SELECT lockerState FROM locker WHERE lockerNum="+(num+1);
+                pstmt = conn.prepareStatement(SQL);
+                rs = pstmt.executeQuery();
+                while(rs.next()) {
+                    locker_state[num] = rs.getInt("lockerState");
+                }
+
+            }
+            flag = true;
+            System.out.println(Arrays.toString(locker_state));
+            System.out.println("락커 색깔 가져오기 성공");
+
+        } catch(Exception e) {
+            flag = false;
+            System.out.println("락커 색깔 가져오기 실패 > " + e.toString());
+        }
+
+        // 색깔 할당 부분
+        int[] locker_color = new int[20];
+        for(int j=0; j<locker_state.length; j++) {
+            if (locker_state[j]==0) {   // empty
+                locker_color[j] = 0x6699ff; // BLUE
+            }
+            else if (locker_state[j]==1) {  // using
+                locker_color[j] = 0xcccccc; // WHITE
+            }
+            else if (locker_state[j]==2) {  // broken
+                locker_color[j] = 0xff9999; // RED
+            }
+        }
+        return locker_color;
     }
 }

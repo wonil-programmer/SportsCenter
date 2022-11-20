@@ -6,8 +6,11 @@ package gui;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Arrays;
 import javax.swing.*;
 import javax.swing.table.*;
+
+import api.UserDAO;
 import gui.loginPage;
 /**
  * @author Minjae
@@ -26,10 +29,22 @@ public class mainPage extends JFrame {
 
     }
 
+    // 락커 번호 클릭시 결제창 뜨게 하는 부분
     private void button2(ActionEvent e) {
         // TODO add your code here
-        dialog1.setVisible(true);
-        dialog1.setSize(185,175);
+        int[] locker_color;
+        locker_color = UserDAO.lockerColor();
+        // System.out.println("Arrays.toString(locker_color)로 락커 색깔 불러옴");
+        if (locker_color[0]==0x6699ff) { // Blue
+            dialog1.setVisible(true);
+            dialog1.setSize(185,175);
+        }
+        else if (locker_color[0]==0xcccccc) {   // White
+            JOptionPane.showMessageDialog(null, "이미 사용 중인 락커입니다.");
+        }
+        else if (locker_color[0]==0xff9999) {   // Red
+            JOptionPane.showMessageDialog(null, "고장난 락커입니다.");
+        }
     }
 
     // 결제 버튼 눌렀을 시
@@ -38,19 +53,35 @@ public class mainPage extends JFrame {
         int num = 1;
         int period = comboBox1.getSelectedIndex();
         System.out.println("락커 번호 : " + num + ", 락커 기간(idx) : " +period);
-        lockerPayment("IDtest", num, period);   // ?
+        api.UserDAO.lockerPayment("IDtest", num, period);   // 아이디명 다시 수정해야 [수정]
         dialog1.setVisible(false);
         JOptionPane.showMessageDialog(null, "결제에 성공하였습니다");
     }
-    // 콤보박스 바꼈을 시
+    // 콤보박스 선택이 바뀌었을 시
     private void comboBox1ItemStateChanged(ItemEvent e) {
         // TODO add your code here
-/*        JComboBox cb = (JComboBox) e.getSource(); // 콤보박스 알아내기
-        int index = cb.getSelectedIndex();// 선택된 아이템의 인덱스
-        System.out.println(comboBox1.getSelectedItem().toString());
-        System.out.println(index);*/
+        int index = comboBox1.getSelectedIndex();// 선택된 아이템의 인덱스
+        // System.out.println(comboBox1.getSelectedItem().toString());
+        // System.out.println(index);
+        if (index==0) {
+            label4.setText("5000원");
+        }
+        else if (index==1) {
+            label4.setText("8000원");
+        }
+        else if (index==2) {
+            label4.setText("10000원");
+        }
+
     }
+
     private void initComponents() {
+
+        // 락커 버튼 관련
+        int[] locker_color;
+        locker_color = UserDAO.lockerColor();
+        // System.out.println(Arrays.toString(locker_color));
+
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         MainForm = new JFrame();
         tabbedPane1 = new JTabbedPane();
@@ -112,7 +143,6 @@ public class mainPage extends JFrame {
         comboBox1 = new JComboBox<>();
         label3 = new JLabel();
         label4 = new JLabel();
-        label5 = new JLabel();
 
         //======== MainForm ========
         {
@@ -462,7 +492,7 @@ public class mainPage extends JFrame {
                     label17.setBounds(310, 240, 15, 15);
 
                     //---- label18 ----
-                    label18.setText("\uc774\uc6a9\uc911");
+                    label18.setText("\uc0ac\uc6a9 \uc911");
                     panel4.add(label18);
                     label18.setBounds(335, 240, 52, 17);
 
@@ -597,14 +627,9 @@ public class mainPage extends JFrame {
             label3.setBounds(new Rectangle(new Point(45, 40), label3.getPreferredSize()));
 
             //---- label4 ----
-            label4.setText("5000");
+            label4.setText("5000\uc6d0");
             dialog1ContentPane.add(label4);
-            label4.setBounds(new Rectangle(new Point(85, 40), label4.getPreferredSize()));
-
-            //---- label5 ----
-            label5.setText("\uc6d0");
-            dialog1ContentPane.add(label5);
-            label5.setBounds(115, 40, 42, 17);
+            label4.setBounds(85, 40, 60, label4.getPreferredSize().height);
 
             dialog1ContentPane.setPreferredSize(new Dimension(185, 175));
             dialog1.pack();
@@ -612,6 +637,9 @@ public class mainPage extends JFrame {
         }
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }
+
+
+
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
     private JFrame MainForm;
@@ -674,6 +702,5 @@ public class mainPage extends JFrame {
     private JComboBox<String> comboBox1;
     private JLabel label3;
     private JLabel label4;
-    private JLabel label5;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

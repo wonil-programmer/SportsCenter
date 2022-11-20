@@ -6,6 +6,7 @@ import java.awt.*;
 import javax.swing.*;
 
 import api.UserDAO;
+import java.util.Arrays;
 import gui.mainPage;
 //import com.intellij.ide.ui.laf.*;
 /*
@@ -202,14 +203,22 @@ public class loginPage extends JFrame {
 
     public static void main(String[] args) {
 
+        UserDAO userDAO = new UserDAO();
+        /*int[] locker_color;
+        locker_color = UserDAO.lockerColor();
+        System.out.println(Arrays.toString(locker_color));*/
+
+
+
         com.formdev.flatlaf.intellijthemes.FlatArcOrangeIJTheme.setup();
         loginPage frame = new loginPage();
         frame.pack();
         frame.setSize(415, 145);
         frame.setVisible(true);
 
-        UserDAO userDAO = new UserDAO();
-        // addeventlistner
+
+
+// addeventlistner
         /*
         int result = userDAO.login(username, password);
         if (result == 1) {

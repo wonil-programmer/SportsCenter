@@ -6,8 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="ca9a1687-7357-49dc-8023-c66cb0f536e6" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SportsCenterApp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SportsCenterApp.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SportsCenterApp/api/UserDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SportsCenterApp/api/UserDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SportsCenterApp/gui/mainPage.jfd" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SportsCenterApp/gui/mainPage.jfd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/api/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/UserDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/loginPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/loginPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/mainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/mainPage.java" afterDir="false" />
@@ -127,7 +127,7 @@
       <workItem from="1668773697195" duration="1699000" />
       <workItem from="1668775443546" duration="18965000" />
       <workItem from="1668867076729" duration="55000" />
-      <workItem from="1668867167795" duration="16967000" />
+      <workItem from="1668867167795" duration="27117000" />
     </task>
     <servers />
   </component>
