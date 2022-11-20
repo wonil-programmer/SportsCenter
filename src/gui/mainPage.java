@@ -29,11 +29,29 @@ public class mainPage extends JFrame {
     private void button2(ActionEvent e) {
         // TODO add your code here
         dialog1.setVisible(true);
-        dialog1.setSize(145,180);
+        dialog1.setSize(185,175);
+    }
+
+    // 결제 버튼 눌렀을 시
+    private void button1Clicked(ActionEvent e) {
+        // TODO add your code here
+        int num = 1;
+        int period = comboBox1.getSelectedIndex();
+        System.out.println("락커 번호 : " + num + ", 락커 기간(idx) : " +period);
+        lockerPayment("IDtest", num, period);   // ?
+        dialog1.setVisible(false);
+        JOptionPane.showMessageDialog(null, "결제에 성공하였습니다");
+    }
+    // 콤보박스 바꼈을 시
+    private void comboBox1ItemStateChanged(ItemEvent e) {
+        // TODO add your code here
+/*        JComboBox cb = (JComboBox) e.getSource(); // 콤보박스 알아내기
+        int index = cb.getSelectedIndex();// 선택된 아이템의 인덱스
+        System.out.println(comboBox1.getSelectedItem().toString());
+        System.out.println(index);*/
     }
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
-        // Generated using JFormDesigner Evaluation license - Minjae
         MainForm = new JFrame();
         tabbedPane1 = new JTabbedPane();
         panel5 = new JPanel();
@@ -94,6 +112,7 @@ public class mainPage extends JFrame {
         comboBox1 = new JComboBox<>();
         label3 = new JLabel();
         label4 = new JLabel();
+        label5 = new JLabel();
 
         //======== MainForm ========
         {
@@ -109,13 +128,6 @@ public class mainPage extends JFrame {
 
                 //======== panel5 ========
                 {
-                    panel5.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.
-                    swing.border.EmptyBorder(0,0,0,0), "JFor\u006dDesi\u0067ner \u0045valu\u0061tion",javax.swing.border
-                    .TitledBorder.CENTER,javax.swing.border.TitledBorder.BOTTOM,new java.awt.Font("Dia\u006cog"
-                    ,java.awt.Font.BOLD,12),java.awt.Color.red),panel5. getBorder
-                    ()));panel5. addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override public void propertyChange(java
-                    .beans.PropertyChangeEvent e){if("bord\u0065r".equals(e.getPropertyName()))throw new RuntimeException
-                    ();}});
                     panel5.setLayout(null);
 
                     //---- label13 ----
@@ -549,23 +561,25 @@ public class mainPage extends JFrame {
 
         //======== dialog1 ========
         {
+            dialog1.setTitle("\uacb0\uc81c");
             var dialog1ContentPane = dialog1.getContentPane();
             dialog1ContentPane.setLayout(null);
 
             //---- button1 ----
             button1.setText("\uacb0\uc81c");
+            button1.addActionListener(e -> button1Clicked(e));
             dialog1ContentPane.add(button1);
-            button1.setBounds(30, 100, 90, 35);
+            button1.setBounds(40, 100, 90, 35);
 
             //---- label1 ----
             label1.setText("\ubc88 \uac1c\uc778\ub77d\ucee4");
             dialog1ContentPane.add(label1);
-            label1.setBounds(50, 15, 90, label1.getPreferredSize().height);
+            label1.setBounds(65, 15, 70, label1.getPreferredSize().height);
 
             //---- label2 ----
             label2.setText("01");
             dialog1ContentPane.add(label2);
-            label2.setBounds(new Rectangle(new Point(35, 15), label2.getPreferredSize()));
+            label2.setBounds(new Rectangle(new Point(50, 15), label2.getPreferredSize()));
 
             //---- comboBox1 ----
             comboBox1.setModel(new DefaultComboBoxModel<>(new String[] {
@@ -573,20 +587,26 @@ public class mainPage extends JFrame {
                 "6\uac1c\uc6d4",
                 "1\ub144"
             }));
+            comboBox1.addItemListener(e -> comboBox1ItemStateChanged(e));
             dialog1ContentPane.add(comboBox1);
-            comboBox1.setBounds(35, 70, 80, comboBox1.getPreferredSize().height);
+            comboBox1.setBounds(40, 65, 95, comboBox1.getPreferredSize().height);
 
             //---- label3 ----
             label3.setText("\uc694\uae08 : ");
             dialog1ContentPane.add(label3);
-            label3.setBounds(new Rectangle(new Point(30, 40), label3.getPreferredSize()));
+            label3.setBounds(new Rectangle(new Point(45, 40), label3.getPreferredSize()));
 
             //---- label4 ----
-            label4.setText("5000 \uc6d0");
+            label4.setText("5000");
             dialog1ContentPane.add(label4);
-            label4.setBounds(new Rectangle(new Point(70, 40), label4.getPreferredSize()));
+            label4.setBounds(new Rectangle(new Point(85, 40), label4.getPreferredSize()));
 
-            dialog1ContentPane.setPreferredSize(new Dimension(145, 175));
+            //---- label5 ----
+            label5.setText("\uc6d0");
+            dialog1ContentPane.add(label5);
+            label5.setBounds(115, 40, 42, 17);
+
+            dialog1ContentPane.setPreferredSize(new Dimension(185, 175));
             dialog1.pack();
             dialog1.setLocationRelativeTo(dialog1.getOwner());
         }
@@ -594,7 +614,6 @@ public class mainPage extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
-    // Generated using JFormDesigner Evaluation license - Minjae
     private JFrame MainForm;
     private JTabbedPane tabbedPane1;
     private JPanel panel5;
@@ -655,5 +674,6 @@ public class mainPage extends JFrame {
     private JComboBox<String> comboBox1;
     private JLabel label3;
     private JLabel label4;
+    private JLabel label5;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

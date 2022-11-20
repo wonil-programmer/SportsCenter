@@ -4,6 +4,8 @@ import java.awt.event.*;
 import javax.swing.table.*;
 import java.awt.*;
 import javax.swing.*;
+
+import api.UserDAO;
 import gui.mainPage;
 //import com.intellij.ide.ui.laf.*;
 /*
@@ -33,17 +35,18 @@ public class loginPage extends JFrame {
         //mainPage.setVisible(true);
         //f.setSize(585,330);
         this.setVisible(false);
-        
+
     }
 
+    // 회원가입
     private void button1(ActionEvent e) {
         // TODO add your code here
         this2.setVisible(false);
+        JOptionPane.showMessageDialog(null, "회원가입에 성공하였습니다");
     }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
-        // Generated using JFormDesigner Evaluation license - Minjae
         label1 = new JLabel();
         label2 = new JLabel();
         PWtext = new JPasswordField();
@@ -204,7 +207,8 @@ public class loginPage extends JFrame {
         frame.pack();
         frame.setSize(415, 145);
         frame.setVisible(true);
-        //UserDAO userDAO = new UserDAO();
+
+        UserDAO userDAO = new UserDAO();
         // addeventlistner
         /*
         int result = userDAO.login(username, password);
@@ -223,7 +227,6 @@ public class loginPage extends JFrame {
     */
     }
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
-    // Generated using JFormDesigner Evaluation license - Minjae
     private JLabel label1;
     private JLabel label2;
     private JPasswordField PWtext;

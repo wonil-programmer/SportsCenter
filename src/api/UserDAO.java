@@ -17,12 +17,13 @@ public class UserDAO {
         try {
             String dbURL = "jdbc:mysql://localhost:3306/sportscenter";
             String dbID = "root";
-            String dbPassword = "mysqlrhtn8580!";
+            String dbPassword = "0201";
             Class.forName("com.mysql.cj.jdbc.Driver");
             // getConnection 메소드로 DB에 연결
             conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
+            System.out.println("MySQL 서버 연동 성공");
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("MySQL 서버 연동 실패 > " + e.toString());
         }
     }
 
@@ -66,5 +67,32 @@ public class UserDAO {
             e.printStackTrace();
         }
         return -1; // 데이터베이스 오류
+    }
+
+    boolean lockerPayment(String _u, int _n, int _p) {
+        boolean flag = false;
+
+        _u = "test";    // 수정
+
+        String UserID = _u;
+        int lockerPeriod = _p;
+        int lockerNum = _n;
+
+        try {
+            String SQL = "UPDATE locker SET userID = ?, lockerPeriod = ?, lockerState=? WHERE lockerNum=?";
+            pstmt = conn.prepareStatement(SQL);
+            pstmt.setString(1, UserID);
+            pstmt.setInt(2, lockerPeriod);
+            pstmt.setInt(3, 1); // lockerState 사용중으로 변경
+            pstmt.setInt(4, lockerNum);
+            pstmt.executeUpdate();
+            flag = true;
+            System.out.println("락커 등록 성공");
+        } catch(Exception e) {
+            flag = false;
+            System.out.println("락커 등록 실패 > " + e.toString());
+        }
+
+        return flag;
     }
 }
