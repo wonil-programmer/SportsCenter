@@ -22,8 +22,8 @@ public class loginPage extends JFrame {
 
     private void Reg(ActionEvent e) {
         // TODO add your code here
-        this2.setVisible(true);
-        this2.setSize(300,280);
+        RegForm.setVisible(true);
+        RegForm.setSize(300,280);
 
     }
 
@@ -36,9 +36,9 @@ public class loginPage extends JFrame {
         
     }
 
-    private void button1(ActionEvent e) {
+    private void CreateAccount(ActionEvent e) {
         // TODO add your code here
-        this2.setVisible(false);
+        RegForm.setVisible(false);
     }
 
     private void initComponents() {
@@ -51,21 +51,21 @@ public class loginPage extends JFrame {
         LoginButton = new JButton();
         RememberCheck = new JCheckBox();
         RegButton = new JButton();
-        this2 = new JFrame();
+        RegForm = new JFrame();
         label3 = new JLabel();
         label4 = new JLabel();
-        textField1 = new JTextField();
+        Reg_ID = new JTextField();
         label5 = new JLabel();
-        radioButton1 = new JRadioButton();
-        radioButton2 = new JRadioButton();
+        Gen_B = new JRadioButton();
+        Gen_G = new JRadioButton();
         label6 = new JLabel();
         label7 = new JLabel();
-        comboBox1 = new JComboBox<>();
+        State = new JComboBox<>();
         label8 = new JLabel();
-        checkBox1 = new JCheckBox();
-        button1 = new JButton();
-        passwordField1 = new JPasswordField();
-        passwordField2 = new JPasswordField();
+        LockerUse = new JCheckBox();
+        Reg_PW = new JPasswordField();
+        Reg_PWagain = new JPasswordField();
+        CreateAccount = new JButton();
 
         //======== this ========
         setTitle("LOGIN");
@@ -110,90 +110,90 @@ public class loginPage extends JFrame {
         pack();
         setLocationRelativeTo(getOwner());
 
-        //======== this2 ========
+        //======== RegForm ========
         {
-            this2.setTitle("REGISTER");
-            this2.setResizable(false);
-            var this2ContentPane = this2.getContentPane();
-            this2ContentPane.setLayout(null);
+            RegForm.setTitle("REGISTER");
+            RegForm.setResizable(false);
+            var RegFormContentPane = RegForm.getContentPane();
+            RegFormContentPane.setLayout(null);
 
             //---- label3 ----
             label3.setText("userID");
-            this2ContentPane.add(label3);
+            RegFormContentPane.add(label3);
             label3.setBounds(new Rectangle(new Point(30, 15), label3.getPreferredSize()));
 
             //---- label4 ----
             label4.setText("userPW");
-            this2ContentPane.add(label4);
+            RegFormContentPane.add(label4);
             label4.setBounds(new Rectangle(new Point(25, 50), label4.getPreferredSize()));
-            this2ContentPane.add(textField1);
-            textField1.setBounds(85, 10, 175, 25);
+            RegFormContentPane.add(Reg_ID);
+            Reg_ID.setBounds(85, 10, 175, 25);
 
             //---- label5 ----
             label5.setText("gender");
-            this2ContentPane.add(label5);
+            RegFormContentPane.add(label5);
             label5.setBounds(25, 115, 50, label5.getPreferredSize().height);
 
-            //---- radioButton1 ----
-            radioButton1.setText("\ub0a8");
-            radioButton1.setSelected(true);
-            this2ContentPane.add(radioButton1);
-            radioButton1.setBounds(new Rectangle(new Point(85, 115), radioButton1.getPreferredSize()));
+            //---- Gen_B ----
+            Gen_B.setText("\ub0a8");
+            Gen_B.setSelected(true);
+            RegFormContentPane.add(Gen_B);
+            Gen_B.setBounds(new Rectangle(new Point(85, 115), Gen_B.getPreferredSize()));
 
-            //---- radioButton2 ----
-            radioButton2.setText("\uc5ec");
-            this2ContentPane.add(radioButton2);
-            radioButton2.setBounds(new Rectangle(new Point(125, 115), radioButton2.getPreferredSize()));
+            //---- Gen_G ----
+            Gen_G.setText("\uc5ec");
+            RegFormContentPane.add(Gen_G);
+            Gen_G.setBounds(new Rectangle(new Point(125, 115), Gen_G.getPreferredSize()));
 
             //---- label6 ----
             label6.setText("PW Again");
-            this2ContentPane.add(label6);
+            RegFormContentPane.add(label6);
             label6.setBounds(15, 85, 60, 17);
 
             //---- label7 ----
             label7.setText("state");
-            this2ContentPane.add(label7);
+            RegFormContentPane.add(label7);
             label7.setBounds(new Rectangle(new Point(30, 145), label7.getPreferredSize()));
 
-            //---- comboBox1 ----
-            comboBox1.setModel(new DefaultComboBoxModel<>(new String[] {
+            //---- State ----
+            State.setModel(new DefaultComboBoxModel<>(new String[] {
                 "\uc7ac\ud559\uc0dd",
                 "\uc77c\ubc18\uc778",
                 "\uad50\uc9c1\uc6d0"
             }));
-            this2ContentPane.add(comboBox1);
-            comboBox1.setBounds(85, 145, 75, comboBox1.getPreferredSize().height);
+            RegFormContentPane.add(State);
+            State.setBounds(85, 145, 75, State.getPreferredSize().height);
 
             //---- label8 ----
             label8.setText("locker usage");
-            this2ContentPane.add(label8);
+            RegFormContentPane.add(label8);
             label8.setBounds(10, 175, 70, label8.getPreferredSize().height);
 
-            //---- checkBox1 ----
-            checkBox1.setText("\uc0ac\uc6a9\ud568");
-            checkBox1.setSelected(true);
-            this2ContentPane.add(checkBox1);
-            checkBox1.setBounds(new Rectangle(new Point(85, 175), checkBox1.getPreferredSize()));
+            //---- LockerUse ----
+            LockerUse.setText("\uc0ac\uc6a9\ud568");
+            LockerUse.setSelected(true);
+            RegFormContentPane.add(LockerUse);
+            LockerUse.setBounds(new Rectangle(new Point(85, 175), LockerUse.getPreferredSize()));
+            RegFormContentPane.add(Reg_PW);
+            Reg_PW.setBounds(85, 45, 175, Reg_PW.getPreferredSize().height);
+            RegFormContentPane.add(Reg_PWagain);
+            Reg_PWagain.setBounds(85, 80, 175, Reg_PWagain.getPreferredSize().height);
 
-            //---- button1 ----
-            button1.setText("Create Account");
-            button1.addActionListener(e -> button1(e));
-            this2ContentPane.add(button1);
-            button1.setBounds(15, 205, 260, 30);
-            this2ContentPane.add(passwordField1);
-            passwordField1.setBounds(85, 45, 175, passwordField1.getPreferredSize().height);
-            this2ContentPane.add(passwordField2);
-            passwordField2.setBounds(85, 80, 175, passwordField2.getPreferredSize().height);
+            //---- CreateAccount ----
+            CreateAccount.setText("Create Account");
+            CreateAccount.addActionListener(e -> CreateAccount(e));
+            RegFormContentPane.add(CreateAccount);
+            CreateAccount.setBounds(15, 205, 260, 30);
 
-            this2ContentPane.setPreferredSize(new Dimension(290, 275));
-            this2.pack();
-            this2.setLocationRelativeTo(this2.getOwner());
+            RegFormContentPane.setPreferredSize(new Dimension(290, 275));
+            RegForm.pack();
+            RegForm.setLocationRelativeTo(RegForm.getOwner());
         }
 
         //---- buttonGroup1 ----
         var buttonGroup1 = new ButtonGroup();
-        buttonGroup1.add(radioButton1);
-        buttonGroup1.add(radioButton2);
+        buttonGroup1.add(Gen_B);
+        buttonGroup1.add(Gen_G);
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }
 
@@ -231,20 +231,20 @@ public class loginPage extends JFrame {
     private JButton LoginButton;
     private JCheckBox RememberCheck;
     private JButton RegButton;
-    private JFrame this2;
+    private JFrame RegForm;
     private JLabel label3;
     private JLabel label4;
-    private JTextField textField1;
+    private JTextField Reg_ID;
     private JLabel label5;
-    private JRadioButton radioButton1;
-    private JRadioButton radioButton2;
+    private JRadioButton Gen_B;
+    private JRadioButton Gen_G;
     private JLabel label6;
     private JLabel label7;
-    private JComboBox<String> comboBox1;
+    private JComboBox<String> State;
     private JLabel label8;
-    private JCheckBox checkBox1;
-    private JButton button1;
-    private JPasswordField passwordField1;
-    private JPasswordField passwordField2;
+    private JCheckBox LockerUse;
+    private JPasswordField Reg_PW;
+    private JPasswordField Reg_PWagain;
+    private JButton CreateAccount;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }
