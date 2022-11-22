@@ -4,6 +4,9 @@ import java.awt.event.*;
 import javax.swing.table.*;
 import java.awt.*;
 import javax.swing.*;
+
+import api.User;
+import api.UserDAO;
 import gui.mainPage;
 //import com.intellij.ide.ui.laf.*;
 /*
@@ -27,18 +30,63 @@ public class loginPage extends JFrame {
 
     }
 
-    private void Login(ActionEvent e) {
+    private void Login(ActionEvent e) { // 로그인 버튼 클릭 시
         // TODO add your code here
-        new mainPage();
         //mainPage.setVisible(true);
         //f.setSize(585,330);
-        this.setVisible(false);
+
+        UserDAO userDAO = new UserDAO();
+        String passPW = new String(PWtext.getPassword());
+        int result = userDAO.login(IDtext.getText(), passPW);
+        System.out.println("result = " + result);
+        if (result == 1)
+        {
+            // 로그인 성공
+            JOptionPane.showMessageDialog(null, "로그인에 성공하였습니다");
+            new mainPage();
+            this.setVisible(false);
+
+        } else if (result == 0)
+        {
+            JOptionPane.showMessageDialog(null, "비밀번호 틀림 ㅎㅎ");
+            // 비밀번호 오류
+        } else if (result == -1)
+        {
+            JOptionPane.showMessageDialog(null, "아이디 틀림 ㅎㅎ");
+            // 존재하지 않는 아이디
+        } else if (result == -2)
+        {
+            JOptionPane.showMessageDialog(null, "DB 오류");
+            // 데이터베이스 오류
+        }
         
     }
 
-    private void CreateAccount(ActionEvent e) {
+    private void CreateAccount(ActionEvent e) { // 회원가입 버튼 누를 시
         // TODO add your code here
         RegForm.setVisible(false);
+
+
+        User user = new User(); // user 인스턴스 생성
+
+        // 회원가입 비밀번호란에서 받아온 문자 string으로 변환
+        // PWtext, IDtext -> 임시변수
+        String passPW = new String(Reg_PW.getPassword());
+
+        user.setID(Reg_ID.getText());
+        user.setPassword(passPW);
+        user.setLocker(false);
+
+        UserDAO userDAO = new UserDAO();
+
+        int result = userDAO.signUp(user);
+        System.out.println("result = " + result);
+
+        if (result == 1) {
+            //  성공
+        } else if (result == -1) {
+            // 데이터베이스 오류
+        }
     }
 
     private void initComponents() {
