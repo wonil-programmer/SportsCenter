@@ -46,18 +46,15 @@ public class loginPage extends JFrame {
             new mainPage();
             this.setVisible(false);
 
-        } else if (result == 0)
-        {
-            JOptionPane.showMessageDialog(null, "비밀번호 틀림 ㅎㅎ");
-            // 비밀번호 오류
-        } else if (result == -1)
-        {
-            JOptionPane.showMessageDialog(null, "아이디 틀림 ㅎㅎ");
-            // 존재하지 않는 아이디
-        } else if (result == -2)
-        {
-            JOptionPane.showMessageDialog(null, "DB 오류");
+        } else if (result == 0) {
+            // 아이디 또는 비밀번호 오류
+            JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.");
+        } else if (result == -1) {
+            // 아이디 없음
+            JOptionPane.showMessageDialog(null, "존재하지 않는 아이디입니다.");
+        } else if (result == -2) {
             // 데이터베이스 오류
+            JOptionPane.showMessageDialog(null, "DB 오류");
         }
         
     }
@@ -70,10 +67,9 @@ public class loginPage extends JFrame {
         User user = new User(); // user 인스턴스 생성
 
         // 회원가입 비밀번호란에서 받아온 문자 string으로 변환
-        // PWtext, IDtext -> 임시변수
         String passPW = new String(Reg_PW.getPassword());
 
-        user.setID(Reg_ID.getText());
+        user.setUserID(Reg_ID.getText());
         user.setPassword(passPW);
         user.setLocker(false);
 
