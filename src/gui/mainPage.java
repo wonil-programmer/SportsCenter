@@ -108,6 +108,7 @@ public class mainPage extends JFrame {
         SunGraph = new JProgressBar();
         label21 = new JLabel();
         panel2 = new JPanel();
+        panel1 = new JPanel();
         panel4 = new JPanel();
         Locker2 = new JButton();
         Locker3 = new JButton();
@@ -135,6 +136,7 @@ public class mainPage extends JFrame {
         label19 = new JLabel();
         label20 = new JLabel();
         Locker1 = new JButton();
+        panel3 = new JPanel();
         panel6 = new JPanel();
         label9 = new JLabel();
         label11 = new JLabel();
@@ -165,11 +167,13 @@ public class mainPage extends JFrame {
 
                 //======== panel5 ========
                 {
-                    panel5.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder(
-                    0, 0, 0, 0) , "JF\u006frmDesi\u0067ner Ev\u0061luatio\u006e", javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder
-                    . BOTTOM, new java .awt .Font ("Dialo\u0067" ,java .awt .Font .BOLD ,12 ), java. awt. Color.
-                    red) ,panel5. getBorder( )) ); panel5. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .
-                    beans .PropertyChangeEvent e) {if ("borde\u0072" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
+                    panel5.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing
+                    . border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder
+                    . CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069alog" ,java .
+                    awt .Font .BOLD ,12 ), java. awt. Color. red) ,panel5. getBorder( )) )
+                    ; panel5. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
+                    ) {if ("\u0062order" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} )
+                    ;
                     panel5.setLayout(null);
 
                     //---- label13 ----
@@ -338,6 +342,27 @@ public class mainPage extends JFrame {
                     }
                 }
                 tabbedPane1.addTab("\ud68c\uc6d0\uad8c \uad6c\ub9e4", panel2);
+
+                //======== panel1 ========
+                {
+                    panel1.setLayout(null);
+
+                    {
+                        // compute preferred size
+                        Dimension preferredSize = new Dimension();
+                        for(int i = 0; i < panel1.getComponentCount(); i++) {
+                            Rectangle bounds = panel1.getComponent(i).getBounds();
+                            preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                            preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                        }
+                        Insets insets = panel1.getInsets();
+                        preferredSize.width += insets.right;
+                        preferredSize.height += insets.bottom;
+                        panel1.setMinimumSize(preferredSize);
+                        panel1.setPreferredSize(preferredSize);
+                    }
+                }
+                tabbedPane1.addTab("PT\uad8c \uad6c\ub9e4", panel1);
 
                 //======== panel4 ========
                 {
@@ -541,6 +566,27 @@ public class mainPage extends JFrame {
                 }
                 tabbedPane1.addTab("\uac1c\uc778\ub77d\ucee4", panel4);
 
+                //======== panel3 ========
+                {
+                    panel3.setLayout(null);
+
+                    {
+                        // compute preferred size
+                        Dimension preferredSize = new Dimension();
+                        for(int i = 0; i < panel3.getComponentCount(); i++) {
+                            Rectangle bounds = panel3.getComponent(i).getBounds();
+                            preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                            preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                        }
+                        Insets insets = panel3.getInsets();
+                        preferredSize.width += insets.right;
+                        preferredSize.height += insets.bottom;
+                        panel3.setMinimumSize(preferredSize);
+                        panel3.setPreferredSize(preferredSize);
+                    }
+                }
+                tabbedPane1.addTab("\uc2a4\ucf00\uc904 \uad00\ub9ac", panel3);
+
                 //======== panel6 ========
                 {
                     panel6.setLayout(null);
@@ -598,7 +644,7 @@ public class mainPage extends JFrame {
                 tabbedPane1.addTab("\ud68c\uc6d0\uc815\ubcf4", panel6);
             }
             MainFormContentPane.add(tabbedPane1);
-            tabbedPane1.setBounds(0, 0, 560, 285);
+            tabbedPane1.setBounds(0, -5, 560, 285);
 
             MainFormContentPane.setPreferredSize(new Dimension(565, 315));
             MainForm.pack();
@@ -673,6 +719,7 @@ public class mainPage extends JFrame {
     private JProgressBar SunGraph;
     private JLabel label21;
     private JPanel panel2;
+    private JPanel panel1;
     private JPanel panel4;
     private JButton Locker2;
     private JButton Locker3;
@@ -700,6 +747,7 @@ public class mainPage extends JFrame {
     private JLabel label19;
     private JLabel label20;
     private JButton Locker1;
+    private JPanel panel3;
     private JPanel panel6;
     private JLabel label9;
     private JLabel label11;

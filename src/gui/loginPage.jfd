@@ -148,12 +148,12 @@ new FormModel {
 				"y": 145
 			} )
 			add( new FormComponent( "javax.swing.JComboBox" ) {
-				name: "State"
+				name: "Type"
 				"model": new javax.swing.DefaultComboBoxModel {
 					selectedItem: "재학생"
 					addElement( "재학생" )
-					addElement( "일반인" )
 					addElement( "교직원" )
+					addElement( "일반인" )
 				}
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 85

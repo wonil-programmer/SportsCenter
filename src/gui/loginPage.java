@@ -61,28 +61,73 @@ public class loginPage extends JFrame {
 
     private void CreateAccount(ActionEvent e) { // 회원가입 버튼 누를 시
         // TODO add your code here
-        RegForm.setVisible(false);
-
-
-        User user = new User(); // user 인스턴스 생성
-
         // 회원가입 비밀번호란에서 받아온 문자 string으로 변환
         String passPW = new String(Reg_PW.getPassword());
+        String passPWAgain = new String(Reg_PWagain.getPassword());
+        if(passPW == passPWAgain)
+        {
+            User user = new User(); // user 인스턴스 생성
 
-        user.setUserID(Reg_ID.getText());
-        user.setPassword(passPW);
-        user.setLocker(false);
+            // DB에 각 정보 저장
+            user.setUserID(Reg_ID.getText()); // ID 저장
+            user.setPassword(passPW); // PW 저장
 
-        UserDAO userDAO = new UserDAO();
 
-        int result = userDAO.signUp(user);
-        System.out.println("result = " + result);
+            if(Gen_B.isSelected()) { // 성별 저장
+                user.setGender("남");
+            }
+            else if(Gen_G.isSelected())
+            {
+                user.setGender("여");
+            }
 
-        if (result == 1) {
-            //  성공
-        } else if (result == -1) {
-            // 데이터베이스 오류
+            if(Type.getSelectedIndex()==0) // type 저장
+            {
+                user.setType("재학생");
+            }
+            else if(Type.getSelectedIndex()==1)
+            {
+                user.setType("교직원");
+            }
+            else if(Type.getSelectedIndex()==2)
+            {
+                user.setType("일반인");
+            }
+
+            if(LockerUse.isSelected()) // 개인락커 사용여부 저장
+            {
+                user.setLocker(true);
+            }
+            else {
+                user.setLocker(false);
+            }
+
+            RegForm.setVisible(false); // 로그인창 숨기기
+
+            UserDAO userDAO = new UserDAO(); // userDAO 객체 생성
+
+            int result = userDAO.signUp(user); // 회원가입 성공 여부 result에 담음
+
+
+            if (result == 1) {
+                JOptionPane.showMessageDialog(null, "회원가입 완료");
+                //  성공
+            } else if (result == -1) {
+                JOptionPane.showMessageDialog(null, "DB오류");
+                // 데이터베이스 오류
+            }
+
         }
+        else {
+            JOptionPane.showMessageDialog(null, "비밀번호가 일치하지않습니다");
+        }
+
+
+
+
+        /* System.out.println("result = " + result); */
+
+
     }
 
     private void initComponents() {
@@ -104,7 +149,7 @@ public class loginPage extends JFrame {
         Gen_G = new JRadioButton();
         label6 = new JLabel();
         label7 = new JLabel();
-        State = new JComboBox<>();
+        Type = new JComboBox<>();
         label8 = new JLabel();
         LockerUse = new JCheckBox();
         Reg_PW = new JPasswordField();
@@ -199,14 +244,14 @@ public class loginPage extends JFrame {
             RegFormContentPane.add(label7);
             label7.setBounds(new Rectangle(new Point(30, 145), label7.getPreferredSize()));
 
-            //---- State ----
-            State.setModel(new DefaultComboBoxModel<>(new String[] {
+            //---- Type ----
+            Type.setModel(new DefaultComboBoxModel<>(new String[] {
                 "\uc7ac\ud559\uc0dd",
-                "\uc77c\ubc18\uc778",
-                "\uad50\uc9c1\uc6d0"
+                "\uad50\uc9c1\uc6d0",
+                "\uc77c\ubc18\uc778"
             }));
-            RegFormContentPane.add(State);
-            State.setBounds(85, 145, 75, State.getPreferredSize().height);
+            RegFormContentPane.add(Type);
+            Type.setBounds(85, 145, 75, Type.getPreferredSize().height);
 
             //---- label8 ----
             label8.setText("locker usage");
@@ -284,7 +329,7 @@ public class loginPage extends JFrame {
     private JRadioButton Gen_G;
     private JLabel label6;
     private JLabel label7;
-    private JComboBox<String> State;
+    private JComboBox<String> Type;
     private JLabel label8;
     private JCheckBox LockerUse;
     private JPasswordField Reg_PW;
