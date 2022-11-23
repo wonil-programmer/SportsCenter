@@ -53,13 +53,13 @@ public class UserDAO {
         String SQL = "INSERT INTO USER VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             pstmt = conn.prepareStatement(SQL);
-            pstmt.setString(1, user.getUserID());
-            pstmt.setString(2, user.getUserPassword());
-            pstmt.setString(3, user.getUserName());
-            pstmt.setString(4, user.getUserBelong());
-            pstmt.setString(5, user.getUserPhoneNumber());
-            pstmt.setString(6, user.getUserGender());
-            pstmt.setBoolean(7, user.getUserLocker());
+            pstmt.setString(1, user.getID());
+            pstmt.setString(2, user.getPassword());
+            pstmt.setString(3, user.getName());
+            pstmt.setString(4, user.getType());
+            pstmt.setString(5, user.getPhoneNumber());
+            pstmt.setString(6, user.getGender());
+            pstmt.setBoolean(7, user.getLocker());
             pstmt.setString(8, user.getCreateTime());
             return pstmt.executeUpdate(); // 회원가입 성공
         } catch (Exception e) {
@@ -67,4 +67,47 @@ public class UserDAO {
         }
         return -1; // 데이터베이스 오류
     }
+
+    // 입장 함수
+//    public int enter(int id) {
+//        String SQL = "INSERT INTO ENTER_EXIT (user_id) VALUES(?)";
+//        try {
+//            pstmt = conn.prepareStatement(SQL);
+//            pstmt.setInt(1, id);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return -1; // 데이터베이스 오류
+//    }
+//
+//    // 퇴장 함수
+//    public int exit(int id) {
+//        String SQL = "UPDATE ENTRY_EXIT SET EXIT_TIME = CURRENT_TIMESTAMP WHERE USER_ID = ?";
+//        try {
+//            pstmt = conn.prepareStatement(SQL);
+//            pstmt.setInt(1, id);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return -1; // 데이터베이스 오류
+//    }
+//
+//    // 사용시간 계산 함수
+//    public String calcUseTime() {
+//        String SQL = "SELECT ENTRY_TIME, EXIT_TIME FROM ENTRY_EXIT";
+//        int[] timeArr = new int[24];
+//        try {
+//            pstmt = conn.prepareStatement(SQL);
+//            rs = pstmt.executeQuery();
+//            if (rs.next()) {
+//                if (rs.getString(1).equals(userPassword))
+//                    return 1; // 로그인 성공
+//                else
+//                    return 0; // 비밀번호 불일치
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return -1; // 데이터베이스 오류
+//    }
 }

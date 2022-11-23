@@ -2,69 +2,66 @@ package api;
 
 public class User {
 
-    private String userID;
-    private String userPassword;
-    private String userName;
-    private String userBelong;
-    private String userPhoneNumber;
-    private String userGender;
-    private Boolean userLocker;
+    private String ID;
+    private String Password;
+    private String Name;
+    private String Type;
+    private String PhoneNumber;
+    public String Gender;
+    private Boolean Locker;
     private String createTime ;
 
-    public String getUserID() {
-        return userID;
+    public String getID() {
+        return ID;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getName() {
+        return Name;
     }
 
-    public String getUserPassword() {
-        return userPassword;
+    public String getPassword() { return Password; }
+
+    public void setPassword(String Password) {
+        this.Password = Password;
     }
 
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
+    public void setName(String userName) {
+        this.Name = Name;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public String getType() {
+        return Type;
     }
 
-    public String getUserBelong() {
-        return userBelong;
+    public void setType(String Type) {
+        this.Type = Type;
     }
 
-    public void setUserBelong(String userBelong) {
-        this.userBelong = userBelong;
+    public String getPhoneNumber() {
+        return PhoneNumber;
     }
 
-    public String getUserPhoneNumber() {
-        return userPhoneNumber;
+    public void setPhoneNumber(String PhoneNumber) {
+        this.PhoneNumber = PhoneNumber;
     }
 
-    public void setUserPhoneNumber(String userPhoneNumber) {
-        this.userPhoneNumber = userPhoneNumber;
+    public String getGender() { return Gender; }
+
+    public void setGender(String Gender) {
+        this.Gender = Gender;
     }
 
-    public String getUserGender() {
-        return userGender;
+    public Boolean getLocker() {
+        return Locker;
     }
 
-    public void setUserGender(String userGender) {
-        this.userGender = userGender;
-    }
 
-    public Boolean getUserLocker() {
-        return userLocker;
-    }
-
-    public void setUserLocker(Boolean userLocker) {
-        this.userLocker = userLocker;
+    public void setLocker(Boolean Locker) {
+        this.Locker = Locker;
     }
 
     public String getCreateTime() {
