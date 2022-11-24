@@ -23,6 +23,7 @@ public class loginPage extends JFrame {
         initComponents();
     }
 
+    // Login 화면에서 Register 버튼 눌렀을 시
     private void Reg(ActionEvent e) {
         // TODO add your code here
         this2.setVisible(true);
@@ -32,18 +33,31 @@ public class loginPage extends JFrame {
 
     private void Login(ActionEvent e) {
         // TODO add your code here
-        new mainPage();
+        new mainPage(); // 나중에 삭제 !!!!!!!!!!, 수정
         //mainPage.setVisible(true);
         //f.setSize(585,330);
-        this.setVisible(false);
 
+        JButton b = (JButton)e.getSource();
+
+        /* TextField에 입력된 아이디와 비밀번호를 변수에 초기화 */
+        String uid = IDtext.getText();
+        String upass = "";
+        for(int i=0; i<PWtext.getPassword().length; i++) {
+            upass = upass + PWtext.getPassword()[i];
+        }
+
+        if (api.UserDAO.login(uid, upass)==1) {
+            //new mainPage();
+            this.setVisible(false);
+        }
     }
 
     // 회원가입
     private void button1(ActionEvent e) {
         // TODO add your code here
+
         this2.setVisible(false);
-        JOptionPane.showMessageDialog(null, "회원가입에 성공하였습니다");
+        // JOptionPane.showMessageDialog(null, "회원가입에 성공하였습니다");
     }
 
     private void initComponents() {

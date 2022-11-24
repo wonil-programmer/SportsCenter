@@ -1,5 +1,6 @@
 package api;
 
+import javax.swing.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -29,8 +30,8 @@ public class UserDAO {
     }
 
     // 로그인 함수
-    public int login(String userID, String userPassword) {
-        System.out.println("userPassword = " + userPassword);
+    public static int login(String userID, String userPassword) {
+        // System.out.println("userPassword = " + userPassword);
         String SQL = "SELECT user_password FROM user WHERE user_id = ?";
         try {
             // Statement 클래스를 이용하여 prepareStatement 객체 생성
@@ -38,11 +39,16 @@ public class UserDAO {
             pstmt.setString(1, userID);
             rs = pstmt.executeQuery();
             if (rs.next()) {
-                if (rs.getString(1).equals(userPassword))
+                if (rs.getString(1).equals(userPassword)) {
+                    JOptionPane.showMessageDialog(null, "로그인에 성공하였습니다");
                     return 1; // 로그인 성공
-                else
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다");
                     return 0; // 비밀번호 불일치
+                }
             }
+            JOptionPane.showMessageDialog(null, "아이디나 비밀번호를 다시 확인해주세요.");
             return -1; // 아이디 없음
         } catch (Exception e) {
             e.printStackTrace();

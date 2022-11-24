@@ -7,10 +7,10 @@
     <list default="true" id="ca9a1687-7357-49dc-8023-c66cb0f536e6" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/SportsCenterApp/api/UserDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SportsCenterApp/api/UserDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SportsCenterApp/gui/loginPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SportsCenterApp/gui/loginPage.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/SportsCenterApp/gui/mainPage.jfd" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SportsCenterApp/gui/mainPage.jfd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/api/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/UserDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/loginPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/loginPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/mainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/mainPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/mainPage.jfd" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/mainPage.jfd" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -48,7 +48,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW": "false",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Program Files (x86)/MySQL/Connector J 8.0/mysql-connector-j-8.0.31.jar",
+    "last_opened_file_path": "C:/Users/ykkim/Downloads/SportsCenter-master/SportsCenter-master",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -56,7 +56,7 @@
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+    "settings.editor.selected.configurable": "preferences.general"
   },
   "keyToStringList": {
     "DatabaseDriversLRU": [
@@ -127,7 +127,14 @@
       <workItem from="1668773697195" duration="1699000" />
       <workItem from="1668775443546" duration="18965000" />
       <workItem from="1668867076729" duration="55000" />
-      <workItem from="1668867167795" duration="27117000" />
+      <workItem from="1668867167795" duration="27741000" />
+      <workItem from="1668952132443" duration="16000" />
+      <workItem from="1668952163932" duration="42000" />
+      <workItem from="1669101391994" duration="1481000" />
+      <workItem from="1669102901229" duration="1550000" />
+      <workItem from="1669123763132" duration="739000" />
+      <workItem from="1669124538216" duration="6474000" />
+      <workItem from="1669175238450" duration="1763000" />
     </task>
     <servers />
   </component>
@@ -144,5 +151,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
