@@ -17,7 +17,7 @@ public class UserDAO {
         try {
             String dbURL = "jdbc:mysql://localhost:3306/sportscenter";
             String dbID = "root";
-            String dbPassword = "mysqlrhtn8580!";
+            String dbPassword = "0201";
             Class.forName("com.mysql.cj.jdbc.Driver");
             // getConnection 메소드로 DB에 연결
             conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
@@ -67,6 +67,27 @@ public class UserDAO {
             e.printStackTrace();
         }
         return -1; // 데이터베이스 오류
+    }
+
+    // 헬스장이나 PT 등록을 DB에 반영하는 함수
+    public int ptReg(int _i, int _p, int _m) {
+
+        int idNum = _i;
+        int ifPT = _p;
+        int monthIdx = _m;
+
+        String SQL = "UPDATE register SET ifPT = ?, monthIdx = ? WHERE idNum=?";
+        try {
+            pstmt = conn.prepareStatement(SQL);
+            pstmt.setInt(1, ifPT);
+            pstmt.setInt(2, monthIdx);
+            pstmt.setInt(3, idNum);
+            pstmt.executeUpdate();
+            System.out.println("헬스/PT 등록 성공");
+        } catch(Exception e) {
+            System.out.println("헬스/PT 등록 실패 > " + e.toString());
+        }
+        return -1;
     }
 
     // 입장 함수
