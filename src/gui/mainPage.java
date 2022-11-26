@@ -3,16 +3,91 @@
  */
 
 package gui;
-
+import api.User;
+import api.UserDAO;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.border.*;
 import javax.swing.table.*;
 import gui.loginPage;
 /**
  * @author Minjae
  */
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.*;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import javax.swing.*;
+
+class CalendarDataManager{
+    static final int CAL_WIDTH = 7;
+    final static int CAL_HEIGHT = 6;
+    int calDates[][] = new int[CAL_HEIGHT][CAL_WIDTH];
+    int calYear;
+    int calMonth;
+    int calDayOfMon;
+    final int calLastDateOfMonth[]={31,28,31,30,31,30,31,31,30,31,30,31};
+    int calLastDate;
+    Calendar today = Calendar.getInstance();
+    Calendar cal;
+
+    public CalendarDataManager()
+    {
+        setToday();
+    }
+    public void setToday(){
+        calYear = today.get(Calendar.YEAR);
+        calMonth = today.get(Calendar.MONTH);
+        calDayOfMon = today.get(Calendar.DAY_OF_MONTH);
+        makeCalData(today);
+    }
+    private void makeCalData(Calendar cal){
+
+        int calStartingPos = (cal.get(Calendar.DAY_OF_WEEK)+7-(cal.get(Calendar.DAY_OF_MONTH))%7)%7;
+        if(calMonth == 1) calLastDate = calLastDateOfMonth[calMonth] + leapCheck(calYear);
+        else calLastDate = calLastDateOfMonth[calMonth];
+
+        for(int i = 0 ; i<CAL_HEIGHT ; i++){
+            for(int j = 0 ; j<CAL_WIDTH ; j++){
+                calDates[i][j] = 0;
+            }
+        }
+
+        for(int i = 0, num = 1, k = 0 ; i<CAL_HEIGHT ; i++){
+            if(i == 0) k = calStartingPos;
+            else k = 0;
+            for(int j = k ; j<CAL_WIDTH ; j++){
+                if(num <= calLastDate) calDates[i][j]=num++;
+            }
+        }
+    }
+    private int leapCheck(int year){
+        if(year%4 == 0 && year%100 != 0 || year%400 == 0) return 1;
+        else return 0;
+    }
+    public void moveMonth(int mon){
+        calMonth += mon;
+        if(calMonth>11) while(calMonth>11){
+            calYear++;
+            calMonth -= 12;
+        } else if (calMonth<0) while(calMonth<0){
+            calYear--;
+            calMonth += 12;
+        }
+        cal = new GregorianCalendar(calYear,calMonth,calDayOfMon);
+        makeCalData(cal);
+    }
+}
+
+
+
 public class mainPage extends JFrame {
+    CalendarDataManager CDM = new CalendarDataManager();
+
     public mainPage() {
         initComponents();
         MainForm.setVisible(true);
@@ -23,8 +98,13 @@ public class mainPage extends JFrame {
         com.formdev.flatlaf.intellijthemes.FlatArcOrangeIJTheme.setup();
         mainPage frame = new mainPage();
         frame.pack();
+        UserDAO userDAO = new UserDAO();
+        String currentuser = Integer.toString(userDAO.countCurUser());
+        frame.CurUser.setText(currentuser);
+        
 
     }
+
     private void LockerBuy(ActionEvent e) {
         // TODO add your code here
 
@@ -86,6 +166,18 @@ public class mainPage extends JFrame {
         }
     }
 
+    private void Enter(ActionEvent e) {
+        // TODO add your code here
+        UserDAO userDAO = new UserDAO();
+        userDAO.enter(1234);
+    }
+
+    private void Exit(ActionEvent e) {
+        // TODO add your code here
+        UserDAO userDAO = new UserDAO();
+        userDAO.exit(1234);
+    }
+
     
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
@@ -94,7 +186,7 @@ public class mainPage extends JFrame {
         tabbedPane1 = new JTabbedPane();
         panel5 = new JPanel();
         label13 = new JLabel();
-        NowPerson = new JLabel();
+        CurUser = new JLabel();
         scrollPane1 = new JScrollPane();
         table1 = new JTable();
         WeekCombo = new JComboBox<>();
@@ -109,6 +201,20 @@ public class mainPage extends JFrame {
         label21 = new JLabel();
         panel2 = new JPanel();
         panel1 = new JPanel();
+        panel7 = new JPanel();
+        scrollPane2 = new JScrollPane();
+        table2 = new JTable();
+        panel8 = new JPanel();
+        label2 = new JLabel();
+        comboBox1 = new JComboBox<>();
+        label4 = new JLabel();
+        label5 = new JLabel();
+        label6 = new JLabel();
+        comboBox2 = new JComboBox<>();
+        label7 = new JLabel();
+        label8 = new JLabel();
+        label10 = new JLabel();
+        button1 = new JButton();
         panel4 = new JPanel();
         Locker2 = new JButton();
         Locker3 = new JButton();
@@ -145,6 +251,8 @@ public class mainPage extends JFrame {
         label23 = new JLabel();
         label24 = new JLabel();
         label25 = new JLabel();
+        EnterButton = new JButton();
+        ExitButton = new JButton();
         LockerBuyForm = new JDialog();
         LockerBuy = new JButton();
         label1 = new JLabel();
@@ -155,9 +263,9 @@ public class mainPage extends JFrame {
 
         //======== MainForm ========
         {
-            MainForm.setTitle("OPEN SW");
             MainForm.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             MainForm.setResizable(false);
+            MainForm.setTitle("OPEN SW");
             var MainFormContentPane = MainForm.getContentPane();
             MainFormContentPane.setLayout(null);
 
@@ -167,13 +275,12 @@ public class mainPage extends JFrame {
 
                 //======== panel5 ========
                 {
-                    panel5.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing
-                    . border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder
-                    . CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069alog" ,java .
-                    awt .Font .BOLD ,12 ), java. awt. Color. red) ,panel5. getBorder( )) )
-                    ; panel5. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
-                    ) {if ("\u0062order" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} )
-                    ;
+                    panel5.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border
+                    .EmptyBorder(0,0,0,0), "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn",javax.swing.border.TitledBorder.CENTER,javax
+                    .swing.border.TitledBorder.BOTTOM,new java.awt.Font("Dia\u006cog",java.awt.Font.BOLD,
+                    12),java.awt.Color.red),panel5. getBorder()));panel5. addPropertyChangeListener(new java.beans
+                    .PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062ord\u0065r".equals(e.
+                    getPropertyName()))throw new RuntimeException();}});
                     panel5.setLayout(null);
 
                     //---- label13 ----
@@ -181,11 +288,11 @@ public class mainPage extends JFrame {
                     panel5.add(label13);
                     label13.setBounds(20, 10, 86, 17);
 
-                    //---- NowPerson ----
-                    NowPerson.setText("32\uba85");
-                    NowPerson.setFont(new Font("\ub9d1\uc740 \uace0\ub515", Font.BOLD, 12));
-                    panel5.add(NowPerson);
-                    NowPerson.setBounds(110, 10, 26, 17);
+                    //---- CurUser ----
+                    CurUser.setText("32\uba85");
+                    CurUser.setFont(new Font("\ub9d1\uc740 \uace0\ub515", Font.BOLD, 12));
+                    panel5.add(CurUser);
+                    CurUser.setBounds(110, 10, 26, 17);
 
                     //======== scrollPane1 ========
                     {
@@ -206,7 +313,7 @@ public class mainPage extends JFrame {
                                 {"  19 : 00 ~ 20 : 00", null},
                             },
                             new String[] {
-                                "\uc2dc\uac04", "\ud3c9\uade0 \uc778\uc6d0"
+                                "\uc2dc\uac04", "\uc778\uc6d0"
                             }
                         ) {
                             boolean[] columnEditable = new boolean[] {
@@ -346,6 +453,112 @@ public class mainPage extends JFrame {
                 //======== panel1 ========
                 {
                     panel1.setLayout(null);
+
+                    //======== panel7 ========
+                    {
+                        panel7.setBorder(new TitledBorder("\uac15\uc0ac\ubaa9\ub85d"));
+                        panel7.setLayout(null);
+
+                        //======== scrollPane2 ========
+                        {
+
+                            //---- table2 ----
+                            table2.setModel(new DefaultTableModel(
+                                new Object[][] {
+                                    {"                    \uc720OO", "                  \uc6d4,\uc218,\uae08"},
+                                    {"                    \uae40OO", "                  \ud654,\ubaa9,\uc77c"},
+                                    {"                    \ud55cOO", "                  \uc6d4,\ubaa9,\ud1a0"},
+                                    {"                    \ubc15OO", "                  \uc218,\uae08,\uc77c"},
+                                },
+                                new String[] {
+                                    "\ud2b8\ub808\uc774\ub108", "PT \uc2dc\uac04"
+                                }
+                            ) {
+                                boolean[] columnEditable = new boolean[] {
+                                    false, false
+                                };
+                                @Override
+                                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                                    return columnEditable[columnIndex];
+                                }
+                            });
+                            {
+                                TableColumnModel cm = table2.getColumnModel();
+                                cm.getColumn(0).setResizable(false);
+                                cm.getColumn(1).setResizable(false);
+                            }
+                            table2.setShowHorizontalLines(true);
+                            table2.setShowVerticalLines(true);
+                            scrollPane2.setViewportView(table2);
+                        }
+                        panel7.add(scrollPane2);
+                        scrollPane2.setBounds(15, 30, 405, 105);
+                    }
+                    panel1.add(panel7);
+                    panel7.setBounds(20, 15, 435, 150);
+
+                    //======== panel8 ========
+                    {
+                        panel8.setBorder(new TitledBorder("\uacb0\uc81c"));
+                        panel8.setLayout(null);
+
+                        //---- label2 ----
+                        label2.setText("\ud2b8\ub808\uc774\ub108");
+                        panel8.add(label2);
+                        label2.setBounds(new Rectangle(new Point(30, 35), label2.getPreferredSize()));
+
+                        //---- comboBox1 ----
+                        comboBox1.setModel(new DefaultComboBoxModel<>(new String[] {
+                            "\uc720OO",
+                            "\uae40OO",
+                            "\ud55cOO",
+                            "\ubc15OO"
+                        }));
+                        panel8.add(comboBox1);
+                        comboBox1.setBounds(85, 30, 85, comboBox1.getPreferredSize().height);
+
+                        //---- label4 ----
+                        label4.setText("\uc694\uae08 : ");
+                        panel8.add(label4);
+                        label4.setBounds(new Rectangle(new Point(190, 65), label4.getPreferredSize()));
+
+                        //---- label5 ----
+                        label5.setText("300000 \uc6d0");
+                        panel8.add(label5);
+                        label5.setBounds(new Rectangle(new Point(235, 65), label5.getPreferredSize()));
+
+                        //---- label6 ----
+                        label6.setText("\ud69f\uc218");
+                        panel8.add(label6);
+                        label6.setBounds(new Rectangle(new Point(40, 65), label6.getPreferredSize()));
+
+                        //---- comboBox2 ----
+                        comboBox2.setModel(new DefaultComboBoxModel<>(new String[] {
+                            "\uc6d4 8\ud68c",
+                            "\uc6d4 10\ud68c"
+                        }));
+                        panel8.add(comboBox2);
+                        comboBox2.setBounds(85, 60, 85, comboBox2.getPreferredSize().height);
+                        panel8.add(label7);
+                        label7.setBounds(new Rectangle(new Point(185, 35), label7.getPreferredSize()));
+
+                        //---- label8 ----
+                        label8.setText("PT \uc2dc\uac04 : ");
+                        panel8.add(label8);
+                        label8.setBounds(190, 35, label8.getPreferredSize().width, 17);
+
+                        //---- label10 ----
+                        label10.setText("\uc6d4,\uc218,\uae08");
+                        panel8.add(label10);
+                        label10.setBounds(new Rectangle(new Point(250, 35), label10.getPreferredSize()));
+
+                        //---- button1 ----
+                        button1.setText("\uacb0\uc81c");
+                        panel8.add(button1);
+                        button1.setBounds(315, 35, 105, 45);
+                    }
+                    panel1.add(panel8);
+                    panel8.setBounds(20, 175, 435, 100);
 
                     {
                         // compute preferred size
@@ -626,6 +839,18 @@ public class mainPage extends JFrame {
                     panel6.add(label25);
                     label25.setBounds(new Rectangle(new Point(20, 85), label25.getPreferredSize()));
 
+                    //---- EnterButton ----
+                    EnterButton.setText("\uc785\uc7a5");
+                    EnterButton.addActionListener(e -> Enter(e));
+                    panel6.add(EnterButton);
+                    EnterButton.setBounds(new Rectangle(new Point(225, 50), EnterButton.getPreferredSize()));
+
+                    //---- ExitButton ----
+                    ExitButton.setText("\ud1f4\uc7a5");
+                    ExitButton.addActionListener(e -> Exit(e));
+                    panel6.add(ExitButton);
+                    ExitButton.setBounds(new Rectangle(new Point(310, 50), ExitButton.getPreferredSize()));
+
                     {
                         // compute preferred size
                         Dimension preferredSize = new Dimension();
@@ -644,7 +869,7 @@ public class mainPage extends JFrame {
                 tabbedPane1.addTab("\ud68c\uc6d0\uc815\ubcf4", panel6);
             }
             MainFormContentPane.add(tabbedPane1);
-            tabbedPane1.setBounds(0, -5, 560, 285);
+            tabbedPane1.setBounds(0, 0, 560, 285);
 
             MainFormContentPane.setPreferredSize(new Dimension(565, 315));
             MainForm.pack();
@@ -705,7 +930,7 @@ public class mainPage extends JFrame {
     private JTabbedPane tabbedPane1;
     private JPanel panel5;
     private JLabel label13;
-    private JLabel NowPerson;
+    private JLabel CurUser;
     private JScrollPane scrollPane1;
     private JTable table1;
     private JComboBox<String> WeekCombo;
@@ -720,6 +945,20 @@ public class mainPage extends JFrame {
     private JLabel label21;
     private JPanel panel2;
     private JPanel panel1;
+    private JPanel panel7;
+    private JScrollPane scrollPane2;
+    private JTable table2;
+    private JPanel panel8;
+    private JLabel label2;
+    private JComboBox<String> comboBox1;
+    private JLabel label4;
+    private JLabel label5;
+    private JLabel label6;
+    private JComboBox<String> comboBox2;
+    private JLabel label7;
+    private JLabel label8;
+    private JLabel label10;
+    private JButton button1;
     private JPanel panel4;
     private JButton Locker2;
     private JButton Locker3;
@@ -756,6 +995,8 @@ public class mainPage extends JFrame {
     private JLabel label23;
     private JLabel label24;
     private JLabel label25;
+    private JButton EnterButton;
+    private JButton ExitButton;
     private JDialog LockerBuyForm;
     private JButton LockerBuy;
     private JLabel label1;

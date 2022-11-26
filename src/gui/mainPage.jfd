@@ -7,9 +7,9 @@ new FormModel {
 			"autoSize": false
 		} ) {
 			name: "MainForm"
-			"title": "OPEN SW"
 			"defaultCloseOperation": 3
 			"resizable": false
+			"title": "OPEN SW"
 			add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
 				name: "tabbedPane1"
 				"tabPlacement": 2
@@ -25,7 +25,7 @@ new FormModel {
 						"y": 10
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
-						name: "NowPerson"
+						name: "CurUser"
 						"text": "32명"
 						"font": new java.awt.Font( "맑은 고딕", 1, 12 )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
@@ -85,7 +85,7 @@ new FormModel {
 								} )
 							}, new java.util.Vector {
 								add( "시간" )
-								add( "평균 인원" )
+								add( "인원" )
 							}, new java.util.Vector {
 								add( null )
 								add( null )
@@ -233,6 +233,155 @@ new FormModel {
 				} )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 					name: "panel1"
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) {
+						"autoSize": false
+					} ) {
+						name: "panel7"
+						"border": new javax.swing.border.TitledBorder( "강사목록" )
+						add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+							name: "scrollPane2"
+							add( new FormComponent( "javax.swing.JTable" ) {
+								name: "table2"
+								"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector {
+									add( new java.util.Vector {
+										add( "                    유OO" )
+										add( "                  월,수,금" )
+									} )
+									add( new java.util.Vector {
+										add( "                    김OO" )
+										add( "                  화,목,일" )
+									} )
+									add( new java.util.Vector {
+										add( "                    한OO" )
+										add( "                  월,목,토" )
+									} )
+									add( new java.util.Vector {
+										add( "                    박OO" )
+										add( "                  수,금,일" )
+									} )
+								}, new java.util.Vector {
+									add( "트레이너" )
+									add( "PT 시간" )
+								}, new java.util.Vector {
+									add( null )
+									add( null )
+								}, new java.util.Vector {
+									add( false )
+									add( false )
+								}, new java.util.Vector {
+									add( new com.jformdesigner.model.SwingTableColumn( null, 0, 0, 0, false ) )
+									add( new com.jformdesigner.model.SwingTableColumn( null, 0, 0, 0, false ) )
+								} )
+								"showHorizontalLines": true
+								"showVerticalLines": true
+							} )
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"width": 405
+							"height": 105
+							"x": 15
+							"y": 30
+						} )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 435
+						"height": 150
+						"x": 20
+						"y": 15
+					} )
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) {
+						"autoSize": false
+					} ) {
+						name: "panel8"
+						"border": new javax.swing.border.TitledBorder( "결제" )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label2"
+							"text": "트레이너"
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"x": 30
+							"y": 35
+						} )
+						add( new FormComponent( "javax.swing.JComboBox" ) {
+							name: "comboBox1"
+							"model": new javax.swing.DefaultComboBoxModel {
+								selectedItem: "유OO"
+								addElement( "유OO" )
+								addElement( "김OO" )
+								addElement( "한OO" )
+								addElement( "박OO" )
+							}
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"x": 85
+							"y": 30
+							"width": 85
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label4"
+							"text": "요금 : "
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"x": 190
+							"y": 65
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label5"
+							"text": "300000 원"
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"x": 235
+							"y": 65
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label6"
+							"text": "횟수"
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"x": 40
+							"y": 65
+						} )
+						add( new FormComponent( "javax.swing.JComboBox" ) {
+							name: "comboBox2"
+							"model": new javax.swing.DefaultComboBoxModel {
+								selectedItem: "월 8회"
+								addElement( "월 8회" )
+								addElement( "월 10회" )
+							}
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"x": 85
+							"y": 60
+							"width": 85
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label7"
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"x": 185
+							"y": 35
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label8"
+							"text": "PT 시간 : "
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"x": 190
+							"y": 35
+							"height": 17
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label10"
+							"text": "월,수,금"
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"x": 250
+							"y": 35
+						} )
+						add( new FormComponent( "javax.swing.JButton" ) {
+							name: "button1"
+							"text": "결제"
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"x": 315
+							"y": 35
+							"width": 105
+							"height": 45
+						} )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 435
+						"height": 100
+						"x": 20
+						"y": 175
+					} )
 				}, new FormLayoutConstraints( null ) {
 					"title": "PT권 구매"
 				} )
@@ -592,12 +741,28 @@ new FormModel {
 						"x": 20
 						"y": 85
 					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "EnterButton"
+						"text": "입장"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Enter", true ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 225
+						"y": 50
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "ExitButton"
+						"text": "퇴장"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Exit", true ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 310
+						"y": 50
+					} )
 				}, new FormLayoutConstraints( null ) {
 					"title": "회원정보"
 				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 0
-				"y": -5
+				"y": 0
 				"width": 560
 				"height": 285
 			} )
