@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.lang.Integer;
+import java.util.Calendar;
 
 public class UserDAO {
 
@@ -70,45 +72,44 @@ public class UserDAO {
     }
 
     // 입장 함수
-//    public int enter(int id) {
-//        String SQL = "INSERT INTO ENTER_EXIT (user_id) VALUES(?)";
-//        try {
-//            pstmt = conn.prepareStatement(SQL);
-//            pstmt.setInt(1, id);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return -1; // 데이터베이스 오류
-//    }
-//
-//    // 퇴장 함수
-//    public int exit(int id) {
-//        String SQL = "UPDATE ENTRY_EXIT SET EXIT_TIME = CURRENT_TIMESTAMP WHERE USER_ID = ?";
-//        try {
-//            pstmt = conn.prepareStatement(SQL);
-//            pstmt.setInt(1, id);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return -1; // 데이터베이스 오류
-//    }
-//
-//    // 사용시간 계산 함수
-//    public String calcUseTime() {
-//        String SQL = "SELECT ENTRY_TIME, EXIT_TIME FROM ENTRY_EXIT";
-//        int[] timeArr = new int[24];
-//        try {
-//            pstmt = conn.prepareStatement(SQL);
-//            rs = pstmt.executeQuery();
-//            if (rs.next()) {
-//                if (rs.getString(1).equals(userPassword))
-//                    return 1; // 로그인 성공
-//                else
-//                    return 0; // 비밀번호 불일치
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return -1; // 데이터베이스 오류
-//    }
+    public int enter(int id) {
+        String SQL = "INSERT INTO ENTER_EXIT (user_id) VALUES(?)";
+        try {
+            pstmt = conn.prepareStatement(SQL);
+            pstmt.setInt(1, id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1; // 데이터베이스 오류
+    }
+
+    // 퇴장 함수
+    public int exit(int id) {
+        String SQL = "UPDATE ENTER_EXIT SET EXIT_TIME = CURRENT_TIMESTAMP WHERE USER_ID = ?";
+        try {
+            pstmt = conn.prepareStatement(SQL);
+            pstmt.setInt(1, id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1; // 데이터베이스 오류
+    }
+
+    // 현재 이용자수 계산 함수
+    public int countCurUser() {
+        // 퇴장시각 NULL인 경우(입장버튼을 누른 후 퇴장버튼은 누르지 않은 경우)
+        String SQL = "SELECT COUNT(*) AS '현재 이용자수' FROM sportscenter.enter_exit WHERE exit_time IS NOT NULL";
+
+        try {
+            pstmt = conn.prepareStatement(SQL);
+            rs = pstmt.executeQuery(); // SQL문 실행
+            int curUser = rs.getInt(1); // 현재 이용자수 값 저장
+            System.out.println("curUser = " + curUser);
+            return curUser;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1; // 데이터베이스 오류
+    }
+    
 }
