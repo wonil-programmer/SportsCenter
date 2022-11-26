@@ -24,7 +24,9 @@ public class UserDAO {
             Class.forName("com.mysql.cj.jdbc.Driver");
             // getConnection 메소드로 DB에 연결
             conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
+            System.out.println("연동 성공 > ");
         } catch (Exception e) {
+            System.out.println("연동 실패 > ");
             e.printStackTrace();
         }
     }
@@ -167,23 +169,23 @@ public class UserDAO {
             System.out.println("락커 색깔 가져오기 실패 > " + e.toString());
         }
 
-        return locker_state;
+        // 색깔 할당 부분
+        int[] locker_color = new int[20];
+        for(int j=0; j<locker_state.length; j++) {
+            if (locker_state[j]==0) {   // empty
+                locker_color[j] = 0x6699ff; // BLUE
+            }
+            else if (locker_state[j]==1) {  // using
+                locker_color[j] = 0xcccccc; // WHITE
+            }
+            else if (locker_state[j]==2) {  // broken
+                locker_color[j] = 0xff9999; // RED
+            }
+        }
+        return locker_color;
     }
 
-//        // 색깔 할당 부분
-//        int[] locker_color = new int[20];
-//        for(int j=0; j<locker_state.length; j++) {
-//            if (locker_state[j]==0) {   // empty
-//                locker_color[j] = 0x6699ff; // BLUE
-//            }
-//            else if (locker_state[j]==1) {  // using
-//                locker_color[j] = 0xcccccc; // WHITE
-//            }
-//            else if (locker_state[j]==2) {  // broken
-//                locker_color[j] = 0xff9999; // RED
-//            }
-//        }
-//        return locker_color;
-//    }
 
 }
+
+
