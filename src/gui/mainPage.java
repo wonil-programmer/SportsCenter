@@ -102,7 +102,7 @@ public class mainPage extends JFrame {
 
     }
 
-    private void LockerBuy(ActionEvent e) {
+    private void LockerBuy(ActionEvent e) { // 락커 결제 수정 필요, 결제 이미 되어있는지 아닌지 확인 절차 필요
         // TODO add your code here
 
         int period = LockerDate.getSelectedIndex();
@@ -111,14 +111,15 @@ public class mainPage extends JFrame {
         LockerBuyForm.setVisible(false);
         JOptionPane.showMessageDialog(null, "결제에 성공하였습니다");
 
-        LockerBuyForm.setVisible(false);
 
     }
     private void Locker1(ActionEvent e) {
         // TODO add your code here
-        LockerBuyForm.setVisible(true);
-        LockerBuyForm.setSize(145,180);
-        LockerNum.setText("1");
+        System.out.println(Locker1.getBackground());
+        
+            LockerBuyForm.setVisible(true);
+            LockerBuyForm.setSize(145, 180);
+            LockerNum.setText("1");
         
     }
 
@@ -311,6 +312,14 @@ public class mainPage extends JFrame {
             PTprice.setText("300000 원");
         }
     }
+
+    private void tabbedPane1StateChanged(ChangeEvent e) {
+        // TODO add your code here
+        System.out.println("change");
+        UserDAO userDAO = new UserDAO();
+        String currentuser = Integer.toString(userDAO.countCurUser());
+        CurUser.setText(currentuser);
+    }
     
     
 
@@ -410,15 +419,17 @@ public class mainPage extends JFrame {
             //======== tabbedPane1 ========
             {
                 tabbedPane1.setTabPlacement(SwingConstants.LEFT);
+                tabbedPane1.addChangeListener(e -> tabbedPane1StateChanged(e));
 
                 //======== panel5 ========
                 {
-                    panel5.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border.
-                    EmptyBorder( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax. swing. border. TitledBorder. CENTER, javax. swing
-                    . border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ),
-                    java. awt. Color. red) ,panel5. getBorder( )) ); panel5. addPropertyChangeListener (new java. beans. PropertyChangeListener( )
-                    { @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062ord\u0065r" .equals (e .getPropertyName () ))
-                    throw new RuntimeException( ); }} );
+                    panel5.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new
+                    javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax
+                    . swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java
+                    .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt
+                    . Color. red) ,panel5. getBorder( )) ); panel5. addPropertyChangeListener (new java. beans.
+                    PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062ord\u0065r" .
+                    equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
                     panel5.setLayout(null);
 
                     //---- label13 ----
