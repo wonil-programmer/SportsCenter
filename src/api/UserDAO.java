@@ -5,10 +5,13 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.lang.Integer;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Calendar;
 
 public class UserDAO {
+
+    LocalDate now = LocalDate.now();
 
     private Connection conn; // Connection 객체 생성
     private PreparedStatement pstmt; // prepareStatement 객체 생성    
@@ -20,7 +23,7 @@ public class UserDAO {
         try {
             String dbURL = "jdbc:mysql://localhost:3306/sportscenter";
             String dbID = "root";
-            String dbPassword = "0201";
+            String dbPassword = "mysqlrhtn8580!";
             Class.forName("com.mysql.cj.jdbc.Driver");
             // getConnection 메소드로 DB에 연결
             conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
@@ -78,6 +81,7 @@ public class UserDAO {
         try {
             pstmt = conn.prepareStatement(SQL);
             pstmt.setInt(1, id);
+            return pstmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -90,28 +94,13 @@ public class UserDAO {
         try {
             pstmt = conn.prepareStatement(SQL);
             pstmt.setInt(1, id);
+            return pstmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return -1; // 데이터베이스 오류
     }
 
-    // 현재 이용자수 계산 함수
-    public int countCurUser() {
-        // 퇴장시각 NULL인 경우(입장버튼을 누른 후 퇴장버튼은 누르지 않은 경우)
-        String SQL = "SELECT COUNT(*) AS '현재 이용자수' FROM sportscenter.enter_exit WHERE exit_time IS NOT NULL";
-
-        try {
-            pstmt = conn.prepareStatement(SQL);
-            rs = pstmt.executeQuery(); // SQL문 실행
-            int curUser = rs.getInt(1); // 현재 이용자수 값 저장
-            System.out.println("curUser = " + curUser);
-            return curUser;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return -1; // 데이터베이스 오류
-    }
     
 
 
