@@ -1,8 +1,8 @@
 /*
  * Created by JFormDesigner on Fri Nov 18 20:23:17 KST 2022
  */
-
 package gui;
+import javax.swing.event.*;
 import api.User;
 import api.UserDAO;
 import java.awt.*;
@@ -14,7 +14,6 @@ import gui.loginPage;
 /**
  * @author Minjae
  */
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -44,6 +43,7 @@ class CalendarDataManager{
         calMonth = today.get(Calendar.MONTH);
         calDayOfMon = today.get(Calendar.DAY_OF_MONTH);
         makeCalData(today);
+        
     }
     private void makeCalData(Calendar cal){
 
@@ -98,15 +98,18 @@ public class mainPage extends JFrame {
         com.formdev.flatlaf.intellijthemes.FlatArcOrangeIJTheme.setup();
         mainPage frame = new mainPage();
         frame.pack();
-        UserDAO userDAO = new UserDAO();
-        String currentuser = Integer.toString(userDAO.countCurUser());
-        frame.CurUser.setText(currentuser);
         
 
     }
 
     private void LockerBuy(ActionEvent e) {
         // TODO add your code here
+
+        int period = LockerDate.getSelectedIndex();
+
+        //api.UserDAO.lockerPayment("IDtest", num, period);   // 아이디명 다시 수정해야 [수정]
+        LockerBuyForm.setVisible(false);
+        JOptionPane.showMessageDialog(null, "결제에 성공하였습니다");
 
         LockerBuyForm.setVisible(false);
 
@@ -146,11 +149,111 @@ public class mainPage extends JFrame {
     }
 
     private void Locker6(ActionEvent e) { // 일단 6번 락커까지만,, 최적화할 수 있는 방법을 찾아보자,,,,
+        // 방법이 없었다고 한다...
         LockerBuyForm.setVisible(true);
         LockerBuyForm.setSize(145,180);
         LockerNum.setText("6");
     }
 
+    private void Locker7(ActionEvent e) {
+        // TODO add your code here
+        LockerBuyForm.setVisible(true);
+        LockerBuyForm.setSize(145,180);
+        LockerNum.setText("7");
+    }
+
+    private void Locker8(ActionEvent e) {
+        // TODO add your code here
+        LockerBuyForm.setVisible(true);
+        LockerBuyForm.setSize(145,180);
+        LockerNum.setText("8");
+    }
+
+    private void Locker9(ActionEvent e) {
+        // TODO add your code here
+        LockerBuyForm.setVisible(true);
+        LockerBuyForm.setSize(145,180);
+        LockerNum.setText("9");
+    }
+
+
+    private void Locker10(ActionEvent e) {
+        // TODO add your code here
+        LockerBuyForm.setVisible(true);
+        LockerBuyForm.setSize(145,180);
+        LockerNum.setText("10");
+    }
+
+    private void Locker11(ActionEvent e) {
+        LockerBuyForm.setVisible(true);
+        LockerBuyForm.setSize(145,180);
+        LockerNum.setText("11");
+    }
+
+    private void Locker12(ActionEvent e) {
+        // TODO add your code here
+        LockerBuyForm.setVisible(true);
+        LockerBuyForm.setSize(145,180);
+        LockerNum.setText("12");
+    }
+
+    private void Locker13(ActionEvent e) {
+        // TODO add your code here
+        LockerBuyForm.setVisible(true);
+        LockerBuyForm.setSize(145,180);
+        LockerNum.setText("13");
+    }
+
+    private void Locker14(ActionEvent e) {
+        // TODO add your code here
+        LockerBuyForm.setVisible(true);
+        LockerBuyForm.setSize(145,180);
+        LockerNum.setText("14");
+    }
+
+    private void Locker15(ActionEvent e) {
+        // TODO add your code here
+        LockerBuyForm.setVisible(true);
+        LockerBuyForm.setSize(145,180);
+        LockerNum.setText("15");
+    }
+
+    private void Locker16(ActionEvent e) {
+        // TODO add your code here
+        LockerBuyForm.setVisible(true);
+        LockerBuyForm.setSize(145,180);
+        LockerNum.setText("16");
+    }
+
+    private void Locker17(ActionEvent e) {
+        // TODO add your code here
+        LockerBuyForm.setVisible(true);
+        LockerBuyForm.setSize(145,180);
+        LockerNum.setText("17");
+    }
+
+    private void Locker18(ActionEvent e) {
+        // TODO add your code here
+        LockerBuyForm.setVisible(true);
+        LockerBuyForm.setSize(145,180);
+        LockerNum.setText("18");
+    }
+
+    private void Locker19(ActionEvent e) {
+        // TODO add your code here
+        LockerBuyForm.setVisible(true);
+        LockerBuyForm.setSize(145,180);
+        LockerNum.setText("19");
+    }
+
+    private void Locker20(ActionEvent e) {
+        // TODO add your code here
+        LockerBuyForm.setVisible(true);
+        LockerBuyForm.setSize(145,180);
+        LockerNum.setText("20");
+    }
+    
+    
     private void LockerDateItemStateChanged(ItemEvent e) {
         // TODO add your code here
         int index = LockerDate.getSelectedIndex();
@@ -179,6 +282,40 @@ public class mainPage extends JFrame {
     }
 
     
+
+    private void TrainerComboItemStateChanged(ItemEvent e) {
+        // TODO add your code here
+        int index = TrainerCombo.getSelectedIndex();
+        if (index==0) {
+            PTday.setText("월,수,금");
+        }
+        else if (index==1) {
+            PTday.setText("화,목,일");
+        }
+        else if (index==2) {
+            PTday.setText("월,목,토");
+        }
+        else if (index==3) {
+            PTday.setText("수,금,일");
+        }
+        
+    }
+
+    private void PTnumComboItemStateChanged(ItemEvent e) {
+        // TODO add your code here
+        int index = PTnumCombo.getSelectedIndex();
+        if (index==0) {
+            PTprice.setText("240000 원");
+        }
+        else if (index==1) {
+            PTprice.setText("300000 원");
+        }
+    }
+    
+    
+
+   
+    
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         // Generated using JFormDesigner Evaluation license - Minjae
@@ -199,6 +336,7 @@ public class mainPage extends JFrame {
         SatGraph = new JProgressBar();
         SunGraph = new JProgressBar();
         label21 = new JLabel();
+        label5 = new JLabel();
         panel2 = new JPanel();
         panel1 = new JPanel();
         panel7 = new JPanel();
@@ -206,14 +344,14 @@ public class mainPage extends JFrame {
         table2 = new JTable();
         panel8 = new JPanel();
         label2 = new JLabel();
-        comboBox1 = new JComboBox<>();
+        TrainerCombo = new JComboBox<>();
         label4 = new JLabel();
-        label5 = new JLabel();
+        PTprice = new JLabel();
         label6 = new JLabel();
-        comboBox2 = new JComboBox<>();
+        PTnumCombo = new JComboBox<>();
         label7 = new JLabel();
         label8 = new JLabel();
-        label10 = new JLabel();
+        PTday = new JLabel();
         button1 = new JButton();
         panel4 = new JPanel();
         Locker2 = new JButton();
@@ -275,24 +413,24 @@ public class mainPage extends JFrame {
 
                 //======== panel5 ========
                 {
-                    panel5.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border
-                    .EmptyBorder(0,0,0,0), "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn",javax.swing.border.TitledBorder.CENTER,javax
-                    .swing.border.TitledBorder.BOTTOM,new java.awt.Font("Dia\u006cog",java.awt.Font.BOLD,
-                    12),java.awt.Color.red),panel5. getBorder()));panel5. addPropertyChangeListener(new java.beans
-                    .PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062ord\u0065r".equals(e.
-                    getPropertyName()))throw new RuntimeException();}});
+                    panel5.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border.
+                    EmptyBorder( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax. swing. border. TitledBorder. CENTER, javax. swing
+                    . border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ),
+                    java. awt. Color. red) ,panel5. getBorder( )) ); panel5. addPropertyChangeListener (new java. beans. PropertyChangeListener( )
+                    { @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062ord\u0065r" .equals (e .getPropertyName () ))
+                    throw new RuntimeException( ); }} );
                     panel5.setLayout(null);
 
                     //---- label13 ----
                     label13.setText("\ud604\uc7ac \uc774\uc6a9\uc790\uc218 : ");
                     panel5.add(label13);
-                    label13.setBounds(20, 10, 86, 17);
+                    label13.setBounds(20, 10, 95, 17);
 
                     //---- CurUser ----
-                    CurUser.setText("32\uba85");
+                    CurUser.setText("32");
                     CurUser.setFont(new Font("\ub9d1\uc740 \uace0\ub515", Font.BOLD, 12));
                     panel5.add(CurUser);
-                    CurUser.setBounds(110, 10, 26, 17);
+                    CurUser.setBounds(120, 10, 26, 17);
 
                     //======== scrollPane1 ========
                     {
@@ -412,6 +550,12 @@ public class mainPage extends JFrame {
                     panel5.add(label21);
                     label21.setBounds(280, 255, 168, 17);
 
+                    //---- label5 ----
+                    label5.setText("\uba85");
+                    label5.setFont(new Font("\ub9d1\uc740 \uace0\ub515", Font.BOLD, 12));
+                    panel5.add(label5);
+                    label5.setBounds(140, 10, 20, label5.getPreferredSize().height);
+
                     {
                         // compute preferred size
                         Dimension preferredSize = new Dimension();
@@ -507,38 +651,41 @@ public class mainPage extends JFrame {
                         panel8.add(label2);
                         label2.setBounds(new Rectangle(new Point(30, 35), label2.getPreferredSize()));
 
-                        //---- comboBox1 ----
-                        comboBox1.setModel(new DefaultComboBoxModel<>(new String[] {
+                        //---- TrainerCombo ----
+                        TrainerCombo.setModel(new DefaultComboBoxModel<>(new String[] {
                             "\uc720OO",
                             "\uae40OO",
                             "\ud55cOO",
                             "\ubc15OO"
                         }));
-                        panel8.add(comboBox1);
-                        comboBox1.setBounds(85, 30, 85, comboBox1.getPreferredSize().height);
+                        TrainerCombo.addItemListener(e -> TrainerComboItemStateChanged(e));
+                        panel8.add(TrainerCombo);
+                        TrainerCombo.setBounds(85, 30, 85, TrainerCombo.getPreferredSize().height);
 
                         //---- label4 ----
                         label4.setText("\uc694\uae08 : ");
                         panel8.add(label4);
                         label4.setBounds(new Rectangle(new Point(190, 65), label4.getPreferredSize()));
 
-                        //---- label5 ----
-                        label5.setText("300000 \uc6d0");
-                        panel8.add(label5);
-                        label5.setBounds(new Rectangle(new Point(235, 65), label5.getPreferredSize()));
+                        //---- PTprice ----
+                        PTprice.setText("300000 \uc6d0");
+                        panel8.add(PTprice);
+                        PTprice.setBounds(new Rectangle(new Point(235, 65), PTprice.getPreferredSize()));
 
                         //---- label6 ----
                         label6.setText("\ud69f\uc218");
                         panel8.add(label6);
                         label6.setBounds(new Rectangle(new Point(40, 65), label6.getPreferredSize()));
 
-                        //---- comboBox2 ----
-                        comboBox2.setModel(new DefaultComboBoxModel<>(new String[] {
+                        //---- PTnumCombo ----
+                        PTnumCombo.setModel(new DefaultComboBoxModel<>(new String[] {
                             "\uc6d4 8\ud68c",
                             "\uc6d4 10\ud68c"
                         }));
-                        panel8.add(comboBox2);
-                        comboBox2.setBounds(85, 60, 85, comboBox2.getPreferredSize().height);
+                        PTnumCombo.setSelectedIndex(1);
+                        PTnumCombo.addItemListener(e -> PTnumComboItemStateChanged(e));
+                        panel8.add(PTnumCombo);
+                        PTnumCombo.setBounds(85, 60, 85, PTnumCombo.getPreferredSize().height);
                         panel8.add(label7);
                         label7.setBounds(new Rectangle(new Point(185, 35), label7.getPreferredSize()));
 
@@ -547,10 +694,10 @@ public class mainPage extends JFrame {
                         panel8.add(label8);
                         label8.setBounds(190, 35, label8.getPreferredSize().width, 17);
 
-                        //---- label10 ----
-                        label10.setText("\uc6d4,\uc218,\uae08");
-                        panel8.add(label10);
-                        label10.setBounds(new Rectangle(new Point(250, 35), label10.getPreferredSize()));
+                        //---- PTday ----
+                        PTday.setText("\uc6d4,\uc218,\uae08");
+                        panel8.add(PTday);
+                        PTday.setBounds(new Rectangle(new Point(250, 35), PTday.getPreferredSize()));
 
                         //---- button1 ----
                         button1.setText("\uacb0\uc81c");
@@ -601,6 +748,7 @@ public class mainPage extends JFrame {
                     Locker4.setText("4.");
                     Locker4.setBackground(new Color(0x6699ff));
                     Locker4.setFocusable(false);
+                    Locker4.setMnemonic('4');
                     Locker4.addActionListener(e -> Locker4(e));
                     panel4.add(Locker4);
                     Locker4.setBounds(285, 25, 75, 35);
@@ -625,6 +773,7 @@ public class mainPage extends JFrame {
                     Locker7.setText("7.");
                     Locker7.setBackground(new Color(0xcccccc));
                     Locker7.setFocusable(false);
+                    Locker7.addActionListener(e -> Locker7(e));
                     panel4.add(Locker7);
                     Locker7.setBounds(110, 75, 75, 35);
 
@@ -632,6 +781,7 @@ public class mainPage extends JFrame {
                     Locker11.setText("11.");
                     Locker11.setBackground(new Color(0xcccccc));
                     Locker11.setFocusable(false);
+                    Locker11.addActionListener(e -> Locker11(e));
                     panel4.add(Locker11);
                     Locker11.setBounds(20, 125, 75, 35);
 
@@ -639,6 +789,7 @@ public class mainPage extends JFrame {
                     Locker12.setText("12.");
                     Locker12.setBackground(new Color(0xcccccc));
                     Locker12.setFocusable(false);
+                    Locker12.addActionListener(e -> Locker12(e));
                     panel4.add(Locker12);
                     Locker12.setBounds(110, 125, 75, 35);
 
@@ -646,6 +797,7 @@ public class mainPage extends JFrame {
                     Locker13.setText("13.");
                     Locker13.setBackground(new Color(0x6699ff));
                     Locker13.setFocusable(false);
+                    Locker13.addActionListener(e -> Locker13(e));
                     panel4.add(Locker13);
                     Locker13.setBounds(200, 125, 75, 35);
 
@@ -653,6 +805,7 @@ public class mainPage extends JFrame {
                     Locker14.setText("14.");
                     Locker14.setBackground(new Color(0x6699ff));
                     Locker14.setFocusable(false);
+                    Locker14.addActionListener(e -> Locker14(e));
                     panel4.add(Locker14);
                     Locker14.setBounds(285, 125, 75, 35);
 
@@ -660,6 +813,7 @@ public class mainPage extends JFrame {
                     Locker15.setText("15.");
                     Locker15.setBackground(new Color(0xff9999));
                     Locker15.setFocusable(false);
+                    Locker15.addActionListener(e -> Locker15(e));
                     panel4.add(Locker15);
                     Locker15.setBounds(370, 125, 75, 35);
 
@@ -667,6 +821,7 @@ public class mainPage extends JFrame {
                     Locker16.setText("16.");
                     Locker16.setBackground(new Color(0x6699ff));
                     Locker16.setFocusable(false);
+                    Locker16.addActionListener(e -> Locker16(e));
                     panel4.add(Locker16);
                     Locker16.setBounds(20, 175, 75, 35);
 
@@ -674,6 +829,7 @@ public class mainPage extends JFrame {
                     Locker17.setText("17.");
                     Locker17.setBackground(new Color(0x6699ff));
                     Locker17.setFocusable(false);
+                    Locker17.addActionListener(e -> Locker17(e));
                     panel4.add(Locker17);
                     Locker17.setBounds(110, 175, 75, 35);
 
@@ -681,6 +837,7 @@ public class mainPage extends JFrame {
                     Locker8.setText("8.");
                     Locker8.setBackground(new Color(0xcccccc));
                     Locker8.setFocusable(false);
+                    Locker8.addActionListener(e -> Locker8(e));
                     panel4.add(Locker8);
                     Locker8.setBounds(200, 75, 75, 35);
 
@@ -688,6 +845,7 @@ public class mainPage extends JFrame {
                     Locker9.setText("9.");
                     Locker9.setBackground(new Color(0x6699ff));
                     Locker9.setFocusable(false);
+                    Locker9.addActionListener(e -> Locker9(e));
                     panel4.add(Locker9);
                     Locker9.setBounds(285, 75, 75, 35);
 
@@ -695,6 +853,7 @@ public class mainPage extends JFrame {
                     Locker10.setText("10.");
                     Locker10.setBackground(new Color(0xcccccc));
                     Locker10.setFocusable(false);
+                    Locker10.addActionListener(e -> Locker10(e));
                     panel4.add(Locker10);
                     Locker10.setBounds(370, 75, 75, 35);
 
@@ -702,6 +861,7 @@ public class mainPage extends JFrame {
                     Locker18.setText("18.");
                     Locker18.setBackground(new Color(0xcccccc));
                     Locker18.setFocusable(false);
+                    Locker18.addActionListener(e -> Locker18(e));
                     panel4.add(Locker18);
                     Locker18.setBounds(200, 175, 75, 35);
 
@@ -709,6 +869,7 @@ public class mainPage extends JFrame {
                     Locker19.setText("19.");
                     Locker19.setBackground(new Color(0xcccccc));
                     Locker19.setFocusable(false);
+                    Locker19.addActionListener(e -> Locker19(e));
                     panel4.add(Locker19);
                     Locker19.setBounds(285, 175, 75, 35);
 
@@ -716,6 +877,7 @@ public class mainPage extends JFrame {
                     Locker20.setText("20.");
                     Locker20.setBackground(new Color(0xcccccc));
                     Locker20.setFocusable(false);
+                    Locker20.addActionListener(e -> Locker20(e));
                     panel4.add(Locker20);
                     Locker20.setBounds(370, 175, 75, 35);
 
@@ -895,7 +1057,7 @@ public class mainPage extends JFrame {
             //---- LockerNum ----
             LockerNum.setText("1");
             LockerBuyFormContentPane.add(LockerNum);
-            LockerNum.setBounds(new Rectangle(new Point(35, 15), LockerNum.getPreferredSize()));
+            LockerNum.setBounds(35, 15, 20, LockerNum.getPreferredSize().height);
 
             //---- LockerDate ----
             LockerDate.setModel(new DefaultComboBoxModel<>(new String[] {
@@ -930,7 +1092,7 @@ public class mainPage extends JFrame {
     private JTabbedPane tabbedPane1;
     private JPanel panel5;
     private JLabel label13;
-    private JLabel CurUser;
+    public JLabel CurUser;
     private JScrollPane scrollPane1;
     private JTable table1;
     private JComboBox<String> WeekCombo;
@@ -943,6 +1105,7 @@ public class mainPage extends JFrame {
     private JProgressBar SatGraph;
     private JProgressBar SunGraph;
     private JLabel label21;
+    private JLabel label5;
     private JPanel panel2;
     private JPanel panel1;
     private JPanel panel7;
@@ -950,42 +1113,42 @@ public class mainPage extends JFrame {
     private JTable table2;
     private JPanel panel8;
     private JLabel label2;
-    private JComboBox<String> comboBox1;
+    private JComboBox<String> TrainerCombo;
     private JLabel label4;
-    private JLabel label5;
+    private JLabel PTprice;
     private JLabel label6;
-    private JComboBox<String> comboBox2;
+    private JComboBox<String> PTnumCombo;
     private JLabel label7;
     private JLabel label8;
-    private JLabel label10;
+    private JLabel PTday;
     private JButton button1;
     private JPanel panel4;
-    private JButton Locker2;
-    private JButton Locker3;
-    private JButton Locker4;
-    private JButton Locker5;
-    private JButton Locker6;
-    private JButton Locker7;
-    private JButton Locker11;
-    private JButton Locker12;
-    private JButton Locker13;
-    private JButton Locker14;
-    private JButton Locker15;
-    private JButton Locker16;
-    private JButton Locker17;
-    private JButton Locker8;
-    private JButton Locker9;
-    private JButton Locker10;
-    private JButton Locker18;
-    private JButton Locker19;
-    private JButton Locker20;
+    public JButton Locker2;
+    public JButton Locker3;
+    public JButton Locker4;
+    public JButton Locker5;
+    public JButton Locker6;
+    public JButton Locker7;
+    public JButton Locker11;
+    public JButton Locker12;
+    public JButton Locker13;
+    public JButton Locker14;
+    public JButton Locker15;
+    public JButton Locker16;
+    public JButton Locker17;
+    public JButton Locker8;
+    public JButton Locker9;
+    public JButton Locker10;
+    public JButton Locker18;
+    public JButton Locker19;
+    public JButton Locker20;
     private JLabel label15;
     private JLabel label16;
     private JLabel label17;
     private JLabel label18;
     private JLabel label19;
     private JLabel label20;
-    private JButton Locker1;
+    public JButton Locker1;
     private JPanel panel3;
     private JPanel panel6;
     private JLabel label9;

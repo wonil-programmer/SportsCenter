@@ -19,19 +19,22 @@ new FormModel {
 						name: "label13"
 						"text": "현재 이용자수 : "
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"width": 86
+						"width": 95
 						"height": 17
 						"x": 20
 						"y": 10
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "CurUser"
-						"text": "32명"
+						"text": "32"
 						"font": new java.awt.Font( "맑은 고딕", 1, 12 )
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 26
 						"height": 17
-						"x": 110
+						"x": 120
 						"y": 10
 					} )
 					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
@@ -223,6 +226,15 @@ new FormModel {
 						"x": 280
 						"y": 255
 					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label5"
+						"text": "명"
+						"font": new java.awt.Font( "맑은 고딕", 1, 12 )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 140
+						"y": 10
+						"width": 20
+					} )
 				}, new FormLayoutConstraints( null ) {
 					"title": "회원 수 확인"
 				} )
@@ -300,7 +312,7 @@ new FormModel {
 							"y": 35
 						} )
 						add( new FormComponent( "javax.swing.JComboBox" ) {
-							name: "comboBox1"
+							name: "TrainerCombo"
 							"model": new javax.swing.DefaultComboBoxModel {
 								selectedItem: "유OO"
 								addElement( "유OO" )
@@ -308,6 +320,7 @@ new FormModel {
 								addElement( "한OO" )
 								addElement( "박OO" )
 							}
+							addEvent( new FormEvent( "java.awt.event.ItemListener", "itemStateChanged", "TrainerComboItemStateChanged", true ) )
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 							"x": 85
 							"y": 30
@@ -321,7 +334,7 @@ new FormModel {
 							"y": 65
 						} )
 						add( new FormComponent( "javax.swing.JLabel" ) {
-							name: "label5"
+							name: "PTprice"
 							"text": "300000 원"
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 							"x": 235
@@ -335,12 +348,14 @@ new FormModel {
 							"y": 65
 						} )
 						add( new FormComponent( "javax.swing.JComboBox" ) {
-							name: "comboBox2"
+							name: "PTnumCombo"
 							"model": new javax.swing.DefaultComboBoxModel {
 								selectedItem: "월 8회"
 								addElement( "월 8회" )
 								addElement( "월 10회" )
 							}
+							"selectedIndex": 1
+							addEvent( new FormEvent( "java.awt.event.ItemListener", "itemStateChanged", "PTnumComboItemStateChanged", true ) )
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 							"x": 85
 							"y": 60
@@ -361,7 +376,7 @@ new FormModel {
 							"height": 17
 						} )
 						add( new FormComponent( "javax.swing.JLabel" ) {
-							name: "label10"
+							name: "PTday"
 							"text": "월,수,금"
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 							"x": 250
@@ -392,6 +407,9 @@ new FormModel {
 						"text": "2."
 						"background": &Color1 new java.awt.Color( 102, 153, 255, 255 )
 						"focusable": false
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
 						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Locker2", true ) )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 75
@@ -404,6 +422,9 @@ new FormModel {
 						"text": "3."
 						"background": new java.awt.Color( 204, 204, 204, 255 )
 						"focusable": false
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
 						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Locker3", true ) )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 75
@@ -416,6 +437,10 @@ new FormModel {
 						"text": "4."
 						"background": #Color1
 						"focusable": false
+						"mnemonic": 52
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
 						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Locker4", true ) )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 75
@@ -428,6 +453,9 @@ new FormModel {
 						"text": "5."
 						"background": #Color1
 						"focusable": false
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
 						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Locker5", true ) )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 75
@@ -440,6 +468,9 @@ new FormModel {
 						"text": "6."
 						"background": &Color2 new java.awt.Color( 204, 204, 204, 255 )
 						"focusable": false
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
 						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Locker6", true ) )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 75
@@ -452,6 +483,10 @@ new FormModel {
 						"text": "7."
 						"background": #Color2
 						"focusable": false
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Locker7", true ) )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 75
 						"height": 35
@@ -463,6 +498,10 @@ new FormModel {
 						"text": "11."
 						"background": #Color2
 						"focusable": false
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Locker11", true ) )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 75
 						"height": 35
@@ -474,6 +513,10 @@ new FormModel {
 						"text": "12."
 						"background": #Color2
 						"focusable": false
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Locker12", true ) )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 75
 						"height": 35
@@ -485,6 +528,10 @@ new FormModel {
 						"text": "13."
 						"background": #Color1
 						"focusable": false
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Locker13", true ) )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 75
 						"height": 35
@@ -496,6 +543,10 @@ new FormModel {
 						"text": "14."
 						"background": #Color1
 						"focusable": false
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Locker14", true ) )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 75
 						"height": 35
@@ -507,6 +558,10 @@ new FormModel {
 						"text": "15."
 						"background": new java.awt.Color( 255, 153, 153, 255 )
 						"focusable": false
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Locker15", true ) )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 75
 						"height": 35
@@ -518,6 +573,10 @@ new FormModel {
 						"text": "16."
 						"background": #Color1
 						"focusable": false
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Locker16", true ) )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 75
 						"height": 35
@@ -529,6 +588,10 @@ new FormModel {
 						"text": "17."
 						"background": #Color1
 						"focusable": false
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Locker17", true ) )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 75
 						"height": 35
@@ -540,6 +603,10 @@ new FormModel {
 						"text": "8."
 						"background": #Color2
 						"focusable": false
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Locker8", true ) )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 75
 						"height": 35
@@ -551,6 +618,10 @@ new FormModel {
 						"text": "9."
 						"background": #Color1
 						"focusable": false
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Locker9", true ) )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 75
 						"height": 35
@@ -562,6 +633,10 @@ new FormModel {
 						"text": "10."
 						"background": #Color2
 						"focusable": false
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Locker10", true ) )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 75
 						"height": 35
@@ -573,6 +648,10 @@ new FormModel {
 						"text": "18."
 						"background": #Color2
 						"focusable": false
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Locker18", true ) )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 75
 						"height": 35
@@ -584,6 +663,10 @@ new FormModel {
 						"text": "19."
 						"background": #Color2
 						"focusable": false
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Locker19", true ) )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 75
 						"height": 35
@@ -595,6 +678,10 @@ new FormModel {
 						"text": "20."
 						"background": #Color2
 						"focusable": false
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Locker20", true ) )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 75
 						"height": 35
@@ -663,6 +750,9 @@ new FormModel {
 						name: "Locker1"
 						"text": "1."
 						"background": new java.awt.Color( 102, 153, 255, 255 )
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
 						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Locker1", true ) )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"x": 20
@@ -798,6 +888,7 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 35
 				"y": 15
+				"width": 20
 			} )
 			add( new FormComponent( "javax.swing.JComboBox" ) {
 				name: "LockerDate"

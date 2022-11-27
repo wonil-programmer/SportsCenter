@@ -43,7 +43,9 @@ public class loginPage extends JFrame {
         {
             // 로그인 성공
             JOptionPane.showMessageDialog(null, "로그인에 성공하였습니다");
-            new mainPage();
+            String currentuser = Integer.toString(userDAO.countCurUser());
+            mainPage frame = new mainPage();
+            frame.CurUser.setText(currentuser);
             this.setVisible(false);
 
         } else if (result == 0) {
