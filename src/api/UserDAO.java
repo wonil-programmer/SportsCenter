@@ -103,7 +103,25 @@ public class UserDAO {
         return -1; // 데이터베이스 오류
     }
 
-    
+    // 현재 이용자수 계산 함수
+    public int countCurUser() {
+        // 퇴장시각 NULL인 경우(입장버튼을 누른 후 퇴장버튼은 누르지 않은 경우)
+        String SQL = "SELECT COUNT(*) AS '현재 이용자수' FROM sportscenter.enter_exit WHERE exit_time IS NULL";
+
+        try {
+            pstmt = conn.prepareStatement(SQL);
+            rs = pstmt.executeQuery(); // SQL문 실행
+            if (rs.next()) {
+
+                int curUser = rs.getInt(1); // 현재 이용자수 값 저장
+                System.out.println("curUser = " + curUser);
+                return curUser;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1; // 데이터베이스 오류
+    }
 
 
 
