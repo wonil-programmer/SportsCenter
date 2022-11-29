@@ -22,7 +22,7 @@ new FormModel {
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 95
 						"height": 17
-						"x": 20
+						"x": 30
 						"y": 10
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
@@ -35,7 +35,7 @@ new FormModel {
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 26
 						"height": 17
-						"x": 120
+						"x": 130
 						"y": 10
 					} )
 					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
@@ -126,7 +126,7 @@ new FormModel {
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 235
 						"height": 197
-						"x": 20
+						"x": 30
 						"y": 75
 					} )
 					add( new FormComponent( "javax.swing.JComboBox" ) {
@@ -139,25 +139,7 @@ new FormModel {
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 72
 						"height": 23
-						"x": 20
-						"y": 40
-					} )
-					add( new FormComponent( "javax.swing.JComboBox" ) {
-						name: "DayCombo"
-						"model": new javax.swing.DefaultComboBoxModel {
-							selectedItem: "월"
-							addElement( "월" )
-							addElement( "화" )
-							addElement( "수" )
-							addElement( "목" )
-							addElement( "금" )
-							addElement( "토" )
-							addElement( "일" )
-						}
-					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"width": 72
-						"height": 23
-						"x": 100
+						"x": 30
 						"y": 40
 					} )
 					add( new FormComponent( "javax.swing.JProgressBar" ) {
@@ -165,10 +147,13 @@ new FormModel {
 						"orientation": 1
 						"value": 40
 						"background": &Color0 new java.awt.Color( 242, 242, 242, 255 )
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 10
 						"height": 150
-						"x": 285
+						"x": 300
 						"y": 100
 					} )
 					add( new FormComponent( "javax.swing.JProgressBar" ) {
@@ -176,10 +161,13 @@ new FormModel {
 						"orientation": 1
 						"value": 60
 						"background": #Color0
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 10
 						"height": 150
-						"x": 310
+						"x": 325
 						"y": 100
 					} )
 					add( new FormComponent( "javax.swing.JProgressBar" ) {
@@ -187,10 +175,13 @@ new FormModel {
 						"orientation": 1
 						"value": 55
 						"background": #Color0
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 10
 						"height": 150
-						"x": 335
+						"x": 350
 						"y": 100
 					} )
 					add( new FormComponent( "javax.swing.JProgressBar" ) {
@@ -198,10 +189,13 @@ new FormModel {
 						"orientation": 1
 						"value": 75
 						"background": #Color0
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 10
 						"height": 150
-						"x": 360
+						"x": 375
 						"y": 100
 					} )
 					add( new FormComponent( "javax.swing.JProgressBar" ) {
@@ -209,10 +203,13 @@ new FormModel {
 						"orientation": 1
 						"value": 60
 						"background": #Color0
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 10
 						"height": 150
-						"x": 385
+						"x": 400
 						"y": 100
 					} )
 					add( new FormComponent( "javax.swing.JProgressBar" ) {
@@ -220,30 +217,22 @@ new FormModel {
 						"orientation": 1
 						"value": 80
 						"background": #Color0
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 10
 						"height": 150
-						"x": 410
-						"y": 100
-					} )
-					add( new FormComponent( "javax.swing.JProgressBar" ) {
-						name: "SunGraph"
-						"orientation": 1
-						"value": 100
-						"background": #Color0
-					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"width": 10
-						"height": 150
-						"x": 435
+						"x": 425
 						"y": 100
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "label21"
-						"text": " 월   화    수   목   금   토   일 "
+						"text": " 월   화    수   목   금   토    "
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 168
 						"height": 17
-						"x": 280
+						"x": 295
 						"y": 255
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
@@ -251,7 +240,7 @@ new FormModel {
 						"text": "명"
 						"font": new java.awt.Font( "맑은 고딕", 1, 12 )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"x": 140
+						"x": 150
 						"y": 10
 						"width": 20
 					} )

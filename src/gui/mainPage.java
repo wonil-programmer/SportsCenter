@@ -337,14 +337,12 @@ public class mainPage extends JFrame {
         scrollPane1 = new JScrollPane();
         table1 = new JTable();
         WeekCombo = new JComboBox<>();
-        DayCombo = new JComboBox<>();
         MonGraph = new JProgressBar();
         TueGraph = new JProgressBar();
         WenGraph = new JProgressBar();
         ThuGraph = new JProgressBar();
         FriGraph = new JProgressBar();
         SatGraph = new JProgressBar();
-        SunGraph = new JProgressBar();
         label21 = new JLabel();
         label5 = new JLabel();
         panel2 = new JPanel();
@@ -427,23 +425,24 @@ public class mainPage extends JFrame {
 
                 //======== panel5 ========
                 {
-                    panel5.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0
-                    ,0,0,0), "JFor\u006dDesi\u0067ner \u0045valu\u0061tion",javax.swing.border.TitledBorder.CENTER,javax.swing.border.TitledBorder.BOTTOM
-                    ,new java.awt.Font("Dia\u006cog",java.awt.Font.BOLD,12),java.awt.Color.red),
-                    panel5. getBorder()));panel5. addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e
-                    ){if("bord\u0065r".equals(e.getPropertyName()))throw new RuntimeException();}});
+                    panel5.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border
+                    .EmptyBorder(0,0,0,0), "JF\u006frmDes\u0069gner \u0045valua\u0074ion",javax.swing.border.TitledBorder.CENTER,javax
+                    .swing.border.TitledBorder.BOTTOM,new java.awt.Font("D\u0069alog",java.awt.Font.BOLD,
+                    12),java.awt.Color.red),panel5. getBorder()));panel5. addPropertyChangeListener(new java.beans
+                    .PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062order".equals(e.
+                    getPropertyName()))throw new RuntimeException();}});
                     panel5.setLayout(null);
 
                     //---- label13 ----
                     label13.setText("\ud604\uc7ac \uc774\uc6a9\uc790\uc218 : ");
                     panel5.add(label13);
-                    label13.setBounds(20, 10, 95, 17);
+                    label13.setBounds(30, 10, 95, 17);
 
                     //---- CurUser ----
                     CurUser.setText("32");
                     CurUser.setFont(new Font("\ub9d1\uc740 \uace0\ub515", Font.BOLD, 12));
                     panel5.add(CurUser);
-                    CurUser.setBounds(120, 10, 26, 17);
+                    CurUser.setBounds(130, 10, 26, 17);
 
                     //======== scrollPane1 ========
                     {
@@ -490,7 +489,7 @@ public class mainPage extends JFrame {
                         scrollPane1.setViewportView(table1);
                     }
                     panel5.add(scrollPane1);
-                    scrollPane1.setBounds(20, 75, 235, 197);
+                    scrollPane1.setBounds(30, 75, 235, 197);
 
                     //---- WeekCombo ----
                     WeekCombo.setModel(new DefaultComboBoxModel<>(new String[] {
@@ -498,80 +497,60 @@ public class mainPage extends JFrame {
                         "2\uc8fc \uc804"
                     }));
                     panel5.add(WeekCombo);
-                    WeekCombo.setBounds(20, 40, 72, 23);
-
-                    //---- DayCombo ----
-                    DayCombo.setModel(new DefaultComboBoxModel<>(new String[] {
-                        "\uc6d4",
-                        "\ud654",
-                        "\uc218",
-                        "\ubaa9",
-                        "\uae08",
-                        "\ud1a0",
-                        "\uc77c"
-                    }));
-                    panel5.add(DayCombo);
-                    DayCombo.setBounds(100, 40, 72, 23);
+                    WeekCombo.setBounds(30, 40, 72, 23);
 
                     //---- MonGraph ----
                     MonGraph.setOrientation(SwingConstants.VERTICAL);
                     MonGraph.setValue(40);
                     MonGraph.setBackground(new Color(0xf2f2f2));
                     panel5.add(MonGraph);
-                    MonGraph.setBounds(285, 100, 10, 150);
+                    MonGraph.setBounds(300, 100, 10, 150);
 
                     //---- TueGraph ----
                     TueGraph.setOrientation(SwingConstants.VERTICAL);
                     TueGraph.setValue(60);
                     TueGraph.setBackground(new Color(0xf2f2f2));
                     panel5.add(TueGraph);
-                    TueGraph.setBounds(310, 100, 10, 150);
+                    TueGraph.setBounds(325, 100, 10, 150);
 
                     //---- WenGraph ----
                     WenGraph.setOrientation(SwingConstants.VERTICAL);
                     WenGraph.setValue(55);
                     WenGraph.setBackground(new Color(0xf2f2f2));
                     panel5.add(WenGraph);
-                    WenGraph.setBounds(335, 100, 10, 150);
+                    WenGraph.setBounds(350, 100, 10, 150);
 
                     //---- ThuGraph ----
                     ThuGraph.setOrientation(SwingConstants.VERTICAL);
                     ThuGraph.setValue(75);
                     ThuGraph.setBackground(new Color(0xf2f2f2));
                     panel5.add(ThuGraph);
-                    ThuGraph.setBounds(360, 100, 10, 150);
+                    ThuGraph.setBounds(375, 100, 10, 150);
 
                     //---- FriGraph ----
                     FriGraph.setOrientation(SwingConstants.VERTICAL);
                     FriGraph.setValue(60);
                     FriGraph.setBackground(new Color(0xf2f2f2));
                     panel5.add(FriGraph);
-                    FriGraph.setBounds(385, 100, 10, 150);
+                    FriGraph.setBounds(400, 100, 10, 150);
 
                     //---- SatGraph ----
                     SatGraph.setOrientation(SwingConstants.VERTICAL);
                     SatGraph.setValue(80);
                     SatGraph.setBackground(new Color(0xf2f2f2));
                     panel5.add(SatGraph);
-                    SatGraph.setBounds(410, 100, 10, 150);
-
-                    //---- SunGraph ----
-                    SunGraph.setOrientation(SwingConstants.VERTICAL);
-                    SunGraph.setValue(100);
-                    SunGraph.setBackground(new Color(0xf2f2f2));
-                    panel5.add(SunGraph);
-                    SunGraph.setBounds(435, 100, 10, 150);
+                    SatGraph.setBounds(425, 100, 10, 150);
 
                     //---- label21 ----
-                    label21.setText(" \uc6d4   \ud654    \uc218   \ubaa9   \uae08   \ud1a0   \uc77c ");
+                    label21.setText(" \uc6d4   \ud654    \uc218   \ubaa9   \uae08   \ud1a0    ");
                     panel5.add(label21);
-                    label21.setBounds(280, 255, 168, 17);
+                    label21.setBounds(295, 255, 168, 17);
 
                     //---- label5 ----
                     label5.setText("\uba85");
                     label5.setFont(new Font("\ub9d1\uc740 \uace0\ub515", Font.BOLD, 12));
                     panel5.add(label5);
-                    label5.setBounds(140, 10, 20, label5.getPreferredSize().height);
+                    label5.setBounds(150, 10, 20, label5.getPreferredSize().height);
 
                     {
                         // compute preferred size
@@ -1131,14 +1110,12 @@ public class mainPage extends JFrame {
     private JScrollPane scrollPane1;
     public JTable table1;
     private JComboBox<String> WeekCombo;
-    private JComboBox<String> DayCombo;
-    private JProgressBar MonGraph;
-    private JProgressBar TueGraph;
-    private JProgressBar WenGraph;
-    private JProgressBar ThuGraph;
-    private JProgressBar FriGraph;
-    private JProgressBar SatGraph;
-    private JProgressBar SunGraph;
+    public JProgressBar MonGraph;
+    public JProgressBar TueGraph;
+    public JProgressBar WenGraph;
+    public JProgressBar ThuGraph;
+    public JProgressBar FriGraph;
+    public JProgressBar SatGraph;
     private JLabel label21;
     private JLabel label5;
     private JPanel panel2;
