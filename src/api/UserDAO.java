@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.lang.Integer;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -77,12 +78,38 @@ public class UserDAO {
         return -1; // 데이터베이스 오류
     }
 
+    // 과거 주에 해당하는 요일에 해당하는 날짜 계산함수 (weekAgo : 예시.1이면 1주전, 2이면 2주전)
+    public String[] calcPastWeekDates(int weekAgo) {
+
+        String dateList[] = new String[6]; // 월~토
+        Calendar cal = Calendar.getInstance();
+
+        int weeksAgo = weekAgo * (-7); // 입력값에 대해 며칠전인지 계산
+        cal.add(Calendar.DATE, weeksAgo);
+        int nWeek = cal.get(Calendar.DAY_OF_WEEK);
+        cal.add(Calendar.DATE, 1-nWeek); //요일에서 월요일 되도록 뺌
+
+        // 과거 주에 해당하는 날짜 배열에 추가
+        for (int i = 0; i < 6; i++) {
+            int nMonth  = cal.get(Calendar.MONTH)+1;
+            cal.add(Calendar.DATE, 1);
+            String date = cal.get(Calendar.YEAR) +"-"+ (nMonth<10?"0"+nMonth:nMonth+"") +"-"+ (cal.get(Calendar.DATE)<10?"0"+cal.get(Calendar.DATE):cal.get(Calendar.DATE)+"");
+            dateList[i] = date;
+            //System.out.println(">>>>>>> searchdate:"+dateList[i]);
+        }
+
+        return dateList;
+    }
+
+
     // 입장 함수
     public int enter(int id) {
         String SQL = "INSERT INTO ENTER_EXIT (user_id) VALUES(?)";
         try {
+
             pstmt = conn.prepareStatement(SQL);
             pstmt.setInt(1, id);
+
             return pstmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -90,18 +117,22 @@ public class UserDAO {
         return -1; // 데이터베이스 오류
     }
 
+
     // 퇴장 함수
     public int exit(int id) {
         String SQL = "UPDATE ENTER_EXIT SET EXIT_TIME = CURRENT_TIMESTAMP WHERE USER_ID = ?";
         try {
+
             pstmt = conn.prepareStatement(SQL);
             pstmt.setInt(1, id);
+
             return pstmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return -1; // 데이터베이스 오류
     }
+
 
     // 현재 이용자수 계산 함수
     public int countCurUser() {
@@ -123,6 +154,44 @@ public class UserDAO {
         return -1; // 데이터베이스 오류
     }
 
+
+    // 과거 특정 주간(월~토)의 사용자들을 시간대별로 정렬하는 함수. (최소사용시간 : 30분)
+    public int[] alignByTime(String[] dateList) {
+
+        int minUseHour = 30;
+        String SQL = "SELECT DATE_FORMAT(ENTER_TIME, '%H'), DATE_FORMAT(EXIT_TIME, '%H') FROM enter_exit " +
+                "WHERE DATE_FORMAT(ENTER_TIME, '%Y-%m-%d') BETWEEN ? AND date_add(?, INTERVAL 1 DAY) " +
+                "AND (TIMESTAMPDIFF(MINUTE, ENTER_TIME, EXIT_TIME) > ?)";
+
+        int[] timeArr = new int[15]; // 06~20시
+        try {
+
+            pstmt = conn.prepareStatement(SQL);
+            pstmt.setString(1, dateList[0]);
+            pstmt.setString(2, dateList[5]);
+            pstmt.setInt(3, minUseHour);
+            rs = pstmt.executeQuery();
+
+            // 시간대별 이용자수 통계내는 부분
+            while (rs.next()) {
+                int enterTime = Integer.parseInt(rs.getString(1));
+                int exitTime = Integer.parseInt(rs.getString(2));
+                for (int i = enterTime; i <= exitTime; i++) {
+                    timeArr[i - 6]++;
+                }
+            }
+
+            // 임시출력부분
+//            for (int i = 0; i < 15; i++) {
+//                System.out.println("timeArr["+i+"]" + "=" + timeArr[i]);
+//            }
+            return timeArr;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null; // 데이터베이스 오류
+    }
 
 
     public boolean lockerPayment(String _u, int _n, int _p) {
