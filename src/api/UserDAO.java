@@ -193,6 +193,38 @@ public class UserDAO {
         return null; // 데이터베이스 오류
     }
 
+    // 요일별 인원 계산 함수
+    public int[] alignByDay(String[] dateList) {
+
+        int minUseHour = 30;
+        String SQL = "SELECT COUNT(enter_time) FROM enter_exit " +
+                "WHERE DATE_FORMAT(ENTER_TIME, '%Y-%m-%d') = ? " +
+                "AND (TIMESTAMPDIFF(MINUTE, ENTER_TIME, EXIT_TIME) > ?)";
+
+        int[] dayArr = new int[6]; // 월~토
+        try {
+
+            // 요일별 일이용자수 계산 후 배열에 대입
+            for (int i = 0; i < 6; i++) {
+                pstmt = conn.prepareStatement(SQL);
+                pstmt.setString(1, dateList[i]);
+                pstmt.setInt(2, minUseHour);
+                rs = pstmt.executeQuery();
+                rs.next();
+                dayArr[i] = rs.getInt(1); // 해당 요일 이용자 수 저장
+            }
+
+            for (int i = 0; i < 6; i++) {
+                System.out.println("dayArr["+i+"]" + "=" + dayArr[i]);
+            }
+            return dayArr;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null; // 데이터베이스 오류
+    }
+
 
     public boolean lockerPayment(String _u, int _n, int _p) {
         boolean flag = false;
