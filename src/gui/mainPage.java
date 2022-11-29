@@ -22,7 +22,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import javax.swing.*;
 
-class CalendarDataManager{
+class CalendarDataManager{ //6*7배열에 나타낼 달력 값을 구하는 클래스
     static final int CAL_WIDTH = 7;
     final static int CAL_HEIGHT = 6;
     int calDates[][] = new int[CAL_HEIGHT][CAL_WIDTH];
@@ -45,18 +45,19 @@ class CalendarDataManager{
         makeCalData(today);
         
     }
-    private void makeCalData(Calendar cal){
+    private void makeCalData(Calendar cal){ //달력의 값을 채워넣기 위한 메소드
+        //1일의 위치와 마지막 날짜를 구함
 
         int calStartingPos = (cal.get(Calendar.DAY_OF_WEEK)+7-(cal.get(Calendar.DAY_OF_MONTH))%7)%7;
         if(calMonth == 1) calLastDate = calLastDateOfMonth[calMonth] + leapCheck(calYear);
         else calLastDate = calLastDateOfMonth[calMonth];
-
+        // 달력 배열 초기화
         for(int i = 0 ; i<CAL_HEIGHT ; i++){
             for(int j = 0 ; j<CAL_WIDTH ; j++){
                 calDates[i][j] = 0;
             }
         }
-
+        // 달력배열에 값 채워넣기
         for(int i = 0, num = 1, k = 0 ; i<CAL_HEIGHT ; i++){
             if(i == 0) k = calStartingPos;
             else k = 0;
@@ -69,7 +70,7 @@ class CalendarDataManager{
         if(year%4 == 0 && year%100 != 0 || year%400 == 0) return 1;
         else return 0;
     }
-    public void moveMonth(int mon){
+    public void moveMonth(int mon){ // 현재 달로부터 전, 후로 이동할 수 있는 메소드
         calMonth += mon;
         if(calMonth>11) while(calMonth>11){
             calYear++;
@@ -115,11 +116,11 @@ public class mainPage extends JFrame {
     }
     private void Locker1(ActionEvent e) {
         // TODO add your code here
-        System.out.println(Locker1.getBackground());
-        
+
             LockerBuyForm.setVisible(true);
             LockerBuyForm.setSize(145, 180);
             LockerNum.setText("1");
+
         
     }
 
@@ -347,6 +348,9 @@ public class mainPage extends JFrame {
         label21 = new JLabel();
         label5 = new JLabel();
         panel2 = new JPanel();
+        panel9 = new JPanel();
+        scrollPane3 = new JScrollPane();
+        panel10 = new JPanel();
         panel1 = new JPanel();
         panel7 = new JPanel();
         scrollPane2 = new JScrollPane();
@@ -423,13 +427,11 @@ public class mainPage extends JFrame {
 
                 //======== panel5 ========
                 {
-                    panel5.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new
-                    javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax
-                    . swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java
-                    .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt
-                    . Color. red) ,panel5. getBorder( )) ); panel5. addPropertyChangeListener (new java. beans.
-                    PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062ord\u0065r" .
-                    equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
+                    panel5.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0
+                    ,0,0,0), "JFor\u006dDesi\u0067ner \u0045valu\u0061tion",javax.swing.border.TitledBorder.CENTER,javax.swing.border.TitledBorder.BOTTOM
+                    ,new java.awt.Font("Dia\u006cog",java.awt.Font.BOLD,12),java.awt.Color.red),
+                    panel5. getBorder()));panel5. addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e
+                    ){if("bord\u0065r".equals(e.getPropertyName()))throw new RuntimeException();}});
                     panel5.setLayout(null);
 
                     //---- label13 ----
@@ -449,6 +451,9 @@ public class mainPage extends JFrame {
                         //---- table1 ----
                         table1.setModel(new DefaultTableModel(
                             new Object[][] {
+                                {"   6 : 00 ~ 7 : 00", null},
+                                {"   7 : 00 ~ 8 : 00", null},
+                                {"   8 : 00 ~ 9 : 00", null},
                                 {"   9 : 00 ~ 10 : 00", null},
                                 {"  10 : 00 ~ 11 : 00", null},
                                 {"  11 : 00 ~ 12 : 00", null},
@@ -460,6 +465,7 @@ public class mainPage extends JFrame {
                                 {"  17 : 00 ~ 18 : 00", null},
                                 {"  18 : 00 ~ 19 : 00", null},
                                 {"  19 : 00 ~ 20 : 00", null},
+                                {"  20 : 00 ~ 21 : 00", null},
                             },
                             new String[] {
                                 "\uc2dc\uac04", "\uc778\uc6d0"
@@ -512,49 +518,49 @@ public class mainPage extends JFrame {
                     MonGraph.setValue(40);
                     MonGraph.setBackground(new Color(0xf2f2f2));
                     panel5.add(MonGraph);
-                    MonGraph.setBounds(285, 115, 10, 135);
+                    MonGraph.setBounds(285, 100, 10, 150);
 
                     //---- TueGraph ----
                     TueGraph.setOrientation(SwingConstants.VERTICAL);
                     TueGraph.setValue(60);
                     TueGraph.setBackground(new Color(0xf2f2f2));
                     panel5.add(TueGraph);
-                    TueGraph.setBounds(310, 115, 10, 135);
+                    TueGraph.setBounds(310, 100, 10, 150);
 
                     //---- WenGraph ----
                     WenGraph.setOrientation(SwingConstants.VERTICAL);
                     WenGraph.setValue(55);
                     WenGraph.setBackground(new Color(0xf2f2f2));
                     panel5.add(WenGraph);
-                    WenGraph.setBounds(335, 115, 10, 135);
+                    WenGraph.setBounds(335, 100, 10, 150);
 
                     //---- ThuGraph ----
                     ThuGraph.setOrientation(SwingConstants.VERTICAL);
                     ThuGraph.setValue(75);
                     ThuGraph.setBackground(new Color(0xf2f2f2));
                     panel5.add(ThuGraph);
-                    ThuGraph.setBounds(360, 115, 10, 135);
+                    ThuGraph.setBounds(360, 100, 10, 150);
 
                     //---- FriGraph ----
                     FriGraph.setOrientation(SwingConstants.VERTICAL);
                     FriGraph.setValue(60);
                     FriGraph.setBackground(new Color(0xf2f2f2));
                     panel5.add(FriGraph);
-                    FriGraph.setBounds(385, 115, 10, 135);
+                    FriGraph.setBounds(385, 100, 10, 150);
 
                     //---- SatGraph ----
                     SatGraph.setOrientation(SwingConstants.VERTICAL);
                     SatGraph.setValue(80);
                     SatGraph.setBackground(new Color(0xf2f2f2));
                     panel5.add(SatGraph);
-                    SatGraph.setBounds(410, 115, 10, 135);
+                    SatGraph.setBounds(410, 100, 10, 150);
 
                     //---- SunGraph ----
                     SunGraph.setOrientation(SwingConstants.VERTICAL);
                     SunGraph.setValue(100);
                     SunGraph.setBackground(new Color(0xf2f2f2));
                     panel5.add(SunGraph);
-                    SunGraph.setBounds(435, 115, 10, 135);
+                    SunGraph.setBounds(435, 100, 10, 150);
 
                     //---- label21 ----
                     label21.setText(" \uc6d4   \ud654    \uc218   \ubaa9   \uae08   \ud1a0   \uc77c ");
@@ -587,6 +593,24 @@ public class mainPage extends JFrame {
                 //======== panel2 ========
                 {
                     panel2.setLayout(null);
+
+                    //======== panel9 ========
+                    {
+                        panel9.setBorder(new TitledBorder("\uac00\uaca9"));
+                        panel9.setLayout(null);
+                        panel9.add(scrollPane3);
+                        scrollPane3.setBounds(15, 30, 405, 105);
+                    }
+                    panel2.add(panel9);
+                    panel9.setBounds(20, 15, 435, 150);
+
+                    //======== panel10 ========
+                    {
+                        panel10.setBorder(new TitledBorder("\uacb0\uc81c"));
+                        panel10.setLayout(null);
+                    }
+                    panel2.add(panel10);
+                    panel10.setBounds(20, 175, 435, 100);
 
                     {
                         // compute preferred size
@@ -1105,7 +1129,7 @@ public class mainPage extends JFrame {
     private JLabel label13;
     public JLabel CurUser;
     private JScrollPane scrollPane1;
-    private JTable table1;
+    public JTable table1;
     private JComboBox<String> WeekCombo;
     private JComboBox<String> DayCombo;
     private JProgressBar MonGraph;
@@ -1118,6 +1142,9 @@ public class mainPage extends JFrame {
     private JLabel label21;
     private JLabel label5;
     private JPanel panel2;
+    private JPanel panel9;
+    private JScrollPane scrollPane3;
+    private JPanel panel10;
     private JPanel panel1;
     private JPanel panel7;
     private JScrollPane scrollPane2;

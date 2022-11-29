@@ -44,6 +44,18 @@ new FormModel {
 							name: "table1"
 							"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector {
 								add( new java.util.Vector {
+									add( "   6 : 00 ~ 7 : 00" )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( "   7 : 00 ~ 8 : 00" )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( "   8 : 00 ~ 9 : 00" )
+									add( null )
+								} )
+								add( new java.util.Vector {
 									add( "   9 : 00 ~ 10 : 00" )
 									add( null )
 								} )
@@ -87,6 +99,10 @@ new FormModel {
 									add( "  19 : 00 ~ 20 : 00" )
 									add( null )
 								} )
+								add( new java.util.Vector {
+									add( "  20 : 00 ~ 21 : 00" )
+									add( null )
+								} )
 							}, new java.util.Vector {
 								add( "시간" )
 								add( "인원" )
@@ -103,6 +119,9 @@ new FormModel {
 							"showVerticalLines": true
 							"showHorizontalLines": true
 							"focusable": false
+							auxiliary() {
+								"JavaCodeGenerator.variableModifiers": 1
+							}
 						} )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 235
@@ -148,9 +167,9 @@ new FormModel {
 						"background": &Color0 new java.awt.Color( 242, 242, 242, 255 )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 10
-						"height": 135
+						"height": 150
 						"x": 285
-						"y": 115
+						"y": 100
 					} )
 					add( new FormComponent( "javax.swing.JProgressBar" ) {
 						name: "TueGraph"
@@ -159,9 +178,9 @@ new FormModel {
 						"background": #Color0
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 10
-						"height": 135
+						"height": 150
 						"x": 310
-						"y": 115
+						"y": 100
 					} )
 					add( new FormComponent( "javax.swing.JProgressBar" ) {
 						name: "WenGraph"
@@ -170,9 +189,9 @@ new FormModel {
 						"background": #Color0
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 10
-						"height": 135
+						"height": 150
 						"x": 335
-						"y": 115
+						"y": 100
 					} )
 					add( new FormComponent( "javax.swing.JProgressBar" ) {
 						name: "ThuGraph"
@@ -181,9 +200,9 @@ new FormModel {
 						"background": #Color0
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 10
-						"height": 135
+						"height": 150
 						"x": 360
-						"y": 115
+						"y": 100
 					} )
 					add( new FormComponent( "javax.swing.JProgressBar" ) {
 						name: "FriGraph"
@@ -192,9 +211,9 @@ new FormModel {
 						"background": #Color0
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 10
-						"height": 135
+						"height": 150
 						"x": 385
-						"y": 115
+						"y": 100
 					} )
 					add( new FormComponent( "javax.swing.JProgressBar" ) {
 						name: "SatGraph"
@@ -203,9 +222,9 @@ new FormModel {
 						"background": #Color0
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 10
-						"height": 135
+						"height": 150
 						"x": 410
-						"y": 115
+						"y": 100
 					} )
 					add( new FormComponent( "javax.swing.JProgressBar" ) {
 						name: "SunGraph"
@@ -214,9 +233,9 @@ new FormModel {
 						"background": #Color0
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 10
-						"height": 135
+						"height": 150
 						"x": 435
-						"y": 115
+						"y": 100
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "label21"
@@ -241,6 +260,36 @@ new FormModel {
 				} )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 					name: "panel2"
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) {
+						"autoSize": false
+					} ) {
+						name: "panel9"
+						"border": new javax.swing.border.TitledBorder( "가격" )
+						add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+							name: "scrollPane3"
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"width": 405
+							"height": 105
+							"x": 15
+							"y": 30
+						} )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 20
+						"y": 15
+						"width": 435
+						"height": 150
+					} )
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) {
+						"autoSize": false
+					} ) {
+						name: "panel10"
+						"border": new javax.swing.border.TitledBorder( "결제" )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 20
+						"y": 175
+						"width": 435
+						"height": 100
+					} )
 				}, new FormLayoutConstraints( null ) {
 					"title": "회원권 구매"
 				} )

@@ -46,6 +46,14 @@ public class loginPage extends JFrame {
             String currentuser = Integer.toString(userDAO.countCurUser());
             mainPage frame = new mainPage();
             frame.CurUser.setText(currentuser);
+            String dateList[] = new String[6];
+            int[] timeArr = new int[15];
+            dateList = userDAO.calcPastWeekDates(1);
+            timeArr = userDAO.alignByTime(dateList);
+            for(int i=0;i<15;i++)
+            {
+                frame.table1.setValueAt("            "+ timeArr[i],i,1);
+            }
             this.setVisible(false);
 
         } else if (result == 0) {
