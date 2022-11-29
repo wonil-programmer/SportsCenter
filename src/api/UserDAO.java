@@ -194,14 +194,14 @@ public class UserDAO {
     }
 
     // 요일별 인원 계산 함수
-    public int[] alignByDay(String[] dateList) {
+    public float[] alignByDay(String[] dateList) {
 
         int minUseHour = 30;
         String SQL = "SELECT COUNT(enter_time) FROM enter_exit " +
                 "WHERE DATE_FORMAT(ENTER_TIME, '%Y-%m-%d') = ? " +
                 "AND (TIMESTAMPDIFF(MINUTE, ENTER_TIME, EXIT_TIME) > ?)";
 
-        int[] dayArr = new int[6]; // 월~토
+        float[] dayArr = new float[6]; // 월~토
         try {
 
             // 요일별 일이용자수 계산 후 배열에 대입
