@@ -199,8 +199,9 @@ public class mainPage extends JFrame {
         // TODO add your code here
 
         int period = LockerDate.getSelectedIndex();
-
-        //api.UserDAO.lockerPayment("IDtest", num, period);   // 아이디명 다시 수정해야 [수정]
+        UserDAO userDAO = new UserDAO();
+        int lockernum = Integer.parseInt(LockerNum.getText());
+        userDAO.buyLocker(1234,lockernum,LockerDate.getSelectedIndex()+1);
         LockerBuyForm.setVisible(false);
         JOptionPane.showMessageDialog(null, "결제에 성공하였습니다");
 
@@ -356,10 +357,10 @@ public class mainPage extends JFrame {
             LockerPrice.setText("5000원");
         }
         else if (index==1) {
-            LockerPrice.setText("8000원");
+            LockerPrice.setText("10000원");
         }
         else if (index==2) {
-            LockerPrice.setText("10000원");
+            LockerPrice.setText("15000원");
         }
     }
 
@@ -433,7 +434,7 @@ public class mainPage extends JFrame {
             ptnum = 20;
         }
         userDAO.regPT(1234, TrainerCombo.getSelectedIndex(),ptnum);
-        // TODO add your code here
+        // TODO add your code
     }
     
     
@@ -539,13 +540,12 @@ public class mainPage extends JFrame {
 
                 //======== panel5 ========
                 {
-                    panel5.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax.
-                    swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border
-                    . TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069alog"
-                    ,java .awt .Font .BOLD ,12 ), java. awt. Color. red) ,panel5. getBorder
-                    ( )) ); panel5. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java
-                    .beans .PropertyChangeEvent e) {if ("\u0062order" .equals (e .getPropertyName () )) throw new RuntimeException
-                    ( ); }} );
+                    panel5.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.
+                    border.EmptyBorder(0,0,0,0), "JF\u006frmDes\u0069gner \u0045valua\u0074ion",javax.swing.border.TitledBorder.CENTER
+                    ,javax.swing.border.TitledBorder.BOTTOM,new java.awt.Font("D\u0069alog",java.awt.Font
+                    .BOLD,12),java.awt.Color.red),panel5. getBorder()));panel5. addPropertyChangeListener(
+                    new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062order"
+                    .equals(e.getPropertyName()))throw new RuntimeException();}});
                     panel5.setLayout(null);
 
                     //---- label13 ----
@@ -1193,8 +1193,8 @@ public class mainPage extends JFrame {
             //---- LockerDate ----
             LockerDate.setModel(new DefaultComboBoxModel<>(new String[] {
                 "1\uac1c\uc6d4",
-                "6\uac1c\uc6d4",
-                "1\ub144"
+                "2\uac1c\uc6d4",
+                "3\uac1c\uc6d4"
             }));
             LockerDate.addItemListener(e -> LockerDateItemStateChanged(e));
             LockerBuyFormContentPane.add(LockerDate);
