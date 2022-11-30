@@ -219,6 +219,23 @@ public class UserDAO {
         return null; // 데이터베이스 오류
     }
 
+    // PT 등록을 DB에 반영하는 함수
+    public int regPT(int id, int trainerId, int useCnt) { // id : 회원ID(FK), trainerId : 트레이너ID, period : 등록횟수
+
+        String SQL_1 = "UPDATE personal_trainings SET user_id = ?, trainer_id = ?, use_count = ?";
+
+        try {
+            pstmt = conn.prepareStatement(SQL_1);
+            pstmt.setInt(1, id);
+            pstmt.setInt(2, trainerId);
+            pstmt.setInt(3, useCnt);
+            pstmt.executeUpdate();
+            System.out.println("PT 등록 성공");
+        } catch(Exception e) {
+            System.out.println("PT 등록 실패 > " + e.toString());
+        }
+        return -1;
+    }
 
     public boolean lockerPayment(String _u, int _n, int _p) {
         boolean flag = false;
