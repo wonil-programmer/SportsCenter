@@ -236,29 +236,22 @@ public class UserDAO {
         return -1;
     }
 
-    public boolean lockerPayment(String _u, int _n, int _p) {
-        boolean flag = false;
 
-        String UserID = _u;
-        int lockerPeriod = _p;
-        int lockerNum = _n;
+    // 락커 구매 함수
+    public int buyLocker(int id, int lockerNum, int period) {
 
         try {
-            String SQL = "UPDATE locker SET userID = ?, lockerPeriod = ?, lockerState=? WHERE lockerNum=?";
+            String SQL = "UPDATE lockers SET number = ?, user_id = ?, state=?";
             pstmt = conn.prepareStatement(SQL);
-            pstmt.setString(1, UserID);
-            pstmt.setInt(2, lockerPeriod);
-            pstmt.setInt(3, 1); // lockerState 사용중으로 변경
-            pstmt.setInt(4, lockerNum);
+            pstmt.setInt(1, lockerNum);
+            pstmt.setInt(2, id);
+            pstmt.setString(3, "사용중"); // state 사용중으로 변경
             pstmt.executeUpdate();
-            flag = true;
             System.out.println("락커 등록 성공");
         } catch(Exception e) {
-            flag = false;
             System.out.println("락커 등록 실패 > " + e.toString());
         }
-
-        return flag;
+        return -1; // 데이터베이스 오류
     }
 //
 //    public int[] lockerColor() {
