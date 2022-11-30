@@ -69,8 +69,8 @@ public class UserDAO {
             pstmt.setString(5, user.getType());
             pstmt.setString(6, user.getPhoneNumber());
             pstmt.setString(7, user.getGender());
-            pstmt.setBoolean(8, user.getLocker());
-            pstmt.setString(9, user.getCreateTime());
+            pstmt.setBoolean(8, user.getLockerFlag());
+            pstmt.setString(9, user.getCreateDateTime());
             return pstmt.executeUpdate(); // 회원가입 성공
         } catch (Exception e) {
             e.printStackTrace();
@@ -95,7 +95,6 @@ public class UserDAO {
             cal.add(Calendar.DATE, 1);
             String date = cal.get(Calendar.YEAR) +"-"+ (nMonth<10?"0"+nMonth:nMonth+"") +"-"+ (cal.get(Calendar.DATE)<10?"0"+cal.get(Calendar.DATE):cal.get(Calendar.DATE)+"");
             dateList[i] = date;
-            //System.out.println(">>>>>>> searchdate:"+dateList[i]);
         }
 
         return dateList;
@@ -104,7 +103,7 @@ public class UserDAO {
 
     // 입장 함수
     public int enter(int id) {
-        String SQL = "INSERT INTO ENTER_EXIT (user_id) VALUES(?)";
+        String SQL = "INSERT INTO visit_logs (user_id) VALUES(?)";
         try {
 
             pstmt = conn.prepareStatement(SQL);
@@ -120,7 +119,7 @@ public class UserDAO {
 
     // 퇴장 함수
     public int exit(int id) {
-        String SQL = "UPDATE ENTER_EXIT SET EXIT_TIME = CURRENT_TIMESTAMP WHERE USER_ID = ?";
+        String SQL = "UPDATE visit_logs SET exit_datetime = CURRENT_TIMESTAMP WHERE user_id = ?";
         try {
 
             pstmt = conn.prepareStatement(SQL);
@@ -137,15 +136,14 @@ public class UserDAO {
     // 현재 이용자수 계산 함수
     public int countCurUser() {
         // 퇴장시각 NULL인 경우(입장버튼을 누른 후 퇴장버튼은 누르지 않은 경우)
-        String SQL = "SELECT COUNT(*) AS '현재 이용자수' FROM sportscenter.enter_exit WHERE exit_time IS NULL";
+        String SQL = "SELECT COUNT(*) AS '현재 이용자수' FROM visit_logs WHERE exit_datetime IS NULL";
 
         try {
             pstmt = conn.prepareStatement(SQL);
-            rs = pstmt.executeQuery(); // SQL문 실행
+            rs = pstmt.executeQuery();
             if (rs.next()) {
 
                 int curUser = rs.getInt(1); // 현재 이용자수 값 저장
-                System.out.println("curUser = " + curUser);
                 return curUser;
             }
         } catch (Exception e) {
@@ -159,9 +157,9 @@ public class UserDAO {
     public int[] alignByTime(String[] dateList) {
 
         int minUseHour = 30;
-        String SQL = "SELECT DATE_FORMAT(ENTER_TIME, '%H'), DATE_FORMAT(EXIT_TIME, '%H') FROM enter_exit " +
-                "WHERE DATE_FORMAT(ENTER_TIME, '%Y-%m-%d') BETWEEN ? AND date_add(?, INTERVAL 1 DAY) " +
-                "AND (TIMESTAMPDIFF(MINUTE, ENTER_TIME, EXIT_TIME) > ?)";
+        String SQL = "SELECT DATE_FORMAT(enter_datetime, '%H'), DATE_FORMAT(exit_datetime, '%H') FROM visit_logs " +
+                "WHERE DATE_FORMAT(enter_datetime, '%Y-%m-%d') BETWEEN ? AND date_add(?, INTERVAL 1 DAY) " +
+                "AND (TIMESTAMPDIFF(MINUTE, enter_datetime, exit_datetime) > ?)";
 
         int[] timeArr = new int[15]; // 06~20시
         try {
@@ -181,10 +179,6 @@ public class UserDAO {
                 }
             }
 
-            // 임시출력부분
-//            for (int i = 0; i < 15; i++) {
-//                System.out.println("timeArr["+i+"]" + "=" + timeArr[i]);
-//            }
             return timeArr;
 
         } catch (Exception e) {
@@ -197,9 +191,9 @@ public class UserDAO {
     public float[] alignByDay(String[] dateList) {
 
         int minUseHour = 30;
-        String SQL = "SELECT COUNT(enter_time) FROM enter_exit " +
-                "WHERE DATE_FORMAT(ENTER_TIME, '%Y-%m-%d') = ? " +
-                "AND (TIMESTAMPDIFF(MINUTE, ENTER_TIME, EXIT_TIME) > ?)";
+        String SQL = "SELECT COUNT(enter_datetime) FROM visit_logs " +
+                "WHERE DATE_FORMAT(enter_datetime, '%Y-%m-%d') = ? " +
+                "AND (TIMESTAMPDIFF(MINUTE, enter_datetime, exit_datetime) > ?)";
 
         float[] dayArr = new float[6]; // 월~토
         try {

@@ -9,8 +9,8 @@ public class User {
     private String Type;
     private String PhoneNumber;
     public String Gender;
-    private Boolean Locker;
-    private String createTime ;
+    private Boolean lockerFlag;
+    private String createDateTime ;
 
     public int getID() {
         return ID;
@@ -46,16 +46,16 @@ public class User {
     public void setGender(String Gender) {
         this.Gender = Gender;
     }
-    public Boolean getLocker() {
-        return Locker;
+    public Boolean getLockerFlag() {
+        return lockerFlag;
     }
-    public void setLocker(Boolean Locker) {
-        this.Locker = Locker;
+    public void setLockerFlag(Boolean lockerFlag) {
+        this.lockerFlag = lockerFlag;
     }
-    public String getCreateTime() {
-        return createTime;
+    public String getCreateDateTime() {
+        return createDateTime;
     }
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime;
+    public void setCreateDateTime(String createDateTime) {
+        this.createDateTime = createDateTime;
     }
 }
