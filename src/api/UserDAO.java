@@ -5,10 +5,13 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.lang.Integer;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 
 public class UserDAO {
 
@@ -238,16 +241,25 @@ public class UserDAO {
 
 
     // 락커 구매 함수
-    public int buyLocker(int id, int lockerNum, int period) {
+    public int buyLocker(int lockerNum, int id, int period) {
+
+        String SQL = "INSERT INTO lockers (number, user_id, state, start_datetime, end_datetime) VALUES (?, ?, ?, ?, ?)";
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String startDate = df.format(cal.getTime()); // 시작날짜를 현재날짜로 지정
 
         try {
-            String SQL = "UPDATE lockers SET number = ?, user_id = ?, state=?";
             pstmt = conn.prepareStatement(SQL);
             pstmt.setInt(1, lockerNum);
             pstmt.setInt(2, id);
             pstmt.setString(3, "사용중"); // state 사용중으로 변경
-            pstmt.executeUpdate();
-            System.out.println("락커 등록 성공");
+            pstmt.setString(4, startDate);
+            cal.add(Calendar.MONTH, period); // 사용기간만큼 날짜 더함
+            String endDate = df.format(cal.getTime());
+            pstmt.setString(5, endDate);
+            return pstmt.executeUpdate();
         } catch(Exception e) {
             System.out.println("락커 등록 실패 > " + e.toString());
         }
