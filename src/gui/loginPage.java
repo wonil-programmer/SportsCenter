@@ -180,10 +180,10 @@ public class loginPage extends JFrame {
 
             if(LockerUse.isSelected()) // 개인락커 사용여부 저장
             {
-                user.setLocker(true);
+                user.setLockerFlag(true);
             }
             else {
-                user.setLocker(false);
+                user.setLockerFlag(false);
             }
 
             RegForm.setVisible(false); // 로그인창 숨기기
