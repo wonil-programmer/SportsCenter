@@ -102,7 +102,99 @@ public class mainPage extends JFrame {
         
 
     }
-
+    public void curuser()
+    {
+        UserDAO userDAO = new UserDAO();
+        String currentuser = Integer.toString(userDAO.countCurUser());
+        CurUser.setText(currentuser);
+    }
+    public void weekstatistic(int num)
+    {
+        UserDAO userDAO = new UserDAO();
+        String dateList[] = new String[6];
+        int[] timeArr = new int[15];
+        dateList = userDAO.calcPastWeekDates(num+1);
+        timeArr = userDAO.alignByTime(dateList);
+        for(int i=0;i<15;i++)
+        {
+            table1.setValueAt("            "+ timeArr[i],i,1);
+        }
+    }
+    public void drawgraph(int num)
+    {
+        UserDAO userDAO = new UserDAO();
+        float[] dayArr = new float[6]; // 월~토
+        String dateList[] = new String[6];
+        dateList = userDAO.calcPastWeekDates(num+1);
+        dayArr = userDAO.alignByDay(dateList);
+        float MonValue,TueValue,WenValue,ThuValue,FriValue,SatValue;
+        float max_num = -1;
+        int max_index = -1;
+        // 가장 많은 요일 찾기
+        for(int i =0;i<6;i++)
+        {
+            if(max_num < dayArr[i])
+            {
+                max_index = i;
+                max_num = dayArr[i];
+            }
+        }
+        // 그래프 상대값 계산
+        if(max_index == 0)
+        {
+            MonGraph.setValue(100);
+            TueGraph.setValue((int)(dayArr[1]/dayArr[0]*100));
+            WenGraph.setValue((int)(dayArr[2]/dayArr[0]*100));
+            ThuGraph.setValue((int)(dayArr[3]/dayArr[0]*100));
+            FriGraph.setValue((int)(dayArr[4]/dayArr[0]*100));
+            SatGraph.setValue((int)(dayArr[5]/dayArr[0]*100));
+        }
+        else if(max_index == 1)
+        {
+            TueGraph.setValue(100);
+            MonGraph.setValue((int)(dayArr[0]/dayArr[1]*100));
+            WenGraph.setValue((int)(dayArr[2]/dayArr[1]*100));
+            ThuGraph.setValue((int)(dayArr[3]/dayArr[1]*100));
+            FriGraph.setValue((int)(dayArr[4]/dayArr[1]*100));
+            SatGraph.setValue((int)(dayArr[5]/dayArr[1]*100));
+        }
+        else if(max_index == 2)
+        {
+            WenGraph.setValue(100);
+            TueGraph.setValue((int)(dayArr[1]/dayArr[2]*100));
+            MonGraph.setValue((int)(dayArr[0]/dayArr[2]*100));
+            ThuGraph.setValue((int)(dayArr[3]/dayArr[2]*100));
+            FriGraph.setValue((int)(dayArr[4]/dayArr[2]*100));
+            SatGraph.setValue((int)(dayArr[5]/dayArr[2]*100));
+        }
+        else if(max_index == 3)
+        {
+            ThuGraph.setValue(100);
+            MonGraph.setValue((int)(dayArr[0]/dayArr[3]*100));
+            WenGraph.setValue((int)(dayArr[2]/dayArr[3]*100));
+            TueGraph.setValue((int)(dayArr[1]/dayArr[3]*100));
+            FriGraph.setValue((int)(dayArr[4]/dayArr[3]*100));
+            SatGraph.setValue((int)(dayArr[5]/dayArr[3]*100));
+        }
+        else if(max_index == 4)
+        {
+            FriGraph.setValue(100);
+            TueGraph.setValue((int)(dayArr[1]/dayArr[4]*100));
+            WenGraph.setValue((int)(dayArr[2]/dayArr[4]*100));
+            ThuGraph.setValue((int)(dayArr[3]/dayArr[4]*100));
+            MonGraph.setValue((int)(dayArr[0]/dayArr[4]*100));
+            SatGraph.setValue((int)(dayArr[5]/dayArr[4]*100));
+        }
+        else if(max_index == 5)
+        {
+            SatGraph.setValue(100);
+            MonGraph.setValue((int)(dayArr[0]/dayArr[5]*100));
+            WenGraph.setValue((int)(dayArr[2]/dayArr[5]*100));
+            ThuGraph.setValue((int)(dayArr[3]/dayArr[5]*100));
+            FriGraph.setValue((int)(dayArr[4]/dayArr[5]*100));
+            TueGraph.setValue((int)(dayArr[1]/dayArr[5]*100));
+        }
+    }
     private void LockerBuy(ActionEvent e) { // 락커 결제 수정 필요, 결제 이미 되어있는지 아닌지 확인 절차 필요
         // TODO add your code here
 
@@ -316,10 +408,18 @@ public class mainPage extends JFrame {
 
     private void tabbedPane1StateChanged(ChangeEvent e) {
         // TODO add your code here
-        System.out.println("change");
         UserDAO userDAO = new UserDAO();
-        String currentuser = Integer.toString(userDAO.countCurUser());
-        CurUser.setText(currentuser);
+        curuser();
+        weekstatistic(WeekCombo.getSelectedIndex());
+        drawgraph(WeekCombo.getSelectedIndex());
+    }
+
+    private void WeekComboItemStateChanged(ItemEvent e) {
+        // TODO add your code here
+        UserDAO userDAO = new UserDAO();
+        curuser();
+        weekstatistic(WeekCombo.getSelectedIndex());
+        drawgraph(WeekCombo.getSelectedIndex());
     }
     
     
@@ -425,12 +525,12 @@ public class mainPage extends JFrame {
 
                 //======== panel5 ========
                 {
-                    panel5.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border
-                    .EmptyBorder(0,0,0,0), "JF\u006frmDes\u0069gner \u0045valua\u0074ion",javax.swing.border.TitledBorder.CENTER,javax
-                    .swing.border.TitledBorder.BOTTOM,new java.awt.Font("D\u0069alog",java.awt.Font.BOLD,
-                    12),java.awt.Color.red),panel5. getBorder()));panel5. addPropertyChangeListener(new java.beans
-                    .PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062order".equals(e.
-                    getPropertyName()))throw new RuntimeException();}});
+                    panel5.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border
+                    . EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDesi\u0067ner Ev\u0061luatio\u006e", javax. swing. border. TitledBorder. CENTER, javax
+                    . swing. border. TitledBorder. BOTTOM, new java .awt .Font ("Dialo\u0067" ,java .awt .Font .BOLD ,
+                    12 ), java. awt. Color. red) ,panel5. getBorder( )) ); panel5. addPropertyChangeListener (new java. beans
+                    . PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("borde\u0072" .equals (e .
+                    getPropertyName () )) throw new RuntimeException( ); }} );
                     panel5.setLayout(null);
 
                     //---- label13 ----
@@ -496,6 +596,7 @@ public class mainPage extends JFrame {
                         "\uc9c0\ub09c\uc8fc",
                         "2\uc8fc \uc804"
                     }));
+                    WeekCombo.addItemListener(e -> WeekComboItemStateChanged(e));
                     panel5.add(WeekCombo);
                     WeekCombo.setBounds(30, 40, 72, 23);
 

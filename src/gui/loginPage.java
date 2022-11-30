@@ -39,7 +39,7 @@ public class loginPage extends JFrame {
         String passPW = new String(PWtext.getPassword());
         int result = userDAO.login(IDtext.getText(), passPW);
         System.out.println("result = " + result);
-        
+
         if (result == 1)
         {
             // 로그인 성공
