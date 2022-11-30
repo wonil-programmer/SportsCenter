@@ -402,7 +402,7 @@ public class mainPage extends JFrame {
             PTprice.setText("240000 원");
         }
         else if (index==1) {
-            PTprice.setText("300000 원");
+            PTprice.setText("400000 원");
         }
     }
 
@@ -420,6 +420,20 @@ public class mainPage extends JFrame {
         curuser();
         weekstatistic(WeekCombo.getSelectedIndex());
         drawgraph(WeekCombo.getSelectedIndex());
+    }
+
+    private void PTbuy(ActionEvent e) {
+        UserDAO userDAO = new UserDAO();
+        int ptnum;
+        if(PTnumCombo.getSelectedIndex()==0)
+        {
+            ptnum = 10;
+        }
+        else {
+            ptnum = 20;
+        }
+        userDAO.regPT(1234, TrainerCombo.getSelectedIndex(),ptnum);
+        // TODO add your code here
     }
     
     
@@ -463,7 +477,7 @@ public class mainPage extends JFrame {
         label7 = new JLabel();
         label8 = new JLabel();
         PTday = new JLabel();
-        button1 = new JButton();
+        PTbuyButton = new JButton();
         panel4 = new JPanel();
         Locker2 = new JButton();
         Locker3 = new JButton();
@@ -525,12 +539,13 @@ public class mainPage extends JFrame {
 
                 //======== panel5 ========
                 {
-                    panel5.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border
-                    . EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDesi\u0067ner Ev\u0061luatio\u006e", javax. swing. border. TitledBorder. CENTER, javax
-                    . swing. border. TitledBorder. BOTTOM, new java .awt .Font ("Dialo\u0067" ,java .awt .Font .BOLD ,
-                    12 ), java. awt. Color. red) ,panel5. getBorder( )) ); panel5. addPropertyChangeListener (new java. beans
-                    . PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("borde\u0072" .equals (e .
-                    getPropertyName () )) throw new RuntimeException( ); }} );
+                    panel5.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax.
+                    swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border
+                    . TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069alog"
+                    ,java .awt .Font .BOLD ,12 ), java. awt. Color. red) ,panel5. getBorder
+                    ( )) ); panel5. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java
+                    .beans .PropertyChangeEvent e) {if ("\u0062order" .equals (e .getPropertyName () )) throw new RuntimeException
+                    ( ); }} );
                     panel5.setLayout(null);
 
                     //---- label13 ----
@@ -794,10 +809,10 @@ public class mainPage extends JFrame {
 
                         //---- PTnumCombo ----
                         PTnumCombo.setModel(new DefaultComboBoxModel<>(new String[] {
-                            "\uc6d4 8\ud68c",
-                            "\uc6d4 10\ud68c"
+                            "10\ud68c",
+                            "20\ud68c"
                         }));
-                        PTnumCombo.setSelectedIndex(1);
+                        PTnumCombo.setSelectedIndex(0);
                         PTnumCombo.addItemListener(e -> PTnumComboItemStateChanged(e));
                         panel8.add(PTnumCombo);
                         PTnumCombo.setBounds(85, 60, 85, PTnumCombo.getPreferredSize().height);
@@ -814,10 +829,11 @@ public class mainPage extends JFrame {
                         panel8.add(PTday);
                         PTday.setBounds(new Rectangle(new Point(250, 35), PTday.getPreferredSize()));
 
-                        //---- button1 ----
-                        button1.setText("\uacb0\uc81c");
-                        panel8.add(button1);
-                        button1.setBounds(315, 35, 105, 45);
+                        //---- PTbuyButton ----
+                        PTbuyButton.setText("\uacb0\uc81c");
+                        PTbuyButton.addActionListener(e -> PTbuy(e));
+                        panel8.add(PTbuyButton);
+                        PTbuyButton.setBounds(315, 35, 105, 45);
                     }
                     panel1.add(panel8);
                     panel8.setBounds(20, 175, 435, 100);
@@ -1237,7 +1253,7 @@ public class mainPage extends JFrame {
     private JLabel label7;
     private JLabel label8;
     private JLabel PTday;
-    private JButton button1;
+    private JButton PTbuyButton;
     private JPanel panel4;
     public JButton Locker2;
     public JButton Locker3;
