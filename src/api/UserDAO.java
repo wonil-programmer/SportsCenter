@@ -222,7 +222,7 @@ public class UserDAO {
     // PT 등록을 DB에 반영하는 함수
     public int regPT(int id, int trainerId, int useCnt) { // id : 회원ID(FK), trainerId : 트레이너ID, period : 등록횟수
 
-        String SQL = "UPDATE personal_trainings SET user_id = ?, trainer_id = ?, use_count = ?";
+        String SQL = "INSERT INTO personal_trainings ('user_id', 'trainer_id', 'use_count') VALUES (?, ?, ?)";
 
         try {
             pstmt = conn.prepareStatement(SQL);
