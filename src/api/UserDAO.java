@@ -222,15 +222,14 @@ public class UserDAO {
     // PT 등록을 DB에 반영하는 함수
     public int regPT(int id, int trainerId, int useCnt) { // id : 회원ID(FK), trainerId : 트레이너ID, period : 등록횟수
 
-        String SQL_1 = "UPDATE personal_trainings SET user_id = ?, trainer_id = ?, use_count = ?";
+        String SQL = "UPDATE personal_trainings SET user_id = ?, trainer_id = ?, use_count = ?";
 
         try {
-            pstmt = conn.prepareStatement(SQL_1);
+            pstmt = conn.prepareStatement(SQL);
             pstmt.setInt(1, id);
             pstmt.setInt(2, trainerId);
             pstmt.setInt(3, useCnt);
-            pstmt.executeUpdate();
-            System.out.println("PT 등록 성공");
+            return pstmt.executeUpdate();
         } catch(Exception e) {
             System.out.println("PT 등록 실패 > " + e.toString());
         }
@@ -261,48 +260,48 @@ public class UserDAO {
 
         return flag;
     }
-
-    public int[] lockerColor() {
-        boolean flag = false;
-
-        int num;
-        int[] locker_state = new int[20];
-
-        try {
-
-            for (num = 0; num < 20; num++) {
-                String SQL = "SELECT lockerState FROM locker WHERE lockerNum=" + (num + 1);
-                pstmt = conn.prepareStatement(SQL);
-                rs = pstmt.executeQuery();
-                while (rs.next()) {
-                    locker_state[num] = rs.getInt("lockerState");
-                }
-
-            }
-            flag = true;
-            System.out.println(Arrays.toString(locker_state));
-            System.out.println("락커 색깔 가져오기 성공");
-
-        } catch (Exception e) {
-            flag = false;
-            System.out.println("락커 색깔 가져오기 실패 > " + e.toString());
-        }
-
-        // 색깔 할당 부분
-        int[] locker_color = new int[20];
-        for(int j=0; j<locker_state.length; j++) {
-            if (locker_state[j]==0) {   // empty
-                locker_color[j] = 0x6699ff; // BLUE
-            }
-            else if (locker_state[j]==1) {  // using
-                locker_color[j] = 0xcccccc; // WHITE
-            }
-            else if (locker_state[j]==2) {  // broken
-                locker_color[j] = 0xff9999; // RED
-            }
-        }
-        return locker_color;
-    }
+//
+//    public int[] lockerColor() {
+//        boolean flag = false;
+//
+//        int num;
+//        int[] locker_state = new int[20];
+//
+//        try {
+//
+//            for (num = 0; num < 20; num++) {
+//                String SQL = "SELECT lockerState FROM locker WHERE lockerNum=" + (num + 1);
+//                pstmt = conn.prepareStatement(SQL);
+//                rs = pstmt.executeQuery();
+//                while (rs.next()) {
+//                    locker_state[num] = rs.getInt("lockerState");
+//                }
+//
+//            }
+//            flag = true;
+//            System.out.println(Arrays.toString(locker_state));
+//            System.out.println("락커 색깔 가져오기 성공");
+//
+//        } catch (Exception e) {
+//            flag = false;
+//            System.out.println("락커 색깔 가져오기 실패 > " + e.toString());
+//        }
+//
+//        // 색깔 할당 부분
+//        int[] locker_color = new int[20];
+//        for(int j=0; j<locker_state.length; j++) {
+//            if (locker_state[j]==0) {   // empty
+//                locker_color[j] = 0x6699ff; // BLUE
+//            }
+//            else if (locker_state[j]==1) {  // using
+//                locker_color[j] = 0xcccccc; // WHITE
+//            }
+//            else if (locker_state[j]==2) {  // broken
+//                locker_color[j] = 0xff9999; // RED
+//            }
+//        }
+//        return locker_color;
+//    }
 
 
 }
