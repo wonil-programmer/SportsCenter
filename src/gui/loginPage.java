@@ -132,7 +132,6 @@ public class loginPage extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
-        // Generated using JFormDesigner Evaluation license - Minjae
         label1 = new JLabel();
         label2 = new JLabel();
         PWtext = new JPasswordField();
@@ -312,7 +311,6 @@ public class loginPage extends JFrame {
     */
     }
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
-    // Generated using JFormDesigner Evaluation license - Minjae
     private JLabel label1;
     private JLabel label2;
     private JPasswordField PWtext;

@@ -19,6 +19,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import javax.swing.*;
@@ -101,7 +102,12 @@ public class mainPage extends JFrame {
         UserDAO userDAO = new UserDAO();
         String currentuser = Integer.toString(userDAO.countCurUser());
         frame.CurUser.setText(currentuser);
-        
+
+        // 임시 test
+        String[] stringList;    // 초기화도
+        stringList = userDAO.userInformation(1);
+        System.out.println(Arrays.toString(stringList));
+
 
     }
 

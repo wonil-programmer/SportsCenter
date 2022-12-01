@@ -393,7 +393,7 @@ public class UserDAO {
         return -1;
     }
 
-    
+
     // 헬스장 등록을 DB에 반영하는 함수
     public int ptReg(int _i, int _m) {
 
