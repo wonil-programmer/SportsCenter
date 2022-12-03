@@ -1,8 +1,8 @@
 /*
  * Created by JFormDesigner on Fri Nov 18 20:23:17 KST 2022
  */
-
 package gui;
+import javax.swing.event.*;
 import api.User;
 import api.UserDAO;
 import java.awt.*;
@@ -14,7 +14,6 @@ import gui.loginPage;
 /**
  * @author Minjae
  */
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,7 +23,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import javax.swing.*;
 
-class CalendarDataManager{
+class CalendarDataManager{ //6*7배열에 나타낼 달력 값을 구하는 클래스
     static final int CAL_WIDTH = 7;
     final static int CAL_HEIGHT = 6;
     int calDates[][] = new int[CAL_HEIGHT][CAL_WIDTH];
@@ -45,19 +44,21 @@ class CalendarDataManager{
         calMonth = today.get(Calendar.MONTH);
         calDayOfMon = today.get(Calendar.DAY_OF_MONTH);
         makeCalData(today);
+        
     }
-    private void makeCalData(Calendar cal){
+    private void makeCalData(Calendar cal){ //달력의 값을 채워넣기 위한 메소드
+        //1일의 위치와 마지막 날짜를 구함
 
         int calStartingPos = (cal.get(Calendar.DAY_OF_WEEK)+7-(cal.get(Calendar.DAY_OF_MONTH))%7)%7;
         if(calMonth == 1) calLastDate = calLastDateOfMonth[calMonth] + leapCheck(calYear);
         else calLastDate = calLastDateOfMonth[calMonth];
-
+        // 달력 배열 초기화
         for(int i = 0 ; i<CAL_HEIGHT ; i++){
             for(int j = 0 ; j<CAL_WIDTH ; j++){
                 calDates[i][j] = 0;
             }
         }
-
+        // 달력배열에 값 채워넣기
         for(int i = 0, num = 1, k = 0 ; i<CAL_HEIGHT ; i++){
             if(i == 0) k = calStartingPos;
             else k = 0;
@@ -70,7 +71,7 @@ class CalendarDataManager{
         if(year%4 == 0 && year%100 != 0 || year%400 == 0) return 1;
         else return 0;
     }
-    public void moveMonth(int mon){
+    public void moveMonth(int mon){ // 현재 달로부터 전, 후로 이동할 수 있는 메소드
         calMonth += mon;
         if(calMonth>11) while(calMonth>11){
             calYear++;
@@ -99,29 +100,121 @@ public class mainPage extends JFrame {
         com.formdev.flatlaf.intellijthemes.FlatArcOrangeIJTheme.setup();
         mainPage frame = new mainPage();
         frame.pack();
-        UserDAO userDAO = new UserDAO();
-        String currentuser = Integer.toString(userDAO.countCurUser());
-        frame.CurUser.setText(currentuser);
-
-        // 임시 test
-        String[] stringList;    // 초기화도
-        stringList = userDAO.userInformation(1);
-        System.out.println(Arrays.toString(stringList));
 
 
     }
-
-    private void LockerBuy(ActionEvent e) {
+    public void curuser()
+    {
+        UserDAO userDAO = new UserDAO();
+        String currentuser = Integer.toString(userDAO.countCurUser());
+        CurUser.setText(currentuser);
+    }
+    public void weekstatistic(int num)
+    {
+        UserDAO userDAO = new UserDAO();
+        String dateList[] = new String[6];
+        int[] timeArr = new int[15];
+        dateList = userDAO.calcPastWeekDates(num+1);
+        timeArr = userDAO.alignByTime(dateList);
+        for(int i=0;i<15;i++)
+        {
+            table1.setValueAt("            "+ timeArr[i],i,1);
+        }
+    }
+    public void drawgraph(int num)
+    {
+        UserDAO userDAO = new UserDAO();
+        float[] dayArr = new float[6]; // 월~토
+        String dateList[] = new String[6];
+        dateList = userDAO.calcPastWeekDates(num+1);
+        dayArr = userDAO.alignByDay(dateList);
+        float MonValue,TueValue,WenValue,ThuValue,FriValue,SatValue;
+        float max_num = -1;
+        int max_index = -1;
+        // 가장 많은 요일 찾기
+        for(int i =0;i<6;i++)
+        {
+            if(max_num < dayArr[i])
+            {
+                max_index = i;
+                max_num = dayArr[i];
+            }
+        }
+        // 그래프 상대값 계산
+        if(max_index == 0)
+        {
+            MonGraph.setValue(100);
+            TueGraph.setValue((int)(dayArr[1]/dayArr[0]*100));
+            WenGraph.setValue((int)(dayArr[2]/dayArr[0]*100));
+            ThuGraph.setValue((int)(dayArr[3]/dayArr[0]*100));
+            FriGraph.setValue((int)(dayArr[4]/dayArr[0]*100));
+            SatGraph.setValue((int)(dayArr[5]/dayArr[0]*100));
+        }
+        else if(max_index == 1)
+        {
+            TueGraph.setValue(100);
+            MonGraph.setValue((int)(dayArr[0]/dayArr[1]*100));
+            WenGraph.setValue((int)(dayArr[2]/dayArr[1]*100));
+            ThuGraph.setValue((int)(dayArr[3]/dayArr[1]*100));
+            FriGraph.setValue((int)(dayArr[4]/dayArr[1]*100));
+            SatGraph.setValue((int)(dayArr[5]/dayArr[1]*100));
+        }
+        else if(max_index == 2)
+        {
+            WenGraph.setValue(100);
+            TueGraph.setValue((int)(dayArr[1]/dayArr[2]*100));
+            MonGraph.setValue((int)(dayArr[0]/dayArr[2]*100));
+            ThuGraph.setValue((int)(dayArr[3]/dayArr[2]*100));
+            FriGraph.setValue((int)(dayArr[4]/dayArr[2]*100));
+            SatGraph.setValue((int)(dayArr[5]/dayArr[2]*100));
+        }
+        else if(max_index == 3)
+        {
+            ThuGraph.setValue(100);
+            MonGraph.setValue((int)(dayArr[0]/dayArr[3]*100));
+            WenGraph.setValue((int)(dayArr[2]/dayArr[3]*100));
+            TueGraph.setValue((int)(dayArr[1]/dayArr[3]*100));
+            FriGraph.setValue((int)(dayArr[4]/dayArr[3]*100));
+            SatGraph.setValue((int)(dayArr[5]/dayArr[3]*100));
+        }
+        else if(max_index == 4)
+        {
+            FriGraph.setValue(100);
+            TueGraph.setValue((int)(dayArr[1]/dayArr[4]*100));
+            WenGraph.setValue((int)(dayArr[2]/dayArr[4]*100));
+            ThuGraph.setValue((int)(dayArr[3]/dayArr[4]*100));
+            MonGraph.setValue((int)(dayArr[0]/dayArr[4]*100));
+            SatGraph.setValue((int)(dayArr[5]/dayArr[4]*100));
+        }
+        else if(max_index == 5)
+        {
+            SatGraph.setValue(100);
+            MonGraph.setValue((int)(dayArr[0]/dayArr[5]*100));
+            WenGraph.setValue((int)(dayArr[2]/dayArr[5]*100));
+            ThuGraph.setValue((int)(dayArr[3]/dayArr[5]*100));
+            FriGraph.setValue((int)(dayArr[4]/dayArr[5]*100));
+            TueGraph.setValue((int)(dayArr[1]/dayArr[5]*100));
+        }
+    }
+    private void LockerBuy(ActionEvent e) { // 락커 결제 수정 필요, 결제 이미 되어있는지 아닌지 확인 절차 필요
         // TODO add your code here
 
+        int period = LockerDate.getSelectedIndex();
+        UserDAO userDAO = new UserDAO();
+        int lockernum = Integer.parseInt(LockerNum.getText());
+        userDAO.buyLocker(1234,lockernum,LockerDate.getSelectedIndex()+1);
         LockerBuyForm.setVisible(false);
+        JOptionPane.showMessageDialog(null, "결제에 성공하였습니다");
+
 
     }
     private void Locker1(ActionEvent e) {
         // TODO add your code here
-        LockerBuyForm.setVisible(true);
-        LockerBuyForm.setSize(145,180);
-        LockerNum.setText("1");
+
+            LockerBuyForm.setVisible(true);
+            LockerBuyForm.setSize(145, 180);
+            LockerNum.setText("1");
+
         
     }
 
@@ -152,11 +245,111 @@ public class mainPage extends JFrame {
     }
 
     private void Locker6(ActionEvent e) { // 일단 6번 락커까지만,, 최적화할 수 있는 방법을 찾아보자,,,,
+        // 방법이 없었다고 한다...
         LockerBuyForm.setVisible(true);
         LockerBuyForm.setSize(145,180);
         LockerNum.setText("6");
     }
 
+    private void Locker7(ActionEvent e) {
+        // TODO add your code here
+        LockerBuyForm.setVisible(true);
+        LockerBuyForm.setSize(145,180);
+        LockerNum.setText("7");
+    }
+
+    private void Locker8(ActionEvent e) {
+        // TODO add your code here
+        LockerBuyForm.setVisible(true);
+        LockerBuyForm.setSize(145,180);
+        LockerNum.setText("8");
+    }
+
+    private void Locker9(ActionEvent e) {
+        // TODO add your code here
+        LockerBuyForm.setVisible(true);
+        LockerBuyForm.setSize(145,180);
+        LockerNum.setText("9");
+    }
+
+
+    private void Locker10(ActionEvent e) {
+        // TODO add your code here
+        LockerBuyForm.setVisible(true);
+        LockerBuyForm.setSize(145,180);
+        LockerNum.setText("10");
+    }
+
+    private void Locker11(ActionEvent e) {
+        LockerBuyForm.setVisible(true);
+        LockerBuyForm.setSize(145,180);
+        LockerNum.setText("11");
+    }
+
+    private void Locker12(ActionEvent e) {
+        // TODO add your code here
+        LockerBuyForm.setVisible(true);
+        LockerBuyForm.setSize(145,180);
+        LockerNum.setText("12");
+    }
+
+    private void Locker13(ActionEvent e) {
+        // TODO add your code here
+        LockerBuyForm.setVisible(true);
+        LockerBuyForm.setSize(145,180);
+        LockerNum.setText("13");
+    }
+
+    private void Locker14(ActionEvent e) {
+        // TODO add your code here
+        LockerBuyForm.setVisible(true);
+        LockerBuyForm.setSize(145,180);
+        LockerNum.setText("14");
+    }
+
+    private void Locker15(ActionEvent e) {
+        // TODO add your code here
+        LockerBuyForm.setVisible(true);
+        LockerBuyForm.setSize(145,180);
+        LockerNum.setText("15");
+    }
+
+    private void Locker16(ActionEvent e) {
+        // TODO add your code here
+        LockerBuyForm.setVisible(true);
+        LockerBuyForm.setSize(145,180);
+        LockerNum.setText("16");
+    }
+
+    private void Locker17(ActionEvent e) {
+        // TODO add your code here
+        LockerBuyForm.setVisible(true);
+        LockerBuyForm.setSize(145,180);
+        LockerNum.setText("17");
+    }
+
+    private void Locker18(ActionEvent e) {
+        // TODO add your code here
+        LockerBuyForm.setVisible(true);
+        LockerBuyForm.setSize(145,180);
+        LockerNum.setText("18");
+    }
+
+    private void Locker19(ActionEvent e) {
+        // TODO add your code here
+        LockerBuyForm.setVisible(true);
+        LockerBuyForm.setSize(145,180);
+        LockerNum.setText("19");
+    }
+
+    private void Locker20(ActionEvent e) {
+        // TODO add your code here
+        LockerBuyForm.setVisible(true);
+        LockerBuyForm.setSize(145,180);
+        LockerNum.setText("20");
+    }
+    
+    
     private void LockerDateItemStateChanged(ItemEvent e) {
         // TODO add your code here
         int index = LockerDate.getSelectedIndex();
@@ -165,10 +358,10 @@ public class mainPage extends JFrame {
             LockerPrice.setText("5000원");
         }
         else if (index==1) {
-            LockerPrice.setText("8000원");
+            LockerPrice.setText("10000원");
         }
         else if (index==2) {
-            LockerPrice.setText("10000원");
+            LockerPrice.setText("15000원");
         }
     }
 
@@ -185,6 +378,70 @@ public class mainPage extends JFrame {
     }
 
     
+
+    private void TrainerComboItemStateChanged(ItemEvent e) {
+        // TODO add your code here
+        int index = TrainerCombo.getSelectedIndex();
+        if (index==0) {
+            PTday.setText("월,수,금");
+        }
+        else if (index==1) {
+            PTday.setText("화,목,일");
+        }
+        else if (index==2) {
+            PTday.setText("월,목,토");
+        }
+        else if (index==3) {
+            PTday.setText("수,금,일");
+        }
+        
+    }
+
+    private void PTnumComboItemStateChanged(ItemEvent e) {
+        // TODO add your code here
+        int index = PTnumCombo.getSelectedIndex();
+        if (index==0) {
+            PTprice.setText("240000 원");
+        }
+        else if (index==1) {
+            PTprice.setText("400000 원");
+        }
+    }
+
+    private void tabbedPane1StateChanged(ChangeEvent e) {
+        // TODO add your code here
+        UserDAO userDAO = new UserDAO();
+        curuser();
+        weekstatistic(WeekCombo.getSelectedIndex());
+        drawgraph(WeekCombo.getSelectedIndex());
+    }
+
+    private void WeekComboItemStateChanged(ItemEvent e) {
+        // TODO add your code here
+        UserDAO userDAO = new UserDAO();
+        curuser();
+        weekstatistic(WeekCombo.getSelectedIndex());
+        drawgraph(WeekCombo.getSelectedIndex());
+    }
+
+    private void PTbuy(ActionEvent e) {
+        UserDAO userDAO = new UserDAO();
+        int ptnum;
+        if(PTnumCombo.getSelectedIndex()==0)
+        {
+            ptnum = 10;
+        }
+        else {
+            ptnum = 20;
+        }
+        userDAO.regPT(1234, TrainerCombo.getSelectedIndex(),ptnum);
+        // TODO add your code
+    }
+    
+    
+
+   
+    
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         // Generated using JFormDesigner Evaluation license - Minjae
@@ -196,31 +453,33 @@ public class mainPage extends JFrame {
         scrollPane1 = new JScrollPane();
         table1 = new JTable();
         WeekCombo = new JComboBox<>();
-        DayCombo = new JComboBox<>();
         MonGraph = new JProgressBar();
         TueGraph = new JProgressBar();
         WenGraph = new JProgressBar();
         ThuGraph = new JProgressBar();
         FriGraph = new JProgressBar();
         SatGraph = new JProgressBar();
-        SunGraph = new JProgressBar();
         label21 = new JLabel();
+        label5 = new JLabel();
         panel2 = new JPanel();
+        panel9 = new JPanel();
+        scrollPane3 = new JScrollPane();
+        panel10 = new JPanel();
         panel1 = new JPanel();
         panel7 = new JPanel();
         scrollPane2 = new JScrollPane();
         table2 = new JTable();
         panel8 = new JPanel();
         label2 = new JLabel();
-        comboBox1 = new JComboBox<>();
+        TrainerCombo = new JComboBox<>();
         label4 = new JLabel();
-        label5 = new JLabel();
+        PTprice = new JLabel();
         label6 = new JLabel();
-        comboBox2 = new JComboBox<>();
+        PTnumCombo = new JComboBox<>();
         label7 = new JLabel();
         label8 = new JLabel();
-        label10 = new JLabel();
-        button1 = new JButton();
+        PTday = new JLabel();
+        PTbuyButton = new JButton();
         panel4 = new JPanel();
         Locker2 = new JButton();
         Locker3 = new JButton();
@@ -278,27 +537,28 @@ public class mainPage extends JFrame {
             //======== tabbedPane1 ========
             {
                 tabbedPane1.setTabPlacement(SwingConstants.LEFT);
+                tabbedPane1.addChangeListener(e -> tabbedPane1StateChanged(e));
 
                 //======== panel5 ========
                 {
-                    panel5.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border
-                    .EmptyBorder(0,0,0,0), "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn",javax.swing.border.TitledBorder.CENTER,javax
-                    .swing.border.TitledBorder.BOTTOM,new java.awt.Font("Dia\u006cog",java.awt.Font.BOLD,
-                    12),java.awt.Color.red),panel5. getBorder()));panel5. addPropertyChangeListener(new java.beans
-                    .PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062ord\u0065r".equals(e.
-                    getPropertyName()))throw new RuntimeException();}});
+                    panel5.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.
+                    border.EmptyBorder(0,0,0,0), "JF\u006frmDes\u0069gner \u0045valua\u0074ion",javax.swing.border.TitledBorder.CENTER
+                    ,javax.swing.border.TitledBorder.BOTTOM,new java.awt.Font("D\u0069alog",java.awt.Font
+                    .BOLD,12),java.awt.Color.red),panel5. getBorder()));panel5. addPropertyChangeListener(
+                    new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062order"
+                    .equals(e.getPropertyName()))throw new RuntimeException();}});
                     panel5.setLayout(null);
 
                     //---- label13 ----
                     label13.setText("\ud604\uc7ac \uc774\uc6a9\uc790\uc218 : ");
                     panel5.add(label13);
-                    label13.setBounds(20, 10, 86, 17);
+                    label13.setBounds(30, 10, 95, 17);
 
                     //---- CurUser ----
-                    CurUser.setText("32\uba85");
+                    CurUser.setText("32");
                     CurUser.setFont(new Font("\ub9d1\uc740 \uace0\ub515", Font.BOLD, 12));
                     panel5.add(CurUser);
-                    CurUser.setBounds(110, 10, 26, 17);
+                    CurUser.setBounds(130, 10, 26, 17);
 
                     //======== scrollPane1 ========
                     {
@@ -306,6 +566,9 @@ public class mainPage extends JFrame {
                         //---- table1 ----
                         table1.setModel(new DefaultTableModel(
                             new Object[][] {
+                                {"   6 : 00 ~ 7 : 00", null},
+                                {"   7 : 00 ~ 8 : 00", null},
+                                {"   8 : 00 ~ 9 : 00", null},
                                 {"   9 : 00 ~ 10 : 00", null},
                                 {"  10 : 00 ~ 11 : 00", null},
                                 {"  11 : 00 ~ 12 : 00", null},
@@ -317,6 +580,7 @@ public class mainPage extends JFrame {
                                 {"  17 : 00 ~ 18 : 00", null},
                                 {"  18 : 00 ~ 19 : 00", null},
                                 {"  19 : 00 ~ 20 : 00", null},
+                                {"  20 : 00 ~ 21 : 00", null},
                             },
                             new String[] {
                                 "\uc2dc\uac04", "\uc778\uc6d0"
@@ -341,82 +605,69 @@ public class mainPage extends JFrame {
                         scrollPane1.setViewportView(table1);
                     }
                     panel5.add(scrollPane1);
-                    scrollPane1.setBounds(20, 75, 235, 197);
+                    scrollPane1.setBounds(30, 75, 235, 197);
 
                     //---- WeekCombo ----
                     WeekCombo.setModel(new DefaultComboBoxModel<>(new String[] {
                         "\uc9c0\ub09c\uc8fc",
                         "2\uc8fc \uc804"
                     }));
+                    WeekCombo.addItemListener(e -> WeekComboItemStateChanged(e));
                     panel5.add(WeekCombo);
-                    WeekCombo.setBounds(20, 40, 72, 23);
-
-                    //---- DayCombo ----
-                    DayCombo.setModel(new DefaultComboBoxModel<>(new String[] {
-                        "\uc6d4",
-                        "\ud654",
-                        "\uc218",
-                        "\ubaa9",
-                        "\uae08",
-                        "\ud1a0",
-                        "\uc77c"
-                    }));
-                    panel5.add(DayCombo);
-                    DayCombo.setBounds(100, 40, 72, 23);
+                    WeekCombo.setBounds(30, 40, 72, 23);
 
                     //---- MonGraph ----
                     MonGraph.setOrientation(SwingConstants.VERTICAL);
                     MonGraph.setValue(40);
                     MonGraph.setBackground(new Color(0xf2f2f2));
                     panel5.add(MonGraph);
-                    MonGraph.setBounds(285, 115, 10, 135);
+                    MonGraph.setBounds(300, 100, 10, 150);
 
                     //---- TueGraph ----
                     TueGraph.setOrientation(SwingConstants.VERTICAL);
                     TueGraph.setValue(60);
                     TueGraph.setBackground(new Color(0xf2f2f2));
                     panel5.add(TueGraph);
-                    TueGraph.setBounds(310, 115, 10, 135);
+                    TueGraph.setBounds(325, 100, 10, 150);
 
                     //---- WenGraph ----
                     WenGraph.setOrientation(SwingConstants.VERTICAL);
                     WenGraph.setValue(55);
                     WenGraph.setBackground(new Color(0xf2f2f2));
                     panel5.add(WenGraph);
-                    WenGraph.setBounds(335, 115, 10, 135);
+                    WenGraph.setBounds(350, 100, 10, 150);
 
                     //---- ThuGraph ----
                     ThuGraph.setOrientation(SwingConstants.VERTICAL);
                     ThuGraph.setValue(75);
                     ThuGraph.setBackground(new Color(0xf2f2f2));
                     panel5.add(ThuGraph);
-                    ThuGraph.setBounds(360, 115, 10, 135);
+                    ThuGraph.setBounds(375, 100, 10, 150);
 
                     //---- FriGraph ----
                     FriGraph.setOrientation(SwingConstants.VERTICAL);
                     FriGraph.setValue(60);
                     FriGraph.setBackground(new Color(0xf2f2f2));
                     panel5.add(FriGraph);
-                    FriGraph.setBounds(385, 115, 10, 135);
+                    FriGraph.setBounds(400, 100, 10, 150);
 
                     //---- SatGraph ----
                     SatGraph.setOrientation(SwingConstants.VERTICAL);
                     SatGraph.setValue(80);
                     SatGraph.setBackground(new Color(0xf2f2f2));
                     panel5.add(SatGraph);
-                    SatGraph.setBounds(410, 115, 10, 135);
-
-                    //---- SunGraph ----
-                    SunGraph.setOrientation(SwingConstants.VERTICAL);
-                    SunGraph.setValue(100);
-                    SunGraph.setBackground(new Color(0xf2f2f2));
-                    panel5.add(SunGraph);
-                    SunGraph.setBounds(435, 115, 10, 135);
+                    SatGraph.setBounds(425, 100, 10, 150);
 
                     //---- label21 ----
-                    label21.setText(" \uc6d4   \ud654    \uc218   \ubaa9   \uae08   \ud1a0   \uc77c ");
+                    label21.setText(" \uc6d4   \ud654    \uc218   \ubaa9   \uae08   \ud1a0    ");
                     panel5.add(label21);
-                    label21.setBounds(280, 255, 168, 17);
+                    label21.setBounds(295, 255, 168, 17);
+
+                    //---- label5 ----
+                    label5.setText("\uba85");
+                    label5.setFont(new Font("\ub9d1\uc740 \uace0\ub515", Font.BOLD, 12));
+                    panel5.add(label5);
+                    label5.setBounds(150, 10, 20, label5.getPreferredSize().height);
 
                     {
                         // compute preferred size
@@ -438,6 +689,24 @@ public class mainPage extends JFrame {
                 //======== panel2 ========
                 {
                     panel2.setLayout(null);
+
+                    //======== panel9 ========
+                    {
+                        panel9.setBorder(new TitledBorder("\uac00\uaca9"));
+                        panel9.setLayout(null);
+                        panel9.add(scrollPane3);
+                        scrollPane3.setBounds(15, 30, 405, 105);
+                    }
+                    panel2.add(panel9);
+                    panel9.setBounds(20, 15, 435, 150);
+
+                    //======== panel10 ========
+                    {
+                        panel10.setBorder(new TitledBorder("\uacb0\uc81c"));
+                        panel10.setLayout(null);
+                    }
+                    panel2.add(panel10);
+                    panel10.setBounds(20, 175, 435, 100);
 
                     {
                         // compute preferred size
@@ -513,38 +782,41 @@ public class mainPage extends JFrame {
                         panel8.add(label2);
                         label2.setBounds(new Rectangle(new Point(30, 35), label2.getPreferredSize()));
 
-                        //---- comboBox1 ----
-                        comboBox1.setModel(new DefaultComboBoxModel<>(new String[] {
+                        //---- TrainerCombo ----
+                        TrainerCombo.setModel(new DefaultComboBoxModel<>(new String[] {
                             "\uc720OO",
                             "\uae40OO",
                             "\ud55cOO",
                             "\ubc15OO"
                         }));
-                        panel8.add(comboBox1);
-                        comboBox1.setBounds(85, 30, 85, comboBox1.getPreferredSize().height);
+                        TrainerCombo.addItemListener(e -> TrainerComboItemStateChanged(e));
+                        panel8.add(TrainerCombo);
+                        TrainerCombo.setBounds(85, 30, 85, TrainerCombo.getPreferredSize().height);
 
                         //---- label4 ----
                         label4.setText("\uc694\uae08 : ");
                         panel8.add(label4);
                         label4.setBounds(new Rectangle(new Point(190, 65), label4.getPreferredSize()));
 
-                        //---- label5 ----
-                        label5.setText("300000 \uc6d0");
-                        panel8.add(label5);
-                        label5.setBounds(new Rectangle(new Point(235, 65), label5.getPreferredSize()));
+                        //---- PTprice ----
+                        PTprice.setText("300000 \uc6d0");
+                        panel8.add(PTprice);
+                        PTprice.setBounds(new Rectangle(new Point(235, 65), PTprice.getPreferredSize()));
 
                         //---- label6 ----
                         label6.setText("\ud69f\uc218");
                         panel8.add(label6);
                         label6.setBounds(new Rectangle(new Point(40, 65), label6.getPreferredSize()));
 
-                        //---- comboBox2 ----
-                        comboBox2.setModel(new DefaultComboBoxModel<>(new String[] {
-                            "\uc6d4 8\ud68c",
-                            "\uc6d4 10\ud68c"
+                        //---- PTnumCombo ----
+                        PTnumCombo.setModel(new DefaultComboBoxModel<>(new String[] {
+                            "10\ud68c",
+                            "20\ud68c"
                         }));
-                        panel8.add(comboBox2);
-                        comboBox2.setBounds(85, 60, 85, comboBox2.getPreferredSize().height);
+                        PTnumCombo.setSelectedIndex(0);
+                        PTnumCombo.addItemListener(e -> PTnumComboItemStateChanged(e));
+                        panel8.add(PTnumCombo);
+                        PTnumCombo.setBounds(85, 60, 85, PTnumCombo.getPreferredSize().height);
                         panel8.add(label7);
                         label7.setBounds(new Rectangle(new Point(185, 35), label7.getPreferredSize()));
 
@@ -553,15 +825,16 @@ public class mainPage extends JFrame {
                         panel8.add(label8);
                         label8.setBounds(190, 35, label8.getPreferredSize().width, 17);
 
-                        //---- label10 ----
-                        label10.setText("\uc6d4,\uc218,\uae08");
-                        panel8.add(label10);
-                        label10.setBounds(new Rectangle(new Point(250, 35), label10.getPreferredSize()));
+                        //---- PTday ----
+                        PTday.setText("\uc6d4,\uc218,\uae08");
+                        panel8.add(PTday);
+                        PTday.setBounds(new Rectangle(new Point(250, 35), PTday.getPreferredSize()));
 
-                        //---- button1 ----
-                        button1.setText("\uacb0\uc81c");
-                        panel8.add(button1);
-                        button1.setBounds(315, 35, 105, 45);
+                        //---- PTbuyButton ----
+                        PTbuyButton.setText("\uacb0\uc81c");
+                        PTbuyButton.addActionListener(e -> PTbuy(e));
+                        panel8.add(PTbuyButton);
+                        PTbuyButton.setBounds(315, 35, 105, 45);
                     }
                     panel1.add(panel8);
                     panel8.setBounds(20, 175, 435, 100);
@@ -607,6 +880,7 @@ public class mainPage extends JFrame {
                     Locker4.setText("4.");
                     Locker4.setBackground(new Color(0x6699ff));
                     Locker4.setFocusable(false);
+                    Locker4.setMnemonic('4');
                     Locker4.addActionListener(e -> Locker4(e));
                     panel4.add(Locker4);
                     Locker4.setBounds(285, 25, 75, 35);
@@ -631,6 +905,7 @@ public class mainPage extends JFrame {
                     Locker7.setText("7.");
                     Locker7.setBackground(new Color(0xcccccc));
                     Locker7.setFocusable(false);
+                    Locker7.addActionListener(e -> Locker7(e));
                     panel4.add(Locker7);
                     Locker7.setBounds(110, 75, 75, 35);
 
@@ -638,6 +913,7 @@ public class mainPage extends JFrame {
                     Locker11.setText("11.");
                     Locker11.setBackground(new Color(0xcccccc));
                     Locker11.setFocusable(false);
+                    Locker11.addActionListener(e -> Locker11(e));
                     panel4.add(Locker11);
                     Locker11.setBounds(20, 125, 75, 35);
 
@@ -645,6 +921,7 @@ public class mainPage extends JFrame {
                     Locker12.setText("12.");
                     Locker12.setBackground(new Color(0xcccccc));
                     Locker12.setFocusable(false);
+                    Locker12.addActionListener(e -> Locker12(e));
                     panel4.add(Locker12);
                     Locker12.setBounds(110, 125, 75, 35);
 
@@ -652,6 +929,7 @@ public class mainPage extends JFrame {
                     Locker13.setText("13.");
                     Locker13.setBackground(new Color(0x6699ff));
                     Locker13.setFocusable(false);
+                    Locker13.addActionListener(e -> Locker13(e));
                     panel4.add(Locker13);
                     Locker13.setBounds(200, 125, 75, 35);
 
@@ -659,6 +937,7 @@ public class mainPage extends JFrame {
                     Locker14.setText("14.");
                     Locker14.setBackground(new Color(0x6699ff));
                     Locker14.setFocusable(false);
+                    Locker14.addActionListener(e -> Locker14(e));
                     panel4.add(Locker14);
                     Locker14.setBounds(285, 125, 75, 35);
 
@@ -666,6 +945,7 @@ public class mainPage extends JFrame {
                     Locker15.setText("15.");
                     Locker15.setBackground(new Color(0xff9999));
                     Locker15.setFocusable(false);
+                    Locker15.addActionListener(e -> Locker15(e));
                     panel4.add(Locker15);
                     Locker15.setBounds(370, 125, 75, 35);
 
@@ -673,6 +953,7 @@ public class mainPage extends JFrame {
                     Locker16.setText("16.");
                     Locker16.setBackground(new Color(0x6699ff));
                     Locker16.setFocusable(false);
+                    Locker16.addActionListener(e -> Locker16(e));
                     panel4.add(Locker16);
                     Locker16.setBounds(20, 175, 75, 35);
 
@@ -680,6 +961,7 @@ public class mainPage extends JFrame {
                     Locker17.setText("17.");
                     Locker17.setBackground(new Color(0x6699ff));
                     Locker17.setFocusable(false);
+                    Locker17.addActionListener(e -> Locker17(e));
                     panel4.add(Locker17);
                     Locker17.setBounds(110, 175, 75, 35);
 
@@ -687,6 +969,7 @@ public class mainPage extends JFrame {
                     Locker8.setText("8.");
                     Locker8.setBackground(new Color(0xcccccc));
                     Locker8.setFocusable(false);
+                    Locker8.addActionListener(e -> Locker8(e));
                     panel4.add(Locker8);
                     Locker8.setBounds(200, 75, 75, 35);
 
@@ -694,6 +977,7 @@ public class mainPage extends JFrame {
                     Locker9.setText("9.");
                     Locker9.setBackground(new Color(0x6699ff));
                     Locker9.setFocusable(false);
+                    Locker9.addActionListener(e -> Locker9(e));
                     panel4.add(Locker9);
                     Locker9.setBounds(285, 75, 75, 35);
 
@@ -701,6 +985,7 @@ public class mainPage extends JFrame {
                     Locker10.setText("10.");
                     Locker10.setBackground(new Color(0xcccccc));
                     Locker10.setFocusable(false);
+                    Locker10.addActionListener(e -> Locker10(e));
                     panel4.add(Locker10);
                     Locker10.setBounds(370, 75, 75, 35);
 
@@ -708,6 +993,7 @@ public class mainPage extends JFrame {
                     Locker18.setText("18.");
                     Locker18.setBackground(new Color(0xcccccc));
                     Locker18.setFocusable(false);
+                    Locker18.addActionListener(e -> Locker18(e));
                     panel4.add(Locker18);
                     Locker18.setBounds(200, 175, 75, 35);
 
@@ -715,6 +1001,7 @@ public class mainPage extends JFrame {
                     Locker19.setText("19.");
                     Locker19.setBackground(new Color(0xcccccc));
                     Locker19.setFocusable(false);
+                    Locker19.addActionListener(e -> Locker19(e));
                     panel4.add(Locker19);
                     Locker19.setBounds(285, 175, 75, 35);
 
@@ -722,6 +1009,7 @@ public class mainPage extends JFrame {
                     Locker20.setText("20.");
                     Locker20.setBackground(new Color(0xcccccc));
                     Locker20.setFocusable(false);
+                    Locker20.addActionListener(e -> Locker20(e));
                     panel4.add(Locker20);
                     Locker20.setBounds(370, 175, 75, 35);
 
@@ -901,13 +1189,13 @@ public class mainPage extends JFrame {
             //---- LockerNum ----
             LockerNum.setText("1");
             LockerBuyFormContentPane.add(LockerNum);
-            LockerNum.setBounds(new Rectangle(new Point(35, 15), LockerNum.getPreferredSize()));
+            LockerNum.setBounds(35, 15, 20, LockerNum.getPreferredSize().height);
 
             //---- LockerDate ----
             LockerDate.setModel(new DefaultComboBoxModel<>(new String[] {
                 "1\uac1c\uc6d4",
-                "6\uac1c\uc6d4",
-                "1\ub144"
+                "2\uac1c\uc6d4",
+                "3\uac1c\uc6d4"
             }));
             LockerDate.addItemListener(e -> LockerDateItemStateChanged(e));
             LockerBuyFormContentPane.add(LockerDate);
@@ -936,62 +1224,64 @@ public class mainPage extends JFrame {
     private JTabbedPane tabbedPane1;
     private JPanel panel5;
     private JLabel label13;
-    private JLabel CurUser;
+    public JLabel CurUser;
     private JScrollPane scrollPane1;
-    private JTable table1;
+    public JTable table1;
     private JComboBox<String> WeekCombo;
-    private JComboBox<String> DayCombo;
-    private JProgressBar MonGraph;
-    private JProgressBar TueGraph;
-    private JProgressBar WenGraph;
-    private JProgressBar ThuGraph;
-    private JProgressBar FriGraph;
-    private JProgressBar SatGraph;
-    private JProgressBar SunGraph;
+    public JProgressBar MonGraph;
+    public JProgressBar TueGraph;
+    public JProgressBar WenGraph;
+    public JProgressBar ThuGraph;
+    public JProgressBar FriGraph;
+    public JProgressBar SatGraph;
     private JLabel label21;
+    private JLabel label5;
     private JPanel panel2;
+    private JPanel panel9;
+    private JScrollPane scrollPane3;
+    private JPanel panel10;
     private JPanel panel1;
     private JPanel panel7;
     private JScrollPane scrollPane2;
     private JTable table2;
     private JPanel panel8;
     private JLabel label2;
-    private JComboBox<String> comboBox1;
+    private JComboBox<String> TrainerCombo;
     private JLabel label4;
-    private JLabel label5;
+    private JLabel PTprice;
     private JLabel label6;
-    private JComboBox<String> comboBox2;
+    private JComboBox<String> PTnumCombo;
     private JLabel label7;
     private JLabel label8;
-    private JLabel label10;
-    private JButton button1;
+    private JLabel PTday;
+    private JButton PTbuyButton;
     private JPanel panel4;
-    private JButton Locker2;
-    private JButton Locker3;
-    private JButton Locker4;
-    private JButton Locker5;
-    private JButton Locker6;
-    private JButton Locker7;
-    private JButton Locker11;
-    private JButton Locker12;
-    private JButton Locker13;
-    private JButton Locker14;
-    private JButton Locker15;
-    private JButton Locker16;
-    private JButton Locker17;
-    private JButton Locker8;
-    private JButton Locker9;
-    private JButton Locker10;
-    private JButton Locker18;
-    private JButton Locker19;
-    private JButton Locker20;
+    public JButton Locker2;
+    public JButton Locker3;
+    public JButton Locker4;
+    public JButton Locker5;
+    public JButton Locker6;
+    public JButton Locker7;
+    public JButton Locker11;
+    public JButton Locker12;
+    public JButton Locker13;
+    public JButton Locker14;
+    public JButton Locker15;
+    public JButton Locker16;
+    public JButton Locker17;
+    public JButton Locker8;
+    public JButton Locker9;
+    public JButton Locker10;
+    public JButton Locker18;
+    public JButton Locker19;
+    public JButton Locker20;
     private JLabel label15;
     private JLabel label16;
     private JLabel label17;
     private JLabel label18;
     private JLabel label19;
     private JLabel label20;
-    private JButton Locker1;
+    public JButton Locker1;
     private JPanel panel3;
     private JPanel panel6;
     private JLabel label9;

@@ -39,11 +39,95 @@ public class loginPage extends JFrame {
         String passPW = new String(PWtext.getPassword());
         int result = userDAO.login(IDtext.getText(), passPW);
         System.out.println("result = " + result);
+
         if (result == 1)
         {
             // 로그인 성공
             JOptionPane.showMessageDialog(null, "로그인에 성공하였습니다");
-            new mainPage();
+            // 현재사용자 수
+            String currentuser = Integer.toString(userDAO.countCurUser());
+            mainPage frame = new mainPage();
+            frame.CurUser.setText(currentuser);
+            // 시간별 통계
+            String dateList[] = new String[6];
+            int[] timeArr = new int[15];
+            dateList = userDAO.calcPastWeekDates(1);
+            timeArr = userDAO.alignByTime(dateList);
+            for(int i=0;i<15;i++)
+            {
+                frame.table1.setValueAt("            "+ timeArr[i],i,1);
+            }
+            //요일별 그래프
+            float[] dayArr = new float[6]; // 월~토
+            dayArr = userDAO.alignByDay(dateList);
+            float MonValue,TueValue,WenValue,ThuValue,FriValue,SatValue;
+            float max_num = -1;
+            int max_index = -1;
+            // 가장 많은 요일 찾기
+            for(int i =0;i<6;i++)
+            {
+                if(max_num < dayArr[i])
+                {
+                    max_index = i;
+                    max_num = dayArr[i];
+                }
+            }
+            // 그래프 상대값 계산
+            if(max_index == 0)
+            {
+                frame.MonGraph.setValue(100);
+                frame.TueGraph.setValue((int)(dayArr[1]/dayArr[0]*100));
+                frame.WenGraph.setValue((int)(dayArr[2]/dayArr[0]*100));
+                frame.ThuGraph.setValue((int)(dayArr[3]/dayArr[0]*100));
+                frame.FriGraph.setValue((int)(dayArr[4]/dayArr[0]*100));
+                frame.SatGraph.setValue((int)(dayArr[5]/dayArr[0]*100));
+            }
+            else if(max_index == 1)
+            {
+                    frame.TueGraph.setValue(100);
+                    frame.MonGraph.setValue((int)(dayArr[0]/dayArr[1]*100));
+                    frame.WenGraph.setValue((int)(dayArr[2]/dayArr[1]*100));
+                    frame.ThuGraph.setValue((int)(dayArr[3]/dayArr[1]*100));
+                    frame.FriGraph.setValue((int)(dayArr[4]/dayArr[1]*100));
+                    frame.SatGraph.setValue((int)(dayArr[5]/dayArr[1]*100));
+            }
+            else if(max_index == 2)
+            {
+                frame.WenGraph.setValue(100);
+                frame.TueGraph.setValue((int)(dayArr[1]/dayArr[2]*100));
+                frame.MonGraph.setValue((int)(dayArr[0]/dayArr[2]*100));
+                frame.ThuGraph.setValue((int)(dayArr[3]/dayArr[2]*100));
+                frame.FriGraph.setValue((int)(dayArr[4]/dayArr[2]*100));
+                frame.SatGraph.setValue((int)(dayArr[5]/dayArr[2]*100));
+            }
+            else if(max_index == 3)
+            {
+                frame.ThuGraph.setValue(100);
+                frame.MonGraph.setValue((int)(dayArr[0]/dayArr[3]*100));
+                frame.WenGraph.setValue((int)(dayArr[2]/dayArr[3]*100));
+                frame.TueGraph.setValue((int)(dayArr[1]/dayArr[3]*100));
+                frame.FriGraph.setValue((int)(dayArr[4]/dayArr[3]*100));
+                frame.SatGraph.setValue((int)(dayArr[5]/dayArr[3]*100));
+            }
+            else if(max_index == 4)
+            {
+                frame.FriGraph.setValue(100);
+                frame.TueGraph.setValue((int)(dayArr[1]/dayArr[4]*100));
+                frame.WenGraph.setValue((int)(dayArr[2]/dayArr[4]*100));
+                frame.ThuGraph.setValue((int)(dayArr[3]/dayArr[4]*100));
+                frame.MonGraph.setValue((int)(dayArr[0]/dayArr[4]*100));
+                frame.SatGraph.setValue((int)(dayArr[5]/dayArr[4]*100));
+            }
+            else if(max_index == 5)
+            {
+                frame.SatGraph.setValue(100);
+                frame.MonGraph.setValue((int)(dayArr[0]/dayArr[5]*100));
+                frame.WenGraph.setValue((int)(dayArr[2]/dayArr[5]*100));
+                frame.ThuGraph.setValue((int)(dayArr[3]/dayArr[5]*100));
+                frame.FriGraph.setValue((int)(dayArr[4]/dayArr[5]*100));
+                frame.TueGraph.setValue((int)(dayArr[1]/dayArr[5]*100));
+            }
+
             this.setVisible(false);
 
         } else if (result == 0) {
@@ -96,10 +180,10 @@ public class loginPage extends JFrame {
 
             if(LockerUse.isSelected()) // 개인락커 사용여부 저장
             {
-                user.setLocker(true);
+                user.setLockerFlag(true);
             }
             else {
-                user.setLocker(false);
+                user.setLockerFlag(false);
             }
 
             RegForm.setVisible(false); // 로그인창 숨기기
