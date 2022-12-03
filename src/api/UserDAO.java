@@ -223,6 +223,44 @@ public class UserDAO {
         return null; // 데이터베이스 오류
     }
 
+
+    // 헬스 회원권 등록 함수
+    public int regHealth(int id, int period) {
+
+        String preSQL = "SELECT EXISTS(SELECT * FROM health_members WHERE user_id = ?) AS regFlag";
+        String SQL = "INSERT INTO health_members (user_id, start_date, end_date) VALUES (?, ?, ?)";
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String startDate = df.format(cal.getTime()); // 시작날짜를 현재날짜로 지정
+
+        try {
+            pstmt = conn.prepareStatement(preSQL);
+            pstmt.setInt(1, id);
+            rs = pstmt.executeQuery();
+            rs.next();
+            int regFlag = rs.getInt(1);
+            System.out.println("regFlag= " + regFlag);
+            // -2 반환시 "이미 등록한 회원입니다. 회원님의 남은기간은 ?일입니다. 재등록하시겠습니까?"
+            // 메시지 출력후, 확인 버튼 누르면 재등록창으로 이동
+            if (regFlag == 1) return -2;
+            else {
+                pstmt = conn.prepareStatement(SQL);
+                pstmt.setInt(1, id);
+                pstmt.setString(2, startDate);
+                cal.add(Calendar.MONTH, period); // 사용기간만큼 날짜 더함
+                String endDate = df.format(cal.getTime());
+                pstmt.setString(3, endDate);
+                return pstmt.executeUpdate();
+            }
+        } catch(Exception e) {
+            System.out.println("회원권 등록 실패 > " + e.toString());
+        }
+        return -1; // 데이터베이스 오류
+    }
+
+
     // PT 등록을 DB에 반영하는 함수
     public int regPT(int id, int trainerId, int useCnt) { // id : 회원ID(FK), trainerId : 트레이너ID, period : 등록횟수
 
@@ -242,9 +280,9 @@ public class UserDAO {
 
 
     // 락커 구매 함수
-    public int buyLocker(int lockerNum, int id, int period) {
+    public int buyLocker(int id, int lockerNum, int period) {
 
-        String SQL = "INSERT INTO lockers (number, user_id, state, start_datetime, end_datetime) VALUES (?, ?, ?, ?, ?)";
+        String SQL = "INSERT INTO lockers (number, user_id, state, start_date, end_date) VALUES (?, ?, ?, ?, ?)";
 
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
@@ -266,48 +304,49 @@ public class UserDAO {
         }
         return -1; // 데이터베이스 오류
     }
-//
-//    public int[] lockerColor() {
-//        boolean flag = false;
-//
-//        int num;
-//        int[] locker_state = new int[20];
-//
-//        try {
-//
-//            for (num = 0; num < 20; num++) {
-//                String SQL = "SELECT lockerState FROM locker WHERE lockerNum=" + (num + 1);
-//                pstmt = conn.prepareStatement(SQL);
-//                rs = pstmt.executeQuery();
-//                while (rs.next()) {
-//                    locker_state[num] = rs.getInt("lockerState");
-//                }
-//
-//            }
-//            flag = true;
-//            System.out.println(Arrays.toString(locker_state));
-//            System.out.println("락커 색깔 가져오기 성공");
-//
-//        } catch (Exception e) {
-//            flag = false;
-//            System.out.println("락커 색깔 가져오기 실패 > " + e.toString());
-//        }
-//
-//        // 색깔 할당 부분
-//        int[] locker_color = new int[20];
-//        for(int j=0; j<locker_state.length; j++) {
-//            if (locker_state[j]==0) {   // empty
-//                locker_color[j] = 0x6699ff; // BLUE
-//            }
-//            else if (locker_state[j]==1) {  // using
-//                locker_color[j] = 0xcccccc; // WHITE
-//            }
-//            else if (locker_state[j]==2) {  // broken
-//                locker_color[j] = 0xff9999; // RED
-//            }
-//        }
-//        return locker_color;
-//    }
+
+    public int[] lockerColor() {
+        boolean flag = false;
+
+        int num;
+        int[] locker_state = new int[20];
+
+        try {
+
+            for (num = 0; num < 20; num++) {
+                String SQL = "SELECT lockerState FROM locker WHERE lockerNum=" + (num + 1);
+                pstmt = conn.prepareStatement(SQL);
+                rs = pstmt.executeQuery();
+                while (rs.next()) {
+                    locker_state[num] = rs.getInt("lockerState");
+                }
+
+            }
+            flag = true;
+            System.out.println(Arrays.toString(locker_state));
+            System.out.println("락커 색깔 가져오기 성공");
+
+        } catch (Exception e) {
+            flag = false;
+            System.out.println("락커 색깔 가져오기 실패 > " + e.toString());
+        }
+
+        // 색깔 할당 부분
+        int[] locker_color = new int[20];
+        for(int j=0; j<locker_state.length; j++) {
+            if (locker_state[j]==0) {   // empty
+                locker_color[j] = 0x6699ff; // BLUE
+            }
+            else if (locker_state[j]==1) {  // using
+                locker_color[j] = 0xcccccc; // WHITE
+            }
+            else if (locker_state[j]==2) {  // broken
+                locker_color[j] = 0xff9999; // RED
+            }
+        }
+        return locker_color;
+    }
+
 
     //
     public String[] userInformation (int id) {
