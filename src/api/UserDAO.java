@@ -111,7 +111,6 @@ public class UserDAO {
 
             pstmt = conn.prepareStatement(SQL);
             pstmt.setInt(1, id);
-
             return pstmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -127,7 +126,6 @@ public class UserDAO {
 
             pstmt = conn.prepareStatement(SQL);
             pstmt.setInt(1, id);
-
             return pstmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -228,6 +226,7 @@ public class UserDAO {
 
         String preSQL = "SELECT EXISTS(SELECT * FROM health_members WHERE user_id = ?) AS regFlag";
         String SQL = "INSERT INTO health_members (user_id, start_date, end_date) VALUES (?, ?, ?)";
+        String reRegSQL = "UPDATE health_members SET end_date = ? WHERE user_id = ?";
 
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
@@ -239,10 +238,10 @@ public class UserDAO {
             pstmt.setInt(1, id);
             rs = pstmt.executeQuery();
             rs.next();
-            int regFlag = rs.getInt(1);
+            int regFlag = rs.getInt(1); // 기존 등록 회원인지 체크하는 플래그 (1이면 기존등록회원)
             System.out.println("regFlag= " + regFlag);
             // -2 반환시 "이미 등록한 회원입니다. 회원님의 남은기간은 ?일입니다. 재등록하시겠습니까?"
-            // 메시지 출력후, 확인 버튼 누르면 재등록창으로 이동
+            // 메시지 출력후, 확인 버튼 누르면 재등록 창 팝업
             if (regFlag == 1) return -2;
             else {
                 pstmt = conn.prepareStatement(SQL);
@@ -304,48 +303,156 @@ public class UserDAO {
         return -1; // 데이터베이스 오류
     }
 
-    public int[] lockerColor() {
-        boolean flag = false;
+//    // 락커 상태에 따른 색상 변경 함수
+//    public int[] lockerColor() {
+//        boolean flag = false;
+//
+//        int num;
+//        String[] lockerState = new String[20];
+//
+//        try {
+//
+//            for (num = 0; num < 20; num++) {
+//                String SQL = "SELECT state FROM lockers WHERE number=" + (num + 1);
+//                pstmt = conn.prepareStatement(SQL);
+//                rs = pstmt.executeQuery();
+//                while (rs.next()) {
+//                    lockerState[num] = rs.getString(1);
+//                }
+//
+//            }
+//            flag = true;
+//            System.out.println(Arrays.toString(lockerState));
+//            System.out.println("락커 색깔 가져오기 성공");
+//
+//        } catch (Exception e) {
+//            flag = false;
+//            System.out.println("락커 색깔 가져오기 실패 > " + e.toString());
+//        }
+//
+//        // 색깔 할당 부분
+//        int[] lockerColor = new int[20];
+//        for(int j=0; j<lockerState.length; j++) {
+//            if (lockerState[j]=='사용가능') {   // empty
+//                lockerColor[j] = 0x6699ff; // BLUE
+//            }
+//            else if (lockerState[j]==) {  // using
+//                lockerColor[j] = 0xcccccc; // WHITE
+//            }
+//            else if (lockerState[j]==2) {  // broken
+//                lockerColor[j] = 0xff9999; // RED
+//            }
+//        }
+//        return lockerColor;
+//    }
 
-        int num;
-        int[] locker_state = new int[20];
 
-        try {
+        public String[] showUserInfo ( int id){
+            String[] userInfoList = new String[10];
+        /*
+         0 이름
+         1 PT 트레이너 정보 (id)
+         2 PT 남은 횟수
+         3 회원권 남은 날짜 (일단위)
+         4 회원권 시작날짜
+         5 회원권 끝나는날짜
+         6 개인 락커 번호
+         7 개인 락커 남은 날짜 (일단위)
+         8 개인 락커 시작 날짜
+         9 개인 락커 종료 날짜
+         */
 
-            for (num = 0; num < 20; num++) {
-                String SQL = "SELECT lockerState FROM locker WHERE lockerNum=" + (num + 1);
-                pstmt = conn.prepareStatement(SQL);
+            try {
+
+                /* 이용자 정보 관련 */
+                // 이용자 이름
+                String SQL_user_name = "SELECT name FROM user WHERE id=" + id;
+                pstmt = conn.prepareStatement(SQL_user_name);
                 rs = pstmt.executeQuery();
                 while (rs.next()) {
-                    locker_state[num] = rs.getInt("lockerState");
+                    userInfoList[0] = rs.getString("name");   // 이름
                 }
 
-            }
-            flag = true;
-            System.out.println(Arrays.toString(locker_state));
-            System.out.println("락커 색깔 가져오기 성공");
 
-        } catch (Exception e) {
-            flag = false;
-            System.out.println("락커 색깔 가져오기 실패 > " + e.toString());
+                /* pt 관련 */
+                // pt트레이너 정보, 남은 횟수 (등록 안한 경우는 default: 'pt등록안함')
+                String preSQL_pt = "SELECT EXISTS(SELECT * FROM personal_trainings WHERE user_id = ?) AS ptFlag";
+                String SQL_pt = "SELECT trainer_id, use_count FROM personal_trainings WHERE user_id=" + id;
+
+                // pt 여부 확인
+                pstmt = conn.prepareStatement(preSQL_pt);
+                pstmt.setInt(1, id);
+                rs = pstmt.executeQuery();
+                rs.next();
+                int ptFlag = rs.getInt(1); // pt 등록 회원인지 체크하는 플래그 (1이면 pt 등록회원)
+                if (ptFlag == 1) { // pt 등록된 경우
+                    pstmt = conn.prepareStatement(SQL_pt);
+                    rs = pstmt.executeQuery();
+                    while (rs.next()) {
+                        userInfoList[1] = rs.getString(1); // pt 트레이너 정보
+                        userInfoList[2] = rs.getString(2); // pt 남은 횟수
+                    }
+                } else {
+                    userInfoList[1] = "pt 등록안함";
+                    userInfoList[2] = "-";
+                }
+
+                /* 회원권 관련 */
+                String preSQL_mem = "SELECT EXISTS(SELECT * FROM health_members WHERE user_id = ?) AS memFlag";
+                String SQL_mem = "SELECT timestampdiff(day, start_date, end_date), start_date, end_date FROM health_members WHERE user_id=" + id;
+
+                // pt 여부 확인
+                pstmt = conn.prepareStatement(preSQL_mem);
+                pstmt.setInt(1, id);
+                rs = pstmt.executeQuery();
+                rs.next();
+                int memFlag = rs.getInt(1); // pt 등록 회원인지 체크하는 플래그 (1이면 회원권 등록회원)
+                if (memFlag == 1) { // pt 등록된 경우
+                    pstmt = conn.prepareStatement(SQL_mem);
+                    rs = pstmt.executeQuery();
+                    while (rs.next()) {
+                        userInfoList[3] = rs.getString(1); // 회원권 남은 날짜
+                        userInfoList[4] = rs.getString(2); // 회원권 시작 날짜
+                        userInfoList[5] = rs.getString(3); // 회원권 종료 날짜
+                    }
+                } else {
+                    userInfoList[3] = "회원권 등록안함";
+                    userInfoList[4] = "-";
+                }
+
+
+                /* 개인 락커 관련 */
+                String preSQL_locker = "SELECT EXISTS(SELECT * FROM lockers WHERE user_id = ?) AS lockerFlag";
+                String SQL_locker = "SELECT number, timestampdiff(day, start_date, end_date), start_date, end_date FROM lockers WHERE user_id=" + id;
+
+                // 개인랔커 사용 여부 확인
+                pstmt = conn.prepareStatement(preSQL_locker);
+                pstmt.setInt(1, id);
+                rs = pstmt.executeQuery();
+                rs.next();
+                int lockerFlag = rs.getInt(1); // 개인락커 사용하고 있는 회원인지 체크하는 플래그 (1이면 구매한 회원)
+                if (lockerFlag == 1) { // 개인락커 구매한 경우
+                    pstmt = conn.prepareStatement(SQL_mem);
+                    rs = pstmt.executeQuery();
+                    while (rs.next()) {
+                        userInfoList[6] = rs.getString(1); // 개인락커 번호
+                        userInfoList[7] = rs.getString(2); // 개인락커 남은 날짜
+                        userInfoList[8] = rs.getString(3); // 개인락커 시작 날짜
+                        userInfoList[9] = rs.getString(4); // 개인락커 종료 날짜
+                    }
+                } else {
+                    userInfoList[6] = "개인락커 없음";
+                    userInfoList[7] = "-";
+                    userInfoList[8] = "-";
+                    userInfoList[9] = "-";
+                }
+                return userInfoList; // 회원정보를 리스트에 담아 반환
+
+            } catch (Exception e) {
+                System.out.println("회원 정보 불러오기 실패 > " + e.toString());
+            }
+            return null; // 데이터베이스 오류
         }
-
-        // 색깔 할당 부분
-        int[] locker_color = new int[20];
-        for(int j=0; j<locker_state.length; j++) {
-            if (locker_state[j]==0) {   // empty
-                locker_color[j] = 0x6699ff; // BLUE
-            }
-            else if (locker_state[j]==1) {  // using
-                locker_color[j] = 0xcccccc; // WHITE
-            }
-            else if (locker_state[j]==2) {  // broken
-                locker_color[j] = 0xff9999; // RED
-            }
-        }
-        return locker_color;
-    }
-
 
 
 }
