@@ -5,11 +5,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.lang.Integer;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -19,7 +18,7 @@ public class UserDAO {
     LocalDate now = LocalDate.now();
 
     private Connection conn; // Connection 객체 생성
-    private PreparedStatement pstmt; // prepareStatement 객체 생성    
+    private PreparedStatement pstmt; // prepareStatement 객체 생성
     private ResultSet rs;
 
     // 생성자
@@ -28,7 +27,7 @@ public class UserDAO {
         try {
             String dbURL = "jdbc:mysql://localhost:3306/sportscenter";
             String dbID = "root";
-            String dbPassword = "0201";
+            String dbPassword = "mysqlrhtn8580!";
             Class.forName("com.mysql.cj.jdbc.Driver");
             // getConnection 메소드로 DB에 연결
             conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
@@ -112,7 +111,6 @@ public class UserDAO {
 
             pstmt = conn.prepareStatement(SQL);
             pstmt.setInt(1, id);
-
             return pstmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -128,7 +126,6 @@ public class UserDAO {
 
             pstmt = conn.prepareStatement(SQL);
             pstmt.setInt(1, id);
-
             return pstmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -229,6 +226,7 @@ public class UserDAO {
 
         String preSQL = "SELECT EXISTS(SELECT * FROM health_members WHERE user_id = ?) AS regFlag";
         String SQL = "INSERT INTO health_members (user_id, start_date, end_date) VALUES (?, ?, ?)";
+        String reRegSQL = "UPDATE health_members SET end_date = ? WHERE user_id = ?";
 
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
@@ -240,10 +238,10 @@ public class UserDAO {
             pstmt.setInt(1, id);
             rs = pstmt.executeQuery();
             rs.next();
-            int regFlag = rs.getInt(1);
+            int regFlag = rs.getInt(1); // 기존 등록 회원인지 체크하는 플래그 (1이면 기존등록회원)
             System.out.println("regFlag= " + regFlag);
             // -2 반환시 "이미 등록한 회원입니다. 회원님의 남은기간은 ?일입니다. 재등록하시겠습니까?"
-            // 메시지 출력후, 확인 버튼 누르면 재등록창으로 이동
+            // 메시지 출력후, 확인 버튼 누르면 재등록 창 팝업
             if (regFlag == 1) return -2;
             else {
                 pstmt = conn.prepareStatement(SQL);
@@ -305,273 +303,157 @@ public class UserDAO {
         return -1; // 데이터베이스 오류
     }
 
-    public int[] lockerColor() {
-        boolean flag = false;
-
-        int num;
-        int[] locker_state = new int[20];
-
-        try {
-
-            for (num = 0; num < 20; num++) {
-                String SQL = "SELECT lockerState FROM locker WHERE lockerNum=" + (num + 1);
-                pstmt = conn.prepareStatement(SQL);
-                rs = pstmt.executeQuery();
-                while (rs.next()) {
-                    locker_state[num] = rs.getInt("lockerState");
-                }
-
-            }
-            flag = true;
-            System.out.println(Arrays.toString(locker_state));
-            System.out.println("락커 색깔 가져오기 성공");
-
-        } catch (Exception e) {
-            flag = false;
-            System.out.println("락커 색깔 가져오기 실패 > " + e.toString());
-        }
-
-        // 색깔 할당 부분
-        int[] locker_color = new int[20];
-        for(int j=0; j<locker_state.length; j++) {
-            if (locker_state[j]==0) {   // empty
-                locker_color[j] = 0x6699ff; // BLUE
-            }
-            else if (locker_state[j]==1) {  // using
-                locker_color[j] = 0xcccccc; // WHITE
-            }
-            else if (locker_state[j]==2) {  // broken
-                locker_color[j] = 0xff9999; // RED
-            }
-        }
-        return locker_color;
-    }
-
-
-    //
-    public String[] userInformation (int id) {
-        String[] stringList = new String[11];
-        /*
-        * 0 이름
-        * 1 PT유무
-        * 2 PT횟수Idx
-        * 3 PT가격
-        * 4 PT트레이너Idx
-        * 5 회원권유무
-        * 6 회원권기간Idx
-        * 7 회원권시작날짜
-        * 8 회원권끝나는날짜
-        * 9 락커 사용여부
-        * 10 락커 번호
-        *
-        * */
-        String cur_id = null;
-        try {
-//            // id 얻어오기
-//            String SQL1 = "SELECT u_id FROM user WHERE id=" + id;
-//            pstmt = conn.prepareStatement(SQL1);
-//            rs = pstmt.executeQuery();
-//            while (rs.next()) {
-//                cur_id = rs.getString("id");
+//    // 락커 상태에 따른 색상 변경 함수
+//    public int[] lockerColor() {
+//        boolean flag = false;
+//
+//        int num;
+//        String[] lockerState = new String[20];
+//
+//        try {
+//
+//            for (num = 0; num < 20; num++) {
+//                String SQL = "SELECT state FROM lockers WHERE number=" + (num + 1);
+//                pstmt = conn.prepareStatement(SQL);
+//                rs = pstmt.executeQuery();
+//                while (rs.next()) {
+//                    lockerState[num] = rs.getString(1);
+//                }
+//
 //            }
+//            flag = true;
+//            System.out.println(Arrays.toString(lockerState));
+//            System.out.println("락커 색깔 가져오기 성공");
+//
+//        } catch (Exception e) {
+//            flag = false;
+//            System.out.println("락커 색깔 가져오기 실패 > " + e.toString());
+//        }
+//
+//        // 색깔 할당 부분
+//        int[] lockerColor = new int[20];
+//        for(int j=0; j<lockerState.length; j++) {
+//            if (lockerState[j]=='사용가능') {   // empty
+//                lockerColor[j] = 0x6699ff; // BLUE
+//            }
+//            else if (lockerState[j]==) {  // using
+//                lockerColor[j] = 0xcccccc; // WHITE
+//            }
+//            else if (lockerState[j]==2) {  // broken
+//                lockerColor[j] = 0xff9999; // RED
+//            }
+//        }
+//        return lockerColor;
+//    }
 
-            //
-            String SQL1 = "SELECT name FROM user WHERE id=" + id;
-            pstmt = conn.prepareStatement(SQL1);
+
+    public String[] showUserInfo ( int id){
+        String[] userInfoList = new String[10];
+        /*
+         0 이름
+         1 PT 트레이너 정보 (id)
+         2 PT 남은 횟수
+         3 회원권 남은 날짜 (일단위)
+         4 회원권 시작날짜
+         5 회원권 끝나는날짜
+         6 개인 락커 번호
+         7 개인 락커 남은 날짜 (일단위)
+         8 개인 락커 시작 날짜
+         9 개인 락커 종료 날짜
+         */
+
+        try {
+
+            /* 이용자 정보 관련 */
+            // 이용자 이름
+            String SQL_user_name = "SELECT name FROM user WHERE id=" + id;
+            pstmt = conn.prepareStatement(SQL_user_name);
             rs = pstmt.executeQuery();
             while (rs.next()) {
-                stringList[0] = rs.getString("name");   // 이름
+                userInfoList[0] = rs.getString("name");   // 이름
             }
 
 
-            // PT유무
+            /* pt 관련 */
+            // pt트레이너 정보, 남은 횟수 (등록 안한 경우는 default: 'pt등록안함')
+            String preSQL_pt = "SELECT EXISTS(SELECT * FROM personal_trainings WHERE user_id = ?) AS ptFlag";
+            String SQL_pt = "SELECT trainer_id, use_count FROM personal_trainings WHERE user_id=" + id;
 
-            String SQL2 = "SELECT ifPT FROM register WHERE id=" + id;
-            pstmt = conn.prepareStatement(SQL2);
+            // pt 여부 확인
+            pstmt = conn.prepareStatement(preSQL_pt);
+            pstmt.setInt(1, id);
             rs = pstmt.executeQuery();
-            while (rs.next()) {
-                stringList[1] = rs.getString("ifPT");   // PT유무
-            }
-
-            // pt횟수Idx
-            if (stringList[1].equals("1")) {    // pt 할경우
-                String SQL3 = "SELECT ptNumIdx FROM register WHERE id=" + id;
-                pstmt = conn.prepareStatement(SQL3);
+            rs.next();
+            int ptFlag = rs.getInt(1); // pt 등록 회원인지 체크하는 플래그 (1이면 pt 등록회원)
+            if (ptFlag == 1) { // pt 등록된 경우
+                pstmt = conn.prepareStatement(SQL_pt);
                 rs = pstmt.executeQuery();
                 while (rs.next()) {
-                    stringList[2] = rs.getString("ptNumIdx");   // PT횟수Idx
+                    userInfoList[1] = rs.getString(1); // pt 트레이너 정보
+                    userInfoList[2] = rs.getString(2); // pt 남은 횟수
                 }
             } else {
-                stringList[2] = "없음";
+                userInfoList[1] = "pt 등록안함";
+                userInfoList[2] = "-";
             }
 
+            /* 회원권 관련 */
+            String preSQL_mem = "SELECT EXISTS(SELECT * FROM health_members WHERE user_id = ?) AS memFlag";
+            String SQL_mem = "SELECT timestampdiff(day, start_date, end_date), start_date, end_date FROM health_members WHERE user_id=" + id;
 
-            /* PT 가격
-            * */
-            if (stringList[1].equals("1")) {    // pt 할경우
-                if (stringList[2].equals("0")) {    // 월 8회
-                    stringList[3] = "24만원";
-                } else if (stringList[2].equals("1")) {
-                    stringList[3] = "30만원";
-                }
-            } else {
-                stringList[3] ="없음";
-            }
-
-
-            // PT트레이너Idx
-            if (stringList[1].equals("1")) {    // pt 할경우
-                String SQL4 = "SELECT ptTrainerIdx FROM register WHERE id=" + id;
-                pstmt = conn.prepareStatement(SQL4);
-                rs = pstmt.executeQuery();
-                while (rs.next()) {
-                    stringList[4] = rs.getString("ptTrainerIdx");   // PT트레이너Idx
-                }
-            } else {
-                stringList[4] = "없음";
-            }
-
-
-            ////////회원권
-            // 회원권 유무
-            String SQL5 = "SELECT ifMembership FROM register WHERE id=" + id;
-            pstmt = conn.prepareStatement(SQL5);
+            // pt 여부 확인
+            pstmt = conn.prepareStatement(preSQL_mem);
+            pstmt.setInt(1, id);
             rs = pstmt.executeQuery();
-            while (rs.next()) {
-                stringList[5] = rs.getString("ifMembership");   // 회원권유무
-            }
-            // 멤버십기간Idx
-            if (stringList[5].equals("1")) {    // 헬스장할경우
-                String SQL6 = "SELECT membershipIdx FROM register WHERE id=" + id;
-                pstmt = conn.prepareStatement(SQL6);
+            rs.next();
+            int memFlag = rs.getInt(1); // pt 등록 회원인지 체크하는 플래그 (1이면 회원권 등록회원)
+            if (memFlag == 1) { // pt 등록된 경우
+                pstmt = conn.prepareStatement(SQL_mem);
                 rs = pstmt.executeQuery();
                 while (rs.next()) {
-                    stringList[6] = rs.getString("membershipIdx");   // 멤버십Idx
+                    userInfoList[3] = rs.getString(1); // 회원권 남은 날짜
+                    userInfoList[4] = rs.getString(2); // 회원권 시작 날짜
+                    userInfoList[5] = rs.getString(3); // 회원권 종료 날짜
                 }
             } else {
-                stringList[6] = "없음";
+                userInfoList[3] = "회원권 등록안함";
+                userInfoList[4] = "-";
             }
-            // 멤버십시작날짜
-            if (stringList[5].equals("1")) {    // 헬스장할경우
-                String SQL7 = "SELECT membershipDate FROM register WHERE id=" + id;
-                pstmt = conn.prepareStatement(SQL7);
+
+
+            /* 개인 락커 관련 */
+            String preSQL_locker = "SELECT EXISTS(SELECT * FROM lockers WHERE user_id = ?) AS lockerFlag";
+            String SQL_locker = "SELECT number, timestampdiff(day, start_date, end_date), start_date, end_date FROM lockers WHERE user_id=" + id;
+
+            // 개인랔커 사용 여부 확인
+            pstmt = conn.prepareStatement(preSQL_locker);
+            pstmt.setInt(1, id);
+            rs = pstmt.executeQuery();
+            rs.next();
+            int lockerFlag = rs.getInt(1); // 개인락커 사용하고 있는 회원인지 체크하는 플래그 (1이면 구매한 회원)
+            if (lockerFlag == 1) { // 개인락커 구매한 경우
+                pstmt = conn.prepareStatement(SQL_mem);
                 rs = pstmt.executeQuery();
                 while (rs.next()) {
-                    stringList[7] = rs.getString("membershipDate");   // 멤버십날짜
+                    userInfoList[6] = rs.getString(1); // 개인락커 번호
+                    userInfoList[7] = rs.getString(2); // 개인락커 남은 날짜
+                    userInfoList[8] = rs.getString(3); // 개인락커 시작 날짜
+                    userInfoList[9] = rs.getString(4); // 개인락커 종료 날짜
                 }
             } else {
-                stringList[7] = "없음";
+                userInfoList[6] = "개인락커 없음";
+                userInfoList[7] = "-";
+                userInfoList[8] = "-";
+                userInfoList[9] = "-";
             }
-
-            // 멤버십끝나는날짜
-            if (stringList[5].equals("1")) {
-                String[] Date = stringList[7].split("-");
-                int[] startDate = {Integer.parseInt(Date[0]), Integer.parseInt(Date[1]), Integer.parseInt(Date[2])};
-
-                // 회원권기간 처리 부분
-                if(stringList[6].equals("0") == false && stringList[6].equals("1")==false) {
-                    stringList[8] = "오류";
-                } else {
-                    int memMonth=0;
-                    if(stringList[6].equals("0")) { // 헬스장Idx
-                        memMonth = 1;
-                    } else if (stringList[6].equals("1")) {
-                        memMonth = 3;}
-
-                    // 날짜계산 알고리즘
-                    startDate[1]+=memMonth;
-                    if(startDate[1]>12) {
-                        startDate[0]+=1;
-                        startDate[1]%=12;
-                    }
-                    // 최종 날짜
-                    stringList[8]=startDate[0]+"-"+startDate[1]+"-"+startDate[2];
-                }
-
-                // ** 하나의 id가 여러 개를 누를 경우 오류 가능성 -> 마지막 락커번호만 가져옴
-                // 락커 사용 여부
-                String SQL8 = "SELECT lockerState FROM locker WHERE id=" + id;
-                pstmt = conn.prepareStatement(SQL8);
-                rs = pstmt.executeQuery();
-                while (rs.next()) {
-                    stringList[9] = rs.getString("lockerState");   //
-                }
-
-                // 락커 번호
-                if (stringList[9].equals("1")) {
-                    String SQL9 = "SELECT lockerNum FROM locker WHERE id=" + id;
-                    pstmt = conn.prepareStatement(SQL9);
-                    rs = pstmt.executeQuery();
-                    while (rs.next()) {
-                        stringList[10] = rs.getString("lockerNum");   //
-                    }
-                } else {
-                    stringList[10] = "사용하지 않음";
-                }
-
-            }   // try
-
+            return userInfoList; // 회원정보를 리스트에 담아 반환
 
         } catch (Exception e) {
-            System.out.println("회원 정보 실패 > " + e.toString());
+            System.out.println("회원 정보 불러오기 실패 > " + e.toString());
         }
-
-        return stringList;
+        return null; // 데이터베이스 오류
     }
 
-
-    // PT 등록을 DB에 반영하는 함수
-    public int ptReg(int _i, int _t, int _m) {
-
-        int idNum = _i; // 회원 id (Int)
-        int trainer = _t;   // 트레이너 Index
-        int monthIdx = _m;  // pt 등록 달 수 Index
-
-        String SQL = "UPDATE register SET ifPT = ?, ptNumIdx = ?, ptTrainerIdx = ? WHERE id=?";
-        try {
-            pstmt = conn.prepareStatement(SQL);
-            pstmt.setInt(1, 1);
-            pstmt.setInt(2, monthIdx);
-            pstmt.setInt(3, trainer);
-            pstmt.setInt(4, idNum);
-            pstmt.executeUpdate();
-            System.out.println("PT 등록 성공");
-        } catch(Exception e) {
-            System.out.println("PT 등록 실패 > " + e.toString());
-        }
-        return -1;
-    }
-
-
-    // 헬스장 등록을 DB에 반영하는 함수
-    public int ptReg(int _i, int _m) {
-
-        int idNum = _i; // 회원 id (Int)
-        int monthIdx = _m;
-
-        // 현재 날짜 구하기
-        LocalDate now = LocalDate.now();
-        // 포맷 정의
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        // 포맷 적용
-        String formatedNow = now.format(formatter);
-
-
-        String SQL = "UPDATE register SET ifMembership = ?, membershipIdx = ?, membershipDate = ? WHERE id=?";
-        try {
-            pstmt = conn.prepareStatement(SQL);
-            pstmt.setInt(1, 1);
-            pstmt.setInt(2, monthIdx);
-            pstmt.setString(3, formatedNow);    // 다시 확인
-            pstmt.setInt(4, idNum);
-            pstmt.executeUpdate();
-            System.out.println("헬스장 등록 성공");
-        } catch(Exception e) {
-            System.out.println("헬스장 등록 실패 > " + e.toString());
-        }
-        return -1;
-    }
 
 }
-
 
