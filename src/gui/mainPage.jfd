@@ -461,7 +461,7 @@ new FormModel {
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "Locker3"
 						"text": "3."
-						"background": new java.awt.Color( 204, 204, 204, 255 )
+						"background": &Color2 new java.awt.Color( 102, 153, 255, 255 )
 						"focusable": false
 						auxiliary() {
 							"JavaCodeGenerator.variableModifiers": 1
@@ -507,7 +507,7 @@ new FormModel {
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "Locker6"
 						"text": "6."
-						"background": &Color2 new java.awt.Color( 204, 204, 204, 255 )
+						"background": #Color2
 						"focusable": false
 						auxiliary() {
 							"JavaCodeGenerator.variableModifiers": 1
@@ -597,7 +597,7 @@ new FormModel {
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "Locker15"
 						"text": "15."
-						"background": new java.awt.Color( 255, 153, 153, 255 )
+						"background": #Color2
 						"focusable": false
 						auxiliary() {
 							"JavaCodeGenerator.variableModifiers": 1

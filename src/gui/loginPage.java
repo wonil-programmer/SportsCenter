@@ -39,7 +39,7 @@ public class loginPage extends JFrame {
         String passPW = new String(PWtext.getPassword());
         int result = userDAO.login(IDtext.getText(), passPW);
         System.out.println("result = " + result);
-
+        //result = 1;
         if (result == 1)
         {
             // 로그인 성공
@@ -127,6 +127,88 @@ public class loginPage extends JFrame {
                 frame.FriGraph.setValue((int)(dayArr[4]/dayArr[5]*100));
                 frame.TueGraph.setValue((int)(dayArr[1]/dayArr[5]*100));
             }
+            if(userDAO.checkLockerUse(1)==1)
+            {
+                frame.Locker1.setBackground(new Color(0xcccccc));
+            }
+            if(userDAO.checkLockerUse(2)==1)
+            {
+                frame.Locker1.setBackground(new Color(0xcccccc));
+            }
+            if(userDAO.checkLockerUse(3)==1)
+            {
+                frame.Locker1.setBackground(new Color(0xcccccc));
+            }
+            if(userDAO.checkLockerUse(4)==1)
+            {
+                frame.Locker1.setBackground(new Color(0xcccccc));
+            }
+            if(userDAO.checkLockerUse(5)==1)
+            {
+                frame.Locker1.setBackground(new Color(0xcccccc));
+            }
+            if(userDAO.checkLockerUse(6)==1)
+            {
+                frame.Locker1.setBackground(new Color(0xcccccc));
+            }
+            if(userDAO.checkLockerUse(7)==1)
+            {
+                frame.Locker1.setBackground(new Color(0xcccccc));
+            }if(userDAO.checkLockerUse(8)==1)
+        {
+            frame.Locker1.setBackground(new Color(0xcccccc));
+        }
+            if(userDAO.checkLockerUse(9)==1)
+            {
+                frame.Locker1.setBackground(new Color(0xcccccc));
+            }
+            if(userDAO.checkLockerUse(10)==1)
+            {
+                frame.Locker1.setBackground(new Color(0xcccccc));
+            }
+            if(userDAO.checkLockerUse(11)==1)
+            {
+                frame.Locker1.setBackground(new Color(0xcccccc));
+            }
+            if(userDAO.checkLockerUse(12)==1)
+            {
+                frame.Locker1.setBackground(new Color(0xcccccc));
+            }
+            if(userDAO.checkLockerUse(13)==1)
+            {
+                frame.Locker1.setBackground(new Color(0xcccccc));
+            }
+            if(userDAO.checkLockerUse(14)==1)
+            {
+                frame.Locker1.setBackground(new Color(0xcccccc));
+            }
+            if(userDAO.checkLockerUse(15)==1)
+            {
+                frame.Locker1.setBackground(new Color(0xcccccc));
+            }if(userDAO.checkLockerUse(16)==1)
+            {
+                frame.Locker1.setBackground(new Color(0xcccccc));
+            }
+            if(userDAO.checkLockerUse(17)==1)
+            {
+                frame.Locker1.setBackground(new Color(0xcccccc));
+            }
+            if(userDAO.checkLockerUse(18)==1)
+            {
+                frame.Locker1.setBackground(new Color(0xcccccc));
+            }
+            if(userDAO.checkLockerUse(19)==1)
+            {
+                frame.Locker1.setBackground(new Color(0xcccccc));
+            }
+            if(userDAO.checkLockerUse(20)==1)
+            {
+                frame.Locker1.setBackground(new Color(0xcccccc));
+            }
+
+
+
+
 
             this.setVisible(false);
 

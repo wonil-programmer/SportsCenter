@@ -102,6 +102,88 @@ public class mainPage extends JFrame {
         
 
     }
+    public void updatelocker()
+    {
+        UserDAO userDAO = new UserDAO();
+        if(userDAO.checkLockerUse(1)==1)
+        {
+            Locker1.setBackground(new Color(0xcccccc));
+        }
+        if(userDAO.checkLockerUse(2)==1)
+        {
+            Locker1.setBackground(new Color(0xcccccc));
+        }
+        if(userDAO.checkLockerUse(3)==1)
+        {
+            Locker1.setBackground(new Color(0xcccccc));
+        }
+        if(userDAO.checkLockerUse(4)==1)
+        {
+            Locker1.setBackground(new Color(0xcccccc));
+        }
+        if(userDAO.checkLockerUse(5)==1)
+        {
+            Locker1.setBackground(new Color(0xcccccc));
+        }
+        if(userDAO.checkLockerUse(6)==1)
+        {
+            Locker1.setBackground(new Color(0xcccccc));
+        }
+        if(userDAO.checkLockerUse(7)==1)
+        {
+            Locker1.setBackground(new Color(0xcccccc));
+        }if(userDAO.checkLockerUse(8)==1)
+        {
+            Locker1.setBackground(new Color(0xcccccc));
+        }
+        if(userDAO.checkLockerUse(9)==1)
+        {
+            Locker1.setBackground(new Color(0xcccccc));
+        }
+        if(userDAO.checkLockerUse(10)==1)
+        {
+            Locker1.setBackground(new Color(0xcccccc));
+        }
+        if(userDAO.checkLockerUse(11)==1)
+        {
+            Locker1.setBackground(new Color(0xcccccc));
+        }
+        if(userDAO.checkLockerUse(12)==1)
+        {
+            Locker1.setBackground(new Color(0xcccccc));
+        }
+        if(userDAO.checkLockerUse(13)==1)
+        {
+            Locker1.setBackground(new Color(0xcccccc));
+        }
+        if(userDAO.checkLockerUse(14)==1)
+        {
+            Locker1.setBackground(new Color(0xcccccc));
+        }
+        if(userDAO.checkLockerUse(15)==1)
+        {
+            Locker1.setBackground(new Color(0xcccccc));
+        }if(userDAO.checkLockerUse(16)==1)
+        {
+            Locker1.setBackground(new Color(0xcccccc));
+        }
+        if(userDAO.checkLockerUse(17)==1)
+        {
+            Locker1.setBackground(new Color(0xcccccc));
+        }
+        if(userDAO.checkLockerUse(18)==1)
+        {
+            Locker1.setBackground(new Color(0xcccccc));
+        }
+        if(userDAO.checkLockerUse(19)==1)
+        {
+            Locker1.setBackground(new Color(0xcccccc));
+        }
+        if(userDAO.checkLockerUse(20)==1)
+        {
+            Locker1.setBackground(new Color(0xcccccc));
+        }
+    }
     public void curuser()
     {
         UserDAO userDAO = new UserDAO();
@@ -198,7 +280,6 @@ public class mainPage extends JFrame {
     private void LockerBuy(ActionEvent e) { // 락커 결제 수정 필요, 결제 이미 되어있는지 아닌지 확인 절차 필요
         // TODO add your code here
 
-        int period = LockerDate.getSelectedIndex();
         UserDAO userDAO = new UserDAO();
         int lockernum = Integer.parseInt(LockerNum.getText());
         userDAO.buyLocker(1234,lockernum,LockerDate.getSelectedIndex()+1);
@@ -208,144 +289,302 @@ public class mainPage extends JFrame {
 
     }
     private void Locker1(ActionEvent e) {
+        int num = 1;
         // TODO add your code here
+        UserDAO userDAO = new UserDAO();
+        int lockerstate = userDAO.checkLockerUse(1);
 
+        if (lockerstate==1) {
+            JOptionPane.showMessageDialog(null, "이미 사용 중인 락커입니다.");
+        } else if (lockerstate==0) {
             LockerBuyForm.setVisible(true);
             LockerBuyForm.setSize(145, 180);
-            LockerNum.setText("1");
+            LockerNum.setText( Integer.toString(1) );
+        }
 
-        
     }
 
     private void Locker2(ActionEvent e) {
+        int num = 2;
         // TODO add your code here
-        LockerBuyForm.setVisible(true);
-        LockerBuyForm.setSize(145,180);
-        LockerNum.setText("2");
+        UserDAO userDAO = new UserDAO();
+        int lockerstate = userDAO.checkLockerUse(1);
+
+        if (lockerstate==1) {
+            JOptionPane.showMessageDialog(null, "이미 사용 중인 락커입니다.");
+        } else if (lockerstate==0) {
+            LockerBuyForm.setVisible(true);
+            LockerBuyForm.setSize(145, 180);
+            LockerNum.setText( Integer.toString(1) );
+        }
     }
 
     private void Locker3(ActionEvent e) {
-        LockerBuyForm.setVisible(true);
-        LockerBuyForm.setSize(145,180);
-        LockerNum.setText("3");
+        int num = 3;
+        UserDAO userDAO = new UserDAO();
+        int lockerstate = userDAO.checkLockerUse(1);
+
+        if (lockerstate==1) {
+            JOptionPane.showMessageDialog(null, "이미 사용 중인 락커입니다.");
+        } else if (lockerstate==0) {
+            LockerBuyForm.setVisible(true);
+            LockerBuyForm.setSize(145, 180);
+            LockerNum.setText( Integer.toString(1) );
+        }
     }
 
     private void Locker4(ActionEvent e) {
-        LockerBuyForm.setVisible(true);
-        LockerBuyForm.setSize(145,180);
-        LockerNum.setText("4");
+        int num = 4;
+        UserDAO userDAO = new UserDAO();
+        int lockerstate = userDAO.checkLockerUse(1);
+
+        if (lockerstate==1) {
+            JOptionPane.showMessageDialog(null, "이미 사용 중인 락커입니다.");
+        } else if (lockerstate==0) {
+            LockerBuyForm.setVisible(true);
+            LockerBuyForm.setSize(145, 180);
+            LockerNum.setText( Integer.toString(1) );
+        }
     }
 
     private void Locker5(ActionEvent e) {
         // TODO add your code here
-        LockerBuyForm.setVisible(true);
-        LockerBuyForm.setSize(145,180);
-        LockerNum.setText("5");
+        int num = 5;
+        UserDAO userDAO = new UserDAO();
+        int lockerstate = userDAO.checkLockerUse(num);
+
+        if (lockerstate==1) {
+            JOptionPane.showMessageDialog(null, "이미 사용 중인 락커입니다.");
+        } else if (lockerstate==0) {
+            LockerBuyForm.setVisible(true);
+            LockerBuyForm.setSize(145, 180);
+            LockerNum.setText( Integer.toString(num) );
+        }
     }
 
     private void Locker6(ActionEvent e) { // 일단 6번 락커까지만,, 최적화할 수 있는 방법을 찾아보자,,,,
         // 방법이 없었다고 한다...
-        LockerBuyForm.setVisible(true);
-        LockerBuyForm.setSize(145,180);
-        LockerNum.setText("6");
+        int num = 6;
+        UserDAO userDAO = new UserDAO();
+        int lockerstate = userDAO.checkLockerUse(num);
+
+        if (lockerstate==1) {
+            JOptionPane.showMessageDialog(null, "이미 사용 중인 락커입니다.");
+        } else if (lockerstate==0) {
+            LockerBuyForm.setVisible(true);
+            LockerBuyForm.setSize(145, 180);
+            LockerNum.setText( Integer.toString(num) );
+        }
     }
 
     private void Locker7(ActionEvent e) {
         // TODO add your code here
-        LockerBuyForm.setVisible(true);
-        LockerBuyForm.setSize(145,180);
-        LockerNum.setText("7");
+        int num = 7;
+        UserDAO userDAO = new UserDAO();
+        int lockerstate = userDAO.checkLockerUse(num);
+
+        if (lockerstate==1) {
+            JOptionPane.showMessageDialog(null, "이미 사용 중인 락커입니다.");
+        } else if (lockerstate==0) {
+            LockerBuyForm.setVisible(true);
+            LockerBuyForm.setSize(145, 180);
+            LockerNum.setText( Integer.toString(num) );
+        }
     }
 
     private void Locker8(ActionEvent e) {
         // TODO add your code here
-        LockerBuyForm.setVisible(true);
-        LockerBuyForm.setSize(145,180);
-        LockerNum.setText("8");
+        int num = 8;
+        UserDAO userDAO = new UserDAO();
+        int lockerstate = userDAO.checkLockerUse(num);
+
+        if (lockerstate==1) {
+            JOptionPane.showMessageDialog(null, "이미 사용 중인 락커입니다.");
+        } else if (lockerstate==0) {
+            LockerBuyForm.setVisible(true);
+            LockerBuyForm.setSize(145, 180);
+            LockerNum.setText( Integer.toString(num) );
+        }
     }
 
     private void Locker9(ActionEvent e) {
         // TODO add your code here
-        LockerBuyForm.setVisible(true);
-        LockerBuyForm.setSize(145,180);
-        LockerNum.setText("9");
+        int num = 9;
+        UserDAO userDAO = new UserDAO();
+        int lockerstate = userDAO.checkLockerUse(num);
+
+        if (lockerstate==1) {
+            JOptionPane.showMessageDialog(null, "이미 사용 중인 락커입니다.");
+        } else if (lockerstate==0) {
+            LockerBuyForm.setVisible(true);
+            LockerBuyForm.setSize(145, 180);
+            LockerNum.setText( Integer.toString(num) );
+        }
     }
 
 
     private void Locker10(ActionEvent e) {
         // TODO add your code here
-        LockerBuyForm.setVisible(true);
-        LockerBuyForm.setSize(145,180);
-        LockerNum.setText("10");
+        int num = 10;
+        UserDAO userDAO = new UserDAO();
+        int lockerstate = userDAO.checkLockerUse(num);
+
+        if (lockerstate==1) {
+            JOptionPane.showMessageDialog(null, "이미 사용 중인 락커입니다.");
+        } else if (lockerstate==0) {
+            LockerBuyForm.setVisible(true);
+            LockerBuyForm.setSize(145, 180);
+            LockerNum.setText( Integer.toString(num) );
+        }
     }
 
     private void Locker11(ActionEvent e) {
-        LockerBuyForm.setVisible(true);
-        LockerBuyForm.setSize(145,180);
-        LockerNum.setText("11");
+        int num = 11;
+        UserDAO userDAO = new UserDAO();
+        int lockerstate = userDAO.checkLockerUse(num);
+
+        if (lockerstate==1) {
+            JOptionPane.showMessageDialog(null, "이미 사용 중인 락커입니다.");
+        } else if (lockerstate==0) {
+            LockerBuyForm.setVisible(true);
+            LockerBuyForm.setSize(145, 180);
+            LockerNum.setText( Integer.toString(num) );
+        }
     }
 
     private void Locker12(ActionEvent e) {
         // TODO add your code here
-        LockerBuyForm.setVisible(true);
-        LockerBuyForm.setSize(145,180);
-        LockerNum.setText("12");
+        int num = 12;
+        UserDAO userDAO = new UserDAO();
+        int lockerstate = userDAO.checkLockerUse(num);
+
+        if (lockerstate==1) {
+            JOptionPane.showMessageDialog(null, "이미 사용 중인 락커입니다.");
+        } else if (lockerstate==0) {
+            LockerBuyForm.setVisible(true);
+            LockerBuyForm.setSize(145, 180);
+            LockerNum.setText( Integer.toString(num) );
+        }
     }
 
     private void Locker13(ActionEvent e) {
         // TODO add your code here
-        LockerBuyForm.setVisible(true);
-        LockerBuyForm.setSize(145,180);
-        LockerNum.setText("13");
+        int num = 13;
+        UserDAO userDAO = new UserDAO();
+        int lockerstate = userDAO.checkLockerUse(num);
+
+        if (lockerstate==1) {
+            JOptionPane.showMessageDialog(null, "이미 사용 중인 락커입니다.");
+        } else if (lockerstate==0) {
+            LockerBuyForm.setVisible(true);
+            LockerBuyForm.setSize(145, 180);
+            LockerNum.setText( Integer.toString(num) );
+        }
     }
 
     private void Locker14(ActionEvent e) {
         // TODO add your code here
-        LockerBuyForm.setVisible(true);
-        LockerBuyForm.setSize(145,180);
-        LockerNum.setText("14");
+        int num = 14;
+        UserDAO userDAO = new UserDAO();
+        int lockerstate = userDAO.checkLockerUse(num);
+
+        if (lockerstate==1) {
+            JOptionPane.showMessageDialog(null, "이미 사용 중인 락커입니다.");
+        } else if (lockerstate==0) {
+            LockerBuyForm.setVisible(true);
+            LockerBuyForm.setSize(145, 180);
+            LockerNum.setText( Integer.toString(num) );
+        }
     }
 
     private void Locker15(ActionEvent e) {
         // TODO add your code here
-        LockerBuyForm.setVisible(true);
-        LockerBuyForm.setSize(145,180);
-        LockerNum.setText("15");
+        int num = 15;
+        UserDAO userDAO = new UserDAO();
+        int lockerstate = userDAO.checkLockerUse(num);
+
+        if (lockerstate==1) {
+            JOptionPane.showMessageDialog(null, "이미 사용 중인 락커입니다.");
+        } else if (lockerstate==0) {
+            LockerBuyForm.setVisible(true);
+            LockerBuyForm.setSize(145, 180);
+            LockerNum.setText( Integer.toString(num) );
+        }
     }
 
     private void Locker16(ActionEvent e) {
         // TODO add your code here
-        LockerBuyForm.setVisible(true);
-        LockerBuyForm.setSize(145,180);
-        LockerNum.setText("16");
+        int num = 16;
+        UserDAO userDAO = new UserDAO();
+        int lockerstate = userDAO.checkLockerUse(num);
+
+        if (lockerstate==1) {
+            JOptionPane.showMessageDialog(null, "이미 사용 중인 락커입니다.");
+        } else if (lockerstate==0) {
+            LockerBuyForm.setVisible(true);
+            LockerBuyForm.setSize(145, 180);
+            LockerNum.setText( Integer.toString(num) );
+        }
     }
 
     private void Locker17(ActionEvent e) {
         // TODO add your code here
-        LockerBuyForm.setVisible(true);
-        LockerBuyForm.setSize(145,180);
-        LockerNum.setText("17");
+        int num = 17;
+        UserDAO userDAO = new UserDAO();
+        int lockerstate = userDAO.checkLockerUse(num);
+
+        if (lockerstate==1) {
+            JOptionPane.showMessageDialog(null, "이미 사용 중인 락커입니다.");
+        } else if (lockerstate==0) {
+            LockerBuyForm.setVisible(true);
+            LockerBuyForm.setSize(145, 180);
+            LockerNum.setText( Integer.toString(num) );
+        }
     }
 
     private void Locker18(ActionEvent e) {
         // TODO add your code here
-        LockerBuyForm.setVisible(true);
-        LockerBuyForm.setSize(145,180);
-        LockerNum.setText("18");
+        int num = 18;
+        UserDAO userDAO = new UserDAO();
+        int lockerstate = userDAO.checkLockerUse(num);
+
+        if (lockerstate==1) {
+            JOptionPane.showMessageDialog(null, "이미 사용 중인 락커입니다.");
+        } else if (lockerstate==0) {
+            LockerBuyForm.setVisible(true);
+            LockerBuyForm.setSize(145, 180);
+            LockerNum.setText( Integer.toString(num) );
+        }
     }
 
     private void Locker19(ActionEvent e) {
         // TODO add your code here
-        LockerBuyForm.setVisible(true);
-        LockerBuyForm.setSize(145,180);
-        LockerNum.setText("19");
+        int num = 19;
+        UserDAO userDAO = new UserDAO();
+        int lockerstate = userDAO.checkLockerUse(num);
+
+        if (lockerstate==1) {
+            JOptionPane.showMessageDialog(null, "이미 사용 중인 락커입니다.");
+        } else if (lockerstate==0) {
+            LockerBuyForm.setVisible(true);
+            LockerBuyForm.setSize(145, 180);
+            LockerNum.setText( Integer.toString(num) );
+        }
     }
 
     private void Locker20(ActionEvent e) {
         // TODO add your code here
-        LockerBuyForm.setVisible(true);
-        LockerBuyForm.setSize(145,180);
-        LockerNum.setText("20");
+        int num = 20;
+        UserDAO userDAO = new UserDAO();
+        int lockerstate = userDAO.checkLockerUse(num);
+
+        if (lockerstate==1) {
+            JOptionPane.showMessageDialog(null, "이미 사용 중인 락커입니다.");
+        } else if (lockerstate==0) {
+            LockerBuyForm.setVisible(true);
+            LockerBuyForm.setSize(145, 180);
+            LockerNum.setText( Integer.toString(num) );
+        }
     }
     
     
@@ -413,6 +652,7 @@ public class mainPage extends JFrame {
         curuser();
         weekstatistic(WeekCombo.getSelectedIndex());
         drawgraph(WeekCombo.getSelectedIndex());
+        updatelocker();
     }
 
     private void WeekComboItemStateChanged(ItemEvent e) {
@@ -540,12 +780,12 @@ public class mainPage extends JFrame {
 
                 //======== panel5 ========
                 {
-                    panel5.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.
-                    border.EmptyBorder(0,0,0,0), "JF\u006frmDes\u0069gner \u0045valua\u0074ion",javax.swing.border.TitledBorder.CENTER
-                    ,javax.swing.border.TitledBorder.BOTTOM,new java.awt.Font("D\u0069alog",java.awt.Font
-                    .BOLD,12),java.awt.Color.red),panel5. getBorder()));panel5. addPropertyChangeListener(
-                    new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062order"
-                    .equals(e.getPropertyName()))throw new RuntimeException();}});
+                    panel5.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .
+                    EmptyBorder ( 0, 0 ,0 , 0) ,  "JFor\u006dDesi\u0067ner \u0045valu\u0061tion" , javax. swing .border . TitledBorder. CENTER ,javax . swing
+                    . border .TitledBorder . BOTTOM, new java. awt .Font ( "Dia\u006cog", java .awt . Font. BOLD ,12 ) ,
+                    java . awt. Color .red ) ,panel5. getBorder () ) ); panel5. addPropertyChangeListener( new java. beans .PropertyChangeListener ( )
+                    { @Override public void propertyChange (java . beans. PropertyChangeEvent e) { if( "bord\u0065r" .equals ( e. getPropertyName () ) )
+                    throw new RuntimeException( ) ;} } );
                     panel5.setLayout(null);
 
                     //---- label13 ----
@@ -869,7 +1109,7 @@ public class mainPage extends JFrame {
 
                     //---- Locker3 ----
                     Locker3.setText("3.");
-                    Locker3.setBackground(new Color(0xcccccc));
+                    Locker3.setBackground(new Color(0x6699ff));
                     Locker3.setFocusable(false);
                     Locker3.addActionListener(e -> Locker3(e));
                     panel4.add(Locker3);
@@ -894,7 +1134,7 @@ public class mainPage extends JFrame {
 
                     //---- Locker6 ----
                     Locker6.setText("6.");
-                    Locker6.setBackground(new Color(0xcccccc));
+                    Locker6.setBackground(new Color(0x6699ff));
                     Locker6.setFocusable(false);
                     Locker6.addActionListener(e -> Locker6(e));
                     panel4.add(Locker6);
@@ -902,7 +1142,7 @@ public class mainPage extends JFrame {
 
                     //---- Locker7 ----
                     Locker7.setText("7.");
-                    Locker7.setBackground(new Color(0xcccccc));
+                    Locker7.setBackground(new Color(0x6699ff));
                     Locker7.setFocusable(false);
                     Locker7.addActionListener(e -> Locker7(e));
                     panel4.add(Locker7);
@@ -910,7 +1150,7 @@ public class mainPage extends JFrame {
 
                     //---- Locker11 ----
                     Locker11.setText("11.");
-                    Locker11.setBackground(new Color(0xcccccc));
+                    Locker11.setBackground(new Color(0x6699ff));
                     Locker11.setFocusable(false);
                     Locker11.addActionListener(e -> Locker11(e));
                     panel4.add(Locker11);
@@ -918,7 +1158,7 @@ public class mainPage extends JFrame {
 
                     //---- Locker12 ----
                     Locker12.setText("12.");
-                    Locker12.setBackground(new Color(0xcccccc));
+                    Locker12.setBackground(new Color(0x6699ff));
                     Locker12.setFocusable(false);
                     Locker12.addActionListener(e -> Locker12(e));
                     panel4.add(Locker12);
@@ -942,7 +1182,7 @@ public class mainPage extends JFrame {
 
                     //---- Locker15 ----
                     Locker15.setText("15.");
-                    Locker15.setBackground(new Color(0xff9999));
+                    Locker15.setBackground(new Color(0x6699ff));
                     Locker15.setFocusable(false);
                     Locker15.addActionListener(e -> Locker15(e));
                     panel4.add(Locker15);
@@ -966,7 +1206,7 @@ public class mainPage extends JFrame {
 
                     //---- Locker8 ----
                     Locker8.setText("8.");
-                    Locker8.setBackground(new Color(0xcccccc));
+                    Locker8.setBackground(new Color(0x6699ff));
                     Locker8.setFocusable(false);
                     Locker8.addActionListener(e -> Locker8(e));
                     panel4.add(Locker8);
@@ -982,7 +1222,7 @@ public class mainPage extends JFrame {
 
                     //---- Locker10 ----
                     Locker10.setText("10.");
-                    Locker10.setBackground(new Color(0xcccccc));
+                    Locker10.setBackground(new Color(0x6699ff));
                     Locker10.setFocusable(false);
                     Locker10.addActionListener(e -> Locker10(e));
                     panel4.add(Locker10);
@@ -990,7 +1230,7 @@ public class mainPage extends JFrame {
 
                     //---- Locker18 ----
                     Locker18.setText("18.");
-                    Locker18.setBackground(new Color(0xcccccc));
+                    Locker18.setBackground(new Color(0x6699ff));
                     Locker18.setFocusable(false);
                     Locker18.addActionListener(e -> Locker18(e));
                     panel4.add(Locker18);
@@ -998,7 +1238,7 @@ public class mainPage extends JFrame {
 
                     //---- Locker19 ----
                     Locker19.setText("19.");
-                    Locker19.setBackground(new Color(0xcccccc));
+                    Locker19.setBackground(new Color(0x6699ff));
                     Locker19.setFocusable(false);
                     Locker19.addActionListener(e -> Locker19(e));
                     panel4.add(Locker19);
@@ -1006,7 +1246,7 @@ public class mainPage extends JFrame {
 
                     //---- Locker20 ----
                     Locker20.setText("20.");
-                    Locker20.setBackground(new Color(0xcccccc));
+                    Locker20.setBackground(new Color(0x6699ff));
                     Locker20.setFocusable(false);
                     Locker20.addActionListener(e -> Locker20(e));
                     panel4.add(Locker20);
