@@ -822,12 +822,12 @@ new FormModel {
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "label11"
-						"text": "회원권 : "
+						"text": "회원권 시작일 : "
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"width": 46
+						"width": 95
 						"height": 17
 						"x": 20
-						"y": 55
+						"y": 50
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "label12"
@@ -836,7 +836,7 @@ new FormModel {
 						"width": 62
 						"height": 17
 						"x": 20
-						"y": 115
+						"y": 100
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "label22"
@@ -845,7 +845,7 @@ new FormModel {
 						"width": 90
 						"height": 17
 						"x": 20
-						"y": 145
+						"y": 175
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "label23"
@@ -854,7 +854,7 @@ new FormModel {
 						"width": 76
 						"height": 17
 						"x": 20
-						"y": 175
+						"y": 125
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "label24"
@@ -863,30 +863,172 @@ new FormModel {
 						"width": 80
 						"height": 17
 						"x": 20
-						"y": 205
+						"y": 150
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "label25"
-						"text": "회원권 가격 : "
+						"text": "회원권 만기일 : "
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"x": 20
-						"y": 85
+						"y": 75
+						"width": 95
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "EnterButton"
 						"text": "입장"
 						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Enter", true ) )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"x": 225
-						"y": 50
+						"x": 285
+						"y": 120
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "ExitButton"
 						"text": "퇴장"
 						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Exit", true ) )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"x": 310
+						"x": 370
+						"y": 120
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "Name"
+						"text": "이름이 모에요(모모에요~)전화번호 모에요(모모에요~)"
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 55
+						"y": 25
+						"width": 370
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "HealthStart"
+						"text": "언제부턴뎅?"
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 110
 						"y": 50
+						"width": 145
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "HealthEnd"
+						"text": "언제까진뎅?"
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 145
+						"height": 17
+						"x": 110
+						"y": 75
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "HealthRemain"
+						"text": "얼마나 남았는뎅?"
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 145
+						"height": 17
+						"x": 90
+						"y": 100
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "LockerNumber"
+						"text": "몇번인뎅?"
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 145
+						"height": 17
+						"x": 115
+						"y": 175
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "TrainerName"
+						"text": "누군뎅?"
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 145
+						"height": 17
+						"x": 100
+						"y": 125
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "PTRemain"
+						"text": "몇번 남았는뎅?"
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 145
+						"height": 17
+						"x": 105
+						"y": 150
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "LockerStart"
+						"text": "언제부턴뎅?"
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 145
+						"height": 17
+						"x": 125
+						"y": 200
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label10"
+						"text": "개인 락커 시작일 : "
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 20
+						"y": 200
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label14"
+						"text": "개인 락커 만기일 : "
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 102
+						"height": 17
+						"x": 20
+						"y": 225
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "LockerEnd"
+						"text": "언제까진뎅?"
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 145
+						"height": 17
+						"x": 125
+						"y": 225
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label26"
+						"text": "개인 락커 남은 기간 : "
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 20
+						"y": 250
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "LockerRemain"
+						"text": "얼마나 남았는뎅?"
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"width": 145
+						"height": 17
+						"x": 140
+						"y": 250
 					} )
 				}, new FormLayoutConstraints( null ) {
 					"title": "회원정보"

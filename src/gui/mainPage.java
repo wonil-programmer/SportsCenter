@@ -102,6 +102,22 @@ public class mainPage extends JFrame {
         
 
     }
+    public void updateUserInfo()
+    {
+        UserDAO userDAO = new UserDAO();
+        String[] UserInfo = new String[10];
+        UserInfo = userDAO.showUserInfo(1234);
+        Name.setText(UserInfo[0]);
+        TrainerName.setText(UserInfo[1]);
+        PTRemain.setText(UserInfo[2]);
+        HealthRemain.setText(UserInfo[3]);
+        HealthStart.setText(UserInfo[4]);
+        HealthEnd.setText(UserInfo[5]);
+        LockerNumber.setText(UserInfo[6]);
+        LockerRemain.setText(UserInfo[7]);
+        LockerStart.setText(UserInfo[8]);
+        LockerEnd.setText(UserInfo[9]);
+    }
     public void updatelocker()
     {
         UserDAO userDAO = new UserDAO();
@@ -654,6 +670,7 @@ public class mainPage extends JFrame {
         weekstatistic(WeekCombo.getSelectedIndex());
         drawgraph(WeekCombo.getSelectedIndex());
         updatelocker();
+        updateUserInfo();
     }
 
     private void WeekComboItemStateChanged(ItemEvent e) {
@@ -758,6 +775,19 @@ public class mainPage extends JFrame {
         label25 = new JLabel();
         EnterButton = new JButton();
         ExitButton = new JButton();
+        Name = new JLabel();
+        HealthStart = new JLabel();
+        HealthEnd = new JLabel();
+        HealthRemain = new JLabel();
+        LockerNumber = new JLabel();
+        TrainerName = new JLabel();
+        PTRemain = new JLabel();
+        LockerStart = new JLabel();
+        label10 = new JLabel();
+        label14 = new JLabel();
+        LockerEnd = new JLabel();
+        label26 = new JLabel();
+        LockerRemain = new JLabel();
         LockerBuyForm = new JDialog();
         LockerBuy = new JButton();
         label1 = new JLabel();
@@ -781,12 +811,12 @@ public class mainPage extends JFrame {
 
                 //======== panel5 ========
                 {
-                    panel5.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .
-                    EmptyBorder ( 0, 0 ,0 , 0) ,  "JFor\u006dDesi\u0067ner \u0045valu\u0061tion" , javax. swing .border . TitledBorder. CENTER ,javax . swing
-                    . border .TitledBorder . BOTTOM, new java. awt .Font ( "Dia\u006cog", java .awt . Font. BOLD ,12 ) ,
-                    java . awt. Color .red ) ,panel5. getBorder () ) ); panel5. addPropertyChangeListener( new java. beans .PropertyChangeListener ( )
-                    { @Override public void propertyChange (java . beans. PropertyChangeEvent e) { if( "bord\u0065r" .equals ( e. getPropertyName () ) )
-                    throw new RuntimeException( ) ;} } );
+                    panel5.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border
+                    . EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder. CENTER, javax
+                    . swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,
+                    12 ), java. awt. Color. red) ,panel5. getBorder( )) ); panel5. addPropertyChangeListener (new java. beans
+                    . PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062order" .equals (e .
+                    getPropertyName () )) throw new RuntimeException( ); }} );
                     panel5.setLayout(null);
 
                     //---- label13 ----
@@ -1344,46 +1374,111 @@ public class mainPage extends JFrame {
                     label9.setBounds(20, 25, 34, 17);
 
                     //---- label11 ----
-                    label11.setText("\ud68c\uc6d0\uad8c : ");
+                    label11.setText("\ud68c\uc6d0\uad8c \uc2dc\uc791\uc77c : ");
                     panel6.add(label11);
-                    label11.setBounds(20, 55, 46, 17);
+                    label11.setBounds(20, 50, 95, 17);
 
                     //---- label12 ----
                     label12.setText("\ub0a8\uc740 \uae30\uac04 : ");
                     panel6.add(label12);
-                    label12.setBounds(20, 115, 62, 17);
+                    label12.setBounds(20, 100, 62, 17);
 
                     //---- label22 ----
                     label22.setText("\uac1c\uc778 \ub77d\ucee4 \ubc88\ud638 : ");
                     panel6.add(label22);
-                    label22.setBounds(20, 145, 90, 17);
+                    label22.setBounds(20, 175, 90, 17);
 
                     //---- label23 ----
                     label23.setText("PT \ud2b8\ub808\uc774\ub108 : ");
                     panel6.add(label23);
-                    label23.setBounds(20, 175, 76, 17);
+                    label23.setBounds(20, 125, 76, 17);
 
                     //---- label24 ----
                     label24.setText("PT \ub0a8\uc740 \ud69f\uc218 : ");
                     panel6.add(label24);
-                    label24.setBounds(20, 205, 80, 17);
+                    label24.setBounds(20, 150, 80, 17);
 
                     //---- label25 ----
-                    label25.setText("\ud68c\uc6d0\uad8c \uac00\uaca9 : ");
+                    label25.setText("\ud68c\uc6d0\uad8c \ub9cc\uae30\uc77c : ");
                     panel6.add(label25);
-                    label25.setBounds(new Rectangle(new Point(20, 85), label25.getPreferredSize()));
+                    label25.setBounds(20, 75, 95, label25.getPreferredSize().height);
 
                     //---- EnterButton ----
                     EnterButton.setText("\uc785\uc7a5");
                     EnterButton.addActionListener(e -> Enter(e));
                     panel6.add(EnterButton);
-                    EnterButton.setBounds(new Rectangle(new Point(225, 50), EnterButton.getPreferredSize()));
+                    EnterButton.setBounds(new Rectangle(new Point(285, 120), EnterButton.getPreferredSize()));
 
                     //---- ExitButton ----
                     ExitButton.setText("\ud1f4\uc7a5");
                     ExitButton.addActionListener(e -> Exit(e));
                     panel6.add(ExitButton);
-                    ExitButton.setBounds(new Rectangle(new Point(310, 50), ExitButton.getPreferredSize()));
+                    ExitButton.setBounds(new Rectangle(new Point(370, 120), ExitButton.getPreferredSize()));
+
+                    //---- Name ----
+                    Name.setText("\uc774\ub984\uc774 \ubaa8\uc5d0\uc694(\ubaa8\ubaa8\uc5d0\uc694~)\uc804\ud654\ubc88\ud638 \ubaa8\uc5d0\uc694(\ubaa8\ubaa8\uc5d0\uc694~)");
+                    panel6.add(Name);
+                    Name.setBounds(55, 25, 370, Name.getPreferredSize().height);
+
+                    //---- HealthStart ----
+                    HealthStart.setText("\uc5b8\uc81c\ubd80\ud134\ub385?");
+                    panel6.add(HealthStart);
+                    HealthStart.setBounds(110, 50, 145, HealthStart.getPreferredSize().height);
+
+                    //---- HealthEnd ----
+                    HealthEnd.setText("\uc5b8\uc81c\uae4c\uc9c4\ub385?");
+                    panel6.add(HealthEnd);
+                    HealthEnd.setBounds(110, 75, 145, 17);
+
+                    //---- HealthRemain ----
+                    HealthRemain.setText("\uc5bc\ub9c8\ub098 \ub0a8\uc558\ub294\ub385?");
+                    panel6.add(HealthRemain);
+                    HealthRemain.setBounds(90, 100, 145, 17);
+
+                    //---- LockerNumber ----
+                    LockerNumber.setText("\uba87\ubc88\uc778\ub385?");
+                    panel6.add(LockerNumber);
+                    LockerNumber.setBounds(115, 175, 145, 17);
+
+                    //---- TrainerName ----
+                    TrainerName.setText("\ub204\uad70\ub385?");
+                    panel6.add(TrainerName);
+                    TrainerName.setBounds(100, 125, 145, 17);
+
+                    //---- PTRemain ----
+                    PTRemain.setText("\uba87\ubc88 \ub0a8\uc558\ub294\ub385?");
+                    panel6.add(PTRemain);
+                    PTRemain.setBounds(105, 150, 145, 17);
+
+                    //---- LockerStart ----
+                    LockerStart.setText("\uc5b8\uc81c\ubd80\ud134\ub385?");
+                    panel6.add(LockerStart);
+                    LockerStart.setBounds(125, 200, 145, 17);
+
+                    //---- label10 ----
+                    label10.setText("\uac1c\uc778 \ub77d\ucee4 \uc2dc\uc791\uc77c : ");
+                    panel6.add(label10);
+                    label10.setBounds(new Rectangle(new Point(20, 200), label10.getPreferredSize()));
+
+                    //---- label14 ----
+                    label14.setText("\uac1c\uc778 \ub77d\ucee4 \ub9cc\uae30\uc77c : ");
+                    panel6.add(label14);
+                    label14.setBounds(20, 225, 102, 17);
+
+                    //---- LockerEnd ----
+                    LockerEnd.setText("\uc5b8\uc81c\uae4c\uc9c4\ub385?");
+                    panel6.add(LockerEnd);
+                    LockerEnd.setBounds(125, 225, 145, 17);
+
+                    //---- label26 ----
+                    label26.setText("\uac1c\uc778 \ub77d\ucee4 \ub0a8\uc740 \uae30\uac04 : ");
+                    panel6.add(label26);
+                    label26.setBounds(new Rectangle(new Point(20, 250), label26.getPreferredSize()));
+
+                    //---- LockerRemain ----
+                    LockerRemain.setText("\uc5bc\ub9c8\ub098 \ub0a8\uc558\ub294\ub385?");
+                    panel6.add(LockerRemain);
+                    LockerRemain.setBounds(140, 250, 145, 17);
 
                     {
                         // compute preferred size
@@ -1533,6 +1628,19 @@ public class mainPage extends JFrame {
     private JLabel label25;
     private JButton EnterButton;
     private JButton ExitButton;
+    public JLabel Name;
+    public JLabel HealthStart;
+    public JLabel HealthEnd;
+    public JLabel HealthRemain;
+    public JLabel LockerNumber;
+    public JLabel TrainerName;
+    public JLabel PTRemain;
+    public JLabel LockerStart;
+    private JLabel label10;
+    private JLabel label14;
+    public JLabel LockerEnd;
+    private JLabel label26;
+    public JLabel LockerRemain;
     private JDialog LockerBuyForm;
     private JButton LockerBuy;
     private JLabel label1;

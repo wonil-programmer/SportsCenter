@@ -205,7 +205,18 @@ public class loginPage extends JFrame {
             {
                 frame.Locker20.setBackground(new Color(0xcccccc));
             }
-
+            String[] UserInfo = new String[10];
+            UserInfo = userDAO.showUserInfo(1234);
+            frame.Name.setText(UserInfo[0]);
+            frame.TrainerName.setText(UserInfo[1]);
+            frame.PTRemain.setText(UserInfo[2]);
+            frame.HealthRemain.setText(UserInfo[3]);
+            frame.HealthStart.setText(UserInfo[4]);
+            frame.HealthEnd.setText(UserInfo[5]);
+            frame.LockerNumber.setText(UserInfo[6]);
+            frame.LockerRemain.setText(UserInfo[7]);
+            frame.LockerStart.setText(UserInfo[8]);
+            frame.LockerEnd.setText(UserInfo[9]);
             this.setVisible(false);
 
         } else if (result == 0) {
