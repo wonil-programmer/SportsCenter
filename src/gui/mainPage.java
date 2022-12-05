@@ -285,6 +285,7 @@ public class mainPage extends JFrame {
         userDAO.buyLocker(1234,lockernum,LockerDate.getSelectedIndex()+1);
         LockerBuyForm.setVisible(false);
         JOptionPane.showMessageDialog(null, "결제에 성공하였습니다");
+        updatelocker();
 
 
     }
