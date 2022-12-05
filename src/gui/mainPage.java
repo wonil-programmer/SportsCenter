@@ -18,7 +18,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import javax.swing.*;
@@ -44,7 +43,7 @@ class CalendarDataManager{ //6*7배열에 나타낼 달력 값을 구하는 클�
         calMonth = today.get(Calendar.MONTH);
         calDayOfMon = today.get(Calendar.DAY_OF_MONTH);
         makeCalData(today);
-        
+
     }
     private void makeCalData(Calendar cal){ //달력의 값을 채워넣기 위한 메소드
         //1일의 위치와 마지막 날짜를 구함
@@ -198,24 +197,41 @@ public class mainPage extends JFrame {
     }
     private void LockerBuy(ActionEvent e) { // 락커 결제 수정 필요, 결제 이미 되어있는지 아닌지 확인 절차 필요
         // TODO add your code here
-
-        int period = LockerDate.getSelectedIndex();
         UserDAO userDAO = new UserDAO();
+        int period = LockerDate.getSelectedIndex();
         int lockernum = Integer.parseInt(LockerNum.getText());
-        userDAO.buyLocker(1234,lockernum,LockerDate.getSelectedIndex()+1);
+        userDAO.buyLocker(1234,lockernum,LockerDate.getSelectedIndex()+1);  // 수정
         LockerBuyForm.setVisible(false);
         JOptionPane.showMessageDialog(null, "결제에 성공하였습니다");
-
-
     }
-    private void Locker1(ActionEvent e) {
-        // TODO add your code here
+    private int LockerState(int number) {   // 락커 상태를 int로 가져옴. 결제 여부에 사용. 색깔반영에도 사용(?) (0:사용중,1:사용가능,2:고장,-1:오류)
+        UserDAO userDAO = new UserDAO();
+        String res = userDAO.checkLockerUse(number);
+        int ret=-1; // 반환값
+        // System.out.println(userDAO.checkLockerUse(number));  //
+        if(res.equals("사용중")) {
+            ret = 0;
+        } else if (res.equals("사용가능")) {
+            ret = 1;
+        } else if (res.equals("고장")) {
+            ret = 2;
+        }
+        return ret;
+    }
 
+    private void Locker1(ActionEvent e) {   // 임시
+        // TODO add your code here
+        int num=1;  // 락커 번호 (이 부분만 변경해서 복사해 쓰면 됨)
+        int lockerstate=LockerState(num);
+        if (lockerstate==0) {
+            JOptionPane.showMessageDialog(null, "이미 사용 중인 락커입니다.");
+        } else if (lockerstate==1) {
             LockerBuyForm.setVisible(true);
             LockerBuyForm.setSize(145, 180);
-            LockerNum.setText("1");
-
-        
+            LockerNum.setText( Integer.toString(num) );
+        } else if (lockerstate==2) {
+            JOptionPane.showMessageDialog(null, "고장난 락커입니다.");
+        }
     }
 
     private void Locker2(ActionEvent e) {
@@ -245,7 +261,6 @@ public class mainPage extends JFrame {
     }
 
     private void Locker6(ActionEvent e) { // 일단 6번 락커까지만,, 최적화할 수 있는 방법을 찾아보자,,,,
-        // 방법이 없었다고 한다...
         LockerBuyForm.setVisible(true);
         LockerBuyForm.setSize(145,180);
         LockerNum.setText("6");
@@ -348,8 +363,8 @@ public class mainPage extends JFrame {
         LockerBuyForm.setSize(145,180);
         LockerNum.setText("20");
     }
-    
-    
+
+
     private void LockerDateItemStateChanged(ItemEvent e) {
         // TODO add your code here
         int index = LockerDate.getSelectedIndex();
@@ -377,7 +392,7 @@ public class mainPage extends JFrame {
         userDAO.exit(1234);
     }
 
-    
+
 
     private void TrainerComboItemStateChanged(ItemEvent e) {
         // TODO add your code here
@@ -394,7 +409,7 @@ public class mainPage extends JFrame {
         else if (index==3) {
             PTday.setText("수,금,일");
         }
-        
+
     }
 
     private void PTnumComboItemStateChanged(ItemEvent e) {
@@ -437,14 +452,13 @@ public class mainPage extends JFrame {
         userDAO.regPT(1234, TrainerCombo.getSelectedIndex(),ptnum);
         // TODO add your code
     }
-    
-    
 
-   
-    
+
+
+
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
-        // Generated using JFormDesigner Evaluation license - Minjae
         MainForm = new JFrame();
         tabbedPane1 = new JTabbedPane();
         panel5 = new JPanel();
@@ -541,12 +555,6 @@ public class mainPage extends JFrame {
 
                 //======== panel5 ========
                 {
-                    panel5.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.
-                    border.EmptyBorder(0,0,0,0), "JF\u006frmDes\u0069gner \u0045valua\u0074ion",javax.swing.border.TitledBorder.CENTER
-                    ,javax.swing.border.TitledBorder.BOTTOM,new java.awt.Font("D\u0069alog",java.awt.Font
-                    .BOLD,12),java.awt.Color.red),panel5. getBorder()));panel5. addPropertyChangeListener(
-                    new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062order"
-                    .equals(e.getPropertyName()))throw new RuntimeException();}});
                     panel5.setLayout(null);
 
                     //---- label13 ----
@@ -1219,7 +1227,6 @@ public class mainPage extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
-    // Generated using JFormDesigner Evaluation license - Minjae
     private JFrame MainForm;
     private JTabbedPane tabbedPane1;
     private JPanel panel5;

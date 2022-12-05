@@ -7,9 +7,7 @@ import java.sql.ResultSet;
 import java.lang.Integer;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -27,7 +25,7 @@ public class UserDAO {
         try {
             String dbURL = "jdbc:mysql://localhost:3306/sportscenter";
             String dbID = "root";
-            String dbPassword = "mysqlrhtn8580!";
+            String dbPassword = "0201";
             Class.forName("com.mysql.cj.jdbc.Driver");
             // getConnection 메소드로 DB에 연결
             conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
@@ -346,6 +344,23 @@ public class UserDAO {
 //        return lockerColor;
 //    }
 
+    // 락커 사용 상태 반환해주는 함수
+    public int checkLockerUse(int number) {
+
+        String SQL = "SELECT EXISTS(SELECT * FROM lockers WHERE number = ?) AS occupiedFlag";
+
+        try {
+            pstmt = conn.prepareStatement(SQL);
+            pstmt.setInt(1, number);
+            rs = pstmt.executeQuery();
+            rs.next();
+            int occupiedFlag = rs.getInt(1); // 락커가 사용중인지 체크하는 플래그 (1:사용중, 0:미사용중)
+            return occupiedFlag;
+        } catch (Exception e) {
+            System.out.println("락커 상태 가져오기 실패 > " + e.toString());
+        }
+        return -1; // 데이터베이스 오류
+    }
 
     public String[] showUserInfo ( int id){
         String[] userInfoList = new String[10];

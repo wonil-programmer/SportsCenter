@@ -84,12 +84,12 @@ public class loginPage extends JFrame {
             }
             else if(max_index == 1)
             {
-                    frame.TueGraph.setValue(100);
-                    frame.MonGraph.setValue((int)(dayArr[0]/dayArr[1]*100));
-                    frame.WenGraph.setValue((int)(dayArr[2]/dayArr[1]*100));
-                    frame.ThuGraph.setValue((int)(dayArr[3]/dayArr[1]*100));
-                    frame.FriGraph.setValue((int)(dayArr[4]/dayArr[1]*100));
-                    frame.SatGraph.setValue((int)(dayArr[5]/dayArr[1]*100));
+                frame.TueGraph.setValue(100);
+                frame.MonGraph.setValue((int)(dayArr[0]/dayArr[1]*100));
+                frame.WenGraph.setValue((int)(dayArr[2]/dayArr[1]*100));
+                frame.ThuGraph.setValue((int)(dayArr[3]/dayArr[1]*100));
+                frame.FriGraph.setValue((int)(dayArr[4]/dayArr[1]*100));
+                frame.SatGraph.setValue((int)(dayArr[5]/dayArr[1]*100));
             }
             else if(max_index == 2)
             {
@@ -140,12 +140,13 @@ public class loginPage extends JFrame {
             // 데이터베이스 오류
             JOptionPane.showMessageDialog(null, "DB 오류");
         }
-        
+
     }
 
     private void CreateAccount(ActionEvent e) { // 회원가입 버튼 누를 시
         // TODO add your code here
         // 회원가입 비밀번호란에서 받아온 문자 string으로 변환
+        UserDAO userDAO = new UserDAO(); // userDAO 객체 생성
         String passPW = new String(Reg_PW.getPassword());
         String passPWAgain = new String(Reg_PWagain.getPassword());
         if(passPW == passPWAgain)
@@ -188,7 +189,7 @@ public class loginPage extends JFrame {
 
             RegForm.setVisible(false); // 로그인창 숨기기
 
-            UserDAO userDAO = new UserDAO(); // userDAO 객체 생성
+            //UserDAO userDAO = new UserDAO(); // userDAO 객체 생성
 
             int result = userDAO.signUp(user); // 회원가입 성공 여부 result에 담음
 
