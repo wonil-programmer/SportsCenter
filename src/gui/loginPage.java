@@ -133,82 +133,78 @@ public class loginPage extends JFrame {
             }
             if(userDAO.checkLockerUse(2)==1)
             {
-                frame.Locker1.setBackground(new Color(0xcccccc));
+                frame.Locker2.setBackground(new Color(0xcccccc));
             }
             if(userDAO.checkLockerUse(3)==1)
             {
-                frame.Locker1.setBackground(new Color(0xcccccc));
+                frame.Locker3.setBackground(new Color(0xcccccc));
             }
             if(userDAO.checkLockerUse(4)==1)
             {
-                frame.Locker1.setBackground(new Color(0xcccccc));
+                frame.Locker4.setBackground(new Color(0xcccccc));
             }
             if(userDAO.checkLockerUse(5)==1)
             {
-                frame.Locker1.setBackground(new Color(0xcccccc));
+                frame.Locker5.setBackground(new Color(0xcccccc));
             }
             if(userDAO.checkLockerUse(6)==1)
             {
-                frame.Locker1.setBackground(new Color(0xcccccc));
+                frame.Locker6.setBackground(new Color(0xcccccc));
             }
             if(userDAO.checkLockerUse(7)==1)
             {
-                frame.Locker1.setBackground(new Color(0xcccccc));
+                frame.Locker7.setBackground(new Color(0xcccccc));
             }if(userDAO.checkLockerUse(8)==1)
-        {
-            frame.Locker1.setBackground(new Color(0xcccccc));
-        }
+            {
+                frame.Locker8.setBackground(new Color(0xcccccc));
+            }
             if(userDAO.checkLockerUse(9)==1)
             {
-                frame.Locker1.setBackground(new Color(0xcccccc));
+                frame.Locker9.setBackground(new Color(0xcccccc));
             }
             if(userDAO.checkLockerUse(10)==1)
             {
-                frame.Locker1.setBackground(new Color(0xcccccc));
+                frame.Locker10.setBackground(new Color(0xcccccc));
             }
             if(userDAO.checkLockerUse(11)==1)
             {
-                frame.Locker1.setBackground(new Color(0xcccccc));
+                frame.Locker11.setBackground(new Color(0xcccccc));
             }
             if(userDAO.checkLockerUse(12)==1)
             {
-                frame.Locker1.setBackground(new Color(0xcccccc));
+                frame.Locker12.setBackground(new Color(0xcccccc));
             }
             if(userDAO.checkLockerUse(13)==1)
             {
-                frame.Locker1.setBackground(new Color(0xcccccc));
+                frame.Locker13.setBackground(new Color(0xcccccc));
             }
             if(userDAO.checkLockerUse(14)==1)
             {
-                frame.Locker1.setBackground(new Color(0xcccccc));
+                frame.Locker14.setBackground(new Color(0xcccccc));
             }
             if(userDAO.checkLockerUse(15)==1)
             {
-                frame.Locker1.setBackground(new Color(0xcccccc));
+                frame.Locker15.setBackground(new Color(0xcccccc));
             }if(userDAO.checkLockerUse(16)==1)
             {
-                frame.Locker1.setBackground(new Color(0xcccccc));
+                frame.Locker16.setBackground(new Color(0xcccccc));
             }
             if(userDAO.checkLockerUse(17)==1)
             {
-                frame.Locker1.setBackground(new Color(0xcccccc));
+                frame.Locker17.setBackground(new Color(0xcccccc));
             }
             if(userDAO.checkLockerUse(18)==1)
             {
-                frame.Locker1.setBackground(new Color(0xcccccc));
+                frame.Locker18.setBackground(new Color(0xcccccc));
             }
             if(userDAO.checkLockerUse(19)==1)
             {
-                frame.Locker1.setBackground(new Color(0xcccccc));
+                frame.Locker19.setBackground(new Color(0xcccccc));
             }
             if(userDAO.checkLockerUse(20)==1)
             {
-                frame.Locker1.setBackground(new Color(0xcccccc));
+                frame.Locker20.setBackground(new Color(0xcccccc));
             }
-
-
-
-
 
             this.setVisible(false);
 

@@ -111,77 +111,77 @@ public class mainPage extends JFrame {
         }
         if(userDAO.checkLockerUse(2)==1)
         {
-            Locker1.setBackground(new Color(0xcccccc));
+            Locker2.setBackground(new Color(0xcccccc));
         }
         if(userDAO.checkLockerUse(3)==1)
         {
-            Locker1.setBackground(new Color(0xcccccc));
+            Locker3.setBackground(new Color(0xcccccc));
         }
         if(userDAO.checkLockerUse(4)==1)
         {
-            Locker1.setBackground(new Color(0xcccccc));
+            Locker4.setBackground(new Color(0xcccccc));
         }
         if(userDAO.checkLockerUse(5)==1)
         {
-            Locker1.setBackground(new Color(0xcccccc));
+            Locker5.setBackground(new Color(0xcccccc));
         }
         if(userDAO.checkLockerUse(6)==1)
         {
-            Locker1.setBackground(new Color(0xcccccc));
+            Locker6.setBackground(new Color(0xcccccc));
         }
         if(userDAO.checkLockerUse(7)==1)
         {
-            Locker1.setBackground(new Color(0xcccccc));
+            Locker7.setBackground(new Color(0xcccccc));
         }if(userDAO.checkLockerUse(8)==1)
         {
-            Locker1.setBackground(new Color(0xcccccc));
+            Locker8.setBackground(new Color(0xcccccc));
         }
         if(userDAO.checkLockerUse(9)==1)
         {
-            Locker1.setBackground(new Color(0xcccccc));
+            Locker9.setBackground(new Color(0xcccccc));
         }
         if(userDAO.checkLockerUse(10)==1)
         {
-            Locker1.setBackground(new Color(0xcccccc));
+            Locker10.setBackground(new Color(0xcccccc));
         }
         if(userDAO.checkLockerUse(11)==1)
         {
-            Locker1.setBackground(new Color(0xcccccc));
+            Locker11.setBackground(new Color(0xcccccc));
         }
         if(userDAO.checkLockerUse(12)==1)
         {
-            Locker1.setBackground(new Color(0xcccccc));
+            Locker12.setBackground(new Color(0xcccccc));
         }
         if(userDAO.checkLockerUse(13)==1)
         {
-            Locker1.setBackground(new Color(0xcccccc));
+            Locker13.setBackground(new Color(0xcccccc));
         }
         if(userDAO.checkLockerUse(14)==1)
         {
-            Locker1.setBackground(new Color(0xcccccc));
+            Locker14.setBackground(new Color(0xcccccc));
         }
         if(userDAO.checkLockerUse(15)==1)
         {
-            Locker1.setBackground(new Color(0xcccccc));
+            Locker15.setBackground(new Color(0xcccccc));
         }if(userDAO.checkLockerUse(16)==1)
         {
-            Locker1.setBackground(new Color(0xcccccc));
+            Locker16.setBackground(new Color(0xcccccc));
         }
         if(userDAO.checkLockerUse(17)==1)
         {
-            Locker1.setBackground(new Color(0xcccccc));
+            Locker17.setBackground(new Color(0xcccccc));
         }
         if(userDAO.checkLockerUse(18)==1)
         {
-            Locker1.setBackground(new Color(0xcccccc));
+            Locker18.setBackground(new Color(0xcccccc));
         }
         if(userDAO.checkLockerUse(19)==1)
         {
-            Locker1.setBackground(new Color(0xcccccc));
+            Locker19.setBackground(new Color(0xcccccc));
         }
         if(userDAO.checkLockerUse(20)==1)
         {
-            Locker1.setBackground(new Color(0xcccccc));
+            Locker20.setBackground(new Color(0xcccccc));
         }
     }
     public void curuser()
@@ -292,14 +292,14 @@ public class mainPage extends JFrame {
         int num = 1;
         // TODO add your code here
         UserDAO userDAO = new UserDAO();
-        int lockerstate = userDAO.checkLockerUse(1);
+        int lockerstate = userDAO.checkLockerUse(num);
 
         if (lockerstate==1) {
             JOptionPane.showMessageDialog(null, "이미 사용 중인 락커입니다.");
         } else if (lockerstate==0) {
             LockerBuyForm.setVisible(true);
             LockerBuyForm.setSize(145, 180);
-            LockerNum.setText( Integer.toString(1) );
+            LockerNum.setText( Integer.toString(num) );
         }
 
     }
@@ -308,42 +308,42 @@ public class mainPage extends JFrame {
         int num = 2;
         // TODO add your code here
         UserDAO userDAO = new UserDAO();
-        int lockerstate = userDAO.checkLockerUse(1);
+        int lockerstate = userDAO.checkLockerUse(num);
 
         if (lockerstate==1) {
             JOptionPane.showMessageDialog(null, "이미 사용 중인 락커입니다.");
         } else if (lockerstate==0) {
             LockerBuyForm.setVisible(true);
             LockerBuyForm.setSize(145, 180);
-            LockerNum.setText( Integer.toString(1) );
+            LockerNum.setText( Integer.toString(num) );
         }
     }
 
     private void Locker3(ActionEvent e) {
         int num = 3;
         UserDAO userDAO = new UserDAO();
-        int lockerstate = userDAO.checkLockerUse(1);
+        int lockerstate = userDAO.checkLockerUse(num);
 
         if (lockerstate==1) {
             JOptionPane.showMessageDialog(null, "이미 사용 중인 락커입니다.");
         } else if (lockerstate==0) {
             LockerBuyForm.setVisible(true);
             LockerBuyForm.setSize(145, 180);
-            LockerNum.setText( Integer.toString(1) );
+            LockerNum.setText( Integer.toString(num) );
         }
     }
 
     private void Locker4(ActionEvent e) {
         int num = 4;
         UserDAO userDAO = new UserDAO();
-        int lockerstate = userDAO.checkLockerUse(1);
+        int lockerstate = userDAO.checkLockerUse(num);
 
         if (lockerstate==1) {
             JOptionPane.showMessageDialog(null, "이미 사용 중인 락커입니다.");
         } else if (lockerstate==0) {
             LockerBuyForm.setVisible(true);
             LockerBuyForm.setSize(145, 180);
-            LockerNum.setText( Integer.toString(1) );
+            LockerNum.setText( Integer.toString(num) );
         }
     }
 
