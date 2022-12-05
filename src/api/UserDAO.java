@@ -145,7 +145,9 @@ public class UserDAO {
     public int enter(int id) {
         String SQL = "INSERT INTO visit_logs (user_id) VALUES(?)";
         try {
-
+            String[] list = new String[10];
+            UserDAO userDAO = new UserDAO();
+            list = userDAO.showUserInfo(1234);
             pstmt = conn.prepareStatement(SQL);
             pstmt.setInt(1, id);
             return pstmt.executeUpdate();
@@ -246,9 +248,6 @@ public class UserDAO {
                 dayArr[i] = rs.getInt(1); // 해당 요일 이용자 수 저장
             }
 
-            for (int i = 0; i < 6; i++) {
-                System.out.println("dayArr["+i+"]" + "=" + dayArr[i]);
-            }
             return dayArr;
 
         } catch (Exception e) {
@@ -441,7 +440,7 @@ public class UserDAO {
                 rs.next();
                 int lockerFlag = rs.getInt(1); // 개인락커 사용하고 있는 회원인지 체크하는 플래그 (1이면 구매한 회원)
                 if (lockerFlag == 1) { // 개인락커 구매한 경우
-                    pstmt = conn.prepareStatement(SQL_mem);
+                    pstmt = conn.prepareStatement(SQL_locker);
                     rs = pstmt.executeQuery();
                     while (rs.next()) {
                         userInfoList[6] = rs.getString(1); // 개인락커 번호
@@ -455,6 +454,7 @@ public class UserDAO {
                     userInfoList[8] = "-";
                     userInfoList[9] = "-";
                 }
+
                 return userInfoList; // 회원정보를 리스트에 담아 반환
 
             } catch (Exception e) {
