@@ -103,6 +103,43 @@ public class UserDAO {
         return dateList;
     }
 
+    // 기간종료 임박 알림 함수
+    public int[] alertEndDate(int id) {
+
+        int minDate = 10;
+        String SQL_mem = "SELECT if(timestampdiff(day, date_format(now(), '%Y-%m-%d'), end_date) < ?, '1','0') FROM health_members WHERE user_id = ?";
+        String SQL_locker = "SELECT if(timestampdiff(day, date_format(now(), '%Y-%m-%d'), end_date)< ?, '1','0') FROM lockers WHERE user_id = ?;";
+
+        int alertFlag[] = new int[2];
+
+        try {
+
+            // 요일별 일이용자수 계산 후 배열에 대입
+            for (int i = 0; i < 6; i++) {
+                pstmt = conn.prepareStatement(SQL_mem);
+                pstmt.setInt(1, minDate);
+                pstmt.setInt(2, id);
+                rs = pstmt.executeQuery();
+                rs.next();
+                alertFlag[0] = rs.getInt(1); // memAlertFlag 저장
+
+                pstmt = conn.prepareStatement(SQL_locker);
+                pstmt.setInt(1, minDate);
+                pstmt.setInt(2, id);
+                rs = pstmt.executeQuery();
+                rs.next();
+                alertFlag[1] = rs.getInt(1); // lockerAlertFlag 저장
+            }
+
+            return alertFlag;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null; // 데이터베이스 오류
+    }
+
+
 
     // 입장 함수
     public int enter(int id) {
@@ -321,52 +358,7 @@ public class UserDAO {
         return -1; // 데이터베이스 오류
     }
 
-//    // 락커 상태에 따른 색상 변경 함수
-//    public int[] lockerColor() {
-//        boolean flag = false;
-//
-//        int num;
-//        String[] lockerState = new String[20];
-//
-//        try {
-//
-//            for (num = 0; num < 20; num++) {
-//                String SQL = "SELECT state FROM lockers WHERE number=" + (num + 1);
-//                pstmt = conn.prepareStatement(SQL);
-//                rs = pstmt.executeQuery();
-//                while (rs.next()) {
-//                    lockerState[num] = rs.getString(1);
-//                }
-//
-//            }
-//            flag = true;
-//            System.out.println(Arrays.toString(lockerState));
-//            System.out.println("락커 색깔 가져오기 성공");
-//
-//        } catch (Exception e) {
-//            flag = false;
-//            System.out.println("락커 색깔 가져오기 실패 > " + e.toString());
-//        }
-//
-//        // 색깔 할당 부분
-//        int[] lockerColor = new int[20];
-//        for(int j=0; j<lockerState.length; j++) {
-//            if (lockerState[j]=='사용가능') {   // empty
-//                lockerColor[j] = 0x6699ff; // BLUE
-//            }
-//            else if (lockerState[j]==) {  // using
-//                lockerColor[j] = 0xcccccc; // WHITE
-//            }
-//            else if (lockerState[j]==2) {  // broken
-//                lockerColor[j] = 0xff9999; // RED
-//            }
-//        }
-//        return lockerColor;
-//    }
-
-
-        public String[] showUserInfo ( int id){
-            String[] userInfoList = new String[10];
+        public String[] showUserInfo (int id){
         /*
          0 이름
          1 PT 트레이너 정보 (id)
@@ -379,6 +371,7 @@ public class UserDAO {
          8 개인 락커 시작 날짜
          9 개인 락커 종료 날짜
          */
+            String[] userInfoList = new String[10]; // 회원정보를 담을 리스트
 
             try {
 
@@ -390,7 +383,6 @@ public class UserDAO {
                 while (rs.next()) {
                     userInfoList[0] = rs.getString("name");   // 이름
                 }
-
 
                 /* pt 관련 */
                 // pt트레이너 정보, 남은 횟수 (등록 안한 경우는 default: 'pt등록안함')
@@ -438,12 +430,11 @@ public class UserDAO {
                     userInfoList[4] = "-";
                 }
 
-
                 /* 개인 락커 관련 */
                 String preSQL_locker = "SELECT EXISTS(SELECT * FROM lockers WHERE user_id = ?) AS lockerFlag";
                 String SQL_locker = "SELECT number, timestampdiff(day, start_date, end_date), start_date, end_date FROM lockers WHERE user_id=" + id;
 
-                // 개인랔커 사용 여부 확인
+                // 개인락커 사용 여부 확인
                 pstmt = conn.prepareStatement(preSQL_locker);
                 pstmt.setInt(1, id);
                 rs = pstmt.executeQuery();
