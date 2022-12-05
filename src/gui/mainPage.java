@@ -99,7 +99,6 @@ public class mainPage extends JFrame {
         com.formdev.flatlaf.intellijthemes.FlatArcOrangeIJTheme.setup();
         mainPage frame = new mainPage();
         frame.pack();
-        
 
     }
     public void updateUserInfo()
@@ -811,12 +810,13 @@ public class mainPage extends JFrame {
 
                 //======== panel5 ========
                 {
-                    panel5.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border
-                    . EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder. CENTER, javax
-                    . swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,
-                    12 ), java. awt. Color. red) ,panel5. getBorder( )) ); panel5. addPropertyChangeListener (new java. beans
-                    . PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062order" .equals (e .
-                    getPropertyName () )) throw new RuntimeException( ); }} );
+                    panel5.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax .
+                    swing. border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JFor\u006dDesi\u0067ner \u0045valu\u0061tion" , javax. swing .border
+                    . TitledBorder. CENTER ,javax . swing. border .TitledBorder . BOTTOM, new java. awt .Font ( "Dia\u006cog"
+                    , java .awt . Font. BOLD ,12 ) ,java . awt. Color .red ) ,panel5. getBorder
+                    () ) ); panel5. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void propertyChange (java
+                    . beans. PropertyChangeEvent e) { if( "bord\u0065r" .equals ( e. getPropertyName () ) )throw new RuntimeException
+                    ( ) ;} } );
                     panel5.setLayout(null);
 
                     //---- label13 ----
@@ -1371,7 +1371,7 @@ public class mainPage extends JFrame {
                     //---- label9 ----
                     label9.setText("\uc774\ub984 : ");
                     panel6.add(label9);
-                    label9.setBounds(20, 25, 34, 17);
+                    label9.setBounds(21, 24, 34, 17);
 
                     //---- label11 ----
                     label11.setText("\ud68c\uc6d0\uad8c \uc2dc\uc791\uc77c : ");
@@ -1407,13 +1407,13 @@ public class mainPage extends JFrame {
                     EnterButton.setText("\uc785\uc7a5");
                     EnterButton.addActionListener(e -> Enter(e));
                     panel6.add(EnterButton);
-                    EnterButton.setBounds(new Rectangle(new Point(285, 120), EnterButton.getPreferredSize()));
+                    EnterButton.setBounds(new Rectangle(new Point(285, 115), EnterButton.getPreferredSize()));
 
                     //---- ExitButton ----
                     ExitButton.setText("\ud1f4\uc7a5");
                     ExitButton.addActionListener(e -> Exit(e));
                     panel6.add(ExitButton);
-                    ExitButton.setBounds(new Rectangle(new Point(370, 120), ExitButton.getPreferredSize()));
+                    ExitButton.setBounds(new Rectangle(new Point(370, 115), ExitButton.getPreferredSize()));
 
                     //---- Name ----
                     Name.setText("\uc774\ub984\uc774 \ubaa8\uc5d0\uc694(\ubaa8\ubaa8\uc5d0\uc694~)\uc804\ud654\ubc88\ud638 \ubaa8\uc5d0\uc694(\ubaa8\ubaa8\uc5d0\uc694~)");
