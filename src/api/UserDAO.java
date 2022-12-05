@@ -303,6 +303,24 @@ public class UserDAO {
         return -1; // 데이터베이스 오류
     }
 
+    // 락커 사용 상태 반환해주는 함수
+    public int checkLockerUse(int number) {
+
+        String SQL = "SELECT EXISTS(SELECT * FROM lockers WHERE number = ?) AS occupiedFlag";
+
+        try {
+            pstmt = conn.prepareStatement(SQL);
+            pstmt.setInt(1, number);
+            rs = pstmt.executeQuery();
+            rs.next();
+            int occupiedFlag = rs.getInt(1); // 락커가 사용중인지 체크하는 플래그 (1:사용중, 0:미사용중)
+            return occupiedFlag;
+        } catch (Exception e) {
+            System.out.println("락커 상태 가져오기 실패 > " + e.toString());
+        }
+        return -1; // 데이터베이스 오류
+    }
+
 //    // 락커 상태에 따른 색상 변경 함수
 //    public int[] lockerColor() {
 //        boolean flag = false;
