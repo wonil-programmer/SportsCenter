@@ -257,11 +257,63 @@ new FormModel {
 						"border": new javax.swing.border.TitledBorder( "가격" )
 						add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 							name: "scrollPane3"
+							add( new FormComponent( "javax.swing.JTable" ) {
+								name: "table3"
+								"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector {
+									add( new java.util.Vector {
+										add( "               30000 원" )
+										add( "                81000 원" )
+									} )
+									add( new java.util.Vector {
+										add( "               35000 원" )
+										add( "                94000 원" )
+									} )
+									add( new java.util.Vector {
+										add( "               40000 원" )
+										add( "               108000 원" )
+									} )
+								}, new java.util.Vector {
+									add( "1개월" )
+									add( "3개월" )
+								}, new java.util.Vector {
+									add( null )
+									add( null )
+								}, new java.util.Vector {
+									add( false )
+									add( null )
+								}, new java.util.Vector {
+									add( new com.jformdesigner.model.SwingTableColumn( null, 0, 0, 0, false ) )
+									add( null )
+								} )
+								"showHorizontalLines": true
+								"showVerticalLines": true
+							} )
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"width": 405
-							"height": 105
-							"x": 15
+							"x": 65
 							"y": 30
+							"width": 355
+							"height": 105
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label27"
+							"text": "재학생"
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"x": 15
+							"y": 60
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label28"
+							"text": "교직원"
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"x": 15
+							"y": 80
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label29"
+							"text": "일반인"
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"x": 15
+							"y": 100
 						} )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"x": 20
@@ -274,6 +326,82 @@ new FormModel {
 					} ) {
 						name: "panel10"
 						"border": new javax.swing.border.TitledBorder( "결제" )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label30"
+							"text": "구분"
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"width": 35
+							"height": 17
+							"x": 40
+							"y": 35
+						} )
+						add( new FormComponent( "javax.swing.JComboBox" ) {
+							name: "StateCombo"
+							"model": new javax.swing.DefaultComboBoxModel {
+								selectedItem: "재학생"
+								addElement( "재학생" )
+								addElement( "교직원" )
+								addElement( "일반인" )
+							}
+							addEvent( new FormEvent( "java.awt.event.ItemListener", "itemStateChanged", "StateComboItemStateChanged", true ) )
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"width": 85
+							"height": 23
+							"x": 85
+							"y": 30
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label31"
+							"text": "요금 : "
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"width": 34
+							"height": 17
+							"x": 190
+							"y": 50
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "HealthPrice"
+							"text": "30000 원"
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"width": 60
+							"height": 17
+							"x": 235
+							"y": 50
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label32"
+							"text": "기간"
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"width": 24
+							"height": 17
+							"x": 40
+							"y": 65
+						} )
+						add( new FormComponent( "javax.swing.JComboBox" ) {
+							name: "HealthDateCombo"
+							"model": new javax.swing.DefaultComboBoxModel {
+								selectedItem: "1개월"
+								addElement( "1개월" )
+								addElement( "3개월" )
+							}
+							"selectedIndex": 0
+							addEvent( new FormEvent( "java.awt.event.ItemListener", "itemStateChanged", "HealthDateComboItemStateChanged", true ) )
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"width": 85
+							"height": 23
+							"x": 85
+							"y": 60
+						} )
+						add( new FormComponent( "javax.swing.JButton" ) {
+							name: "HealthBuyButton"
+							"text": "결제"
+							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "HealthBuy", true ) )
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"width": 105
+							"height": 45
+							"x": 315
+							"y": 35
+						} )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"x": 20
 						"y": 175
@@ -817,8 +945,8 @@ new FormModel {
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 34
 						"height": 17
-						"x": 21
-						"y": 24
+						"x": 20
+						"y": 30
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "label11"
@@ -827,50 +955,50 @@ new FormModel {
 						"width": 95
 						"height": 17
 						"x": 20
-						"y": 50
+						"y": 55
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "label12"
 						"text": "남은 기간 : "
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"width": 62
+						"width": 70
 						"height": 17
 						"x": 20
-						"y": 100
+						"y": 105
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "label22"
 						"text": "개인 락커 번호 : "
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"width": 90
+						"width": 95
 						"height": 17
 						"x": 20
-						"y": 175
+						"y": 180
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "label23"
 						"text": "PT 트레이너 : "
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"width": 76
+						"width": 80
 						"height": 17
 						"x": 20
-						"y": 125
+						"y": 130
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "label24"
 						"text": "PT 남은 횟수 : "
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"width": 80
+						"width": 85
 						"height": 17
 						"x": 20
-						"y": 150
+						"y": 155
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "label25"
 						"text": "회원권 만기일 : "
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"x": 20
-						"y": 75
+						"y": 80
 						"width": 95
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
@@ -878,16 +1006,16 @@ new FormModel {
 						"text": "입장"
 						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Enter", true ) )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"x": 285
-						"y": 115
+						"x": 20
+						"y": 5
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "ExitButton"
 						"text": "퇴장"
 						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Exit", true ) )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"x": 370
-						"y": 115
+						"x": 100
+						"y": 5
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "Name"
@@ -897,8 +1025,8 @@ new FormModel {
 						}
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"x": 55
-						"y": 25
-						"width": 370
+						"y": 30
+						"width": 160
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "HealthStart"
@@ -908,7 +1036,7 @@ new FormModel {
 						}
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"x": 110
-						"y": 50
+						"y": 55
 						"width": 145
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
@@ -921,7 +1049,7 @@ new FormModel {
 						"width": 145
 						"height": 17
 						"x": 110
-						"y": 75
+						"y": 80
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "HealthRemain"
@@ -933,7 +1061,7 @@ new FormModel {
 						"width": 145
 						"height": 17
 						"x": 90
-						"y": 100
+						"y": 105
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "LockerNumber"
@@ -945,7 +1073,7 @@ new FormModel {
 						"width": 145
 						"height": 17
 						"x": 115
-						"y": 175
+						"y": 180
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "TrainerName"
@@ -957,7 +1085,7 @@ new FormModel {
 						"width": 145
 						"height": 17
 						"x": 100
-						"y": 125
+						"y": 130
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "PTRemain"
@@ -969,7 +1097,7 @@ new FormModel {
 						"width": 145
 						"height": 17
 						"x": 105
-						"y": 150
+						"y": 155
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "LockerStart"
@@ -981,23 +1109,24 @@ new FormModel {
 						"width": 145
 						"height": 17
 						"x": 125
-						"y": 200
+						"y": 205
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "label10"
 						"text": "개인 락커 시작일 : "
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"x": 20
-						"y": 200
+						"y": 205
+						"width": 105
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "label14"
 						"text": "개인 락커 만기일 : "
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"width": 102
+						"width": 110
 						"height": 17
 						"x": 20
-						"y": 225
+						"y": 230
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "LockerEnd"
@@ -1009,14 +1138,15 @@ new FormModel {
 						"width": 145
 						"height": 17
 						"x": 125
-						"y": 225
+						"y": 230
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "label26"
 						"text": "개인 락커 남은 기간 : "
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"x": 20
-						"y": 250
+						"y": 255
+						"width": 125
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "LockerRemain"
@@ -1028,7 +1158,7 @@ new FormModel {
 						"width": 145
 						"height": 17
 						"x": 140
-						"y": 250
+						"y": 255
 					} )
 				}, new FormLayoutConstraints( null ) {
 					"title": "회원정보"
