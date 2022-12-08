@@ -27,7 +27,7 @@ public class UserDAO {
         try {
             String dbURL = "jdbc:mysql://localhost:3306/sportscenter";
             String dbID = "root";
-            String dbPassword = "0201";
+            String dbPassword = "mysqlrhtn8580!";
             Class.forName("com.mysql.cj.jdbc.Driver");
             // getConnection 메소드로 DB에 연결
             conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
@@ -108,10 +108,13 @@ public class UserDAO {
     // 기간만료 회원 자동 삭제 함수 (회원권, 개인락커)
     public int checkExpiration() {
 
+        String SQL_safeOff = "SET SQL_SAFE_UPDATES = 0";
         String SQL_delMember = "DELETE FROM health_members WHERE timestampdiff(day, date_format(now(), '%Y-%m-%d'), end_date) < 0";
         String SQL_delLocker = "DELETE FROM lockers WHERE timestampdiff(day, date_format(now(), '%Y-%m-%d'), end_date) < 0";
 
         try {
+            pstmt = conn.prepareStatement(SQL_safeOff);
+            pstmt.executeUpdate();
             pstmt = conn.prepareStatement(SQL_delMember);
             pstmt.executeUpdate();
             pstmt = conn.prepareStatement(SQL_delLocker);
@@ -369,7 +372,7 @@ public class UserDAO {
         return -1; // 데이터베이스 오류
     }
 
-    public String[] showUserInfo (int id){
+        public String[] showUserInfo (int id){
         /*
          0 이름
          1 PT 트레이너 정보 (id)
@@ -382,99 +385,100 @@ public class UserDAO {
          8 개인 락커 시작 날짜
          9 개인 락커 종료 날짜
          */
-        String[] userInfoList = new String[10]; // 회원정보를 담을 리스트
+            String[] userInfoList = new String[10]; // 회원정보를 담을 리스트
 
-        try {
+            try {
 
-            /* 이용자 정보 관련 */
-            // 이용자 이름
-            String SQL_user_name = "SELECT name FROM user WHERE id=" + id;
-            pstmt = conn.prepareStatement(SQL_user_name);
-            rs = pstmt.executeQuery();
-            while (rs.next()) {
-                userInfoList[0] = rs.getString("name");   // 이름
-            }
-
-            /* pt 관련 */
-            // pt트레이너 정보, 남은 횟수 (등록 안한 경우는 default: 'pt등록안함')
-            String preSQL_pt = "SELECT EXISTS(SELECT * FROM personal_trainings WHERE user_id = ?) AS ptFlag";
-            String SQL_pt = "SELECT trainer_id, use_count FROM personal_trainings WHERE user_id=" + id;
-
-            // pt 여부 확인
-            pstmt = conn.prepareStatement(preSQL_pt);
-            pstmt.setInt(1, id);
-            rs = pstmt.executeQuery();
-            rs.next();
-            int ptFlag = rs.getInt(1); // pt 등록 회원인지 체크하는 플래그 (1이면 pt 등록회원)
-            if (ptFlag == 1) { // pt 등록된 경우
-                pstmt = conn.prepareStatement(SQL_pt);
+                /* 이용자 정보 관련 */
+                // 이용자 이름
+                String SQL_user_name = "SELECT name FROM user WHERE id=" + id;
+                pstmt = conn.prepareStatement(SQL_user_name);
                 rs = pstmt.executeQuery();
                 while (rs.next()) {
-                    userInfoList[1] = rs.getString(1); // pt 트레이너 정보
-                    userInfoList[2] = rs.getString(2); // pt 남은 횟수
+                    userInfoList[0] = rs.getString("name");   // 이름
                 }
-            } else {
-                userInfoList[1] = "pt 등록안함";
-                userInfoList[2] = "-";
-            }
 
-            /* 회원권 관련 */
-            String preSQL_mem = "SELECT EXISTS(SELECT * FROM health_members WHERE user_id = ?) AS memFlag";
-            String SQL_mem = "SELECT timestampdiff(day, start_date, end_date), start_date, end_date FROM health_members WHERE user_id=" + id;
+                /* pt 관련 */
+                // pt트레이너 정보, 남은 횟수 (등록 안한 경우는 default: 'pt등록안함')
+                String preSQL_pt = "SELECT EXISTS(SELECT * FROM personal_trainings WHERE user_id = ?) AS ptFlag";
+                String SQL_pt = "SELECT trainer_id, use_count FROM personal_trainings WHERE user_id=" + id;
 
-            // pt 여부 확인
-            pstmt = conn.prepareStatement(preSQL_mem);
-            pstmt.setInt(1, id);
-            rs = pstmt.executeQuery();
-            rs.next();
-            int memFlag = rs.getInt(1); // pt 등록 회원인지 체크하는 플래그 (1이면 회원권 등록회원)
-            if (memFlag == 1) { // pt 등록된 경우
-                pstmt = conn.prepareStatement(SQL_mem);
+                // pt 여부 확인
+                pstmt = conn.prepareStatement(preSQL_pt);
+                pstmt.setInt(1, id);
                 rs = pstmt.executeQuery();
-                while (rs.next()) {
-                    userInfoList[3] = rs.getString(1); // 회원권 남은 날짜
-                    userInfoList[4] = rs.getString(2); // 회원권 시작 날짜
-                    userInfoList[5] = rs.getString(3); // 회원권 종료 날짜
+                rs.next();
+                int ptFlag = rs.getInt(1); // pt 등록 회원인지 체크하는 플래그 (1이면 pt 등록회원)
+                if (ptFlag == 1) { // pt 등록된 경우
+                    pstmt = conn.prepareStatement(SQL_pt);
+                    rs = pstmt.executeQuery();
+                    while (rs.next()) {
+                        userInfoList[1] = rs.getString(1); // pt 트레이너 정보
+                        userInfoList[2] = rs.getString(2); // pt 남은 횟수
+                    }
+                } else {
+                    userInfoList[1] = "pt 등록안함";
+                    userInfoList[2] = "-";
                 }
-            } else {
-                userInfoList[3] = "회원권 등록안함";
-                userInfoList[4] = "-";
-            }
 
-            /* 개인 락커 관련 */
-            String preSQL_locker = "SELECT EXISTS(SELECT * FROM lockers WHERE user_id = ?) AS lockerFlag";
-            String SQL_locker = "SELECT number, timestampdiff(day, start_date, end_date), start_date, end_date FROM lockers WHERE user_id=" + id;
+                /* 회원권 관련 */
+                String preSQL_mem = "SELECT EXISTS(SELECT * FROM health_members WHERE user_id = ?) AS memFlag";
+                String SQL_mem = "SELECT timestampdiff(day, start_date, end_date), start_date, end_date FROM health_members WHERE user_id=" + id;
 
-            // 개인락커 사용 여부 확인
-            pstmt = conn.prepareStatement(preSQL_locker);
-            pstmt.setInt(1, id);
-            rs = pstmt.executeQuery();
-            rs.next();
-            int lockerFlag = rs.getInt(1); // 개인락커 사용하고 있는 회원인지 체크하는 플래그 (1이면 구매한 회원)
-            if (lockerFlag == 1) { // 개인락커 구매한 경우
-                pstmt = conn.prepareStatement(SQL_locker);
+                // pt 여부 확인
+                pstmt = conn.prepareStatement(preSQL_mem);
+                pstmt.setInt(1, id);
                 rs = pstmt.executeQuery();
-                while (rs.next()) {
-                    userInfoList[6] = rs.getString(1); // 개인락커 번호
-                    userInfoList[7] = rs.getString(2); // 개인락커 남은 날짜
-                    userInfoList[8] = rs.getString(3); // 개인락커 시작 날짜
-                    userInfoList[9] = rs.getString(4); // 개인락커 종료 날짜
+                rs.next();
+                int memFlag = rs.getInt(1); // pt 등록 회원인지 체크하는 플래그 (1이면 회원권 등록회원)
+                if (memFlag == 1) { // pt 등록된 경우
+                    pstmt = conn.prepareStatement(SQL_mem);
+                    rs = pstmt.executeQuery();
+                    while (rs.next()) {
+                        userInfoList[3] = rs.getString(1); // 회원권 남은 날짜
+                        userInfoList[4] = rs.getString(2); // 회원권 시작 날짜
+                        userInfoList[5] = rs.getString(3); // 회원권 종료 날짜
+                    }
+                } else {
+                    userInfoList[3] = "회원권 등록안함";
+                    userInfoList[4] = "-";
                 }
-            } else {
-                userInfoList[6] = "개인락커 없음";
-                userInfoList[7] = "-";
-                userInfoList[8] = "-";
-                userInfoList[9] = "-";
+
+                /* 개인 락커 관련 */
+                String preSQL_locker = "SELECT EXISTS(SELECT * FROM lockers WHERE user_id = ?) AS lockerFlag";
+                String SQL_locker = "SELECT number, timestampdiff(day, start_date, end_date), start_date, end_date FROM lockers WHERE user_id=" + id;
+
+                // 개인락커 사용 여부 확인
+                pstmt = conn.prepareStatement(preSQL_locker);
+                pstmt.setInt(1, id);
+                rs = pstmt.executeQuery();
+                rs.next();
+                int lockerFlag = rs.getInt(1); // 개인락커 사용하고 있는 회원인지 체크하는 플래그 (1이면 구매한 회원)
+                if (lockerFlag == 1) { // 개인락커 구매한 경우
+                    pstmt = conn.prepareStatement(SQL_locker);
+                    rs = pstmt.executeQuery();
+                    while (rs.next()) {
+                        userInfoList[6] = rs.getString(1); // 개인락커 번호
+                        userInfoList[7] = rs.getString(2); // 개인락커 남은 날짜
+                        userInfoList[8] = rs.getString(3); // 개인락커 시작 날짜
+                        userInfoList[9] = rs.getString(4); // 개인락커 종료 날짜
+                    }
+                } else {
+                    userInfoList[6] = "개인락커 없음";
+                    userInfoList[7] = "-";
+                    userInfoList[8] = "-";
+                    userInfoList[9] = "-";
+                }
+
+                return userInfoList; // 회원정보를 리스트에 담아 반환
+
+            } catch (Exception e) {
+                System.out.println("회원 정보 불러오기 실패 > " + e.toString());
             }
-
-            return userInfoList; // 회원정보를 리스트에 담아 반환
-
-        } catch (Exception e) {
-            System.out.println("회원 정보 불러오기 실패 > " + e.toString());
+            return null; // 데이터베이스 오류
         }
-        return null; // 데이터베이스 오류
-    }
 
 
 }
+
 
