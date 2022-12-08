@@ -81,6 +81,7 @@ public class UserDAO {
         return -1; // 데이터베이스 오류
     }
 
+
     // 과거 주에 해당하는 요일에 해당하는 날짜 계산함수 (weekAgo : 예시.1이면 1주전, 2이면 2주전)
     public String[] calcPastWeekDates(int weekAgo) {
 
@@ -103,6 +104,25 @@ public class UserDAO {
         return dateList;
     }
 
+
+    // 기간만료 회원 자동 삭제 함수 (회원권, 개인락커)
+    public int checkExpiration() {
+
+        String SQL_delMember = "DELETE FROM health_members WHERE timestampdiff(day, date_format(now(), '%Y-%m-%d'), end_date) < 0";
+        String SQL_delLocker = "DELETE FROM lockers WHERE timestampdiff(day, date_format(now(), '%Y-%m-%d'), end_date) < 0";
+
+        try {
+            pstmt = conn.prepareStatement(SQL_delMember);
+            pstmt.executeUpdate();
+            pstmt = conn.prepareStatement(SQL_delLocker);
+            pstmt.executeUpdate();
+            return 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1; // 데이터베이스 오류
+    }
+
     // 기간종료 임박 알림 함수
     public int[] alertEndDate(int id) {
 
@@ -113,26 +133,20 @@ public class UserDAO {
         int alertFlag[] = new int[2];
 
         try {
+            pstmt = conn.prepareStatement(SQL_mem);
+            pstmt.setInt(1, minDate);
+            pstmt.setInt(2, id);
+            rs = pstmt.executeQuery();
+            rs.next();
+            alertFlag[0] = rs.getInt(1); // memAlertFlag 저장
 
-            // 요일별 일이용자수 계산 후 배열에 대입
-            for (int i = 0; i < 6; i++) {
-                pstmt = conn.prepareStatement(SQL_mem);
-                pstmt.setInt(1, minDate);
-                pstmt.setInt(2, id);
-                rs = pstmt.executeQuery();
-                rs.next();
-                alertFlag[0] = rs.getInt(1); // memAlertFlag 저장
-
-                pstmt = conn.prepareStatement(SQL_locker);
-                pstmt.setInt(1, minDate);
-                pstmt.setInt(2, id);
-                rs = pstmt.executeQuery();
-                rs.next();
-                alertFlag[1] = rs.getInt(1); // lockerAlertFlag 저장
-            }
-
+            pstmt = conn.prepareStatement(SQL_locker);
+            pstmt.setInt(1, minDate);
+            pstmt.setInt(2, id);
+            rs = pstmt.executeQuery();
+            rs.next();
+            alertFlag[1] = rs.getInt(1); // lockerAlertFlag 저장
             return alertFlag;
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -220,7 +234,6 @@ public class UserDAO {
             }
 
             return timeArr;
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -249,7 +262,6 @@ public class UserDAO {
             }
 
             return dayArr;
-
         } catch (Exception e) {
             e.printStackTrace();
         }
