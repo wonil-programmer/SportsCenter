@@ -108,10 +108,13 @@ public class UserDAO {
     // 기간만료 회원 자동 삭제 함수 (회원권, 개인락커)
     public int checkExpiration() {
 
+        String SQL_safeOff = "SET SQL_SAFE_UPDATES = 0";
         String SQL_delMember = "DELETE FROM health_members WHERE timestampdiff(day, date_format(now(), '%Y-%m-%d'), end_date) < 0";
         String SQL_delLocker = "DELETE FROM lockers WHERE timestampdiff(day, date_format(now(), '%Y-%m-%d'), end_date) < 0";
 
         try {
+            pstmt = conn.prepareStatement(SQL_safeOff);
+            pstmt.executeUpdate();
             pstmt = conn.prepareStatement(SQL_delMember);
             pstmt.executeUpdate();
             pstmt = conn.prepareStatement(SQL_delLocker);
