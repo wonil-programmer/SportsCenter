@@ -89,20 +89,20 @@ new FormModel {
 				"text": "userID"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 30
-				"y": 15
+				"y": 45
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label4"
 				"text": "userPW"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 25
-				"y": 50
+				"y": 80
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
 				name: "Reg_ID"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 85
-				"y": 10
+				"y": 40
 				"width": 175
 				"height": 25
 			} )
@@ -111,7 +111,7 @@ new FormModel {
 				"text": "gender"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 25
-				"y": 115
+				"y": 145
 				"width": 50
 			} )
 			add( new FormComponent( "javax.swing.JRadioButton" ) {
@@ -121,7 +121,7 @@ new FormModel {
 				"selected": true
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 85
-				"y": 115
+				"y": 145
 			} )
 			add( new FormComponent( "javax.swing.JRadioButton" ) {
 				name: "Gen_G"
@@ -129,7 +129,7 @@ new FormModel {
 				"$buttonGroup": new FormReference( "buttonGroup1" )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 125
-				"y": 115
+				"y": 145
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label6"
@@ -138,14 +138,14 @@ new FormModel {
 				"width": 60
 				"height": 17
 				"x": 15
-				"y": 85
+				"y": 115
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label7"
 				"text": "state"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 30
-				"y": 145
+				"y": 175
 			} )
 			add( new FormComponent( "javax.swing.JComboBox" ) {
 				name: "Type"
@@ -157,7 +157,7 @@ new FormModel {
 				}
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 85
-				"y": 145
+				"y": 175
 				"width": 75
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
@@ -165,7 +165,7 @@ new FormModel {
 				"text": "locker usage"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 10
-				"y": 175
+				"y": 205
 				"width": 70
 			} )
 			add( new FormComponent( "javax.swing.JCheckBox" ) {
@@ -174,20 +174,20 @@ new FormModel {
 				"selected": true
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 85
-				"y": 175
+				"y": 205
 			} )
 			add( new FormComponent( "javax.swing.JPasswordField" ) {
 				name: "Reg_PW"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 85
-				"y": 45
+				"y": 75
 				"width": 175
 			} )
 			add( new FormComponent( "javax.swing.JPasswordField" ) {
 				name: "Reg_PWagain"
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 85
-				"y": 80
+				"y": 110
 				"width": 175
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
@@ -198,16 +198,29 @@ new FormModel {
 				"width": 260
 				"height": 30
 				"x": 15
-				"y": 205
+				"y": 235
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label9"
+				"text": "name"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 35
+				"y": 15
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "textField1"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 85
+				"y": 10
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"size": new java.awt.Dimension( 290, 275 )
+			"size": new java.awt.Dimension( 290, 305 )
 			"location": new java.awt.Point( 460, 25 )
 		} )
 		add( new FormNonVisual( "javax.swing.ButtonGroup" ) {
 			name: "buttonGroup1"
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 815, 455 )
+			"location": new java.awt.Point( 670, 445 )
 		} )
 	}
 }

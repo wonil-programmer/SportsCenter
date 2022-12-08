@@ -14,80 +14,10 @@ import gui.loginPage;
 /**
  * @author Minjae
  */
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.*;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import javax.swing.*;
-
-class CalendarDataManager{ //6*7배열에 나타낼 달력 값을 구하는 클래스
-    static final int CAL_WIDTH = 7;
-    final static int CAL_HEIGHT = 6;
-    int calDates[][] = new int[CAL_HEIGHT][CAL_WIDTH];
-    int calYear;
-    int calMonth;
-    int calDayOfMon;
-    final int calLastDateOfMonth[]={31,28,31,30,31,30,31,31,30,31,30,31};
-    int calLastDate;
-    Calendar today = Calendar.getInstance();
-    Calendar cal;
-
-    public CalendarDataManager()
-    {
-        setToday();
-    }
-    public void setToday(){
-        calYear = today.get(Calendar.YEAR);
-        calMonth = today.get(Calendar.MONTH);
-        calDayOfMon = today.get(Calendar.DAY_OF_MONTH);
-        makeCalData(today);
-        
-    }
-    private void makeCalData(Calendar cal){ //달력의 값을 채워넣기 위한 메소드
-        //1일의 위치와 마지막 날짜를 구함
-
-        int calStartingPos = (cal.get(Calendar.DAY_OF_WEEK)+7-(cal.get(Calendar.DAY_OF_MONTH))%7)%7;
-        if(calMonth == 1) calLastDate = calLastDateOfMonth[calMonth] + leapCheck(calYear);
-        else calLastDate = calLastDateOfMonth[calMonth];
-        // 달력 배열 초기화
-        for(int i = 0 ; i<CAL_HEIGHT ; i++){
-            for(int j = 0 ; j<CAL_WIDTH ; j++){
-                calDates[i][j] = 0;
-            }
-        }
-        // 달력배열에 값 채워넣기
-        for(int i = 0, num = 1, k = 0 ; i<CAL_HEIGHT ; i++){
-            if(i == 0) k = calStartingPos;
-            else k = 0;
-            for(int j = k ; j<CAL_WIDTH ; j++){
-                if(num <= calLastDate) calDates[i][j]=num++;
-            }
-        }
-    }
-    private int leapCheck(int year){
-        if(year%4 == 0 && year%100 != 0 || year%400 == 0) return 1;
-        else return 0;
-    }
-    public void moveMonth(int mon){ // 현재 달로부터 전, 후로 이동할 수 있는 메소드
-        calMonth += mon;
-        if(calMonth>11) while(calMonth>11){
-            calYear++;
-            calMonth -= 12;
-        } else if (calMonth<0) while(calMonth<0){
-            calYear--;
-            calMonth += 12;
-        }
-        cal = new GregorianCalendar(calYear,calMonth,calDayOfMon);
-        makeCalData(cal);
-    }
-}
 
 
 
 public class mainPage extends JFrame {
-    CalendarDataManager CDM = new CalendarDataManager();
 
     public mainPage() {
         initComponents();
@@ -693,6 +623,95 @@ public class mainPage extends JFrame {
         userDAO.regPT(1234, TrainerCombo.getSelectedIndex(),ptnum);
         // TODO add your code
     }
+
+    private void HealthBuy(ActionEvent e) {
+        // TODO add your code here
+        UserDAO userDAO = new UserDAO();
+        int date;
+        if(HealthDateCombo.getSelectedIndex() == 0)
+        {
+            date = 1;
+        }
+        else
+        {
+            date = 3;
+        }
+        userDAO.regHealth(1234,date);
+    }
+
+    private void StateComboItemStateChanged(ItemEvent e) {
+        // TODO add your code here
+        if (StateCombo.getSelectedIndex() == 0) {
+            if(HealthDateCombo.getSelectedIndex() == 0)
+            {
+                HealthPrice.setText("30000 원");
+            }
+            else
+            {
+                HealthPrice.setText("81000 원");
+            }
+            
+        }
+        else if(StateCombo.getSelectedIndex() == 1)
+        {
+            if(HealthDateCombo.getSelectedIndex() == 0)
+            {
+                HealthPrice.setText("35000 원");
+            }
+            else
+            {
+                HealthPrice.setText("94000 원");
+            }
+        }
+        else {
+            
+                if(HealthDateCombo.getSelectedIndex() == 0)
+                {
+                    HealthPrice.setText("40000 원");
+                }
+                else 
+                {
+                    HealthPrice.setText("108000 원");
+                }
+        }
+    }
+
+    private void HealthDateComboItemStateChanged(ItemEvent e) {
+        // TODO add your code here
+        if (StateCombo.getSelectedIndex() == 0) {
+            if(HealthDateCombo.getSelectedIndex() == 0)
+            {
+                HealthPrice.setText("30000 원");
+            }
+            else
+            {
+                HealthPrice.setText("81000 원");
+            }
+
+        }
+        else if(StateCombo.getSelectedIndex() == 1)
+        {
+            if(HealthDateCombo.getSelectedIndex() == 0)
+            {
+                HealthPrice.setText("35000 원");
+            }
+            else
+            {
+                HealthPrice.setText("94000 원");
+            }
+        }
+        else {
+
+            if(HealthDateCombo.getSelectedIndex() == 0)
+            {
+                HealthPrice.setText("40000 원");
+            }
+            else
+            {
+                HealthPrice.setText("108000 원");
+            }
+        }
+    }
     
     
 
@@ -700,6 +719,7 @@ public class mainPage extends JFrame {
     
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
+        // Generated using JFormDesigner Evaluation license - 김민재
         MainForm = new JFrame();
         tabbedPane1 = new JTabbedPane();
         panel5 = new JPanel();
@@ -719,7 +739,18 @@ public class mainPage extends JFrame {
         panel2 = new JPanel();
         panel9 = new JPanel();
         scrollPane3 = new JScrollPane();
+        table3 = new JTable();
+        label27 = new JLabel();
+        label28 = new JLabel();
+        label29 = new JLabel();
         panel10 = new JPanel();
+        label30 = new JLabel();
+        StateCombo = new JComboBox<>();
+        label31 = new JLabel();
+        HealthPrice = new JLabel();
+        label32 = new JLabel();
+        HealthDateCombo = new JComboBox<>();
+        HealthBuyButton = new JButton();
         panel1 = new JPanel();
         panel7 = new JPanel();
         scrollPane2 = new JScrollPane();
@@ -809,6 +840,13 @@ public class mainPage extends JFrame {
 
                 //======== panel5 ========
                 {
+                    panel5.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax
+                    . swing. border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JFor\u006dDesi\u0067ner \u0045valu\u0061tion" , javax. swing
+                    .border . TitledBorder. CENTER ,javax . swing. border .TitledBorder . BOTTOM, new java. awt .
+                    Font ( "Dia\u006cog", java .awt . Font. BOLD ,12 ) ,java . awt. Color .red
+                    ) ,panel5. getBorder () ) ); panel5. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override
+                    public void propertyChange (java . beans. PropertyChangeEvent e) { if( "bord\u0065r" .equals ( e. getPropertyName (
+                    ) ) )throw new RuntimeException( ) ;} } );
                     panel5.setLayout(null);
 
                     //---- label13 ----
@@ -956,8 +994,54 @@ public class mainPage extends JFrame {
                     {
                         panel9.setBorder(new TitledBorder("\uac00\uaca9"));
                         panel9.setLayout(null);
+
+                        //======== scrollPane3 ========
+                        {
+
+                            //---- table3 ----
+                            table3.setModel(new DefaultTableModel(
+                                new Object[][] {
+                                    {"               30000 \uc6d0", "                81000 \uc6d0"},
+                                    {"               35000 \uc6d0", "                94000 \uc6d0"},
+                                    {"               40000 \uc6d0", "               108000 \uc6d0"},
+                                },
+                                new String[] {
+                                    "1\uac1c\uc6d4", "3\uac1c\uc6d4"
+                                }
+                            ) {
+                                boolean[] columnEditable = new boolean[] {
+                                    false, true
+                                };
+                                @Override
+                                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                                    return columnEditable[columnIndex];
+                                }
+                            });
+                            {
+                                TableColumnModel cm = table3.getColumnModel();
+                                cm.getColumn(0).setResizable(false);
+                            }
+                            table3.setShowHorizontalLines(true);
+                            table3.setShowVerticalLines(true);
+                            scrollPane3.setViewportView(table3);
+                        }
                         panel9.add(scrollPane3);
-                        scrollPane3.setBounds(15, 30, 405, 105);
+                        scrollPane3.setBounds(65, 30, 355, 105);
+
+                        //---- label27 ----
+                        label27.setText("\uc7ac\ud559\uc0dd");
+                        panel9.add(label27);
+                        label27.setBounds(new Rectangle(new Point(15, 60), label27.getPreferredSize()));
+
+                        //---- label28 ----
+                        label28.setText("\uad50\uc9c1\uc6d0");
+                        panel9.add(label28);
+                        label28.setBounds(new Rectangle(new Point(15, 80), label28.getPreferredSize()));
+
+                        //---- label29 ----
+                        label29.setText("\uc77c\ubc18\uc778");
+                        panel9.add(label29);
+                        label29.setBounds(new Rectangle(new Point(15, 100), label29.getPreferredSize()));
                     }
                     panel2.add(panel9);
                     panel9.setBounds(20, 15, 435, 150);
@@ -966,6 +1050,52 @@ public class mainPage extends JFrame {
                     {
                         panel10.setBorder(new TitledBorder("\uacb0\uc81c"));
                         panel10.setLayout(null);
+
+                        //---- label30 ----
+                        label30.setText("\uad6c\ubd84");
+                        panel10.add(label30);
+                        label30.setBounds(40, 35, 35, 17);
+
+                        //---- StateCombo ----
+                        StateCombo.setModel(new DefaultComboBoxModel<>(new String[] {
+                            "\uc7ac\ud559\uc0dd",
+                            "\uad50\uc9c1\uc6d0",
+                            "\uc77c\ubc18\uc778"
+                        }));
+                        StateCombo.addItemListener(e -> StateComboItemStateChanged(e));
+                        panel10.add(StateCombo);
+                        StateCombo.setBounds(85, 30, 85, 23);
+
+                        //---- label31 ----
+                        label31.setText("\uc694\uae08 : ");
+                        panel10.add(label31);
+                        label31.setBounds(190, 50, 34, 17);
+
+                        //---- HealthPrice ----
+                        HealthPrice.setText("30000 \uc6d0");
+                        panel10.add(HealthPrice);
+                        HealthPrice.setBounds(235, 50, 60, 17);
+
+                        //---- label32 ----
+                        label32.setText("\uae30\uac04");
+                        panel10.add(label32);
+                        label32.setBounds(40, 65, 24, 17);
+
+                        //---- HealthDateCombo ----
+                        HealthDateCombo.setModel(new DefaultComboBoxModel<>(new String[] {
+                            "1\uac1c\uc6d4",
+                            "3\uac1c\uc6d4"
+                        }));
+                        HealthDateCombo.setSelectedIndex(0);
+                        HealthDateCombo.addItemListener(e -> HealthDateComboItemStateChanged(e));
+                        panel10.add(HealthDateCombo);
+                        HealthDateCombo.setBounds(85, 60, 85, 23);
+
+                        //---- HealthBuyButton ----
+                        HealthBuyButton.setText("\uacb0\uc81c");
+                        HealthBuyButton.addActionListener(e -> HealthBuy(e));
+                        panel10.add(HealthBuyButton);
+                        HealthBuyButton.setBounds(315, 35, 105, 45);
                     }
                     panel2.add(panel10);
                     panel10.setBounds(20, 175, 435, 100);
@@ -1363,114 +1493,114 @@ public class mainPage extends JFrame {
                     //---- label9 ----
                     label9.setText("\uc774\ub984 : ");
                     panel6.add(label9);
-                    label9.setBounds(21, 24, 34, 17);
+                    label9.setBounds(20, 30, 34, 17);
 
                     //---- label11 ----
                     label11.setText("\ud68c\uc6d0\uad8c \uc2dc\uc791\uc77c : ");
                     panel6.add(label11);
-                    label11.setBounds(20, 50, 95, 17);
+                    label11.setBounds(20, 55, 95, 17);
 
                     //---- label12 ----
                     label12.setText("\ub0a8\uc740 \uae30\uac04 : ");
                     panel6.add(label12);
-                    label12.setBounds(20, 100, 62, 17);
+                    label12.setBounds(20, 105, 70, 17);
 
                     //---- label22 ----
                     label22.setText("\uac1c\uc778 \ub77d\ucee4 \ubc88\ud638 : ");
                     panel6.add(label22);
-                    label22.setBounds(20, 175, 90, 17);
+                    label22.setBounds(20, 180, 95, 17);
 
                     //---- label23 ----
                     label23.setText("PT \ud2b8\ub808\uc774\ub108 : ");
                     panel6.add(label23);
-                    label23.setBounds(20, 125, 76, 17);
+                    label23.setBounds(20, 130, 80, 17);
 
                     //---- label24 ----
                     label24.setText("PT \ub0a8\uc740 \ud69f\uc218 : ");
                     panel6.add(label24);
-                    label24.setBounds(20, 150, 80, 17);
+                    label24.setBounds(20, 155, 85, 17);
 
                     //---- label25 ----
                     label25.setText("\ud68c\uc6d0\uad8c \ub9cc\uae30\uc77c : ");
                     panel6.add(label25);
-                    label25.setBounds(20, 75, 95, label25.getPreferredSize().height);
+                    label25.setBounds(20, 80, 95, label25.getPreferredSize().height);
 
                     //---- EnterButton ----
                     EnterButton.setText("\uc785\uc7a5");
                     EnterButton.addActionListener(e -> Enter(e));
                     panel6.add(EnterButton);
-                    EnterButton.setBounds(new Rectangle(new Point(285, 115), EnterButton.getPreferredSize()));
+                    EnterButton.setBounds(new Rectangle(new Point(20, 5), EnterButton.getPreferredSize()));
 
                     //---- ExitButton ----
                     ExitButton.setText("\ud1f4\uc7a5");
                     ExitButton.addActionListener(e -> Exit(e));
                     panel6.add(ExitButton);
-                    ExitButton.setBounds(new Rectangle(new Point(370, 115), ExitButton.getPreferredSize()));
+                    ExitButton.setBounds(new Rectangle(new Point(100, 5), ExitButton.getPreferredSize()));
 
                     //---- Name ----
                     Name.setText("\uc774\ub984\uc774 \ubaa8\uc5d0\uc694(\ubaa8\ubaa8\uc5d0\uc694~)\uc804\ud654\ubc88\ud638 \ubaa8\uc5d0\uc694(\ubaa8\ubaa8\uc5d0\uc694~)");
                     panel6.add(Name);
-                    Name.setBounds(55, 25, 370, Name.getPreferredSize().height);
+                    Name.setBounds(55, 30, 160, Name.getPreferredSize().height);
 
                     //---- HealthStart ----
                     HealthStart.setText("\uc5b8\uc81c\ubd80\ud134\ub385?");
                     panel6.add(HealthStart);
-                    HealthStart.setBounds(110, 50, 145, HealthStart.getPreferredSize().height);
+                    HealthStart.setBounds(110, 55, 145, HealthStart.getPreferredSize().height);
 
                     //---- HealthEnd ----
                     HealthEnd.setText("\uc5b8\uc81c\uae4c\uc9c4\ub385?");
                     panel6.add(HealthEnd);
-                    HealthEnd.setBounds(110, 75, 145, 17);
+                    HealthEnd.setBounds(110, 80, 145, 17);
 
                     //---- HealthRemain ----
                     HealthRemain.setText("\uc5bc\ub9c8\ub098 \ub0a8\uc558\ub294\ub385?");
                     panel6.add(HealthRemain);
-                    HealthRemain.setBounds(90, 100, 145, 17);
+                    HealthRemain.setBounds(90, 105, 145, 17);
 
                     //---- LockerNumber ----
                     LockerNumber.setText("\uba87\ubc88\uc778\ub385?");
                     panel6.add(LockerNumber);
-                    LockerNumber.setBounds(115, 175, 145, 17);
+                    LockerNumber.setBounds(115, 180, 145, 17);
 
                     //---- TrainerName ----
                     TrainerName.setText("\ub204\uad70\ub385?");
                     panel6.add(TrainerName);
-                    TrainerName.setBounds(100, 125, 145, 17);
+                    TrainerName.setBounds(100, 130, 145, 17);
 
                     //---- PTRemain ----
                     PTRemain.setText("\uba87\ubc88 \ub0a8\uc558\ub294\ub385?");
                     panel6.add(PTRemain);
-                    PTRemain.setBounds(105, 150, 145, 17);
+                    PTRemain.setBounds(105, 155, 145, 17);
 
                     //---- LockerStart ----
                     LockerStart.setText("\uc5b8\uc81c\ubd80\ud134\ub385?");
                     panel6.add(LockerStart);
-                    LockerStart.setBounds(125, 200, 145, 17);
+                    LockerStart.setBounds(125, 205, 145, 17);
 
                     //---- label10 ----
                     label10.setText("\uac1c\uc778 \ub77d\ucee4 \uc2dc\uc791\uc77c : ");
                     panel6.add(label10);
-                    label10.setBounds(new Rectangle(new Point(20, 200), label10.getPreferredSize()));
+                    label10.setBounds(20, 205, 105, label10.getPreferredSize().height);
 
                     //---- label14 ----
                     label14.setText("\uac1c\uc778 \ub77d\ucee4 \ub9cc\uae30\uc77c : ");
                     panel6.add(label14);
-                    label14.setBounds(20, 225, 102, 17);
+                    label14.setBounds(20, 230, 110, 17);
 
                     //---- LockerEnd ----
                     LockerEnd.setText("\uc5b8\uc81c\uae4c\uc9c4\ub385?");
                     panel6.add(LockerEnd);
-                    LockerEnd.setBounds(125, 225, 145, 17);
+                    LockerEnd.setBounds(125, 230, 145, 17);
 
                     //---- label26 ----
                     label26.setText("\uac1c\uc778 \ub77d\ucee4 \ub0a8\uc740 \uae30\uac04 : ");
                     panel6.add(label26);
-                    label26.setBounds(new Rectangle(new Point(20, 250), label26.getPreferredSize()));
+                    label26.setBounds(20, 255, 125, label26.getPreferredSize().height);
 
                     //---- LockerRemain ----
                     LockerRemain.setText("\uc5bc\ub9c8\ub098 \ub0a8\uc558\ub294\ub385?");
                     panel6.add(LockerRemain);
-                    LockerRemain.setBounds(140, 250, 145, 17);
+                    LockerRemain.setBounds(140, 255, 145, 17);
 
                     {
                         // compute preferred size
@@ -1546,6 +1676,7 @@ public class mainPage extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
+    // Generated using JFormDesigner Evaluation license - 김민재
     private JFrame MainForm;
     private JTabbedPane tabbedPane1;
     private JPanel panel5;
@@ -1565,7 +1696,18 @@ public class mainPage extends JFrame {
     private JPanel panel2;
     private JPanel panel9;
     private JScrollPane scrollPane3;
+    private JTable table3;
+    private JLabel label27;
+    private JLabel label28;
+    private JLabel label29;
     private JPanel panel10;
+    private JLabel label30;
+    private JComboBox<String> StateCombo;
+    private JLabel label31;
+    private JLabel HealthPrice;
+    private JLabel label32;
+    private JComboBox<String> HealthDateCombo;
+    private JButton HealthBuyButton;
     private JPanel panel1;
     private JPanel panel7;
     private JScrollPane scrollPane2;

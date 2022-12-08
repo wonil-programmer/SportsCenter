@@ -25,7 +25,7 @@ public class loginPage extends JFrame {
     private void Reg(ActionEvent e) {
         // TODO add your code here
         RegForm.setVisible(true);
-        RegForm.setSize(300,280);
+        RegForm.setSize(300,310);
 
     }
 
@@ -236,9 +236,7 @@ public class loginPage extends JFrame {
         // 회원가입 비밀번호란에서 받아온 문자 string으로 변환
         String passPW = new String(Reg_PW.getPassword());
         String passPWAgain = new String(Reg_PWagain.getPassword());
-//        System.out.println(passPW);
-//        System.out.println(passPWAgain);
-        if(passPW.equals(passPWAgain))
+        if(passPW == passPWAgain)
         {
             User user = new User(); // user 인스턴스 생성
 
@@ -306,6 +304,7 @@ public class loginPage extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
+        // Generated using JFormDesigner Evaluation license - 김민재
         label1 = new JLabel();
         label2 = new JLabel();
         PWtext = new JPasswordField();
@@ -328,6 +327,8 @@ public class loginPage extends JFrame {
         Reg_PW = new JPasswordField();
         Reg_PWagain = new JPasswordField();
         CreateAccount = new JButton();
+        label9 = new JLabel();
+        textField1 = new JTextField();
 
         //======== this ========
         setTitle("LOGIN");
@@ -382,40 +383,40 @@ public class loginPage extends JFrame {
             //---- label3 ----
             label3.setText("userID");
             RegFormContentPane.add(label3);
-            label3.setBounds(new Rectangle(new Point(30, 15), label3.getPreferredSize()));
+            label3.setBounds(new Rectangle(new Point(30, 45), label3.getPreferredSize()));
 
             //---- label4 ----
             label4.setText("userPW");
             RegFormContentPane.add(label4);
-            label4.setBounds(new Rectangle(new Point(25, 50), label4.getPreferredSize()));
+            label4.setBounds(new Rectangle(new Point(25, 80), label4.getPreferredSize()));
             RegFormContentPane.add(Reg_ID);
-            Reg_ID.setBounds(85, 10, 175, 25);
+            Reg_ID.setBounds(85, 40, 175, 25);
 
             //---- label5 ----
             label5.setText("gender");
             RegFormContentPane.add(label5);
-            label5.setBounds(25, 115, 50, label5.getPreferredSize().height);
+            label5.setBounds(25, 145, 50, label5.getPreferredSize().height);
 
             //---- Gen_B ----
             Gen_B.setText("\ub0a8");
             Gen_B.setSelected(true);
             RegFormContentPane.add(Gen_B);
-            Gen_B.setBounds(new Rectangle(new Point(85, 115), Gen_B.getPreferredSize()));
+            Gen_B.setBounds(new Rectangle(new Point(85, 145), Gen_B.getPreferredSize()));
 
             //---- Gen_G ----
             Gen_G.setText("\uc5ec");
             RegFormContentPane.add(Gen_G);
-            Gen_G.setBounds(new Rectangle(new Point(125, 115), Gen_G.getPreferredSize()));
+            Gen_G.setBounds(new Rectangle(new Point(125, 145), Gen_G.getPreferredSize()));
 
             //---- label6 ----
             label6.setText("PW Again");
             RegFormContentPane.add(label6);
-            label6.setBounds(15, 85, 60, 17);
+            label6.setBounds(15, 115, 60, 17);
 
             //---- label7 ----
             label7.setText("state");
             RegFormContentPane.add(label7);
-            label7.setBounds(new Rectangle(new Point(30, 145), label7.getPreferredSize()));
+            label7.setBounds(new Rectangle(new Point(30, 175), label7.getPreferredSize()));
 
             //---- Type ----
             Type.setModel(new DefaultComboBoxModel<>(new String[] {
@@ -424,30 +425,37 @@ public class loginPage extends JFrame {
                 "\uc77c\ubc18\uc778"
             }));
             RegFormContentPane.add(Type);
-            Type.setBounds(85, 145, 75, Type.getPreferredSize().height);
+            Type.setBounds(85, 175, 75, Type.getPreferredSize().height);
 
             //---- label8 ----
             label8.setText("locker usage");
             RegFormContentPane.add(label8);
-            label8.setBounds(10, 175, 70, label8.getPreferredSize().height);
+            label8.setBounds(10, 205, 70, label8.getPreferredSize().height);
 
             //---- LockerUse ----
             LockerUse.setText("\uc0ac\uc6a9\ud568");
             LockerUse.setSelected(true);
             RegFormContentPane.add(LockerUse);
-            LockerUse.setBounds(new Rectangle(new Point(85, 175), LockerUse.getPreferredSize()));
+            LockerUse.setBounds(new Rectangle(new Point(85, 205), LockerUse.getPreferredSize()));
             RegFormContentPane.add(Reg_PW);
-            Reg_PW.setBounds(85, 45, 175, Reg_PW.getPreferredSize().height);
+            Reg_PW.setBounds(85, 75, 175, Reg_PW.getPreferredSize().height);
             RegFormContentPane.add(Reg_PWagain);
-            Reg_PWagain.setBounds(85, 80, 175, Reg_PWagain.getPreferredSize().height);
+            Reg_PWagain.setBounds(85, 110, 175, Reg_PWagain.getPreferredSize().height);
 
             //---- CreateAccount ----
             CreateAccount.setText("Create Account");
             CreateAccount.addActionListener(e -> CreateAccount(e));
             RegFormContentPane.add(CreateAccount);
-            CreateAccount.setBounds(15, 205, 260, 30);
+            CreateAccount.setBounds(15, 235, 260, 30);
 
-            RegFormContentPane.setPreferredSize(new Dimension(290, 275));
+            //---- label9 ----
+            label9.setText("name");
+            RegFormContentPane.add(label9);
+            label9.setBounds(new Rectangle(new Point(35, 15), label9.getPreferredSize()));
+            RegFormContentPane.add(textField1);
+            textField1.setBounds(new Rectangle(new Point(85, 10), textField1.getPreferredSize()));
+
+            RegFormContentPane.setPreferredSize(new Dimension(290, 305));
             RegForm.pack();
             RegForm.setLocationRelativeTo(RegForm.getOwner());
         }
@@ -466,7 +474,8 @@ public class loginPage extends JFrame {
         frame.pack();
         frame.setSize(415, 145);
         frame.setVisible(true);
-        //UserDAO userDAO = new UserDAO();
+        UserDAO userDAO = new UserDAO();
+        userDAO.checkExpiration();
         // addeventlistner
         /*
         int result = userDAO.login(username, password);
@@ -485,6 +494,7 @@ public class loginPage extends JFrame {
     */
     }
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
+    // Generated using JFormDesigner Evaluation license - 김민재
     private JLabel label1;
     private JLabel label2;
     private JPasswordField PWtext;
@@ -507,5 +517,7 @@ public class loginPage extends JFrame {
     private JPasswordField Reg_PW;
     private JPasswordField Reg_PWagain;
     private JButton CreateAccount;
+    private JLabel label9;
+    private JTextField textField1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }
