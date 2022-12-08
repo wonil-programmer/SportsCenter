@@ -236,7 +236,9 @@ public class loginPage extends JFrame {
         // 회원가입 비밀번호란에서 받아온 문자 string으로 변환
         String passPW = new String(Reg_PW.getPassword());
         String passPWAgain = new String(Reg_PWagain.getPassword());
-        if(passPW == passPWAgain)
+//        System.out.println(passPW);
+//        System.out.println(passPWAgain);
+        if(passPW.equals(passPWAgain))
         {
             User user = new User(); // user 인스턴스 생성
 
@@ -304,7 +306,6 @@ public class loginPage extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
-        // Generated using JFormDesigner Evaluation license - Minjae
         label1 = new JLabel();
         label2 = new JLabel();
         PWtext = new JPasswordField();
@@ -484,7 +485,6 @@ public class loginPage extends JFrame {
     */
     }
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
-    // Generated using JFormDesigner Evaluation license - Minjae
     private JLabel label1;
     private JLabel label2;
     private JPasswordField PWtext;

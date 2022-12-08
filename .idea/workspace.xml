@@ -5,18 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca9a1687-7357-49dc-8023-c66cb0f536e6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/flatlaf_2_6.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/flatlaf_intellij_themes_2_6.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SportsCenterApp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SportsCenterApp.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SportsCenterApp/MainRegister.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SportsCenterApp/api/App.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/Login.form" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/Login.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/MainRegist.form" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/MainRegist.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/NewRegist.form" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/NewRegist.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SportsCenterApp/com/intellij/uiDesigner/core/AbstractLayout.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SportsCenterApp/com/intellij/uiDesigner/core/DimensionInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SportsCenterApp/com/intellij/uiDesigner/core/GridConstraints.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SportsCenterApp/com/intellij/uiDesigner/core/GridLayoutManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SportsCenterApp/com/intellij/uiDesigner/core/HorizontalInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SportsCenterApp/com/intellij/uiDesigner/core/LayoutState.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SportsCenterApp/com/intellij/uiDesigner/core/Spacer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SportsCenterApp/com/intellij/uiDesigner/core/SupportCode$TextWithMnemonic.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SportsCenterApp/com/intellij/uiDesigner/core/SupportCode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SportsCenterApp/com/intellij/uiDesigner/core/Util.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SportsCenterApp/com/intellij/uiDesigner/core/VerticalInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/UserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/loginPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/loginPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/mainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/mainPage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,49 +41,81 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2HWcQcCgQrUBHvsi8SbouEKTI5e" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
     <option name="showVisibilityIcons" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW": "false",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/JMLEE/Downloads/flatlaf-intellij-themes-2.6.jar",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/ykkim/github/SportsCenter&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\허원일\Documents\SportsCenterApp\src\gui" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration name="gui" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="gui.login" />
+  <component name="RunManager" selected="Application.gui">
+    <configuration name="Main" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="SportsCenterApp" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="gui" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="gui.loginPage" />
+      <module name="SportsCenterApp" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="mainPage" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="gui.mainPage" />
+      <module name="SportsCenterApp" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="gui.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.gui" />
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.mainPage" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.mainPage" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -98,6 +134,30 @@
       <workItem from="1668561615866" duration="2000" />
       <workItem from="1668561636390" duration="189000" />
       <workItem from="1668563391229" duration="2160000" />
+      <workItem from="1669536552160" duration="8974000" />
+      <workItem from="1669713259755" duration="1268000" />
+      <workItem from="1669766334949" duration="1317000" />
+      <workItem from="1669767730762" duration="1977000" />
+      <workItem from="1669799790371" duration="2245000" />
+      <workItem from="1669879532726" duration="1183000" />
+      <workItem from="1669946057350" duration="183000" />
+      <workItem from="1669946257011" duration="2091000" />
+      <workItem from="1669979627604" duration="43000" />
+      <workItem from="1670071218920" duration="336000" />
+      <workItem from="1670076793695" duration="11000" />
+      <workItem from="1670076952185" duration="7120000" />
+      <workItem from="1670129691735" duration="15000" />
+      <workItem from="1670144382269" duration="386000" />
+      <workItem from="1670144786992" duration="6667000" />
+      <workItem from="1670212188213" duration="636000" />
+      <workItem from="1670292954270" duration="10000" />
+      <workItem from="1670293043423" duration="258000" />
+      <workItem from="1670293328165" duration="498000" />
+      <workItem from="1670500793630" duration="205000" />
+      <workItem from="1670501016433" duration="2165000" />
+      <workItem from="1670507375301" duration="596000" />
+      <workItem from="1670508957459" duration="254000" />
+      <workItem from="1670515560800" duration="1204000" />
     </task>
     <servers />
   </component>
@@ -114,5 +174,19 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.ArrayIndexOutOfBoundsException" package="java.lang" />
+          <option name="timeStamp" value="2" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
