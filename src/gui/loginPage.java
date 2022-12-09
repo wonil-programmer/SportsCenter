@@ -220,11 +220,11 @@ public class loginPage extends JFrame {
             remain = userDAO.alertEndDate(1234);
             if(remain[0] == 1)
             {
-                JOptionPane.showMessageDialog(null, "회원권 기간이 얼마 안남았어용~");
+                JOptionPane.showMessageDialog(null, "회원권 만기일까지 10일 미만 남았습니다");
             }
             if(remain[1]==1)
             {
-                JOptionPane.showMessageDialog(null, "락커 기간이 얼마 안남았어용~");
+                JOptionPane.showMessageDialog(null, "락커 만기일까지 10일 미만 남았습니다");
             }
 
 
@@ -301,6 +301,10 @@ public class loginPage extends JFrame {
             } else if (result == -1) {
                 JOptionPane.showMessageDialog(null, "DB오류");
                 // 데이터베이스 오류
+            }
+            else if(result == -2)
+            {
+                JOptionPane.showMessageDialog(null, "이미 존재하는 ID입니다");
             }
 
         }
