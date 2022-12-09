@@ -929,6 +929,16 @@ new FormModel {
 						"width": 75
 						"height": 35
 					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "RepairButton"
+						"text": "고장 신고"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Repair", true ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 20
+						"y": 235
+						"width": 90
+						"height": 25
+					} )
 				}, new FormLayoutConstraints( null ) {
 					"title": "개인락커"
 				} )
@@ -938,7 +948,7 @@ new FormModel {
 						name: "label9"
 						"text": "이름 : "
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"width": 34
+						"width": 40
 						"height": 17
 						"x": 20
 						"y": 30
@@ -1230,6 +1240,54 @@ new FormModel {
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 625, 105 )
 			"size": new java.awt.Dimension( 145, 175 )
+		} )
+		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) {
+			"autoSize": false
+		} ) {
+			name: "ReportForm"
+			"resizable": false
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "ReportLocker"
+				"model": new javax.swing.DefaultComboBoxModel {
+					selectedItem: "1번 락커"
+					addElement( "1번 락커" )
+					addElement( "2번 락커" )
+					addElement( "3번 락커" )
+					addElement( "4번 락커" )
+					addElement( "5번 락커" )
+					addElement( "6번 락커" )
+					addElement( "7번 락커" )
+					addElement( "8번 락커" )
+					addElement( "9번 락커" )
+					addElement( "10번 락커" )
+					addElement( "11번 락커" )
+					addElement( "12번 락커" )
+					addElement( "13번 락커" )
+					addElement( "14번 락커" )
+					addElement( "15번 락커" )
+					addElement( "16번 락커" )
+					addElement( "17번 락커" )
+					addElement( "18번 락커" )
+					addElement( "19번 락커" )
+					addElement( "20번 락커" )
+				}
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 15
+				"y": 10
+				"width": 90
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "ReportButton"
+				"text": "고장 신고"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "Report", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 15
+				"y": 40
+				"width": 90
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 625, 305 )
+			"size": new java.awt.Dimension( 120, 100 )
 		} )
 	}
 }

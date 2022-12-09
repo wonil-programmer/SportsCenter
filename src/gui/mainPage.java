@@ -637,6 +637,7 @@ public class mainPage extends JFrame {
             date = 3;
         }
         userDAO.regHealth(1234,date);
+
     }
 
     private void StateComboItemStateChanged(ItemEvent e) {
@@ -711,6 +712,17 @@ public class mainPage extends JFrame {
                 HealthPrice.setText("108000 원");
             }
         }
+    }
+
+    private void Repair(ActionEvent e) {
+        // TODO add your code here
+        ReportForm.setVisible(true);
+        ReportForm.setSize(120,105);
+    }
+
+    private void Report(ActionEvent e) {
+        // TODO add your code here
+        ReportForm.setVisible(true);
     }
     
     
@@ -793,6 +805,7 @@ public class mainPage extends JFrame {
         label19 = new JLabel();
         label20 = new JLabel();
         Locker1 = new JButton();
+        RepairButton = new JButton();
         panel6 = new JPanel();
         label9 = new JLabel();
         label11 = new JLabel();
@@ -823,6 +836,9 @@ public class mainPage extends JFrame {
         LockerDate = new JComboBox<>();
         label3 = new JLabel();
         LockerPrice = new JLabel();
+        ReportForm = new JDialog();
+        ReportLocker = new JComboBox<>();
+        ReportButton = new JButton();
 
         //======== MainForm ========
         {
@@ -839,12 +855,12 @@ public class mainPage extends JFrame {
 
                 //======== panel5 ========
                 {
-                    panel5.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing.
-                    border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder. CENTER
-                    , javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069alog" ,java .awt .Font
-                    .BOLD ,12 ), java. awt. Color. red) ,panel5. getBorder( )) ); panel5. addPropertyChangeListener (
-                    new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062order"
-                    .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
+                    panel5.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border.
+                    EmptyBorder( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax. swing. border. TitledBorder. CENTER, javax. swing
+                    . border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ),
+                    java. awt. Color. red) ,panel5. getBorder( )) ); panel5. addPropertyChangeListener (new java. beans. PropertyChangeListener( )
+                    { @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062ord\u0065r" .equals (e .getPropertyName () ))
+                    throw new RuntimeException( ); }} );
                     panel5.setLayout(null);
 
                     //---- label13 ----
@@ -1446,6 +1462,12 @@ public class mainPage extends JFrame {
                     panel4.add(Locker1);
                     Locker1.setBounds(20, 25, 75, 35);
 
+                    //---- RepairButton ----
+                    RepairButton.setText("\uace0\uc7a5 \uc2e0\uace0");
+                    RepairButton.addActionListener(e -> Repair(e));
+                    panel4.add(RepairButton);
+                    RepairButton.setBounds(20, 235, 90, 25);
+
                     {
                         // compute preferred size
                         Dimension preferredSize = new Dimension();
@@ -1470,7 +1492,7 @@ public class mainPage extends JFrame {
                     //---- label9 ----
                     label9.setText("\uc774\ub984 : ");
                     panel6.add(label9);
-                    label9.setBounds(20, 30, 34, 17);
+                    label9.setBounds(20, 30, 40, 17);
 
                     //---- label11 ----
                     label11.setText("\ud68c\uc6d0\uad8c \uc2dc\uc791\uc77c : ");
@@ -1649,6 +1671,49 @@ public class mainPage extends JFrame {
             LockerBuyForm.pack();
             LockerBuyForm.setLocationRelativeTo(LockerBuyForm.getOwner());
         }
+
+        //======== ReportForm ========
+        {
+            ReportForm.setResizable(false);
+            var ReportFormContentPane = ReportForm.getContentPane();
+            ReportFormContentPane.setLayout(null);
+
+            //---- ReportLocker ----
+            ReportLocker.setModel(new DefaultComboBoxModel<>(new String[] {
+                "1\ubc88 \ub77d\ucee4",
+                "2\ubc88 \ub77d\ucee4",
+                "3\ubc88 \ub77d\ucee4",
+                "4\ubc88 \ub77d\ucee4",
+                "5\ubc88 \ub77d\ucee4",
+                "6\ubc88 \ub77d\ucee4",
+                "7\ubc88 \ub77d\ucee4",
+                "8\ubc88 \ub77d\ucee4",
+                "9\ubc88 \ub77d\ucee4",
+                "10\ubc88 \ub77d\ucee4",
+                "11\ubc88 \ub77d\ucee4",
+                "12\ubc88 \ub77d\ucee4",
+                "13\ubc88 \ub77d\ucee4",
+                "14\ubc88 \ub77d\ucee4",
+                "15\ubc88 \ub77d\ucee4",
+                "16\ubc88 \ub77d\ucee4",
+                "17\ubc88 \ub77d\ucee4",
+                "18\ubc88 \ub77d\ucee4",
+                "19\ubc88 \ub77d\ucee4",
+                "20\ubc88 \ub77d\ucee4"
+            }));
+            ReportFormContentPane.add(ReportLocker);
+            ReportLocker.setBounds(15, 10, 90, ReportLocker.getPreferredSize().height);
+
+            //---- ReportButton ----
+            ReportButton.setText("\uace0\uc7a5 \uc2e0\uace0");
+            ReportButton.addActionListener(e -> Report(e));
+            ReportFormContentPane.add(ReportButton);
+            ReportButton.setBounds(15, 40, 90, ReportButton.getPreferredSize().height);
+
+            ReportFormContentPane.setPreferredSize(new Dimension(120, 100));
+            ReportForm.pack();
+            ReportForm.setLocationRelativeTo(ReportForm.getOwner());
+        }
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }
 
@@ -1727,6 +1792,7 @@ public class mainPage extends JFrame {
     private JLabel label19;
     private JLabel label20;
     public JButton Locker1;
+    private JButton RepairButton;
     private JPanel panel6;
     private JLabel label9;
     private JLabel label11;
@@ -1757,5 +1823,8 @@ public class mainPage extends JFrame {
     private JComboBox<String> LockerDate;
     private JLabel label3;
     private JLabel LockerPrice;
+    private JDialog ReportForm;
+    private JComboBox<String> ReportLocker;
+    private JButton ReportButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }
