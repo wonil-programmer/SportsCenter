@@ -222,7 +222,7 @@ public class loginPage extends JFrame {
             {
                 JOptionPane.showMessageDialog(null, "회원권 기간이 얼마 안남았어용~");
             }
-            else if(remain[1]==1)
+            if(remain[1]==1)
             {
                 JOptionPane.showMessageDialog(null, "락커 기간이 얼마 안남았어용~");
             }
