@@ -793,7 +793,6 @@ public class mainPage extends JFrame {
         label19 = new JLabel();
         label20 = new JLabel();
         Locker1 = new JButton();
-        panel3 = new JPanel();
         panel6 = new JPanel();
         label9 = new JLabel();
         label11 = new JLabel();
@@ -840,13 +839,12 @@ public class mainPage extends JFrame {
 
                 //======== panel5 ========
                 {
-                    panel5.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax
-                    . swing. border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JFor\u006dDesi\u0067ner \u0045valu\u0061tion" , javax. swing
-                    .border . TitledBorder. CENTER ,javax . swing. border .TitledBorder . BOTTOM, new java. awt .
-                    Font ( "Dia\u006cog", java .awt . Font. BOLD ,12 ) ,java . awt. Color .red
-                    ) ,panel5. getBorder () ) ); panel5. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override
-                    public void propertyChange (java . beans. PropertyChangeEvent e) { if( "bord\u0065r" .equals ( e. getPropertyName (
-                    ) ) )throw new RuntimeException( ) ;} } );
+                    panel5.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing.
+                    border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder. CENTER
+                    , javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069alog" ,java .awt .Font
+                    .BOLD ,12 ), java. awt. Color. red) ,panel5. getBorder( )) ); panel5. addPropertyChangeListener (
+                    new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062order"
+                    .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
                     panel5.setLayout(null);
 
                     //---- label13 ----
@@ -1069,7 +1067,7 @@ public class mainPage extends JFrame {
                         //---- label31 ----
                         label31.setText("\uc694\uae08 : ");
                         panel10.add(label31);
-                        label31.setBounds(190, 50, 34, 17);
+                        label31.setBounds(190, 50, 45, 17);
 
                         //---- HealthPrice ----
                         HealthPrice.setText("30000 \uc6d0");
@@ -1465,27 +1463,6 @@ public class mainPage extends JFrame {
                 }
                 tabbedPane1.addTab("\uac1c\uc778\ub77d\ucee4", panel4);
 
-                //======== panel3 ========
-                {
-                    panel3.setLayout(null);
-
-                    {
-                        // compute preferred size
-                        Dimension preferredSize = new Dimension();
-                        for(int i = 0; i < panel3.getComponentCount(); i++) {
-                            Rectangle bounds = panel3.getComponent(i).getBounds();
-                            preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
-                            preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
-                        }
-                        Insets insets = panel3.getInsets();
-                        preferredSize.width += insets.right;
-                        preferredSize.height += insets.bottom;
-                        panel3.setMinimumSize(preferredSize);
-                        panel3.setPreferredSize(preferredSize);
-                    }
-                }
-                tabbedPane1.addTab("\uc2a4\ucf00\uc904 \uad00\ub9ac", panel3);
-
                 //======== panel6 ========
                 {
                     panel6.setLayout(null);
@@ -1750,7 +1727,6 @@ public class mainPage extends JFrame {
     private JLabel label19;
     private JLabel label20;
     public JButton Locker1;
-    private JPanel panel3;
     private JPanel panel6;
     private JLabel label9;
     private JLabel label11;

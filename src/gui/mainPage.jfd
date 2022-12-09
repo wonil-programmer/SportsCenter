@@ -354,7 +354,7 @@ new FormModel {
 							name: "label31"
 							"text": "요금 : "
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"width": 34
+							"width": 45
 							"height": 17
 							"x": 190
 							"y": 50
@@ -931,11 +931,6 @@ new FormModel {
 					} )
 				}, new FormLayoutConstraints( null ) {
 					"title": "개인락커"
-				} )
-				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
-					name: "panel3"
-				}, new FormLayoutConstraints( null ) {
-					"title": "스케줄 관리"
 				} )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 					name: "panel6"

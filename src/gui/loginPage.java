@@ -216,6 +216,18 @@ public class loginPage extends JFrame {
             frame.LockerRemain.setText(UserInfo[7]);
             frame.LockerStart.setText(UserInfo[8]);
             frame.LockerEnd.setText(UserInfo[9]);
+            int[] remain = new int[2]; // 월~토
+            remain = userDAO.alertEndDate(1234);
+            if(remain[0] == 1)
+            {
+                JOptionPane.showMessageDialog(null, "회원권 기간이 얼마 안남았어용~");
+            }
+            else if(remain[1]==1)
+            {
+                JOptionPane.showMessageDialog(null, "락커 기간이 얼마 안남았어용~");
+            }
+
+
             this.setVisible(false);
 
         } else if (result == 0) {
