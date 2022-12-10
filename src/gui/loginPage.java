@@ -36,17 +36,20 @@ public class loginPage extends JFrame {
 
         UserDAO userDAO = new UserDAO();
         String passPW = new String(PWtext.getPassword());
-        int result = userDAO.login(IDtext.getText(), passPW);
-        System.out.println("result = " + result);
-        //result = 1;
+        String userID = IDtext.getText();
+        int result = userDAO.login(userID, passPW);
+
         if (result == 1)
         {
             // 로그인 성공
+            int ID_PARAM = userDAO.getParamId(userID);
+
             JOptionPane.showMessageDialog(null, "로그인에 성공하였습니다");
             // 현재사용자 수
             String currentuser = Integer.toString(userDAO.countCurUser());
             mainPage frame = new mainPage();
             frame.CurUser.setText(currentuser);
+            frame.ID.setText(IDtext.getText());
             // 시간별 통계
             String dateList[] = new String[6];
             int[] timeArr = new int[15];
@@ -205,7 +208,7 @@ public class loginPage extends JFrame {
                 frame.Locker20.setBackground(new Color(0xcccccc));
             }
             String[] UserInfo = new String[10];
-            UserInfo = userDAO.showUserInfo(1234);
+            UserInfo = userDAO.showUserInfo(ID_PARAM);
             frame.Name.setText(UserInfo[0]);
             frame.TrainerName.setText(UserInfo[1]);
             frame.PTRemain.setText(UserInfo[2]);
@@ -217,7 +220,7 @@ public class loginPage extends JFrame {
             frame.LockerStart.setText(UserInfo[8]);
             frame.LockerEnd.setText(UserInfo[9]);
             int[] remain = new int[2]; // 월~토
-            remain = userDAO.alertEndDate(1234);
+            remain = userDAO.alertEndDate(ID_PARAM);
             if(remain[0] == 1)
             {
                 JOptionPane.showMessageDialog(null, "회원권 만기일까지 10일 미만 남았습니다");

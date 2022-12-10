@@ -35,7 +35,9 @@ public class mainPage extends JFrame {
     {
         UserDAO userDAO = new UserDAO();
         String[] UserInfo = new String[10];
-        UserInfo = userDAO.showUserInfo(1234);
+        String userID = ID.getText();
+        int ID_PARAM = userDAO.getParamId(userID);
+        UserInfo = userDAO.showUserInfo(ID_PARAM);
         Name.setText(UserInfo[0]);
         TrainerName.setText(UserInfo[1]);
         PTRemain.setText(UserInfo[2]);
@@ -53,142 +55,81 @@ public class mainPage extends JFrame {
         if(userDAO.checkLockerUse(1)==1)
         {
             Locker1.setBackground(new Color(0xcccccc));
-        } else if (userDAO.checkLockerUse(1)==3) {
-            Locker1.setBackground(new Color(0xFF9999));
         }
-
         if(userDAO.checkLockerUse(2)==1)
         {
             Locker2.setBackground(new Color(0xcccccc));
-        } else if (userDAO.checkLockerUse(2)==3) {
-            Locker2.setBackground(new Color(0xFF9999));
         }
-
         if(userDAO.checkLockerUse(3)==1)
         {
             Locker3.setBackground(new Color(0xcccccc));
-        }else if (userDAO.checkLockerUse(3)==3) {
-            Locker3.setBackground(new Color(0xFF9999));
         }
-
         if(userDAO.checkLockerUse(4)==1)
         {
             Locker4.setBackground(new Color(0xcccccc));
-        }else if (userDAO.checkLockerUse(4)==3) {
-            Locker4.setBackground(new Color(0xFF9999));
         }
-
         if(userDAO.checkLockerUse(5)==1)
         {
             Locker5.setBackground(new Color(0xcccccc));
-        }else if (userDAO.checkLockerUse(5)==3) {
-            Locker5.setBackground(new Color(0xFF9999));
         }
-
         if(userDAO.checkLockerUse(6)==1)
         {
             Locker6.setBackground(new Color(0xcccccc));
-        }else if (userDAO.checkLockerUse(6)==3) {
-            Locker6.setBackground(new Color(0xFF9999));
         }
-
         if(userDAO.checkLockerUse(7)==1)
         {
             Locker7.setBackground(new Color(0xcccccc));
-        }else if (userDAO.checkLockerUse(7)==3) {
-            Locker7.setBackground(new Color(0xFF9999));
-        }
-
-        if(userDAO.checkLockerUse(8)==1)
+        }if(userDAO.checkLockerUse(8)==1)
         {
             Locker8.setBackground(new Color(0xcccccc));
-        }else if (userDAO.checkLockerUse(8)==3) {
-            Locker8.setBackground(new Color(0xFF9999));
         }
-
         if(userDAO.checkLockerUse(9)==1)
         {
             Locker9.setBackground(new Color(0xcccccc));
-        }else if (userDAO.checkLockerUse(9)==3) {
-            Locker9.setBackground(new Color(0xFF9999));
         }
-
         if(userDAO.checkLockerUse(10)==1)
         {
             Locker10.setBackground(new Color(0xcccccc));
-        }else if (userDAO.checkLockerUse(10)==3) {
-            Locker10.setBackground(new Color(0xFF9999));
         }
-
         if(userDAO.checkLockerUse(11)==1)
         {
             Locker11.setBackground(new Color(0xcccccc));
-        }else if (userDAO.checkLockerUse(11)==3) {
-            Locker11.setBackground(new Color(0xFF9999));
         }
         if(userDAO.checkLockerUse(12)==1)
         {
             Locker12.setBackground(new Color(0xcccccc));
-        }else if (userDAO.checkLockerUse(12)==3) {
-            Locker12.setBackground(new Color(0xFF9999));
         }
-
         if(userDAO.checkLockerUse(13)==1)
         {
             Locker13.setBackground(new Color(0xcccccc));
-        }else if (userDAO.checkLockerUse(13)==3) {
-            Locker13.setBackground(new Color(0xFF9999));
         }
-
         if(userDAO.checkLockerUse(14)==1)
         {
             Locker14.setBackground(new Color(0xcccccc));
-        }else if (userDAO.checkLockerUse(14)==3) {
-            Locker14.setBackground(new Color(0xFF9999));
         }
-
         if(userDAO.checkLockerUse(15)==1)
         {
             Locker15.setBackground(new Color(0xcccccc));
-        }else if (userDAO.checkLockerUse(15)==3) {
-            Locker15.setBackground(new Color(0xFF9999));
-        }
-
-        if(userDAO.checkLockerUse(16)==1)
+        }if(userDAO.checkLockerUse(16)==1)
         {
             Locker16.setBackground(new Color(0xcccccc));
-        }else if (userDAO.checkLockerUse(16)==3) {
-            Locker16.setBackground(new Color(0xFF9999));
         }
-
         if(userDAO.checkLockerUse(17)==1)
         {
             Locker17.setBackground(new Color(0xcccccc));
-        }else if (userDAO.checkLockerUse(17)==3) {
-            Locker17.setBackground(new Color(0xFF9999));
         }
-
         if(userDAO.checkLockerUse(18)==1)
         {
             Locker18.setBackground(new Color(0xcccccc));
-        }else if (userDAO.checkLockerUse(18)==3) {
-            Locker18.setBackground(new Color(0xFF9999));
         }
-
         if(userDAO.checkLockerUse(19)==1)
         {
             Locker19.setBackground(new Color(0xcccccc));
-        }else if (userDAO.checkLockerUse(19)==3) {
-            Locker19.setBackground(new Color(0xFF9999));
         }
-
         if(userDAO.checkLockerUse(20)==1)
         {
             Locker20.setBackground(new Color(0xcccccc));
-        }else if (userDAO.checkLockerUse(20)==3) {
-            Locker20.setBackground(new Color(0xFF9999));
         }
-
     }
     public void curuser()
     {
@@ -288,7 +229,9 @@ public class mainPage extends JFrame {
 
         UserDAO userDAO = new UserDAO();
         int lockernum = Integer.parseInt(LockerNum.getText());
-        userDAO.buyLocker(1234,lockernum,LockerDate.getSelectedIndex()+1);
+        String userID = ID.getText();
+        int ID_PARAM = userDAO.getParamId(userID);
+        userDAO.buyLocker(ID_PARAM,lockernum,LockerDate.getSelectedIndex()+1);
         LockerBuyForm.setVisible(false);
         JOptionPane.showMessageDialog(null, "결제에 성공하였습니다");
         updatelocker();
@@ -613,13 +556,17 @@ public class mainPage extends JFrame {
     private void Enter(ActionEvent e) {
         // TODO add your code here
         UserDAO userDAO = new UserDAO();
-        userDAO.enter(1234);
+        String userID = ID.getText();
+        int ID_PARAM = userDAO.getParamId(userID);
+        userDAO.enter(ID_PARAM);
     }
 
     private void Exit(ActionEvent e) {
         // TODO add your code here
         UserDAO userDAO = new UserDAO();
-        userDAO.exit(1234);
+        String userID = ID.getText();
+        int ID_PARAM = userDAO.getParamId(userID);
+        userDAO.exit(ID_PARAM);
     }
 
     
@@ -681,7 +628,9 @@ public class mainPage extends JFrame {
         else {
             ptnum = 20;
         }
-        userDAO.regPT(1234, TrainerCombo.getSelectedIndex(),ptnum);
+        String userID = ID.getText();
+        int ID_PARAM = userDAO.getParamId(userID);
+        userDAO.regPT(ID_PARAM, TrainerCombo.getSelectedIndex(),ptnum);
         // TODO add your code
     }
 
@@ -697,7 +646,9 @@ public class mainPage extends JFrame {
         {
             date = 3;
         }
-        userDAO.regHealth(1234,date);
+        String userID = ID.getText();
+        int ID_PARAM = userDAO.getParamId(userID);
+        userDAO.regHealth(ID_PARAM,date);
 
     }
 
@@ -778,16 +729,12 @@ public class mainPage extends JFrame {
     private void Repair(ActionEvent e) {
         // TODO add your code here
         ReportForm.setVisible(true);
-        ReportForm.setSize(120,130);
+        ReportForm.setSize(120,105);
     }
 
     private void Report(ActionEvent e) {
         // TODO add your code here
-        UserDAO userDAO = new UserDAO();
-        userDAO.reportLocker(1234,ReportLocker.getSelectedIndex()+1);
-        ReportForm.setVisible(false);
-        JOptionPane.showMessageDialog(null, "신고되었습니다.");
-        updatelocker();
+        ReportForm.setVisible(true);
     }
     
     
@@ -796,6 +743,7 @@ public class mainPage extends JFrame {
     
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
+        // Generated using JFormDesigner Evaluation license - 김민재
         MainForm = new JFrame();
         tabbedPane1 = new JTabbedPane();
         panel5 = new JPanel();
@@ -871,28 +819,32 @@ public class mainPage extends JFrame {
         Locker1 = new JButton();
         RepairButton = new JButton();
         panel6 = new JPanel();
+        panel3 = new JPanel();
         label9 = new JLabel();
         label11 = new JLabel();
         label12 = new JLabel();
-        label22 = new JLabel();
-        label23 = new JLabel();
-        label24 = new JLabel();
         label25 = new JLabel();
-        EnterButton = new JButton();
-        ExitButton = new JButton();
         Name = new JLabel();
         HealthStart = new JLabel();
         HealthEnd = new JLabel();
         HealthRemain = new JLabel();
+        EnterButton = new JButton();
+        ExitButton = new JButton();
+        ID = new JLabel();
+        panel11 = new JPanel();
+        label22 = new JLabel();
         LockerNumber = new JLabel();
-        TrainerName = new JLabel();
-        PTRemain = new JLabel();
         LockerStart = new JLabel();
         label10 = new JLabel();
         label14 = new JLabel();
         LockerEnd = new JLabel();
         label26 = new JLabel();
         LockerRemain = new JLabel();
+        panel12 = new JPanel();
+        label23 = new JLabel();
+        label24 = new JLabel();
+        TrainerName = new JLabel();
+        PTRemain = new JLabel();
         LockerBuyForm = new JDialog();
         LockerBuy = new JButton();
         label1 = new JLabel();
@@ -919,6 +871,12 @@ public class mainPage extends JFrame {
 
                 //======== panel5 ========
                 {
+                    panel5.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder
+                    ( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax. swing. border. TitledBorder. CENTER, javax. swing. border
+                    . TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt
+                    . Color. red) ,panel5. getBorder( )) ); panel5. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void
+                    propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062ord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( )
+                    ; }} );
                     panel5.setLayout(null);
 
                     //---- label13 ----
@@ -1116,7 +1074,7 @@ public class mainPage extends JFrame {
                         label29.setBounds(new Rectangle(new Point(15, 100), label29.getPreferredSize()));
                     }
                     panel2.add(panel9);
-                    panel9.setBounds(20, 15, 435, 150);
+                    panel9.setBounds(15, 15, 440, 150);
 
                     //======== panel10 ========
                     {
@@ -1170,7 +1128,7 @@ public class mainPage extends JFrame {
                         HealthBuyButton.setBounds(315, 35, 105, 45);
                     }
                     panel2.add(panel10);
-                    panel10.setBounds(20, 175, 435, 100);
+                    panel10.setBounds(15, 175, 440, 100);
 
                     {
                         // compute preferred size
@@ -1234,7 +1192,7 @@ public class mainPage extends JFrame {
                         scrollPane2.setBounds(15, 30, 405, 105);
                     }
                     panel1.add(panel7);
-                    panel7.setBounds(20, 15, 435, 150);
+                    panel7.setBounds(15, 15, 440, 150);
 
                     //======== panel8 ========
                     {
@@ -1301,7 +1259,7 @@ public class mainPage extends JFrame {
                         PTbuyButton.setBounds(315, 35, 105, 45);
                     }
                     panel1.add(panel8);
-                    panel8.setBounds(20, 175, 435, 100);
+                    panel8.setBounds(15, 175, 440, 100);
 
                     {
                         // compute preferred size
@@ -1547,117 +1505,147 @@ public class mainPage extends JFrame {
                 {
                     panel6.setLayout(null);
 
-                    //---- label9 ----
-                    label9.setText("\uc774\ub984 : ");
-                    panel6.add(label9);
-                    label9.setBounds(20, 30, 40, 17);
+                    //======== panel3 ========
+                    {
+                        panel3.setBorder(new TitledBorder("\uae30\ubcf8\uc815\ubcf4"));
+                        panel3.setLayout(null);
 
-                    //---- label11 ----
-                    label11.setText("\ud68c\uc6d0\uad8c \uc2dc\uc791\uc77c : ");
-                    panel6.add(label11);
-                    label11.setBounds(20, 55, 95, 17);
+                        //---- label9 ----
+                        label9.setText("\uc774\ub984 : ");
+                        panel3.add(label9);
+                        label9.setBounds(15, 25, 40, 17);
 
-                    //---- label12 ----
-                    label12.setText("\ub0a8\uc740 \uae30\uac04 : ");
-                    panel6.add(label12);
-                    label12.setBounds(20, 105, 70, 17);
+                        //---- label11 ----
+                        label11.setText("\ud68c\uc6d0\uad8c \uc2dc\uc791\uc77c : ");
+                        panel3.add(label11);
+                        label11.setBounds(15, 50, 95, 17);
 
-                    //---- label22 ----
-                    label22.setText("\uac1c\uc778 \ub77d\ucee4 \ubc88\ud638 : ");
-                    panel6.add(label22);
-                    label22.setBounds(20, 180, 95, 17);
+                        //---- label12 ----
+                        label12.setText("\ub0a8\uc740 \uae30\uac04 : ");
+                        panel3.add(label12);
+                        label12.setBounds(15, 100, 70, 17);
 
-                    //---- label23 ----
-                    label23.setText("PT \ud2b8\ub808\uc774\ub108 : ");
-                    panel6.add(label23);
-                    label23.setBounds(20, 130, 80, 17);
+                        //---- label25 ----
+                        label25.setText("\ud68c\uc6d0\uad8c \ub9cc\uae30\uc77c : ");
+                        panel3.add(label25);
+                        label25.setBounds(15, 75, 95, 17);
 
-                    //---- label24 ----
-                    label24.setText("PT \ub0a8\uc740 \ud69f\uc218 : ");
-                    panel6.add(label24);
-                    label24.setBounds(20, 155, 85, 17);
+                        //---- Name ----
+                        Name.setText("\uc774\ub984\uc774 \ubaa8\uc5d0\uc694(\ubaa8\ubaa8\uc5d0\uc694~)\uc804\ud654\ubc88\ud638 \ubaa8\uc5d0\uc694(\ubaa8\ubaa8\uc5d0\uc694~)");
+                        panel3.add(Name);
+                        Name.setBounds(50, 25, 160, 17);
 
-                    //---- label25 ----
-                    label25.setText("\ud68c\uc6d0\uad8c \ub9cc\uae30\uc77c : ");
-                    panel6.add(label25);
-                    label25.setBounds(20, 80, 95, label25.getPreferredSize().height);
+                        //---- HealthStart ----
+                        HealthStart.setText("\uc5b8\uc81c\ubd80\ud134\ub385?");
+                        panel3.add(HealthStart);
+                        HealthStart.setBounds(105, 50, 145, 17);
 
-                    //---- EnterButton ----
-                    EnterButton.setText("\uc785\uc7a5");
-                    EnterButton.addActionListener(e -> Enter(e));
-                    panel6.add(EnterButton);
-                    EnterButton.setBounds(new Rectangle(new Point(20, 5), EnterButton.getPreferredSize()));
+                        //---- HealthEnd ----
+                        HealthEnd.setText("\uc5b8\uc81c\uae4c\uc9c4\ub385?");
+                        panel3.add(HealthEnd);
+                        HealthEnd.setBounds(105, 75, 145, 17);
 
-                    //---- ExitButton ----
-                    ExitButton.setText("\ud1f4\uc7a5");
-                    ExitButton.addActionListener(e -> Exit(e));
-                    panel6.add(ExitButton);
-                    ExitButton.setBounds(new Rectangle(new Point(100, 5), ExitButton.getPreferredSize()));
+                        //---- HealthRemain ----
+                        HealthRemain.setText("\uc5bc\ub9c8\ub098 \ub0a8\uc558\ub294\ub385?");
+                        panel3.add(HealthRemain);
+                        HealthRemain.setBounds(85, 100, 145, 17);
 
-                    //---- Name ----
-                    Name.setText("\uc774\ub984\uc774 \ubaa8\uc5d0\uc694(\ubaa8\ubaa8\uc5d0\uc694~)\uc804\ud654\ubc88\ud638 \ubaa8\uc5d0\uc694(\ubaa8\ubaa8\uc5d0\uc694~)");
-                    panel6.add(Name);
-                    Name.setBounds(55, 30, 160, Name.getPreferredSize().height);
+                        //---- EnterButton ----
+                        EnterButton.setText("\uc785\uc7a5");
+                        EnterButton.addActionListener(e -> Enter(e));
+                        panel3.add(EnterButton);
+                        EnterButton.setBounds(325, 10, 57, 23);
 
-                    //---- HealthStart ----
-                    HealthStart.setText("\uc5b8\uc81c\ubd80\ud134\ub385?");
-                    panel6.add(HealthStart);
-                    HealthStart.setBounds(110, 55, 145, HealthStart.getPreferredSize().height);
+                        //---- ExitButton ----
+                        ExitButton.setText("\ud1f4\uc7a5");
+                        ExitButton.addActionListener(e -> Exit(e));
+                        panel3.add(ExitButton);
+                        ExitButton.setBounds(380, 10, 57, 23);
 
-                    //---- HealthEnd ----
-                    HealthEnd.setText("\uc5b8\uc81c\uae4c\uc9c4\ub385?");
-                    panel6.add(HealthEnd);
-                    HealthEnd.setBounds(110, 80, 145, 17);
+                        //---- ID ----
+                        ID.setText("text");
+                        ID.setVisible(false);
+                        panel3.add(ID);
+                        ID.setBounds(new Rectangle(new Point(325, 95), ID.getPreferredSize()));
+                    }
+                    panel6.add(panel3);
+                    panel3.setBounds(15, 5, 440, 130);
 
-                    //---- HealthRemain ----
-                    HealthRemain.setText("\uc5bc\ub9c8\ub098 \ub0a8\uc558\ub294\ub385?");
-                    panel6.add(HealthRemain);
-                    HealthRemain.setBounds(90, 105, 145, 17);
+                    //======== panel11 ========
+                    {
+                        panel11.setBorder(new TitledBorder("\ub77d\ucee4\uc815\ubcf4"));
+                        panel11.setLayout(null);
 
-                    //---- LockerNumber ----
-                    LockerNumber.setText("\uba87\ubc88\uc778\ub385?");
-                    panel6.add(LockerNumber);
-                    LockerNumber.setBounds(115, 180, 145, 17);
+                        //---- label22 ----
+                        label22.setText("\uac1c\uc778 \ub77d\ucee4 \ubc88\ud638 : ");
+                        panel11.add(label22);
+                        label22.setBounds(15, 25, 95, 17);
 
-                    //---- TrainerName ----
-                    TrainerName.setText("\ub204\uad70\ub385?");
-                    panel6.add(TrainerName);
-                    TrainerName.setBounds(100, 130, 145, 17);
+                        //---- LockerNumber ----
+                        LockerNumber.setText("\uba87\ubc88\uc778\ub385?");
+                        panel11.add(LockerNumber);
+                        LockerNumber.setBounds(110, 25, 145, 17);
 
-                    //---- PTRemain ----
-                    PTRemain.setText("\uba87\ubc88 \ub0a8\uc558\ub294\ub385?");
-                    panel6.add(PTRemain);
-                    PTRemain.setBounds(105, 155, 145, 17);
+                        //---- LockerStart ----
+                        LockerStart.setText("\uc5b8\uc81c\ubd80\ud134\ub385?");
+                        panel11.add(LockerStart);
+                        LockerStart.setBounds(120, 50, 145, 17);
 
-                    //---- LockerStart ----
-                    LockerStart.setText("\uc5b8\uc81c\ubd80\ud134\ub385?");
-                    panel6.add(LockerStart);
-                    LockerStart.setBounds(125, 205, 145, 17);
+                        //---- label10 ----
+                        label10.setText("\uac1c\uc778 \ub77d\ucee4 \uc2dc\uc791\uc77c : ");
+                        panel11.add(label10);
+                        label10.setBounds(15, 50, 105, 17);
 
-                    //---- label10 ----
-                    label10.setText("\uac1c\uc778 \ub77d\ucee4 \uc2dc\uc791\uc77c : ");
-                    panel6.add(label10);
-                    label10.setBounds(20, 205, 105, label10.getPreferredSize().height);
+                        //---- label14 ----
+                        label14.setText("\uac1c\uc778 \ub77d\ucee4 \ub9cc\uae30\uc77c : ");
+                        panel11.add(label14);
+                        label14.setBounds(15, 75, 110, 17);
 
-                    //---- label14 ----
-                    label14.setText("\uac1c\uc778 \ub77d\ucee4 \ub9cc\uae30\uc77c : ");
-                    panel6.add(label14);
-                    label14.setBounds(20, 230, 110, 17);
+                        //---- LockerEnd ----
+                        LockerEnd.setText("\uc5b8\uc81c\uae4c\uc9c4\ub385?");
+                        panel11.add(LockerEnd);
+                        LockerEnd.setBounds(120, 75, 145, 17);
 
-                    //---- LockerEnd ----
-                    LockerEnd.setText("\uc5b8\uc81c\uae4c\uc9c4\ub385?");
-                    panel6.add(LockerEnd);
-                    LockerEnd.setBounds(125, 230, 145, 17);
+                        //---- label26 ----
+                        label26.setText("\uac1c\uc778 \ub77d\ucee4 \ub0a8\uc740 \uae30\uac04 : ");
+                        panel11.add(label26);
+                        label26.setBounds(15, 100, 125, 17);
 
-                    //---- label26 ----
-                    label26.setText("\uac1c\uc778 \ub77d\ucee4 \ub0a8\uc740 \uae30\uac04 : ");
-                    panel6.add(label26);
-                    label26.setBounds(20, 255, 125, label26.getPreferredSize().height);
+                        //---- LockerRemain ----
+                        LockerRemain.setText("\uc5bc\ub9c8\ub098 \ub0a8\uc558\ub294\ub385?");
+                        panel11.add(LockerRemain);
+                        LockerRemain.setBounds(135, 100, 145, 17);
+                    }
+                    panel6.add(panel11);
+                    panel11.setBounds(15, 140, 240, 135);
 
-                    //---- LockerRemain ----
-                    LockerRemain.setText("\uc5bc\ub9c8\ub098 \ub0a8\uc558\ub294\ub385?");
-                    panel6.add(LockerRemain);
-                    LockerRemain.setBounds(140, 255, 145, 17);
+                    //======== panel12 ========
+                    {
+                        panel12.setBorder(new TitledBorder("PT \uc815\ubcf4"));
+                        panel12.setLayout(null);
+
+                        //---- label23 ----
+                        label23.setText("PT \ud2b8\ub808\uc774\ub108 : ");
+                        panel12.add(label23);
+                        label23.setBounds(10, 25, 80, 17);
+
+                        //---- label24 ----
+                        label24.setText("PT \ub0a8\uc740 \ud69f\uc218 : ");
+                        panel12.add(label24);
+                        label24.setBounds(10, 50, 85, 17);
+
+                        //---- TrainerName ----
+                        TrainerName.setText("\ub204\uad70\ub385?");
+                        panel12.add(TrainerName);
+                        TrainerName.setBounds(90, 25, 100, 17);
+
+                        //---- PTRemain ----
+                        PTRemain.setText("\uba87\ubc88 \ub0a8\uc558\ub294\ub385?");
+                        panel12.add(PTRemain);
+                        PTRemain.setBounds(95, 50, 100, 17);
+                    }
+                    panel6.add(panel12);
+                    panel12.setBounds(260, 140, 195, 135);
 
                     {
                         // compute preferred size
@@ -1732,6 +1720,7 @@ public class mainPage extends JFrame {
 
         //======== ReportForm ========
         {
+            ReportForm.setResizable(false);
             var ReportFormContentPane = ReportForm.getContentPane();
             ReportFormContentPane.setLayout(null);
 
@@ -1759,15 +1748,15 @@ public class mainPage extends JFrame {
                 "20\ubc88 \ub77d\ucee4"
             }));
             ReportFormContentPane.add(ReportLocker);
-            ReportLocker.setBounds(15, 15, 90, ReportLocker.getPreferredSize().height);
+            ReportLocker.setBounds(15, 10, 90, ReportLocker.getPreferredSize().height);
 
             //---- ReportButton ----
             ReportButton.setText("\uace0\uc7a5 \uc2e0\uace0");
             ReportButton.addActionListener(e -> Report(e));
             ReportFormContentPane.add(ReportButton);
-            ReportButton.setBounds(15, 55, 90, ReportButton.getPreferredSize().height);
+            ReportButton.setBounds(15, 40, 90, ReportButton.getPreferredSize().height);
 
-            ReportFormContentPane.setPreferredSize(new Dimension(120, 130));
+            ReportFormContentPane.setPreferredSize(new Dimension(120, 100));
             ReportForm.pack();
             ReportForm.setLocationRelativeTo(ReportForm.getOwner());
         }
@@ -1775,6 +1764,7 @@ public class mainPage extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
+    // Generated using JFormDesigner Evaluation license - 김민재
     private JFrame MainForm;
     private JTabbedPane tabbedPane1;
     private JPanel panel5;
@@ -1850,28 +1840,32 @@ public class mainPage extends JFrame {
     public JButton Locker1;
     private JButton RepairButton;
     private JPanel panel6;
+    private JPanel panel3;
     private JLabel label9;
     private JLabel label11;
     private JLabel label12;
-    private JLabel label22;
-    private JLabel label23;
-    private JLabel label24;
     private JLabel label25;
-    private JButton EnterButton;
-    private JButton ExitButton;
     public JLabel Name;
     public JLabel HealthStart;
     public JLabel HealthEnd;
     public JLabel HealthRemain;
+    private JButton EnterButton;
+    private JButton ExitButton;
+    public JLabel ID;
+    private JPanel panel11;
+    private JLabel label22;
     public JLabel LockerNumber;
-    public JLabel TrainerName;
-    public JLabel PTRemain;
     public JLabel LockerStart;
     private JLabel label10;
     private JLabel label14;
     public JLabel LockerEnd;
     private JLabel label26;
     public JLabel LockerRemain;
+    private JPanel panel12;
+    private JLabel label23;
+    private JLabel label24;
+    public JLabel TrainerName;
+    public JLabel PTRemain;
     private JDialog LockerBuyForm;
     private JButton LockerBuy;
     private JLabel label1;
