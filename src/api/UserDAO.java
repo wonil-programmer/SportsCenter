@@ -27,21 +27,20 @@ public class UserDAO {
         try {
             String dbURL = "jdbc:mysql://localhost:3306/sportscenter";
             String dbID = "root";
-            String dbPassword = "0201";
+            String dbPassword = "mysqlrhtn8580!";
             Class.forName("com.mysql.cj.jdbc.Driver");
             // getConnection 메소드로 DB에 연결
             conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
-            System.out.println("연동 성공 > ");
         } catch (Exception e) {
-            System.out.println("연동 실패 > ");
             e.printStackTrace();
         }
     }
 
     // 로그인 함수
     public int login(String userID, String userPassword) {
-        System.out.println("userPassword = " + userPassword);
+
         String SQL = "SELECT password FROM user WHERE u_id = ?";
+
         try {
             // Statement 클래스를 이용하여 prepareStatement 객체 생성
             pstmt = conn.prepareStatement(SQL);
@@ -62,7 +61,9 @@ public class UserDAO {
 
     // 회원가입 함수
     public int signUp(User user) {
+
         String SQL = "INSERT INTO USER VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
         try {
             pstmt = conn.prepareStatement(SQL);
             pstmt.setInt(1, user.getID());
@@ -136,20 +137,25 @@ public class UserDAO {
         int alertFlag[] = new int[2];
 
         try {
+            // 회원권 만료임박 알림 (회원권 등록했을 경우만)
             pstmt = conn.prepareStatement(SQL_mem);
             pstmt.setInt(1, minDate);
             pstmt.setInt(2, id);
             rs = pstmt.executeQuery();
-            rs.next();
-            alertFlag[0] = rs.getInt(1); // memAlertFlag 저장
+            if (rs.next()) {
+                alertFlag[0] = rs.getInt(1); // memAlertFlag 저장
+            }
 
+            // 락커 만료임박 알림 (락커 구매했을 경우만)
             pstmt = conn.prepareStatement(SQL_locker);
             pstmt.setInt(1, minDate);
             pstmt.setInt(2, id);
             rs = pstmt.executeQuery();
-            rs.next();
-            alertFlag[1] = rs.getInt(1); // lockerAlertFlag 저장
-            return alertFlag;
+            if (rs.next()) {
+                alertFlag[1] = rs.getInt(1); // lockerAlertFlag 저장
+            }
+
+            return alertFlag; // [0,0], [1,0], [0,1], [1,1] 세가지 경우 존재
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -372,7 +378,7 @@ public class UserDAO {
         return -1; // 데이터베이스 오류
     }
 
-        public String[] showUserInfo (int id){
+    public String[] showUserInfo (int id){
         /*
          0 이름
          1 PT 트레이너 정보 (id)
@@ -442,6 +448,7 @@ public class UserDAO {
                 } else {
                     userInfoList[3] = "회원권 등록안함";
                     userInfoList[4] = "-";
+                    userInfoList[5] = "-";
                 }
 
                 /* 개인 락커 관련 */
