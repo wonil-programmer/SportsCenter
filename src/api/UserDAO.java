@@ -59,6 +59,25 @@ public class UserDAO {
         return -2; // 데이터베이스 오류
     }
 
+    public int getParamId(String userId) {
+
+        String SQL = "SELECT id FROM sportscenter.user where u_id = ?";
+
+        try {
+            // Statement 클래스를 이용하여 prepareStatement 객체 생성
+            pstmt = conn.prepareStatement(SQL);
+            pstmt.setString(1, userId);
+            rs = pstmt.executeQuery();
+            rs.next();
+            int id = rs.getInt(1);
+
+            return id; // id(AI & PK) 반환
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -2; // 데이터베이스 오류
+    }
+
     // 회원가입 함수
     public int signUp(User user) {
 
@@ -101,7 +120,7 @@ public class UserDAO {
             String date = cal.get(Calendar.YEAR) +"-"+ (nMonth<10?"0"+nMonth:nMonth+"") +"-"+ (cal.get(Calendar.DATE)<10?"0"+cal.get(Calendar.DATE):cal.get(Calendar.DATE)+"");
             dateList[i] = date;
         }
-        
+
         return dateList;
     }
 
