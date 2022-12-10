@@ -27,7 +27,7 @@ public class UserDAO {
         try {
             String dbURL = "jdbc:mysql://localhost:3306/sportscenter";
             String dbID = "root";
-            String dbPassword = "0201";
+            String dbPassword = "mysqlrhtn8580!";
             Class.forName("com.mysql.cj.jdbc.Driver");
             // getConnection 메소드로 DB에 연결
             conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
@@ -96,12 +96,12 @@ public class UserDAO {
 
         // 과거 주에 해당하는 날짜 배열에 추가
         for (int i = 0; i < 6; i++) {
-            int nMonth  = cal.get(Calendar.MONTH)+1;
             cal.add(Calendar.DATE, 1);
+            int nMonth  = cal.get(Calendar.MONTH)+1;
             String date = cal.get(Calendar.YEAR) +"-"+ (nMonth<10?"0"+nMonth:nMonth+"") +"-"+ (cal.get(Calendar.DATE)<10?"0"+cal.get(Calendar.DATE):cal.get(Calendar.DATE)+"");
             dateList[i] = date;
         }
-
+        
         return dateList;
     }
 
@@ -170,7 +170,6 @@ public class UserDAO {
         try {
             String[] list = new String[10];
             UserDAO userDAO = new UserDAO();
-            list = userDAO.showUserInfo(1234);
             pstmt = conn.prepareStatement(SQL);
             pstmt.setInt(1, id);
             return pstmt.executeUpdate();
