@@ -68,10 +68,11 @@ public class UserDAO {
             pstmt = conn.prepareStatement(SQL);
             pstmt.setString(1, userId);
             rs = pstmt.executeQuery();
-            rs.next();
-            int id = rs.getInt(1);
+            if (rs.next()) {
+                int id = rs.getInt(1);
+                return id; // id(AI & PK) 반환
+            }
 
-            return id; // id(AI & PK) 반환
         } catch (Exception e) {
             e.printStackTrace();
         }
