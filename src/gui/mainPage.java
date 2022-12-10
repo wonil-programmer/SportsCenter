@@ -53,81 +53,142 @@ public class mainPage extends JFrame {
         if(userDAO.checkLockerUse(1)==1)
         {
             Locker1.setBackground(new Color(0xcccccc));
+        } else if (userDAO.checkLockerUse(1)==3) {
+            Locker1.setBackground(new Color(0xFF9999));
         }
+
         if(userDAO.checkLockerUse(2)==1)
         {
             Locker2.setBackground(new Color(0xcccccc));
+        } else if (userDAO.checkLockerUse(2)==3) {
+            Locker2.setBackground(new Color(0xFF9999));
         }
+
         if(userDAO.checkLockerUse(3)==1)
         {
             Locker3.setBackground(new Color(0xcccccc));
+        }else if (userDAO.checkLockerUse(3)==3) {
+            Locker3.setBackground(new Color(0xFF9999));
         }
+
         if(userDAO.checkLockerUse(4)==1)
         {
             Locker4.setBackground(new Color(0xcccccc));
+        }else if (userDAO.checkLockerUse(4)==3) {
+            Locker4.setBackground(new Color(0xFF9999));
         }
+
         if(userDAO.checkLockerUse(5)==1)
         {
             Locker5.setBackground(new Color(0xcccccc));
+        }else if (userDAO.checkLockerUse(5)==3) {
+            Locker5.setBackground(new Color(0xFF9999));
         }
+
         if(userDAO.checkLockerUse(6)==1)
         {
             Locker6.setBackground(new Color(0xcccccc));
+        }else if (userDAO.checkLockerUse(6)==3) {
+            Locker6.setBackground(new Color(0xFF9999));
         }
+
         if(userDAO.checkLockerUse(7)==1)
         {
             Locker7.setBackground(new Color(0xcccccc));
-        }if(userDAO.checkLockerUse(8)==1)
+        }else if (userDAO.checkLockerUse(7)==3) {
+            Locker7.setBackground(new Color(0xFF9999));
+        }
+
+        if(userDAO.checkLockerUse(8)==1)
         {
             Locker8.setBackground(new Color(0xcccccc));
+        }else if (userDAO.checkLockerUse(8)==3) {
+            Locker8.setBackground(new Color(0xFF9999));
         }
+
         if(userDAO.checkLockerUse(9)==1)
         {
             Locker9.setBackground(new Color(0xcccccc));
+        }else if (userDAO.checkLockerUse(9)==3) {
+            Locker9.setBackground(new Color(0xFF9999));
         }
+
         if(userDAO.checkLockerUse(10)==1)
         {
             Locker10.setBackground(new Color(0xcccccc));
+        }else if (userDAO.checkLockerUse(10)==3) {
+            Locker10.setBackground(new Color(0xFF9999));
         }
+
         if(userDAO.checkLockerUse(11)==1)
         {
             Locker11.setBackground(new Color(0xcccccc));
+        }else if (userDAO.checkLockerUse(11)==3) {
+            Locker11.setBackground(new Color(0xFF9999));
         }
         if(userDAO.checkLockerUse(12)==1)
         {
             Locker12.setBackground(new Color(0xcccccc));
+        }else if (userDAO.checkLockerUse(12)==3) {
+            Locker12.setBackground(new Color(0xFF9999));
         }
+
         if(userDAO.checkLockerUse(13)==1)
         {
             Locker13.setBackground(new Color(0xcccccc));
+        }else if (userDAO.checkLockerUse(13)==3) {
+            Locker13.setBackground(new Color(0xFF9999));
         }
+
         if(userDAO.checkLockerUse(14)==1)
         {
             Locker14.setBackground(new Color(0xcccccc));
+        }else if (userDAO.checkLockerUse(14)==3) {
+            Locker14.setBackground(new Color(0xFF9999));
         }
+
         if(userDAO.checkLockerUse(15)==1)
         {
             Locker15.setBackground(new Color(0xcccccc));
-        }if(userDAO.checkLockerUse(16)==1)
+        }else if (userDAO.checkLockerUse(15)==3) {
+            Locker15.setBackground(new Color(0xFF9999));
+        }
+
+        if(userDAO.checkLockerUse(16)==1)
         {
             Locker16.setBackground(new Color(0xcccccc));
+        }else if (userDAO.checkLockerUse(16)==3) {
+            Locker16.setBackground(new Color(0xFF9999));
         }
+
         if(userDAO.checkLockerUse(17)==1)
         {
             Locker17.setBackground(new Color(0xcccccc));
+        }else if (userDAO.checkLockerUse(17)==3) {
+            Locker17.setBackground(new Color(0xFF9999));
         }
+
         if(userDAO.checkLockerUse(18)==1)
         {
             Locker18.setBackground(new Color(0xcccccc));
+        }else if (userDAO.checkLockerUse(18)==3) {
+            Locker18.setBackground(new Color(0xFF9999));
         }
+
         if(userDAO.checkLockerUse(19)==1)
         {
             Locker19.setBackground(new Color(0xcccccc));
+        }else if (userDAO.checkLockerUse(19)==3) {
+            Locker19.setBackground(new Color(0xFF9999));
         }
+
         if(userDAO.checkLockerUse(20)==1)
         {
             Locker20.setBackground(new Color(0xcccccc));
+        }else if (userDAO.checkLockerUse(20)==3) {
+            Locker20.setBackground(new Color(0xFF9999));
         }
+
     }
     public void curuser()
     {
@@ -717,12 +778,16 @@ public class mainPage extends JFrame {
     private void Repair(ActionEvent e) {
         // TODO add your code here
         ReportForm.setVisible(true);
-        ReportForm.setSize(120,105);
+        ReportForm.setSize(120,130);
     }
 
     private void Report(ActionEvent e) {
         // TODO add your code here
-        ReportForm.setVisible(true);
+        UserDAO userDAO = new UserDAO();
+        userDAO.reportLocker(1234,ReportLocker.getSelectedIndex()+1);
+        ReportForm.setVisible(false);
+        JOptionPane.showMessageDialog(null, "신고되었습니다.");
+        updatelocker();
     }
     
     
@@ -731,7 +796,6 @@ public class mainPage extends JFrame {
     
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
-        // Generated using JFormDesigner Evaluation license - 김민재
         MainForm = new JFrame();
         tabbedPane1 = new JTabbedPane();
         panel5 = new JPanel();
@@ -855,12 +919,6 @@ public class mainPage extends JFrame {
 
                 //======== panel5 ========
                 {
-                    panel5.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border.
-                    EmptyBorder( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax. swing. border. TitledBorder. CENTER, javax. swing
-                    . border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ),
-                    java. awt. Color. red) ,panel5. getBorder( )) ); panel5. addPropertyChangeListener (new java. beans. PropertyChangeListener( )
-                    { @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062ord\u0065r" .equals (e .getPropertyName () ))
-                    throw new RuntimeException( ); }} );
                     panel5.setLayout(null);
 
                     //---- label13 ----
@@ -1674,7 +1732,6 @@ public class mainPage extends JFrame {
 
         //======== ReportForm ========
         {
-            ReportForm.setResizable(false);
             var ReportFormContentPane = ReportForm.getContentPane();
             ReportFormContentPane.setLayout(null);
 
@@ -1702,15 +1759,15 @@ public class mainPage extends JFrame {
                 "20\ubc88 \ub77d\ucee4"
             }));
             ReportFormContentPane.add(ReportLocker);
-            ReportLocker.setBounds(15, 10, 90, ReportLocker.getPreferredSize().height);
+            ReportLocker.setBounds(15, 15, 90, ReportLocker.getPreferredSize().height);
 
             //---- ReportButton ----
             ReportButton.setText("\uace0\uc7a5 \uc2e0\uace0");
             ReportButton.addActionListener(e -> Report(e));
             ReportFormContentPane.add(ReportButton);
-            ReportButton.setBounds(15, 40, 90, ReportButton.getPreferredSize().height);
+            ReportButton.setBounds(15, 55, 90, ReportButton.getPreferredSize().height);
 
-            ReportFormContentPane.setPreferredSize(new Dimension(120, 100));
+            ReportFormContentPane.setPreferredSize(new Dimension(120, 130));
             ReportForm.pack();
             ReportForm.setLocationRelativeTo(ReportForm.getOwner());
         }
@@ -1718,7 +1775,6 @@ public class mainPage extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
-    // Generated using JFormDesigner Evaluation license - 김민재
     private JFrame MainForm;
     private JTabbedPane tabbedPane1;
     private JPanel panel5;

@@ -27,7 +27,7 @@ public class UserDAO {
         try {
             String dbURL = "jdbc:mysql://localhost:3306/sportscenter";
             String dbID = "root";
-            String dbPassword = "mysqlrhtn8580!";
+            String dbPassword = "0201";
             Class.forName("com.mysql.cj.jdbc.Driver");
             // getConnection 메소드로 DB에 연결
             conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
@@ -360,8 +360,22 @@ public class UserDAO {
         return -1; // 데이터베이스 오류
     }
 
+    // 락커 고장 함수
+    public int reportLocker(int id, int lockerNum) {
+        String SQL = "UPDATE lockers SET state = ? WHERE number = ?";   //"INSERT INTO lockers (number, user_id, state) VALUES (?, ?, ?)";//"INSERT INTO lockers (number, user_id, state) VALUES (?, ?, ?)";
+        try {
+            pstmt = conn.prepareStatement(SQL);
+            pstmt.setInt(2, lockerNum);
+            pstmt.setString(1, "고장"); // state 고장으로 변경
+            return pstmt.executeUpdate();
+        } catch(Exception e) {
+            System.out.println("고장 등록 실패 > " + e.toString());
+        }
+        return -1; // 데이터베이스 오류
+    }
+
     // 락커 사용 상태 반환해주는 함수
-    public int checkLockerUse(int number) {
+    public int checkLockerUse(int number) { // occupiedFlag가 1일 때, 상태 검사해서 1:사용중, 2: 사용가능, 3: 고장 return
 
         String SQL = "SELECT EXISTS(SELECT * FROM lockers WHERE number = ?) AS occupiedFlag";
 
@@ -371,6 +385,26 @@ public class UserDAO {
             rs = pstmt.executeQuery();
             rs.next();
             int occupiedFlag = rs.getInt(1); // 락커가 사용중인지 체크하는 플래그 (1:사용중, 0:미사용중)
+
+            if (occupiedFlag==1) {
+                String SQL1 = "SELECT state FROM lockers WHERE number ="+(number);
+                pstmt = conn.prepareStatement(SQL1);
+                rs = pstmt.executeQuery();
+                String result="";
+                while (rs.next()) {
+                    result = rs.getString(1);
+                }
+                int res=-1;
+                if (result.equals("사용중")) {
+                    res=1;
+                } else if (result.equals("사용가능")) {
+                    res=2;
+                } else if (result.equals("고장")) {
+                    res=3;
+                }
+                //System.out.println(res);    //
+                return res;
+            }
             return occupiedFlag;
         } catch (Exception e) {
             System.out.println("락커 상태 가져오기 실패 > " + e.toString());
